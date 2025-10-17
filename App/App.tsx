@@ -1,21 +1,15 @@
-import { Text } from 'react-native';
-import { styles } from './Style';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Overview from './Overview';
+import Budget from './Budget';
+import Settings from './Settings';
+import Transactions from './Transactions';
 
 function App() {
   return (
     <SafeAreaProvider>
-      <AppContent />
+      <Transactions />
     </SafeAreaProvider>
   );
 }
-
-function AppContent() {
-  return (
-    <SafeAreaView style={styles.headerView}>
-      <Text style={styles.headerText}>Hello World!</Text>
-    </SafeAreaView>
-  );
-};
 
 export default App;
