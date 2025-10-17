@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function App() {
@@ -11,10 +11,18 @@ function App() {
 
 function AppContent() {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={styles.headerText}>
       <Text>Hello World!</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  headerText: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+});
 
 export default App;
