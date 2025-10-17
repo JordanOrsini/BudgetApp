@@ -7,7 +7,7 @@ import Transactions from './Transactions';
 function App() {
   return (
     <SafeAreaProvider>
-      <Transactions />
+      <Overview />
     </SafeAreaProvider>
   );
 }
