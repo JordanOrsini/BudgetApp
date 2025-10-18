@@ -4,7 +4,7 @@ import { styles } from "./Style";
 import Navigation from "./Navigation";
 import { useState } from "react";
 
-function Transactions({ navigation } : { navigation: any }) {
+function Transactions({ navigation }) {
 
 
   return (
@@ -21,9 +21,10 @@ function Transactions({ navigation } : { navigation: any }) {
 function GetTransactions() {
   const [myTransactions, setMyTransactions] = useState([1, 2, 3]);
 
-  function RemoveItem({index} : {index: number}) {
-    myTransactions.splice(index, 1)
-    setMyTransactions(myTransactions)
+  function RemoveItem({ index }) {
+    myTransactions.splice(index, 1);
+    setMyTransactions(myTransactions);
+    this.setState(this.state);
   }
 
   return(

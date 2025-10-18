@@ -2,7 +2,7 @@ import { Pressable, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./Style";
 
-function Navigation({ navigation }: { navigation: any }) {
+function Navigation({ navigation }) {
   return(
     <SafeAreaView style={styles.navigation}>
       <Pressable style={styles.button} onPress={() => navigation.navigate('Overview')}>
