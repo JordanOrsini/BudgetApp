@@ -4,7 +4,7 @@ import { styles } from "./Style";
 
 function Settings() {
   return (
-    <SafeAreaView style={styles.headerView}>
+    <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Settings</Text>
     </SafeAreaView>
   );

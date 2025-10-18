@@ -4,7 +4,7 @@ import { styles } from "./Style";
 
 function Budget() {
   return (
-    <SafeAreaView style={styles.headerView}>
+    <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Budget</Text>
     </SafeAreaView>
   );

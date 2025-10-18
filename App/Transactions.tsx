@@ -4,7 +4,7 @@ import { styles } from "./Style";
 
 function Transactions() {
   return (
-    <SafeAreaView style={styles.headerView}>
+    <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Transactions</Text>
     </SafeAreaView>
   );
