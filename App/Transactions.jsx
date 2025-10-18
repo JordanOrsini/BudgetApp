@@ -5,8 +5,6 @@ import Navigation from "./Navigation";
 import { useState } from "react";
 
 function Transactions({ navigation }) {
-
-
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Transactions</Text>
@@ -22,16 +20,16 @@ function GetTransactions() {
   const [myTransactions, setMyTransactions] = useState([1, 2, 3]);
 
   function RemoveItem({ index }) {
-    myTransactions.splice(index, 1);
-    setMyTransactions(myTransactions);
-    this.setState(this.state);
+    const newTransactions = [...myTransactions];
+    newTransactions.splice(index, 1);
+    setMyTransactions(newTransactions);
   }
 
   return(
   myTransactions.map((element, index) => {return (
     <SafeAreaView key={index} style={styles.transactionElement}>
       <Text>{element}</Text>
-      <Pressable style={styles.transactionRemove} onPress={() => RemoveItem(index)}><Text>X</Text></Pressable>
+      <Pressable style={styles.transactionRemove} onPress={() => RemoveItem({ index })}><Text>X</Text></Pressable>
     </SafeAreaView>
   )
 }))}
