@@ -6,10 +6,8 @@ import Navigation from "./Navigation";
 function Budget({ navigation } : { navigation: any }) {
   return (
     <SafeAreaView style={styles.pageView}>
-      <SafeAreaView>
-        <Text style={styles.headerText}>Budget</Text>
-      </SafeAreaView>
-      
+      <Text style={styles.headerText}>Budget</Text>
+      <Text style={styles.mainBodyText}>Main body</Text>
       <Navigation navigation={navigation}/>
     </SafeAreaView>
   );

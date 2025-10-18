@@ -6,10 +6,8 @@ import Navigation from "./Navigation";
 function Settings({ navigation } : { navigation: any }) {
   return (
     <SafeAreaView style={styles.pageView}>
-      <SafeAreaView>
-        <Text style={styles.headerText}>Settings</Text>
-      </SafeAreaView>
-      
+      <Text style={styles.headerText}>Settings</Text>
+      <Text style={styles.mainBodyText}>Main body</Text>
       <Navigation navigation={navigation}/>
     </SafeAreaView> 
   );

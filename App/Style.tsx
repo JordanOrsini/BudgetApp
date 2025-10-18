@@ -4,11 +4,14 @@ export const styles = StyleSheet.create({
   pageView: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 50,
   },
   headerText: {
     fontSize: 50,
     fontWeight: 'bold',
+    paddingTop: 25,
+  },
+  mainBodyText: {
+    flex: 1,
   },
   navigation: {
     flexDirection: 'row',
