@@ -26,4 +26,16 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
   },
+  transactionElement: {
+    flexDirection: 'row',
+  },
+  transactionRemove: {
+    paddingLeft: 5,
+    paddingRight: 5,
+    marginLeft: 10,
+    borderWidth: 1,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
