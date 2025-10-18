@@ -1,12 +1,17 @@
 import { Text } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from "./Style";
+import Navigation from "./Navigation";
 
-function Settings() {
+function Settings({ navigation } : { navigation: any }) {
   return (
     <SafeAreaView style={styles.pageView}>
-      <Text style={styles.headerText}>Settings</Text>
-    </SafeAreaView>
+      <SafeAreaView>
+        <Text style={styles.headerText}>Settings</Text>
+      </SafeAreaView>
+      
+      <Navigation navigation={navigation}/>
+    </SafeAreaView> 
   );
 }
 
