@@ -1,9 +1,16 @@
 import { StyleSheet } from 'react-native';
 
+/* 
+   Style sheets CSS for the entire application.
+*/
 export const styles = StyleSheet.create({
-  pageView: {
-    flex: 1,
+  button: {
     alignItems: 'center',
+    borderRadius: 20,
+    borderWidth: 1,
+    flex: 1,  
+    justifyContent: 'center',
+    padding: 10,
   },
   headerText: {
     fontSize: 50,
@@ -18,24 +25,20 @@ export const styles = StyleSheet.create({
     paddingLeft: 25,
     paddingRight: 25,
   },
-  button: {
-    flex: 1,
+  pageView: {
     alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderRadius: 20,
-    padding: 10,
+    flex: 1,
   },
   transactionElement: {
     flexDirection: 'row',
   },
   transactionRemove: {
+    alignItems: 'center',
+    borderRadius: 20,
+    borderWidth: 1,
+    justifyContent: 'center',
+    marginLeft: 10,
     paddingLeft: 5,
     paddingRight: 5,
-    marginLeft: 10,
-    borderWidth: 1,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
