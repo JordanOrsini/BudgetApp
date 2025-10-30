@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Pressable, Text} from "react-native";
+import {Pressable, ScrollView, Text} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
@@ -37,9 +37,9 @@ class Transactions extends Component {
     return (
       <SafeAreaView style={styles.pageView}>
         <Text style={styles.headerText}>Transactions</Text>
-        <SafeAreaView>
+        <ScrollView>
           {this.getTransactions()}
-        </SafeAreaView>
+        </ScrollView>
         <Navigation navigation={this.props.navigation}/>
       </SafeAreaView> 
     );
