@@ -41,4 +41,9 @@ export const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
   },
+  scrollView: {
+    flex: 1,
+    paddingLeft: 20,
+    width: '100%',
+  },
 });

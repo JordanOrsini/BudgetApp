@@ -29,7 +29,7 @@ class Transactions extends Component {
   removeItemHandler = ({index}) => {
     const newTransactions = [...this.context.userData];
     newTransactions.splice(index, 1);
-    this.context.setUserData(newTransactions);
+    this.context._setUserData(newTransactions);
   }
 
   // Function that returns the contents of the transactions screen.
@@ -37,9 +37,11 @@ class Transactions extends Component {
     return (
       <SafeAreaView style={styles.pageView}>
         <Text style={styles.headerText}>Transactions</Text>
-        <ScrollView>
-          {this.getTransactions()}
-        </ScrollView>
+        <SafeAreaView style={styles.scrollView}>
+          <ScrollView>
+            {this.getTransactions()}
+          </ScrollView>
+        </SafeAreaView>
         <Navigation navigation={this.props.navigation}/>
       </SafeAreaView> 
     );
