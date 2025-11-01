@@ -2408,6 +2408,8 @@ PODS:
     - React-perflogger (= 0.82.0)
     - React-utils (= 0.82.0)
     - SocketRocket
+  - RNFS (2.20.0):
+    - React-Core
   - RNScreens (4.17.1):
     - boost
     - DoubleConversion
@@ -2545,6 +2547,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - SocketRocket (~> 0.7.1)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -2701,6 +2704,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   Yoga:
@@ -2780,6 +2785,7 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: c5c4f5280e4ae0f9f4a739c64c4260fe0b3edaf1
   ReactCodegen: 374f1c9242fbdd673b460d358b33860c0cc9d926
   ReactCommon: 25c7f94aee74ddd93a8287756a8ac0830a309544
+  RNFS: 89de7d7f4c0f6bafa05343c578f61118c8282ed8
   RNScreens: 833237c48c756d40764540246a501b47dadb2cac
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: edeb9900b9e5bb5b27b9a6a2d5914e4fe4033c1b
