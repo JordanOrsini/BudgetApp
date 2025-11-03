@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 
 import RNFS from 'react-native-fs';
+import Transaction from './Transaction'
 import TransactionsContext from './TransactionsContext';
 
 const TransactionsProvider = ({children}) => {
@@ -21,6 +22,8 @@ const TransactionsProvider = ({children}) => {
 
   // File path of our saved user data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + '/UserData.txt';
+
+  const testTransactions = new Transaction({name: 0, amount: 0, category: 0, transactionDate: 0, creationDate: 0});
 
   // [TODO]: Temporary data for testing.
   const defaultFileContents = '0,0,0,0,0\n1,1,1,1,1\n2,2,2,2,2\n3,3,3,3,3\n4,4,4,4,4\n' +
@@ -56,7 +59,7 @@ const TransactionsProvider = ({children}) => {
   async function readAndParseFile() {
     try {
       // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, 'utf8');
+      await RNFS.writeFile(filePath, testTransactions.toString(), 'utf8');
 
       const content = await RNFS.readFile(filePath, 'utf8');
       console.log('File content:\n', content);
