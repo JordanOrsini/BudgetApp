@@ -85,7 +85,7 @@ const TransactionsProvider = ({children}) => {
         if (item != "") {      
         const transactionDataArray = item.split(',');
         transactionObjectArray.push(new Transaction({name: transactionDataArray[0], 
-                                                     amount: parseInt(transactionDataArray[1]), 
+                                                     amount: parseFloat(transactionDataArray[1]), 
                                                      category: parseInt(transactionDataArray[2]), 
                                                      transactionDate: parseInt(transactionDataArray[3]), 
                                                      creationDate: parseInt(transactionDataArray[4])}
