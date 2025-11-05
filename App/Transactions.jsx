@@ -12,12 +12,21 @@ import TransactionsContext from './TransactionsContext';
 class Transactions extends Component {
   static contextType = TransactionsContext;
 
+  getTotalAmount() {
+    let totalAmount = 0;
+    this.context.userData.map((element) => {
+      totalAmount = totalAmount + element.getAmount();
+      });
+
+    return totalAmount;
+  }
+
   // Function that obtains all the transaction elements to be displayed on screen.
   getTransactions() {
     return (
       this.context.userData.map((element, index) => {return (
         <SafeAreaView key={index} style={styles.transactionElement}>
-          <Text>{element}</Text>
+          <Text>{element.getName() + " | " + element.getAmount() + " | " + element.getCategory() + " | " + element.getTransactionDate()}</Text>
           <Pressable style={styles.transactionRemove} onPress={() => this.removeItemHandler({index})}><Text>X</Text></Pressable>
         </SafeAreaView>
         )})
@@ -39,6 +48,8 @@ class Transactions extends Component {
         <Text style={styles.headerText}>Transactions</Text>
         <SafeAreaView style={styles.scrollView}>
           <ScrollView>
+            <Text>Total amount spent: ${this.getTotalAmount()}</Text>
+            <Text>Name | Amount | Category | Date</Text>
             {this.getTransactions()}
           </ScrollView>
         </SafeAreaView>

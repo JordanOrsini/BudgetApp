@@ -9,8 +9,22 @@ const TransactionsProvider = ({children}) => {
 
   // Custom setter, writing memory's contents to file before updating userData.
   const _setUserData = (newData) => {
+
+    let stringToWrite = "";
+    newData.map((item) => {
+      stringToWrite = stringToWrite + item.toString() + "\n";
+    });
+
+    console.log('stringToWrite:\n', stringToWrite);
+
+    try {
+      RNFS.writeFile(filePath, stringToWrite, 'utf8');
+    }
+    catch (error) {
+      console.error('Error writing to file:', error);
+      return;
+    }
     
-    // [TODO]: Overwrite contents of our text file with what is being updated in memory.
     setUserData(newData);
   }
 
@@ -21,9 +35,7 @@ const TransactionsProvider = ({children}) => {
   }
 
   // File path of our saved user data. Not user accessible. Cross-platform.
-  const filePath = RNFS.DocumentDirectoryPath + '/UserData.txt';
-
-  const testTransactions = new Transaction({name: 0, amount: 0, category: 0, transactionDate: 0, creationDate: 0});
+  const filePath = RNFS.DocumentDirectoryPath + '/UserData.txt'
 
   // [TODO]: Temporary data for testing.
   const defaultFileContents = '0,0,0,0,0\n1,1,1,1,1\n2,2,2,2,2\n3,3,3,3,3\n4,4,4,4,4\n' +
@@ -59,7 +71,7 @@ const TransactionsProvider = ({children}) => {
   async function readAndParseFile() {
     try {
       // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, testTransactions.toString(), 'utf8');
+      await RNFS.writeFile(filePath, defaultFileContents, 'utf8');
 
       const content = await RNFS.readFile(filePath, 'utf8');
       console.log('File content:\n', content);
@@ -68,8 +80,22 @@ const TransactionsProvider = ({children}) => {
       const lines = content.split('\n');
       console.log('Lines:\n', lines); 
 
+      const transactionObjectArray = [];
+      lines.map((item) => {
+        if (item != "") {      
+        const transactionDataArray = item.split(',');
+        transactionObjectArray.push(new Transaction({name: transactionDataArray[0], 
+                                                     amount: parseInt(transactionDataArray[1]), 
+                                                     category: parseInt(transactionDataArray[2]), 
+                                                     transactionDate: parseInt(transactionDataArray[3]), 
+                                                     creationDate: parseInt(transactionDataArray[4])}
+                                                    )); 
+        }  
+      });
+
+
       // Update state with parsed data
-      setUserData(lines);
+      setUserData(transactionObjectArray);
     } 
     catch (error) {
       console.error('Error reading file:', error); 
