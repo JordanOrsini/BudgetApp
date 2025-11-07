@@ -37,7 +37,7 @@ class Transaction {
   }
 
   toString() {
-    return this.#name + ',' + this.#amount + ',' + this.#recurring;
+    return this.#name + ';' + this.#amount + ';' + this.#recurring;
   }
 }
 

@@ -15,7 +15,7 @@ class Transactions extends Component {
 
   constructor(props) {
     super(props);
-    this.myNumberFormatter = new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}); 
+    this.myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"}); 
   }
 
   getTotalAmount() {
