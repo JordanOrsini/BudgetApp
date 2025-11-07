@@ -1,6 +1,8 @@
 import {Component} from 'react';
-import {Modal, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
+
+import AddTransaction from "./AddTransaction";
 
 /* 
    Class representing the navigation component of the application.
@@ -10,8 +12,12 @@ class Navigation extends Component {
     super(props);
 
     this.state = {
-      modalVisible: true, 
+      modalVisible: false, 
     };
+  }
+
+  setModalVisibility = (visibility) => {
+    this.setState({modalVisible: visibility});
   }
 
   // Function that returns the navigation component.
@@ -19,16 +25,7 @@ class Navigation extends Component {
     return (
       <View style={styles.modalNavContainer}>
        
-        <Modal visible={this.state.modalVisible} transparent={true}> 
-          <View style={styles.modalPositioning}>    
-            <View style={styles.modal}>
-              <Pressable style={styles.modalClose} onPress={() => this.setState({modalVisible: false})}>
-                <Text>X</Text>
-              </Pressable>
-              <Text>MODAL</Text>
-            </View>    
-          </View>    
-        </Modal>
+        <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
         <View style={styles.navigation}>
           <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Overview')}>
@@ -37,7 +34,7 @@ class Navigation extends Component {
           <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Budget')}>
             <Text>Budget</Text>
           </Pressable>
-          <Pressable style={styles.button} onPress={() => this.setState({modalVisible: true})}>
+          <Pressable style={styles.button} onPress={() => this.setModalVisibility(true)}>
             <Text>+</Text>
           </Pressable>
           <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Transactions')}>
