@@ -13,9 +13,12 @@ class Settings extends Component {
   render () {
     return (
       <SafeAreaView style={styles.pageView}>
+
         <Text style={styles.headerText}>Settings</Text>
         <Text style={styles.mainBodyText}>Main body</Text>
+
         <Navigation navigation={this.props.navigation}/>
+        
       </SafeAreaView> 
     );
   }

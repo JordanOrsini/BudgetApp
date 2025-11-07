@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Pressable, ScrollView, Text} from "react-native";
+import {Pressable, ScrollView, Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
@@ -31,10 +31,10 @@ class Transactions extends Component {
   getTransactions() {
     return (
       this.context.userData.map((element, index) => {return (
-        <SafeAreaView key={index} style={styles.transactionElement}>
+        <View key={index} style={styles.transactionElement}>
           <Text>{element.getName() + " | " + this.myNumberFormatter.format(element.getAmount()) + " | " + CategoryChoiceConverter(element.getCategory()) + " | " + element.getTransactionDate()}</Text>
           <Pressable style={styles.transactionRemove} onPress={() => this.removeItemHandler({index})}><Text>X</Text></Pressable>
-        </SafeAreaView>
+        </View>
         )})
     )
   }
@@ -51,15 +51,19 @@ class Transactions extends Component {
   render() {
     return (
       <SafeAreaView style={styles.pageView}>
+
         <Text style={styles.headerText}>Transactions</Text>
-        <SafeAreaView style={styles.scrollView}>
+        <Text>Total amount spent: {this.myNumberFormatter.format(this.getTotalAmount())}</Text>
+        <Text>Name | Amount | Category | Date</Text>
+
+        <View style={styles.scrollView}>
           <ScrollView>
-            <Text>Total amount spent: {this.myNumberFormatter.format(this.getTotalAmount())}</Text>
-            <Text>Name | Amount | Category | Date</Text>
             {this.getTransactions()}
           </ScrollView>
-        </SafeAreaView>
+        </View>
+
         <Navigation navigation={this.props.navigation}/>
+        
       </SafeAreaView> 
     );
   }

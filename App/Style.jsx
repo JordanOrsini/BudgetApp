@@ -15,15 +15,36 @@ export const styles = StyleSheet.create({
   headerText: {
     fontSize: 50,
     fontWeight: 'bold',
-    paddingTop: 25,
   },
   mainBodyText: {
     flex: 1,
   },
+  modal: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    elevation: 10,
+  },
+  modalClose: {
+    borderRadius: 20,
+    borderWidth: 1,
+    width: 20,
+    paddingLeft: 5,
+    paddingRight: 5,
+  },
+  modalPositioning: {
+    justifyContent: 'flex-end',
+    flex: 1,
+    marginBottom: 75,
+  },
+  modalNavContainer: {
+    width: '100%',
+  },
   navigation: {
     flexDirection: 'row',
-    paddingLeft: 25,
-    paddingRight: 25,
+    padding: 20,
   },
   pageView: {
     alignItems: 'center',
@@ -31,6 +52,8 @@ export const styles = StyleSheet.create({
   },
   transactionElement: {
     flexDirection: 'row',
+    paddingTop: 25,
+    paddingBottom: 25,
   },
   transactionRemove: {
     alignItems: 'center',
