@@ -89,7 +89,7 @@ const TransactionsProvider = ({children}) => {
                                                        category: parseInt(transactionDataArray[2]), 
                                                        transactionDate: parseInt(transactionDataArray[3]), 
                                                        creationDate: parseInt(transactionDataArray[4])}
-                                                      )); 
+                                                     )); 
         }
       });
 

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     borderRadius: 20,
-    borderWidth: 1,
+    backgroundColor: 'white',
     flex: 1,  
     justifyContent: 'center',
     padding: 10,
@@ -21,23 +21,25 @@ export const styles = StyleSheet.create({
   },
   modal: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: 'silver',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
     elevation: 10,
   },
-  modalClose: {
+  modalAccept: {
     borderRadius: 20,
-    borderWidth: 1,
-    width: 20,
+    backgroundColor: '#A0FAA0',
     paddingLeft: 5,
     paddingRight: 5,
+  },
+  modalButtonsContainer: {
+    flexDirection: 'row',
   },
   modalPositioning: {
     justifyContent: 'flex-end',
     flex: 1,
-    marginBottom: 75,
+    marginBottom: '20%',
   },
   modalNavContainer: {
     width: '100%',
@@ -50,19 +52,23 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
+  textInput: {
+    borderRadius: 20,
+    width: '100%',
+    margin: 10,
+    backgroundColor: 'white',
+  },
   transactionElement: {
     flexDirection: 'row',
     paddingTop: 25,
     paddingBottom: 25,
   },
   transactionRemove: {
-    alignItems: 'center',
     borderRadius: 20,
-    borderWidth: 1,
-    justifyContent: 'center',
-    marginLeft: 10,
+    backgroundColor: '#F76464',
     paddingLeft: 5,
     paddingRight: 5,
+    marginLeft: 10,
   },
   scrollView: {
     flex: 1,
