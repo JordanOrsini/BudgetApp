@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   modalPositioning: {
     justifyContent: 'flex-end',
     flex: 1,
-    marginBottom: '20%',
+    marginBottom: 100,
   },
   modalNavContainer: {
     width: '100%',
@@ -57,6 +57,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     margin: 10,
     backgroundColor: 'white',
+    padding: '10',
   },
   transactionElement: {
     flexDirection: 'row',
