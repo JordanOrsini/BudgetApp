@@ -6,6 +6,8 @@ import Budget from './Budget';
 import Overview from './Overview';
 import Settings from './Settings';
 import Transactions from './Transactions';
+
+import CategoriesProvider from './CategoriesProvider';
 import TransactionsProvider from './TransactionsProvider';
 
 /* 
@@ -20,14 +22,16 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <TransactionsProvider>
-        <NavigationContainer>
-          <navigationStack.Navigator screenOptions={{headerShown: false}} initialRouteName="Overview">
-            <navigationStack.Screen name="Overview" component={Overview} />
-            <navigationStack.Screen name="Budget" component={Budget} />
-            <navigationStack.Screen name="Transactions" component={Transactions} />
-            <navigationStack.Screen name="Settings" component={Settings} />
-          </navigationStack.Navigator>
-        </NavigationContainer>
+        <CategoriesProvider>
+          <NavigationContainer>
+            <navigationStack.Navigator screenOptions={{headerShown: false}} initialRouteName="Overview">
+              <navigationStack.Screen name="Overview" component={Overview} />
+              <navigationStack.Screen name="Budget" component={Budget} />
+              <navigationStack.Screen name="Transactions" component={Transactions} />
+              <navigationStack.Screen name="Settings" component={Settings} />
+            </navigationStack.Navigator>
+          </NavigationContainer>
+        </CategoriesProvider>
       </TransactionsProvider>
     </SafeAreaProvider>
   );

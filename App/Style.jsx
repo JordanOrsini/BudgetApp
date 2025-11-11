@@ -4,6 +4,12 @@ import {StyleSheet} from 'react-native';
    Style sheets CSS for the entire application.
 */
 export const styles = StyleSheet.create({
+  addCategoryButton: {
+    borderRadius: 20,
+    backgroundColor: 'orange',
+    paddingLeft: 5,
+    paddingRight: 5,
+  },
   button: {
     alignItems: 'center',
     borderRadius: 20,
@@ -11,6 +17,12 @@ export const styles = StyleSheet.create({
     flex: 1,  
     justifyContent: 'center',
     padding: 10,
+  },
+  categoryButtons: {
+    borderRadius: 20,
+    backgroundColor: 'white',
+    paddingLeft: 5,
+    paddingRight: 5,
   },
   headerText: {
     fontSize: 50,

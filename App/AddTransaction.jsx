@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
+import Categories from './Categories'
 import Transaction from './Transaction'
 import TransactionsContext from './TransactionsContext';
 
@@ -17,9 +18,13 @@ class AddTransaction extends Component {
     this.state = {
       nameInput: "",
       amountInput: "",
-      categoryInput: "",
+      categoryInput: 0,
       dateInput: "",
     };
+  }
+
+  setSelectedCategory = (newSelection) => {
+    this.setState({categoryInput: newSelection});
   }
 
   validateNameInput = () => {
@@ -42,23 +47,6 @@ class AddTransaction extends Component {
   validateAmountInput = () => {
     let Success = true;
     const stringToValidate = this.state.amountInput;
-
-    if (stringToValidate.length === 0) {
-      console.log("Blank string!\n");
-      Success = false;
-    }
-
-    if (isNaN(stringToValidate)) {
-      console.log("Not a number!\n");
-      Success = false;
-    }
-
-    return Success;
-  }
-
-  validateCategoryInput = () => {
-    let Success = true;
-    const stringToValidate = this.state.categoryInput;
 
     if (stringToValidate.length === 0) {
       console.log("Blank string!\n");
@@ -102,11 +90,6 @@ class AddTransaction extends Component {
       Success = false;
     }
 
-    if (!this.validateCategoryInput()) {
-      console.log("Category invalid!\n");
-      Success = false;
-    }
-
     if (!this.validateDateInput()) {
       console.log("Date invalid!\n");
       Success = false;
@@ -133,7 +116,7 @@ class AddTransaction extends Component {
   closeModal = () => {
     this.setState({nameInput: "",
                    amountInput: "",
-                   categoryInput: "",
+                   categoryInput: 0,
                    dateInput: ""});
     this.props.setVisibility(false);
   }
@@ -150,7 +133,7 @@ class AddTransaction extends Component {
           <View style={styles.modal}>
             <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
             <TextInput style={styles.textInput} placeholder="Amount" onChangeText={(text, id) => this.onTextChange(text, "amountInput")} />
-            <TextInput style={styles.textInput} placeholder="Category" onChangeText={(text, id) => this.onTextChange(text, "categoryInput")} />
+            <Categories setSelection={this.setSelectedCategory} />
             <TextInput style={styles.textInput} placeholder="Date" onChangeText={(text, id) => this.onTextChange(text, "dateInput")} />
             <View style={styles.modalButtonsContainer}> 
               <Pressable style={styles.modalAccept} onPress={() => this.createNewTransaction()}>

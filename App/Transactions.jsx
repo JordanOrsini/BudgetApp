@@ -3,7 +3,7 @@ import {Pressable, ScrollView, Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
-import CategoryChoiceConverter from "./CategoryChoiceConverter";
+import Categories from "./Categories";
 import Navigation from "./Navigation";
 import TransactionsContext from './TransactionsContext';
 
@@ -16,6 +16,7 @@ class Transactions extends Component {
   constructor(props) {
     super(props);
     this.myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"}); 
+    this.myCustomCategories = new Categories();
   }
 
   getTotalAmount() {
@@ -32,8 +33,8 @@ class Transactions extends Component {
     return (
       this.context.userData.map((element, index) => {return (
         <View key={index} style={styles.transactionElement}>
-          <Text>{element.getName() + " | " + this.myNumberFormatter.format(element.getAmount()) + " | " + CategoryChoiceConverter(element.getCategory()) + " | " + element.getTransactionDate()}</Text>
-          <Pressable style={styles.transactionRemove} onPress={() => this.removeItemHandler({index})}><Text>X</Text></Pressable>
+          <Text>{element.getName() + " | " + this.myNumberFormatter.format(element.getAmount()) + " | " + this.myCustomCategories.getCategory(element.getCategory()) + " | " + element.getTransactionDate()}</Text>
+          <Pressable style={styles.transactionRemove} onPress={() => this.removeItemHandler(index)}><Text>X</Text></Pressable>
         </View>
         )})
     )
@@ -41,7 +42,7 @@ class Transactions extends Component {
 
   // Function that handles the onPress event of a transaction element.
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
-  removeItemHandler = ({index}) => {
+  removeItemHandler = (index) => {
     const newTransactions = [...this.context.userData];
     newTransactions.splice(index, 1);
     this.context._setUserData(newTransactions);
