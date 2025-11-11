@@ -22,13 +22,97 @@ class AddTransaction extends Component {
     };
   }
 
-  validateInputs = () => {
-    if (this.state.nameInput.includes(';') || this.state.amountInput.includes(';') || this.state.categoryInput.includes(';') || this.state.dateInput.includes(';')) {
-      console.log("Input invalid ';' found!\n");
-      return false;
+  validateNameInput = () => {
+    let Success = true;
+    const stringToValidate = this.state.nameInput;
+
+    if (stringToValidate.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
     }
 
-    return true;
+    if (stringToValidate.includes(';')) {
+      console.log("Invalid character found: ';'\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  validateAmountInput = () => {
+    let Success = true;
+    const stringToValidate = this.state.amountInput;
+
+    if (stringToValidate.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (isNaN(stringToValidate)) {
+      console.log("Not a number!\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  validateCategoryInput = () => {
+    let Success = true;
+    const stringToValidate = this.state.categoryInput;
+
+    if (stringToValidate.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (isNaN(stringToValidate)) {
+      console.log("Not a number!\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  validateDateInput = () => {
+    let Success = true;
+    const stringToValidate = this.state.dateInput;
+
+    if (stringToValidate.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (isNaN(stringToValidate)) {
+      console.log("Not a number!\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  validateInputs = () => {
+    let Success = true;
+    if (!this.validateNameInput()) {
+      console.log("Name invalid!\n");
+      Success = false;
+    }
+
+    if (!this.validateAmountInput()) {
+      console.log("Amount invalid!\n");
+      Success = false;
+    }
+
+    if (!this.validateCategoryInput()) {
+      console.log("Category invalid!\n");
+      Success = false;
+    }
+
+    if (!this.validateDateInput()) {
+      console.log("Date invalid!\n");
+      Success = false;
+    }
+
+    return Success;
   }
 
   createNewTransaction = () => {
@@ -43,13 +127,18 @@ class AddTransaction extends Component {
                                            }); 
                                        
     this.context._setUserData([newTransaction, ...this.context.userData]);
-    this.props.setVisibility(false);   
+    this.closeModal();
+  }
+
+  closeModal = () => {
+    this.setState({nameInput: "",
+                   amountInput: "",
+                   categoryInput: "",
+                   dateInput: ""});
+    this.props.setVisibility(false);
   }
 
   onTextChange = (text, id) => {
-    console.log("Text: " + text + "\n");
-    console.log("Value: " + id + "\n");
-    
     this.setState({[id]: text});
   }
 
@@ -67,7 +156,7 @@ class AddTransaction extends Component {
               <Pressable style={styles.modalAccept} onPress={() => this.createNewTransaction()}>
                 <Text>Y</Text>
               </Pressable>
-              <Pressable style={styles.transactionRemove} onPress={() => this.props.setVisibility(false)}>
+              <Pressable style={styles.transactionRemove} onPress={() => this.closeModal()}>
                 <Text>N</Text>
               </Pressable>
             </View>
