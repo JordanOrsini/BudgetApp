@@ -10,23 +10,16 @@ import CategoriesContext from './CategoriesContext';
 class Categories extends Component {
   static contextType = CategoriesContext;
 
-  getCategory = (choiceInteger) => {
-    if (choiceInteger < this.context.categoryData.length)
-      return this.context.categoryData[choiceInteger];
-
-    return "N/A";
-  }
-
   getCategories = () => {
     return (
       this.context.categoryData.map((category, index) => (
-        <Pressable key={index} style={styles.categoryButtons} onPress={() => this.onSelectionChange(index)}><Text>{category}</Text></Pressable>
+        <Pressable key={index} style={styles.categoryButtons} onPress={() => this.onSelectionChange(category)}><Text>{category}</Text></Pressable>
       ))
     );
   }
 
-  onSelectionChange = (index) => {
-    this.props.setSelection(index);
+  onSelectionChange = (category) => {
+    this.props.setSelection(category);
   }
 
   addCategory = () => {

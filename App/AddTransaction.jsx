@@ -18,7 +18,7 @@ class AddTransaction extends Component {
     this.state = {
       nameInput: "",
       amountInput: "",
-      categoryInput: 0,
+      categoryInput: "None",
       dateInput: "",
     };
   }
@@ -104,7 +104,7 @@ class AddTransaction extends Component {
 
     const newTransaction = new Transaction({name: this.state.nameInput, 
                                             amount: parseFloat(this.state.amountInput), 
-                                            category: parseInt(this.state.categoryInput), 
+                                            category: this.state.categoryInput, 
                                             transactionDate: parseInt(this.state.dateInput), 
                                             creationDate: parseInt(0)
                                            }); 
@@ -116,7 +116,7 @@ class AddTransaction extends Component {
   closeModal = () => {
     this.setState({nameInput: "",
                    amountInput: "",
-                   categoryInput: 0,
+                   categoryInput: "None",
                    dateInput: ""});
     this.props.setVisibility(false);
   }
