@@ -22,27 +22,35 @@ class AddTransaction extends Component {
     };
   }
 
+  validateInputs = () => {
+    if (this.state.nameInput.includes(';') || this.state.amountInput.includes(';') || this.state.categoryInput.includes(';') || this.state.dateInput.includes(';')) {
+      console.log("Input invalid ';' found!\n");
+      return false;
+    }
+
+    return true;
+  }
+
   createNewTransaction = () => {
-    const myTransactions = [];
-    myTransactions.push(new Transaction({name: this.state.nameInput, 
-                                         amount: parseFloat(this.state.amountInput), 
-                                         category: parseInt(this.state.categoryInput), 
-                                         transactionDate: parseInt(this.state.dateInput), 
-                                         creationDate: parseInt(0)}
-                                       )); 
+    if (!this.validateInputs())
+      return;
+
+    const newTransaction = new Transaction({name: this.state.nameInput, 
+                                            amount: parseFloat(this.state.amountInput), 
+                                            category: parseInt(this.state.categoryInput), 
+                                            transactionDate: parseInt(this.state.dateInput), 
+                                            creationDate: parseInt(0)
+                                           }); 
                                        
-    this.context._setUserData(myTransactions);
+    this.context._setUserData([newTransaction, ...this.context.userData]);
     this.props.setVisibility(false);   
   }
 
-  onTextChange = (text, value) => {
+  onTextChange = (text, id) => {
     console.log("Text: " + text + "\n");
-    console.log("Value: " + value + "\n");
-    //const {name, value} = e.target;
-
-    //console.log("Name: " + this.name + "\n");
-    //console.log("Value: " + this.value + "\n");
-    //this.setState({[this.name]: [this.value]});
+    console.log("Value: " + id + "\n");
+    
+    this.setState({[id]: text});
   }
 
   // Function that returns the contents of the AddTransaction modal.
@@ -51,10 +59,10 @@ class AddTransaction extends Component {
       <Modal visible={this.props.modalVisibility} transparent={true}> 
         <View style={styles.modalPositioning}>    
           <View style={styles.modal}>
-            <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, value) => this.onTextChange(text, value)} />
-            <TextInput style={styles.textInput} placeholder="Amount" onChangeText={this.onTextChange()} />
-            <TextInput style={styles.textInput} placeholder="Category" onChangeText={this.onTextChange()} />
-            <TextInput style={styles.textInput} placeholder="Date" onChangeText={this.onTextChange()} />
+            <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
+            <TextInput style={styles.textInput} placeholder="Amount" onChangeText={(text, id) => this.onTextChange(text, "amountInput")} />
+            <TextInput style={styles.textInput} placeholder="Category" onChangeText={(text, id) => this.onTextChange(text, "categoryInput")} />
+            <TextInput style={styles.textInput} placeholder="Date" onChangeText={(text, id) => this.onTextChange(text, "dateInput")} />
             <View style={styles.modalButtonsContainer}> 
               <Pressable style={styles.modalAccept} onPress={() => this.createNewTransaction()}>
                 <Text>Y</Text>
