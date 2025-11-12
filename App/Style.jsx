@@ -7,8 +7,7 @@ export const styles = StyleSheet.create({
   addCategoryButton: {
     borderRadius: 20,
     backgroundColor: 'orange',
-    paddingLeft: 5,
-    paddingRight: 5,
+    padding: 5,
   },
   addCategoryModal: {
     margin: 20,
@@ -29,16 +28,13 @@ export const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     borderRadius: 20,
-    backgroundColor: 'white',
     flex: 1,  
     justifyContent: 'center',
     padding: 10,
   },
   categoryButtons: {
     borderRadius: 20,
-    backgroundColor: 'white',
-    paddingLeft: 5,
-    paddingRight: 5,
+    padding: 5,
   },
   categoryContainer: {
     flexDirection: 'row',
@@ -76,7 +72,13 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   selected: {
+    backgroundColor: '#ADD8E6',
+  },
+  pressed: {
     backgroundColor: 'yellow',
+  },
+  unSelected: {
+    backgroundColor: 'white',
   },
   textInput: {
     borderRadius: 20,

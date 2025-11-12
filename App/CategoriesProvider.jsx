@@ -38,7 +38,7 @@ const CategoriesProvider = ({children}) => {
   const filePath = RNFS.DocumentDirectoryPath + '/CategoryData.txt'
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = 'None;Test.png\nHome;Test.png\nWork;Test.png\nEntertainment;Test.png';
+  const defaultFileContents = 'None;none.svg\nHome;home.svg\nWork;work.svg\nEntertainment;entertainment.svg';
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {

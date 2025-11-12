@@ -1,8 +1,9 @@
 import {Component} from 'react';
-import {Pressable, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import {styles} from "./Style";
 
 import AddTransaction from "./AddTransaction";
+import SelectableButton from './SelectableButton';
 
 /* 
    Class representing the navigation component of the application.
@@ -28,21 +29,21 @@ class Navigation extends Component {
         <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
         <View style={styles.navigation}>
-          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Overview')}>
+          <SelectableButton style={styles.button} selected={true} onPress={() => this.props.navigation.navigate('Overview')}>
             <Text>Overview</Text>
-          </Pressable>
-          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Budget')}>
+          </SelectableButton>
+          <SelectableButton style={styles.button} onPress={() => this.props.navigation.navigate('Budget')}>
             <Text>Budget</Text>
-          </Pressable>
-          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.setModalVisibility(true)}>
+          </SelectableButton>
+          <SelectableButton style={styles.button} onPress={() => this.setModalVisibility(true)}>
             <Text>+</Text>
-          </Pressable>
-          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Transactions')}>
+          </SelectableButton>
+          <SelectableButton style={styles.button} onPress={() => this.props.navigation.navigate('Transactions')}>
             <Text>Transactions</Text>
-          </Pressable>
-          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Settings')}>
+          </SelectableButton>
+          <SelectableButton style={styles.button} onPress={() => this.props.navigation.navigate('Settings')}>
             <Text>Settings</Text>
-          </Pressable>
+          </SelectableButton>
         </View>
 
       </View>
