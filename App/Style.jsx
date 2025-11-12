@@ -10,6 +10,22 @@ export const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
   },
+  addCategoryModal: {
+    margin: 20,
+    backgroundColor: 'orange',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    elevation: 10,
+  },
+  addTransactionModal: {
+    margin: 20,
+    backgroundColor: 'silver',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    elevation: 10,
+  },
   button: {
     alignItems: 'center',
     borderRadius: 20,
@@ -31,7 +47,7 @@ export const styles = StyleSheet.create({
   mainBodyText: {
     flex: 1,
   },
-  modal: {
+  addTransactionModal: {
     margin: 20,
     backgroundColor: 'silver',
     borderRadius: 20,

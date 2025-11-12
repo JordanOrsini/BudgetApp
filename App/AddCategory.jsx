@@ -57,7 +57,7 @@ class AddCategory extends Component {
     return (
       <Modal visible={this.props.modalVisibility} transparent={true}> 
         <View style={styles.modalPositioning}>    
-          <View style={styles.modal}>
+          <View style={styles.addCategoryModal}>
             <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
             <View style={styles.modalButtonsContainer}> 
               <Pressable style={styles.modalAccept} onPress={() => this.createNewCategory()}>

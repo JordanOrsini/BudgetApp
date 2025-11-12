@@ -130,7 +130,7 @@ class AddTransaction extends Component {
     return (
       <Modal visible={this.props.modalVisibility} transparent={true}> 
         <View style={styles.modalPositioning}>    
-          <View style={styles.modal}>
+          <View style={styles.addTransactionModal}>
             <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
             <TextInput style={styles.textInput} placeholder="Amount" onChangeText={(text, id) => this.onTextChange(text, "amountInput")} />
             <Categories setSelection={this.setSelectedCategory} />
