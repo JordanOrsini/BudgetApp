@@ -2,6 +2,7 @@ import {Component} from 'react';
 import {Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
+import AddCategory from './AddCategory';
 import CategoriesContext from './CategoriesContext';
 
 /* 
@@ -9,6 +10,14 @@ import CategoriesContext from './CategoriesContext';
 */
 class Categories extends Component {
   static contextType = CategoriesContext;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalVisible: false,     
+    };
+  }
 
   getCategories = () => {
     return (
@@ -22,15 +31,16 @@ class Categories extends Component {
     this.props.setSelection(category);
   }
 
-  addCategory = () => {
-    this.context._setCategoryData([...this.context.categoryData, "Category " + (this.context.categoryData.length + 1)])
+  setModalVisibility = (visibility) => {
+    this.setState({modalVisible: visibility});
   }
 
   render () {
     return (
       <View>
+        <AddCategory modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
         {this.getCategories()}
-        <Pressable style={styles.addCategoryButton} onPress={() => this.addCategory()}><Text>+</Text></Pressable>
+        <Pressable style={styles.addCategoryButton} onPress={() => this.setModalVisibility(true)}><Text>+</Text></Pressable>
       </View>
     );
   }

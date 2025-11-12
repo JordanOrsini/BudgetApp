@@ -38,7 +38,7 @@ const TransactionsProvider = ({children}) => {
   const filePath = RNFS.DocumentDirectoryPath + '/UserData.txt'
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = '0;0;None;0;0\n1;1;None;1;1\n2;2;None;2;2\n3;3;None;3;3\n4;4;None;4;4\n' +
+  const defaultFileContents = '1;1;None;1;1\n2;2;None;2;2\n3;3;None;3;3\n4;4;None;4;4\n' +
                               '5;5;None;5;5\n6;6;None;6;6\n7;7;None;7;7\n8;8;None;8;8\n9;9;None;9;9\n' +
                               '10;10;None;10;10\n11;11;None;11;11\n12;12;None;12;12\n' +
                               '13;13;None;13;13\n14;14;None;14;14\n15;15;None;15;15';
