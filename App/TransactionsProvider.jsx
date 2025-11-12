@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 
 import RNFS from 'react-native-fs';
-import Transaction from './Transaction'
+import Category from './Category';
+import Transaction from './Transaction';
 import TransactionsContext from './TransactionsContext';
 
 const TransactionsProvider = ({children}) => {
@@ -84,9 +85,10 @@ const TransactionsProvider = ({children}) => {
       lines.map((item) => {
         if (item != "") {      
           const transactionDataArray = item.split(';');
+          
           transactionObjectArray.push(new Transaction({name: transactionDataArray[0], 
                                                        amount: parseFloat(transactionDataArray[1]), 
-                                                       category: transactionDataArray[2], 
+                                                       category: new Category({name: transactionDataArray[2]}), 
                                                        transactionDate: parseInt(transactionDataArray[3]), 
                                                        creationDate: parseInt(transactionDataArray[4])}
                                                      )); 

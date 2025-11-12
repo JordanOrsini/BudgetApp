@@ -15,21 +15,20 @@ class Categories extends Component {
     super(props);
 
     this.state = {
-      modalVisible: false,
-      selectedId: "",     
+      modalVisible: false,   
     };
   }
 
   getCategories = () => {
     return (
       this.context.categoryData.map((category, index) => (
-        <Pressable key={index} style={({pressed}) => pressed ? [styles.categoryButtons, styles.selected] : styles.categoryButtons} onPress={() => this.onSelectionChange(category)}><Text>{category}</Text></Pressable>
+        <Pressable key={index} style={({pressed}) => pressed ? [styles.categoryButtons, styles.selected] : styles.categoryButtons} onPress={() => this.onSelectionChange(category.getName())}><Text>{category.getName()}</Text></Pressable>
       ))
     );
   }
 
-  onSelectionChange = (category) => {
-    this.props.setSelection(category);
+  onSelectionChange = (categoryName) => {
+    this.props.setSelection(categoryName);
   }
 
   setModalVisibility = (visibility) => {
@@ -40,8 +39,10 @@ class Categories extends Component {
     return (
       <View>
         <AddCategory modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
-        {this.getCategories()}
-        <Pressable style={({pressed}) => pressed ? [styles.addCategoryButton, styles.selected] : styles.addCategoryButton} onPress={() => this.setModalVisibility(true)}><Text>+</Text></Pressable>
+        <View style={styles.categoryContainer}>
+          {this.getCategories()}
+          <Pressable style={({pressed}) => pressed ? [styles.addCategoryButton, styles.selected] : styles.addCategoryButton} onPress={() => this.setModalVisibility(true)}><Text>+</Text></Pressable>
+        </View>
       </View>
     );
   }

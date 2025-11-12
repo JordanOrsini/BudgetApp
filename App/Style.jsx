@@ -40,6 +40,9 @@ export const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
   },
+  categoryContainer: {
+    flexDirection: 'row',
+  },
   headerText: {
     fontSize: 50,
     fontWeight: 'bold',

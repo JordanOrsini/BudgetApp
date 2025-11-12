@@ -2,8 +2,9 @@ import {Component} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
-import Categories from './Categories'
-import Transaction from './Transaction'
+import Category from './Category';
+import Categories from './Categories';
+import Transaction from './Transaction';
 import TransactionsContext from './TransactionsContext';
 
 /* 
@@ -104,7 +105,7 @@ class AddTransaction extends Component {
 
     const newTransaction = new Transaction({name: this.state.nameInput, 
                                             amount: parseFloat(this.state.amountInput), 
-                                            category: this.state.categoryInput, 
+                                            category: new Category({name: this.state.categoryInput}), 
                                             transactionDate: parseInt(this.state.dateInput), 
                                             creationDate: parseInt(0)
                                            }); 

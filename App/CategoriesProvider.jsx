@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 
 import RNFS from 'react-native-fs';
+import Category from './Category';
 import CategoriesContext from './CategoriesContext';
 
 const CategoriesProvider = ({children}) => {
@@ -37,7 +38,7 @@ const CategoriesProvider = ({children}) => {
   const filePath = RNFS.DocumentDirectoryPath + '/CategoryData.txt'
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = 'None\nHome\nWork\nEntertainment';
+  const defaultFileContents = 'None;Test.png\nHome;Test.png\nWork;Test.png\nEntertainment;Test.png';
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -78,10 +79,13 @@ const CategoriesProvider = ({children}) => {
 
       const categoriesArray = [];
       lines.map((item) => {
-        if (item != "") {            
-          categoriesArray.push(item); 
+        if (item != "") {      
+          const categoryDataArray = item.split(';');
+          categoriesArray.push(new Category({name: categoryDataArray[0], 
+                                             iconPath: categoryDataArray[1]}
+                                           )); 
         }
-      }); 
+      });
 
       // Update state with parsed data
       setCategoryData(categoriesArray);

@@ -2,6 +2,7 @@ import {Component} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
+import Category from './Category';
 import CategoriesContext from './CategoriesContext';
 
 /* 
@@ -39,7 +40,7 @@ class AddCategory extends Component {
     if (!this.validateNameInput())
       return;
                                     
-    this.context._setCategoryData([...this.context.categoryData, this.state.nameInput]);
+    this.context._setCategoryData([...this.context.categoryData, new Category({name: this.state.nameInput})]);
     this.closeModal();
   }
 
