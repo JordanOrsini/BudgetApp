@@ -47,14 +47,6 @@ export const styles = StyleSheet.create({
   mainBodyText: {
     flex: 1,
   },
-  addTransactionModal: {
-    margin: 20,
-    backgroundColor: 'silver',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    elevation: 10,
-  },
   modalAccept: {
     borderRadius: 20,
     backgroundColor: '#A0FAA0',
@@ -79,6 +71,9 @@ export const styles = StyleSheet.create({
   pageView: {
     alignItems: 'center',
     flex: 1,
+  },
+  selected: {
+    backgroundColor: 'yellow',
   },
   textInput: {
     borderRadius: 20,

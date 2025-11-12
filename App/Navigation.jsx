@@ -28,19 +28,19 @@ class Navigation extends Component {
         <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
         <View style={styles.navigation}>
-          <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Overview')}>
+          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Overview')}>
             <Text>Overview</Text>
           </Pressable>
-          <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Budget')}>
+          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Budget')}>
             <Text>Budget</Text>
           </Pressable>
-          <Pressable style={styles.button} onPress={() => this.setModalVisibility(true)}>
+          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.setModalVisibility(true)}>
             <Text>+</Text>
           </Pressable>
-          <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Transactions')}>
+          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Transactions')}>
             <Text>Transactions</Text>
           </Pressable>
-          <Pressable style={styles.button} onPress={() => this.props.navigation.navigate('Settings')}>
+          <Pressable style={({pressed}) => pressed ? [styles.button, styles.selected] : styles.button} onPress={() => this.props.navigation.navigate('Settings')}>
             <Text>Settings</Text>
           </Pressable>
         </View>

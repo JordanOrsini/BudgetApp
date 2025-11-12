@@ -136,10 +136,10 @@ class AddTransaction extends Component {
             <Categories setSelection={this.setSelectedCategory} />
             <TextInput style={styles.textInput} placeholder="Date" onChangeText={(text, id) => this.onTextChange(text, "dateInput")} />
             <View style={styles.modalButtonsContainer}> 
-              <Pressable style={styles.modalAccept} onPress={() => this.createNewTransaction()}>
+              <Pressable style={({pressed}) => pressed ? [styles.modalAccept, styles.selected] : styles.modalAccept} onPress={() => this.createNewTransaction()}>
                 <Text>Y</Text>
               </Pressable>
-              <Pressable style={styles.transactionRemove} onPress={() => this.closeModal()}>
+              <Pressable style={({pressed}) => pressed ? [styles.transactionRemove, styles.selected] : styles.transactionRemove} onPress={() => this.closeModal()}>
                 <Text>N</Text>
               </Pressable>
             </View>

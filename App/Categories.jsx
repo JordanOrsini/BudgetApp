@@ -15,14 +15,15 @@ class Categories extends Component {
     super(props);
 
     this.state = {
-      modalVisible: false,     
+      modalVisible: false,
+      selectedId: "",     
     };
   }
 
   getCategories = () => {
     return (
       this.context.categoryData.map((category, index) => (
-        <Pressable key={index} style={styles.categoryButtons} onPress={() => this.onSelectionChange(category)}><Text>{category}</Text></Pressable>
+        <Pressable key={index} style={({pressed}) => pressed ? [styles.categoryButtons, styles.selected] : styles.categoryButtons} onPress={() => this.onSelectionChange(category)}><Text>{category}</Text></Pressable>
       ))
     );
   }
@@ -40,7 +41,7 @@ class Categories extends Component {
       <View>
         <AddCategory modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
         {this.getCategories()}
-        <Pressable style={styles.addCategoryButton} onPress={() => this.setModalVisibility(true)}><Text>+</Text></Pressable>
+        <Pressable style={({pressed}) => pressed ? [styles.addCategoryButton, styles.selected] : styles.addCategoryButton} onPress={() => this.setModalVisibility(true)}><Text>+</Text></Pressable>
       </View>
     );
   }
