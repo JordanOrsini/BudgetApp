@@ -25,16 +25,24 @@ export const styles = StyleSheet.create({
   },
   categoryButtons: {
     borderRadius: 50,
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
     elevation: 5,
+    margin: 10,
   },
   categoryContainer: {
     flexDirection: 'row',
     height: 200,
+  },
+  categoryElement: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: 320,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
   },
   decline: {
     backgroundColor: '#F76464',

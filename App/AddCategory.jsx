@@ -6,7 +6,7 @@ import Category from './Category';
 import CategoriesContext from './CategoriesContext';
 
 /* 
-   Class representing the AddTransaction modal of the application.
+   Class representing the AddCategory modal of the application.
 */
 class AddCategory extends Component {
   static contextType = CategoriesContext;

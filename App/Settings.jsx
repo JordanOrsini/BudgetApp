@@ -4,6 +4,7 @@ import {styles} from "./Style";
 import {Text, View} from "react-native";
 
 import Navigation from "./Navigation";
+import RemoveCategory from "./RemoveCategory";
 
 /* 
    Class representing the settings screen of the application.
@@ -14,7 +15,9 @@ class Settings extends Component {
     return (
       <SafeAreaView style={styles.pageView}>
         <Text style={styles.headerText}>Settings</Text>
-        <View style={styles.mainBodyContainer}></View>
+        <View style={styles.mainBodyContainer}>
+          <RemoveCategory />
+        </View>
         <Navigation navigation={this.props.navigation} selectedIndex={3} />     
       </SafeAreaView> 
     );
