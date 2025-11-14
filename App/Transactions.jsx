@@ -20,7 +20,6 @@ class Transactions extends Component {
 
     this.state = {
       data: [],
-      totalAmount: 0,
     };
   }
 
@@ -38,13 +37,11 @@ class Transactions extends Component {
 
   fillData = () => {
     const newDataArray = [];
-    let newTotalAmount = 0;
     this.contextUserData.map((element, index) => {
       newDataArray.push({id: index, name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
-      newTotalAmount = newTotalAmount + element.getAmount();
     });
 
-    this.setState({data: newDataArray, totalAmount: newTotalAmount});
+    this.setState({data: newDataArray});
   }
 
   renderItem = ({item}) => {
@@ -70,17 +67,15 @@ class Transactions extends Component {
   render() {
     return (
       <SafeAreaView style={styles.pageView}>
-
         <Text style={styles.headerText}>Transactions</Text>
-        <Text>Total amount spent: {this.myNumberFormatter.format(this.state.totalAmount)}</Text>
+        <Text>Total amount spent: {this.myNumberFormatter.format(this.context.totalAmount)}</Text>
         <Text>Name | Amount | Category | Date</Text>
 
-        <View style={styles.scrollView}>
+        <View style={styles.mainBodyContainer}>
           <FlatList data={this.state.data} renderItem={this.renderItem} keyExtractor={item => item.id} numColumns={1} /> 
         </View>
 
-        <Navigation navigation={this.props.navigation} selectedIndex={2} />
-        
+        <Navigation navigation={this.props.navigation} selectedIndex={2} />       
       </SafeAreaView> 
     );
   }

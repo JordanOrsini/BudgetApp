@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
-import {Text} from "react-native";
+import {Text, View} from "react-native";
 
 import Navigation from "./Navigation";
 
@@ -14,12 +14,9 @@ class Budget extends Component {
   render () {
     return (
       <SafeAreaView style={styles.pageView}>
-
         <Text style={styles.headerText}>Budget</Text>
-        <Text style={styles.mainBodyText}>Main body</Text>
-
-        <Navigation navigation={this.props.navigation} selectedIndex={1} />
-        
+        <View style={styles.mainBodyContainer}></View>
+        <Navigation navigation={this.props.navigation} selectedIndex={1} />     
       </SafeAreaView>
     );
   }

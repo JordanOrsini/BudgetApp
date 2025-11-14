@@ -34,8 +34,7 @@ class Navigation extends Component {
   // Function that returns the navigation component.
   render () {
     return (
-      <View style={styles.modalNavContainer}>
-       
+      <View style={styles.modalNavContainer}>      
         <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
         <View style={styles.navigationContainer}>
@@ -55,7 +54,6 @@ class Navigation extends Component {
             <Text>Settings</Text>
           </Pressable>
         </View>
-
       </View>
     );
   }

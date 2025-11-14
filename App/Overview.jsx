@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Text} from "react-native";
+import {Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
@@ -13,12 +13,9 @@ class Overview extends Component {
   render () {
     return (
       <SafeAreaView style={styles.pageView}>
-
         <Text style={styles.headerText}>Overview</Text>
-        <Text style={styles.mainBodyText}>Main body</Text>
-
-        <Navigation navigation={this.props.navigation} selectedIndex={0} />
-        
+        <View style={styles.mainBodyContainer}></View>
+        <Navigation navigation={this.props.navigation} selectedIndex={0} />       
       </SafeAreaView>  
     );
   }

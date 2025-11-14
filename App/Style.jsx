@@ -43,8 +43,14 @@ export const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
   },
-  mainBodyText: {
+  mainBodyContainer: {
+    backgroundColor: '#E1E1E1',
     flex: 1,
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 10,  
+    width: 375,
+    borderRadius: 30,
   },
   modalButton: {
     width: 40,
@@ -137,10 +143,5 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     elevation: 5,
-  },
-  scrollView: {
-    flex: 1,
-    paddingLeft: 20,
-    width: '100%',
   },
 });

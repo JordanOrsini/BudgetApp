@@ -7,6 +7,19 @@ import TransactionsContext from './TransactionsContext';
 
 const TransactionsProvider = ({children}) => {
   const [userData, setUserData] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  const _setTotalAmount = (newData) => {
+    let newTotalAmount = 0;
+    
+    newData.map((element) => {
+      newTotalAmount = newTotalAmount + element.getAmount();
+    });
+
+    console.log("Transaction total amount: " + newTotalAmount);
+
+    setTotalAmount(newTotalAmount);
+  }
 
   // Custom setter, writing memory's contents to file before updating userData.
   const _setUserData = (newData) => {
@@ -27,12 +40,14 @@ const TransactionsProvider = ({children}) => {
     }
     
     setUserData(newData);
+    _setTotalAmount(newData);
   }
 
   // Values to expose in our context.
   const contextValue = {
     userData,
     _setUserData,
+    totalAmount,
   }
 
   // File path of our saved user data. Not user accessible. Cross-platform.
@@ -97,6 +112,7 @@ const TransactionsProvider = ({children}) => {
 
       // Update state with parsed data
       setUserData(transactionObjectArray);
+      _setTotalAmount(transactionObjectArray);
     } 
     catch (error) {
       console.error('Error reading file:', error); 
