@@ -16,8 +16,6 @@ const TransactionsProvider = ({children}) => {
       newTotalAmount = newTotalAmount + element.getAmount();
     });
 
-    console.log("Transaction total amount: " + newTotalAmount);
-
     setTotalAmount(newTotalAmount);
   }
 

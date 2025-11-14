@@ -129,10 +129,24 @@ export const styles = StyleSheet.create({
     padding: '10',
     elevation: 5,
   },
-  transactionElement: {
+  transactionContainer: {
     flexDirection: 'row',
-    paddingTop: 25,
-    paddingBottom: 25,
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  transactionElement: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: 80,
+    backgroundColor: '#FFFFFF',
+  },
+  transactionElementLeft: {
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  transactionElementRight: {
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
   },
   transactionRemove: {
     width: 20,

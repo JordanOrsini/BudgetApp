@@ -46,8 +46,11 @@ class Transactions extends Component {
 
   renderItem = ({item}) => {
     return (
-      <View style={styles.transactionElement}>
-        <Text>{item.name + " | " + this.myNumberFormatter.format(item.amount) + " | " + item.category + " | " + item.date}</Text>
+      <View style={styles.transactionContainer}>
+        <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
+        <Text style={styles.transactionElement}>{this.myNumberFormatter.format(item.amount)}</Text>
+        <Text style={styles.transactionElement}>{item.category}</Text>
+        <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.removeItemHandler(item.id)}>
           <Text>X</Text>
         </Pressable>
@@ -68,11 +71,16 @@ class Transactions extends Component {
     return (
       <SafeAreaView style={styles.pageView}>
         <Text style={styles.headerText}>Transactions</Text>
-        <Text>Total amount spent: {this.myNumberFormatter.format(this.context.totalAmount)}</Text>
-        <Text>Name | Amount | Category | Date</Text>
+        <Text>Total amount spent: {this.myNumberFormatter.format(this.context.totalAmount)}</Text>   
 
         <View style={styles.mainBodyContainer}>
-          <FlatList data={this.state.data} renderItem={this.renderItem} keyExtractor={item => item.id} numColumns={1} /> 
+          <View style={styles.transactionContainer}>
+            <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
+            <Text style={styles.transactionElement}>Amount</Text>
+            <Text style={styles.transactionElement}>Category</Text>
+            <Text style={[styles.transactionElement, styles.transactionElementRight]}>Date</Text>
+          </View>
+          <FlatList data={this.state.data} renderItem={this.renderItem} keyExtractor={item => item.id} /> 
         </View>
 
         <Navigation navigation={this.props.navigation} selectedIndex={2} />       
