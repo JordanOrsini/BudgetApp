@@ -4,40 +4,39 @@ import {StyleSheet} from 'react-native';
    Style sheets CSS for the entire application.
 */
 export const styles = StyleSheet.create({
-  addCategoryButton: {
-    borderRadius: 20,
-    backgroundColor: 'orange',
-    padding: 5,
+  accept: {
+    backgroundColor: '#A0FAA0',
   },
   addCategoryModal: {
     margin: 20,
-    backgroundColor: 'orange',
+    backgroundColor: '#FFB343',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    elevation: 10,
+    elevation: 5,
   },
   addTransactionModal: {
     margin: 20,
-    backgroundColor: 'silver',
+    backgroundColor: '#ECECEC',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    elevation: 10,
-  },
-  button: {
-    alignItems: 'center',
-    borderRadius: 20,
-    flex: 1,  
-    justifyContent: 'center',
-    padding: 10,
+    elevation: 5,
   },
   categoryButtons: {
-    borderRadius: 20,
-    padding: 5,
+    borderRadius: 50,
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    elevation: 5,
   },
   categoryContainer: {
     flexDirection: 'row',
+  },
+  decline: {
+    backgroundColor: '#F76464',
   },
   headerText: {
     fontSize: 50,
@@ -46,11 +45,15 @@ export const styles = StyleSheet.create({
   mainBodyText: {
     flex: 1,
   },
-  modalAccept: {
-    borderRadius: 20,
-    backgroundColor: '#A0FAA0',
-    paddingLeft: 5,
-    paddingRight: 5,
+  modalButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 2.5,
+    marginRight: 2.5,
+    elevation: 5,
   },
   modalButtonsContainer: {
     flexDirection: 'row',
@@ -63,9 +66,42 @@ export const styles = StyleSheet.create({
   modalNavContainer: {
     width: '100%',
   },
-  navigation: {
+  navButton: {
+    elevation: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    flex: 1,
+    height: 40,
+  },
+  navButtonLeft: {
+    borderTopLeftRadius: 50,
+    borderBottomLeftRadius: 50,
+    marginLeft: 10,
+  },
+  navButtonMiddle: {
+    borderRadius: 50,
+    height: 80,
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  navButtonMiddleLeft: {
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  navButtonMiddleRight: {
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  navButtonRight: {
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50,
+    marginRight: 10,
+  },
+  navigationContainer: {
     flexDirection: 'row',
-    padding: 20,
+    marginBottom: 20,
+    alignItems: 'center',
   },
   pageView: {
     alignItems: 'center',
@@ -75,17 +111,16 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ADD8E6',
   },
   pressed: {
-    backgroundColor: 'yellow',
-  },
-  unSelected: {
-    backgroundColor: 'white',
+    backgroundColor: '#FDFD96',
   },
   textInput: {
     borderRadius: 20,
     width: '100%',
-    margin: 10,
-    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: '#FFFFFF',
     padding: '10',
+    elevation: 5,
   },
   transactionElement: {
     flexDirection: 'row',
@@ -93,11 +128,14 @@ export const styles = StyleSheet.create({
     paddingBottom: 25,
   },
   transactionRemove: {
-    borderRadius: 20,
-    backgroundColor: '#F76464',
-    paddingLeft: 5,
-    paddingRight: 5,
+    width: 20,
+    height: 20,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
     marginLeft: 10,
+    marginRight: 10,
+    elevation: 5,
   },
   scrollView: {
     flex: 1,

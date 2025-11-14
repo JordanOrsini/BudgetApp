@@ -61,10 +61,10 @@ class AddCategory extends Component {
           <View style={styles.addCategoryModal}>
             <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
             <View style={styles.modalButtonsContainer}> 
-              <Pressable style={({pressed}) => pressed ? [styles.modalAccept, styles.pressed] : styles.modalAccept} onPress={() => this.createNewCategory()}>
+              <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => this.createNewCategory()}>
                 <Text>Y</Text>
               </Pressable>
-              <Pressable style={({pressed}) => pressed ? [styles.transactionRemove, styles.pressed] : styles.transactionRemove} onPress={() => this.closeModal()}>
+              <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.closeModal()}>
                 <Text>N</Text>
               </Pressable>
             </View>

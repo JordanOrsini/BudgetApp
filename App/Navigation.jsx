@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
 import AddTransaction from "./AddTransaction";
@@ -28,20 +28,20 @@ class Navigation extends Component {
        
         <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
-        <View style={styles.navigation}>
-          <SelectableButton style={styles.button} selected={true} onPress={() => this.props.navigation.navigate('Overview')}>
+        <View style={styles.navigationContainer}>
+          <SelectableButton style={[styles.navButton, styles.navButtonLeft]} selected={true} onPress={() => this.props.navigation.navigate('Overview')}>
             <Text>Overview</Text>
           </SelectableButton>
-          <SelectableButton style={styles.button} onPress={() => this.props.navigation.navigate('Budget')}>
+          <SelectableButton style={[styles.navButton, styles.navButtonMiddleLeft]} onPress={() => this.props.navigation.navigate('Budget')}>
             <Text>Budget</Text>
           </SelectableButton>
-          <SelectableButton style={styles.button} onPress={() => this.setModalVisibility(true)}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddle, pressed ? styles.pressed : '']} onPress={() => this.setModalVisibility(true)}>
             <Text>+</Text>
-          </SelectableButton>
-          <SelectableButton style={styles.button} onPress={() => this.props.navigation.navigate('Transactions')}>
+          </Pressable>
+          <SelectableButton style={[styles.navButton, styles.navButtonMiddleRight]} onPress={() => this.props.navigation.navigate('Transactions')}>
             <Text>Transactions</Text>
           </SelectableButton>
-          <SelectableButton style={styles.button} onPress={() => this.props.navigation.navigate('Settings')}>
+          <SelectableButton style={[styles.navButton, styles.navButtonRight]} onPress={() => this.props.navigation.navigate('Settings')}>
             <Text>Settings</Text>
           </SelectableButton>
         </View>

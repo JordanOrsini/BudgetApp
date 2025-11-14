@@ -14,7 +14,7 @@ const SelectableButton = ({children, style, selected = false, onPress}) => {
   }
 
   return (
-    <Pressable style={({pressed}) => [style, pressed ? styles.pressed : isSelected ? styles.selected : styles.unSelected]} onPress={() => onPressHandler()}>
+    <Pressable style={({pressed}) => [style, isSelected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => onPressHandler()}>
       {children}
     </Pressable>
   );

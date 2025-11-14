@@ -32,7 +32,9 @@ class Transactions extends Component {
       this.context.userData.map((element, index) => {return (
         <View key={index} style={styles.transactionElement}>
           <Text>{element.getName() + " | " + this.myNumberFormatter.format(element.getAmount()) + " | " + element.getCategory().getName() + " | " + element.getTransactionDate()}</Text>
-          <Pressable style={({pressed}) => pressed ? [styles.transactionRemove, styles.pressed] : styles.transactionRemove} onPress={() => this.removeItemHandler(index)}><Text>X</Text></Pressable>
+          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.removeItemHandler(index)}>
+            <Text>X</Text>
+          </Pressable>
         </View>
         )})
     )
