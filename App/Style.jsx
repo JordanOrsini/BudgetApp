@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
   },
   categoryContainer: {
     flexDirection: 'row',
+    height: 200,
   },
   decline: {
     backgroundColor: '#F76464',

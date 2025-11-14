@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Pressable, ScrollView, Text, View} from "react-native";
+import {FlatList, Pressable, Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
@@ -15,35 +15,53 @@ class Transactions extends Component {
   constructor(props) {
     super(props);
     this.myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"}); 
+
+    this.contextUserData = null;
+
+    this.state = {
+      data: [],
+      totalAmount: 0,
+    };
   }
 
-  getTotalAmount() {
-    let totalAmount = 0;
-    this.context.userData.map((element) => {
-      totalAmount = totalAmount + element.getAmount();
-      });
-
-    return totalAmount;
+  componentDidMount = () => {
+    this.contextUserData = this.context.userData;
+    this.fillData();
   }
 
-  // Function that obtains all the transaction elements to be displayed on screen.
-  getTransactions() {
-    return (    
-      this.context.userData.map((element, index) => {return (
-        <View key={index} style={styles.transactionElement}>
-          <Text>{element.getName() + " | " + this.myNumberFormatter.format(element.getAmount()) + " | " + element.getCategory().getName() + " | " + element.getTransactionDate()}</Text>
-          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.removeItemHandler(index)}>
-            <Text>X</Text>
-          </Pressable>
-        </View>
-        )})
-    )
+  componentDidUpdate = () => {
+    if (this.contextUserData !== this.context.userData) {
+      this.contextUserData = this.context.userData;
+      this.fillData();
+    }
+  }
+
+  fillData = () => {
+    const newDataArray = [];
+    let newTotalAmount = 0;
+    this.contextUserData.map((element, index) => {
+      newDataArray.push({id: index, name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
+      newTotalAmount = newTotalAmount + element.getAmount();
+    });
+
+    this.setState({data: newDataArray, totalAmount: newTotalAmount});
+  }
+
+  renderItem = ({item}) => {
+    return (
+      <View style={styles.transactionElement}>
+        <Text>{item.name + " | " + this.myNumberFormatter.format(item.amount) + " | " + item.category + " | " + item.date}</Text>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.removeItemHandler(item.id)}>
+          <Text>X</Text>
+        </Pressable>
+      </View>
+    );
   }
 
   // Function that handles the onPress event of a transaction element.
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
   removeItemHandler = (index) => {
-    const newTransactions = [...this.context.userData];
+    const newTransactions = [...this.contextUserData];
     newTransactions.splice(index, 1);
     this.context._setUserData(newTransactions);
   }
@@ -54,13 +72,11 @@ class Transactions extends Component {
       <SafeAreaView style={styles.pageView}>
 
         <Text style={styles.headerText}>Transactions</Text>
-        <Text>Total amount spent: {this.myNumberFormatter.format(this.getTotalAmount())}</Text>
+        <Text>Total amount spent: {this.myNumberFormatter.format(this.state.totalAmount)}</Text>
         <Text>Name | Amount | Category | Date</Text>
 
         <View style={styles.scrollView}>
-          <ScrollView>
-            {this.getTransactions()}
-          </ScrollView>
+          <FlatList data={this.state.data} renderItem={this.renderItem} keyExtractor={item => item.id} numColumns={1} /> 
         </View>
 
         <Navigation navigation={this.props.navigation} selectedIndex={2} />
