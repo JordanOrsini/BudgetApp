@@ -17,7 +17,7 @@ class Settings extends Component {
         <Text style={styles.headerText}>Settings</Text>
         <Text style={styles.mainBodyText}>Main body</Text>
 
-        <Navigation navigation={this.props.navigation}/>
+        <Navigation navigation={this.props.navigation} selectedIndex={3} />
         
       </SafeAreaView> 
     );

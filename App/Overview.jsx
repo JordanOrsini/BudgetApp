@@ -17,7 +17,7 @@ class Overview extends Component {
         <Text style={styles.headerText}>Overview</Text>
         <Text style={styles.mainBodyText}>Main body</Text>
 
-        <Navigation navigation={this.props.navigation}/>
+        <Navigation navigation={this.props.navigation} selectedIndex={0} />
         
       </SafeAreaView>  
     );

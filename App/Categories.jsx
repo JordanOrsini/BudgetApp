@@ -4,7 +4,6 @@ import {styles} from "./Style";
 
 import AddCategory from './AddCategory';
 import CategoriesContext from './CategoriesContext';
-import SelectableButton from './SelectableButton';
 
 /* 
    Class representing the Category class of the application.
@@ -37,15 +36,25 @@ class Categories extends Component {
 
   fillData = () => {
     const newDataArray = [];
-    this.contextCategoryData.map((category, index) => (
-      newDataArray.push({id: index, category: category.getName()})
-    ))
+    this.contextCategoryData.map((category, index) => {
+      newDataArray.push({id: index, category: category.getName(), selected: false})
+    })
 
     this.setState({data: newDataArray});
   }
 
-  onSelectionChange = (categoryName) => {
-    this.props.setSelection(categoryName);
+  onSelectionChange = (item) => {
+    this.props.setSelection(item.category);
+
+    const newDataArray = [...this.state.data];
+    newDataArray.map((element => {
+      if (element.id !== item.id)
+        element.selected = false;
+      else 
+        element.selected = true;
+    }));
+
+    this.setState({data: newDataArray});
   }
 
   setModalVisibility = (visibility) => {
@@ -62,9 +71,9 @@ class Categories extends Component {
     }
 
     return (
-      <SelectableButton style={styles.categoryButtons} selected={item.id === 0 ? true : false} onPress={() => this.onSelectionChange(item.category)}>
+      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.onSelectionChange(item)}>
         <Text>{item.category}</Text>
-      </SelectableButton>
+      </Pressable>
     );
   }
 

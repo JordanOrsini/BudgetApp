@@ -63,7 +63,7 @@ class Transactions extends Component {
           </ScrollView>
         </View>
 
-        <Navigation navigation={this.props.navigation}/>
+        <Navigation navigation={this.props.navigation} selectedIndex={2} />
         
       </SafeAreaView> 
     );

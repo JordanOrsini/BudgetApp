@@ -3,7 +3,6 @@ import {Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
 import AddTransaction from "./AddTransaction";
-import SelectableButton from './SelectableButton';
 
 /* 
    Class representing the navigation component of the application.
@@ -14,7 +13,18 @@ class Navigation extends Component {
 
     this.state = {
       modalVisible: false, 
+      data: [{id: 0, selected: false},
+             {id: 1, selected: false},
+             {id: 2, selected: false},
+             {id: 3, selected: false},
+            ],
     };
+  }
+
+  componentDidMount = () => {
+    const newDataArray = [...this.state.data];
+    newDataArray[this.props.selectedIndex].selected = true;
+    this.setState({data: newDataArray});
   }
 
   setModalVisibility = (visibility) => {
@@ -29,21 +39,21 @@ class Navigation extends Component {
         <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
         <View style={styles.navigationContainer}>
-          <SelectableButton style={[styles.navButton, styles.navButtonLeft]} selected={true} onPress={() => this.props.navigation.navigate('Overview')}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonLeft, this.state.data[0].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Overview')}>
             <Text>Overview</Text>
-          </SelectableButton>
-          <SelectableButton style={[styles.navButton, styles.navButtonMiddleLeft]} onPress={() => this.props.navigation.navigate('Budget')}>
+          </Pressable>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleLeft, this.state.data[1].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Budget')}>
             <Text>Budget</Text>
-          </SelectableButton>
+          </Pressable>
           <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddle, pressed ? styles.pressed : '']} onPress={() => this.setModalVisibility(true)}>
             <Text>+</Text>
           </Pressable>
-          <SelectableButton style={[styles.navButton, styles.navButtonMiddleRight]} onPress={() => this.props.navigation.navigate('Transactions')}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleRight, this.state.data[2].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Transactions')}>
             <Text>Transactions</Text>
-          </SelectableButton>
-          <SelectableButton style={[styles.navButton, styles.navButtonRight]} onPress={() => this.props.navigation.navigate('Settings')}>
+          </Pressable>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonRight, this.state.data[3].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Settings')}>
             <Text>Settings</Text>
-          </SelectableButton>
+          </Pressable>
         </View>
 
       </View>
