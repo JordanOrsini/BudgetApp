@@ -19,6 +19,7 @@ class Categories extends Component {
     this.state = {
       modalVisible: false,  
       data: [],
+      lastSelectedIndex: 0,
     };
   }
 
@@ -37,21 +38,19 @@ class Categories extends Component {
   fillData = () => {
     const newDataArray = [];
     this.contextCategoryData.map((category, index) => {
-      newDataArray.push({id: index, category: category.getName(), selected: false})
-    })
+      newDataArray.push({id: index, category: category.getName(), selected: (this.state.lastSelectedIndex === index) ? true : false});
+    });
 
     this.setState({data: newDataArray});
   }
 
   onSelectionChange = (item) => {
     this.props.setSelection(item.category);
+    this.setState({lastSelectedIndex: item.id});
 
     const newDataArray = [...this.state.data];
     newDataArray.map((element => {
-      if (element.id !== item.id)
-        element.selected = false;
-      else 
-        element.selected = true;
+      element.selected = (element.id === item.id) ? true : false;
     }));
 
     this.setState({data: newDataArray});
