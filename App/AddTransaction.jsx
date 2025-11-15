@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {useContext, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
@@ -10,27 +10,17 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the AddTransaction modal of the application.
 */
-class AddTransaction extends Component {
-  static contextType = TransactionsContext;
+const AddTransaction = (props) => {
+  const transactionsContext = useContext(TransactionsContext);
 
-  constructor(props) {
-    super(props);
+  const [nameInput, setNameInput] = useState("");
+  const [amountInput, setAmountInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState("None");
+  const [dateInput, setDateInput] = useState("");
 
-    this.state = {
-      nameInput: "",
-      amountInput: "",
-      categoryInput: "None",
-      dateInput: "",
-    };
-  }
-
-  setSelectedCategory = (newSelection) => {
-    this.setState({categoryInput: newSelection});
-  }
-
-  validateNameInput = () => {
+  const validateNameInput = () => {
     let Success = true;
-    const stringToValidate = this.state.nameInput;
+    const stringToValidate = nameInput;
 
     if (stringToValidate.length === 0) {
       console.log("Blank string!\n");
@@ -45,9 +35,9 @@ class AddTransaction extends Component {
     return Success;
   }
 
-  validateAmountInput = () => {
+  const validateAmountInput = () => {
     let Success = true;
-    const stringToValidate = this.state.amountInput;
+    const stringToValidate = amountInput;
 
     if (stringToValidate.length === 0) {
       console.log("Blank string!\n");
@@ -62,9 +52,9 @@ class AddTransaction extends Component {
     return Success;
   }
 
-  validateDateInput = () => {
+  const validateDateInput = () => {
     let Success = true;
-    const stringToValidate = this.state.dateInput;
+    const stringToValidate = dateInput;
 
     if (stringToValidate.length === 0) {
       console.log("Blank string!\n");
@@ -79,19 +69,19 @@ class AddTransaction extends Component {
     return Success;
   }
 
-  validateInputs = () => {
+  const validateInputs = () => {
     let Success = true;
-    if (!this.validateNameInput()) {
+    if (!validateNameInput()) {
       console.log("Name invalid!\n");
       Success = false;
     }
 
-    if (!this.validateAmountInput()) {
+    if (!validateAmountInput()) {
       console.log("Amount invalid!\n");
       Success = false;
     }
 
-    if (!this.validateDateInput()) {
+    if (!validateDateInput()) {
       console.log("Date invalid!\n");
       Success = false;
     }
@@ -99,56 +89,62 @@ class AddTransaction extends Component {
     return Success;
   }
 
-  createNewTransaction = () => {
-    if (!this.validateInputs())
+  const createNewTransaction = () => {
+    if (!validateInputs())
       return;
 
-    const newTransaction = new Transaction({name: this.state.nameInput, 
-                                            amount: parseFloat(this.state.amountInput), 
-                                            category: new Category({name: this.state.categoryInput}), 
-                                            transactionDate: parseInt(this.state.dateInput), 
+    const newTransaction = new Transaction({name: nameInput, 
+                                            amount: parseFloat(amountInput), 
+                                            category: new Category({name: categoryInput}), 
+                                            transactionDate: parseInt(dateInput), 
                                             creationDate: parseInt(0)
                                            }); 
                                        
-    this.context._setUserData([newTransaction, ...this.context.userData]);
-    this.closeModal();
+    transactionsContext._setUserData([newTransaction, ...transactionsContext.userData]);
+    closeModal();
   }
 
-  closeModal = () => {
-    this.setState({nameInput: "",
-                   amountInput: "",
-                   categoryInput: "None",
-                   dateInput: ""});
-    this.props.setVisibility(false);
+  const closeModal = () => {
+    setNameInput("")
+    setAmountInput("");
+    setCategoryInput("None");
+    setDateInput("");  
+
+    props.setVisibility(false);
   }
 
-  onTextChange = (text, id) => {
-    this.setState({[id]: text});
+  const onTextChange = (text, id) => {
+    switch(id) {
+      case("nameInput"):
+        setNameInput(text);
+      case("amountInput"):
+        setAmountInput(text);
+      case("dateInput"):
+        setDateInput(text);
+    }
   }
 
   // Function that returns the contents of the AddTransaction modal.
-  render () {
-    return (
-      <Modal visible={this.props.modalVisibility} transparent={true}> 
-        <View style={styles.modalPositioning}>    
-          <View style={styles.addTransactionModal}>
-            <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
-            <TextInput style={styles.textInput} placeholder="Amount" onChangeText={(text, id) => this.onTextChange(text, "amountInput")} />
-            <Categories setSelection={this.setSelectedCategory} />
-            <TextInput style={styles.textInput} placeholder="Date" onChangeText={(text, id) => this.onTextChange(text, "dateInput")} />
-            <View style={styles.modalButtonsContainer}> 
-              <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => this.createNewTransaction()}>
-                <Text>Y</Text>
-              </Pressable>
-              <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.closeModal()}>
-                <Text>N</Text>
-              </Pressable>
-            </View>
-          </View>    
+  return (
+    <Modal visible={props.modalVisibility} transparent={true}> 
+      <View style={styles.modalPositioning}>    
+        <View style={styles.addTransactionModal}>
+          <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
+          <TextInput style={styles.textInput} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+          <Categories setSelection={setCategoryInput} />
+          <TextInput style={styles.textInput} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <View style={styles.modalButtonsContainer}> 
+            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
+              <Text>Y</Text>
+            </Pressable>
+            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
+              <Text>N</Text>
+            </Pressable>
+          </View>
         </View>    
-      </Modal>
-    );
-  }
+      </View>    
+    </Modal>
+  );
 }
 
 export default AddTransaction;

@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {FlatList, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
@@ -8,84 +8,62 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the Category class of the application.
 */
-class Categories extends Component {
-  static contextType = CategoriesContext;
+const Categories = (props) => {
+  const categoriesContext = useContext(CategoriesContext);
 
-  constructor(props) {
-    super(props);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [data, setData] = useState([]);
+  const [lastSelectedIndex, setLastSelectedIndex] = useState(0);
 
-    this.contextCategoryData = null;
+  useEffect(() => {
+    fillData();
+  }, [categoriesContext.categoryData]);
 
-    this.state = {
-      modalVisible: false,  
-      data: [],
-      lastSelectedIndex: 0,
-    };
-  }
-
-  componentDidMount = () => {
-    this.contextCategoryData = this.context.categoryData;
-    this.fillData();
-  }
-
-  componentDidUpdate = () => {
-    if (this.contextCategoryData !== this.context.categoryData) {
-      this.contextCategoryData = this.context.categoryData;
-      this.fillData();
-    }
-  }
-
-  fillData = () => {
+  const fillData = () => {
     const newDataArray = [];
-    this.contextCategoryData.map((category, index) => {
-      newDataArray.push({id: index, category: category.getName(), selected: (this.state.lastSelectedIndex === index) ? true : false});
+    categoriesContext.categoryData.map((category, index) => {
+      newDataArray.push({id: index, category: category.getName(), selected: (lastSelectedIndex === index) ? true : false});
     });
 
-    this.setState({data: newDataArray});
+    setData(newDataArray);
   }
 
-  onSelectionChange = (item) => {
-    this.props.setSelection(item.category);
-    this.setState({lastSelectedIndex: item.id});
+  const onSelectionChange = (item) => {
+    props.setSelection(item.category);
+    setLastSelectedIndex(item.id);
 
-    const newDataArray = [...this.state.data];
+    const newDataArray = [...data];
     newDataArray.map((element => {
       element.selected = (element.id === item.id) ? true : false;
     }));
 
-    this.setState({data: newDataArray});
+    setData(newDataArray);
   }
 
-  setModalVisibility = (visibility) => {
-    this.setState({modalVisible: visibility});
-  }
-
-  renderItem = ({item}) => {
+  const renderItem = ({item}) => {
     if (item.addCategory) {
       return (
-        <Pressable style={({pressed}) => [styles.categoryButtons, pressed ? styles.pressed : '']} onPress={() => this.setModalVisibility(true)}>
+        <Pressable style={({pressed}) => [styles.categoryButtons, pressed ? styles.pressed : '']} onPress={() => setModalVisible(true)}>
           <Text>+</Text>
         </Pressable>
       );
     }
 
     return (
-      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.onSelectionChange(item)}>
+      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => onSelectionChange(item)}>
         <Text>{item.category}</Text>
       </Pressable>
     );
   }
 
-  render () {
-    return (
-      <View>
-        <AddCategory modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
-        <View style={styles.categoryContainer}>
-          <FlatList data={[...this.state.data, {addCategory: true}]} renderItem={this.renderItem} keyExtractor={item => item.id} numColumns={3} />      
-        </View>
+  return (
+    <View>
+      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelected={setLastSelectedIndex}/>
+      <View style={styles.categoryContainer}>
+        <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={item => item.id} numColumns={3} />      
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 export default Categories;

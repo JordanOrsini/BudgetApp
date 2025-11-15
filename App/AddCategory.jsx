@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {useContext, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
@@ -8,20 +8,13 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the AddCategory modal of the application.
 */
-class AddCategory extends Component {
-  static contextType = CategoriesContext;
+const AddCategory = (props) => {
+  const categoriesContext = useContext(CategoriesContext);
+  const [nameInput, setNameInput] = useState("");
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      nameInput: "",
-    };
-  }
-
-  validateNameInput = () => {
+  const validateNameInput = () => {
     let Success = true;
-    const stringToValidate = this.state.nameInput;
+    const stringToValidate = nameInput;
 
     if (stringToValidate.length === 0) {
       console.log("Blank string!\n");
@@ -36,43 +29,42 @@ class AddCategory extends Component {
     return Success;
   }
 
-  createNewCategory = () => {
-    if (!this.validateNameInput())
+  const createNewCategory = () => {
+    if (!validateNameInput())
       return;
-                                    
-    this.context._setCategoryData([...this.context.categoryData, new Category({name: this.state.nameInput})]);
-    this.closeModal();
+         
+    props.setSelected(categoriesContext.categoryData.length);
+    categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: nameInput})]);
+    closeModal();
   }
 
-  closeModal = () => {
-    this.setState({nameInput: ""});
-    this.props.setVisibility(false);
+  const closeModal = () => {
+    setNameInput("");
+    props.setVisibility(false);
   }
 
-  onTextChange = (text, id) => {
-    this.setState({[id]: text});
+  const onTextChange = (text) => {
+    setNameInput(text);
   }
 
   // Function that returns the contents of the AddTransaction modal.
-  render () {
-    return (
-      <Modal visible={this.props.modalVisibility} transparent={true}> 
-        <View style={styles.modalPositioning}>    
-          <View style={styles.addCategoryModal}>
-            <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => this.onTextChange(text, "nameInput")} />
-            <View style={styles.modalButtonsContainer}> 
-              <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => this.createNewCategory()}>
-                <Text>Y</Text>
-              </Pressable>
-              <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => this.closeModal()}>
-                <Text>N</Text>
-              </Pressable>
-            </View>
-          </View>    
+  return (
+    <Modal visible={props.modalVisibility} transparent={true}> 
+      <View style={styles.modalPositioning}>    
+        <View style={styles.addCategoryModal}>
+          <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text) => onTextChange(text)} />
+          <View style={styles.modalButtonsContainer}> 
+            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
+              <Text>Y</Text>
+            </Pressable>
+            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
+              <Text>N</Text>
+            </Pressable>
+          </View>
         </View>    
-      </Modal>
-    );
-  }
+      </View>    
+    </Modal>
+  );
 }
 
 export default AddCategory;

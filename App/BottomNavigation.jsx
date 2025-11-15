@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 /* 
    Class representing the navigation component of the application.
 */
-const BottomNavigation = () => {
+const BottomNavigation = (props) => {
   return (
     <Tab.Navigator backBehavior={'history'} tabBar={(props) => <Navigation {...props}/>} screenOptions={{headerShown: false}}>
       <Tab.Screen name="Overview" component={Overview} />

@@ -8,7 +8,7 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the RemoveCategory modal of the application.
 */
-const RemoveCategory = () => {
+const RemoveCategory = (props) => {
   const categoryContext = useContext(CategoriesContext);
   const transactionContext = useContext(TransactionsContext);
   const [data, setData] = useState([]);
