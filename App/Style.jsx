@@ -78,9 +78,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 100,
   },
-  modalNavContainer: {
-    width: '100%',
-  },
   navButton: {
     elevation: 5,
     alignItems: 'center',
@@ -113,10 +110,15 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 50,
     marginRight: 10,
   },
+  modalNavContainer: {
+    position: 'absolute',
+    width:'100%',
+  },
   navigationContainer: {
     flexDirection: 'row',
-    marginBottom: 20,
     alignItems: 'center',
+    marginTop: 775,
+    position: 'absolute',
   },
   pageView: {
     alignItems: 'center',

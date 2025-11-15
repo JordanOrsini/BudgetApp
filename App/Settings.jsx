@@ -3,7 +3,6 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 import {Text, View} from "react-native";
 
-import Navigation from "./Navigation";
 import RemoveCategory from "./RemoveCategory";
 
 /* 
@@ -17,8 +16,7 @@ class Settings extends Component {
         <Text style={styles.headerText}>Settings</Text>
         <View style={styles.mainBodyContainer}>
           <RemoveCategory />
-        </View>
-        <Navigation navigation={this.props.navigation} selectedIndex={3} />     
+        </View>  
       </SafeAreaView> 
     );
   }

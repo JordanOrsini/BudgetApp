@@ -3,8 +3,6 @@ import {Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
-import Navigation from "./Navigation";
-
 /* 
    Class representing the overview screen of the application.
 */
@@ -14,8 +12,7 @@ class Overview extends Component {
     return (
       <SafeAreaView style={styles.pageView}>
         <Text style={styles.headerText}>Overview</Text>
-        <View style={styles.mainBodyContainer}></View>
-        <Navigation navigation={this.props.navigation} selectedIndex={0} />       
+        <View style={styles.mainBodyContainer}></View>    
       </SafeAreaView>  
     );
   }

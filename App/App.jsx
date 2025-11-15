@@ -1,14 +1,10 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import Budget from './Budget';
-import Overview from './Overview';
-import Settings from './Settings';
-import Transactions from './Transactions';
-
 import CategoriesProvider from './CategoriesProvider';
 import TransactionsProvider from './TransactionsProvider';
+
+import BottomNavigation from './BottomNavigation';
 
 /* 
    Main function of the application. 
@@ -17,19 +13,12 @@ import TransactionsProvider from './TransactionsProvider';
    SafeAreaProvider ensures content of the application is not displayed where camera cutouts are located.
 */
 const App = () => {
-  const navigationStack = createNativeStackNavigator();
-
   return (
     <SafeAreaProvider>
       <TransactionsProvider>
         <CategoriesProvider>
           <NavigationContainer>
-            <navigationStack.Navigator screenOptions={{headerShown: false}} initialRouteName="Overview">
-              <navigationStack.Screen name="Overview" component={Overview} />
-              <navigationStack.Screen name="Budget" component={Budget} />
-              <navigationStack.Screen name="Transactions" component={Transactions} />
-              <navigationStack.Screen name="Settings" component={Settings} />
-            </navigationStack.Navigator>
+            <BottomNavigation />
           </NavigationContainer>
         </CategoriesProvider>
       </TransactionsProvider>

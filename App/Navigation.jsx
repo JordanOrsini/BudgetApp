@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import AddTransaction from "./AddTransaction";
 
@@ -13,18 +14,7 @@ class Navigation extends Component {
 
     this.state = {
       modalVisible: false, 
-      data: [{id: 0, selected: false},
-             {id: 1, selected: false},
-             {id: 2, selected: false},
-             {id: 3, selected: false},
-            ],
     };
-  }
-
-  componentDidMount = () => {
-    const newDataArray = [...this.state.data];
-    newDataArray[this.props.selectedIndex].selected = true;
-    this.setState({data: newDataArray});
   }
 
   setModalVisibility = (visibility) => {
@@ -34,27 +24,27 @@ class Navigation extends Component {
   // Function that returns the navigation component.
   render () {
     return (
-      <View style={styles.modalNavContainer}>      
+      <SafeAreaView style={styles.modalNavContainer}>      
         <AddTransaction modalVisibility={this.state.modalVisible} setVisibility={this.setModalVisibility}/>
 
         <View style={styles.navigationContainer}>
-          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonLeft, this.state.data[0].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Overview')}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonLeft, (this.props.state.index === 0) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Overview')}>
             <Text>Overview</Text>
           </Pressable>
-          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleLeft, this.state.data[1].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Budget')}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleLeft, (this.props.state.index === 1) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Budget')}>
             <Text>Budget</Text>
           </Pressable>
           <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddle, pressed ? styles.pressed : '']} onPress={() => this.setModalVisibility(true)}>
             <Text>+</Text>
           </Pressable>
-          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleRight, this.state.data[2].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Transactions')}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleRight, (this.props.state.index === 2) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Transactions')}>
             <Text>Transactions</Text>
           </Pressable>
-          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonRight, this.state.data[3].selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Settings')}>
+          <Pressable style={({pressed}) => [styles.navButton, styles.navButtonRight, (this.props.state.index === 3) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => this.props.navigation.navigate('Settings')}>
             <Text>Settings</Text>
           </Pressable>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

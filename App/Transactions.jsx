@@ -3,7 +3,6 @@ import {FlatList, Pressable, Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
-import Navigation from "./Navigation";
 import TransactionsContext from './TransactionsContext';
 
 /* 
@@ -81,9 +80,7 @@ class Transactions extends Component {
             <Text style={[styles.transactionElement, styles.transactionElementRight]}>Date</Text>
           </View>
           <FlatList data={this.state.data} renderItem={this.renderItem} keyExtractor={item => item.id} /> 
-        </View>
-
-        <Navigation navigation={this.props.navigation} selectedIndex={2} />       
+        </View>      
       </SafeAreaView> 
     );
   }
