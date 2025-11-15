@@ -12,9 +12,7 @@ const Settings = (props) => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Settings</Text>
-      <View style={styles.mainBodyContainer}>
-        <RemoveCategory />
-      </View>  
+      <RemoveCategory />
     </SafeAreaView> 
   );
 }

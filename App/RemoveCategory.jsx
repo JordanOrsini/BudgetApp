@@ -58,7 +58,7 @@ const RemoveCategory = (props) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View>
+    <View style={styles.mainBodyContainer}>
       <View style={styles.transactionContainer}>
         <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
       </View>
