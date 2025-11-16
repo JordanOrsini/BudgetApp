@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
@@ -19,6 +19,22 @@ const AddTransaction = (props) => {
   const [categoryInput, setCategoryInput] = useState("Uncategorized");
   const [dateInput, setDateInput] = useState("");
 
+  const [inErrorName, setInErrorName] = useState(false);
+  const [inErrorAmount, setInErrorAmount] = useState(false);
+  const [inErrorDate, setInErrorDate] = useState(false);
+
+  useEffect(() => {
+    setInErrorName(false);
+  }, [nameInput]);
+
+  useEffect(() => {
+    setInErrorAmount(false);
+  }, [amountInput]);
+
+  useEffect(() => {
+    setInErrorDate(false);
+  }, [dateInput]);
+
   const validateNameInput = () => {
     let Success = true;
     const stringToValidate = nameInput;
@@ -33,6 +49,7 @@ const AddTransaction = (props) => {
       Success = false;
     }
 
+    setInErrorName(!Success);
     return Success;
   }
 
@@ -50,6 +67,7 @@ const AddTransaction = (props) => {
       Success = false;
     }
 
+    setInErrorAmount(!Success);
     return Success;
   }
 
@@ -67,6 +85,7 @@ const AddTransaction = (props) => {
       Success = false;
     }
 
+    setInErrorDate(!Success);
     return Success;
   }
 
@@ -112,6 +131,10 @@ const AddTransaction = (props) => {
     setCategoryInput("Uncategorized");
     setDateInput("");  
 
+    setInErrorName(false);
+    setInErrorAmount(false);
+    setInErrorDate(false);
+
     props.setVisibility(false);
   }
 
@@ -131,10 +154,10 @@ const AddTransaction = (props) => {
     <Modal visible={props.modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={styles.addTransactionModal}>
-          <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={styles.textInput} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} />
-          <TextInput style={styles.textInput} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
               <Text>Y</Text>

@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
@@ -11,6 +11,11 @@ import CategoriesContext from './CategoriesContext';
 const AddCategory = (props) => {
   const categoriesContext = useContext(CategoriesContext);
   const [nameInput, setNameInput] = useState("");
+  const [inError, setInError] = useState(false);
+
+  useEffect(() => {
+    setInError(false);
+  }, [nameInput]);
 
   const validateNameInput = () => {
     let Success = true;
@@ -26,6 +31,18 @@ const AddCategory = (props) => {
       Success = false;
     }
 
+    let duplicateFound = false;
+    categoriesContext.categoryData.map((element) => {
+      if (element.getName() === stringToValidate)
+        duplicateFound = true;
+    })
+
+    if (duplicateFound) {
+      console.log("Duplicate category name found!\n");
+      Success = false;
+    }
+
+    setInError(!Success);
     return Success;
   }
 
@@ -40,6 +57,7 @@ const AddCategory = (props) => {
 
   const closeModal = () => {
     setNameInput("");
+    setInError(false);
     props.setVisibility(false);
   }
 
@@ -52,7 +70,7 @@ const AddCategory = (props) => {
     <Modal visible={props.modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={styles.addCategoryModal}>
-          <TextInput style={styles.textInput} placeholder="Name" onChangeText={(text) => onTextChange(text)} />
+          <TextInput style={[styles.textInput, inError ? styles.decline : '']} placeholder="Name" onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
               <Text>Y</Text>
