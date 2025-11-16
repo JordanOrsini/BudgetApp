@@ -6,6 +6,24 @@ import CategoriesContext from './CategoriesContext';
 
 const CategoriesProvider = ({children}) => {
   const [categoryData, setCategoryData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Check if user saved data exists on component mount.
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await checkAndCreateFile();
+      }
+      catch (error) {
+        console.error('Error in useEffect:', error);
+      }
+      finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
 
   // Custom setter, writing memory's contents to file before updating userData.
   const _setCategoryData = (newData) => {
@@ -28,17 +46,26 @@ const CategoriesProvider = ({children}) => {
     setCategoryData(newData);
   }
 
+  const findCategory = (name) => {
+    const filteredData = categoryData.filter(element => 
+      element.getName().toLowerCase().includes(name.toLowerCase())
+    );
+
+    return (filteredData[0]);
+  }
+
   // Values to expose in our context.
   const contextValue = {
     categoryData,
     _setCategoryData,
+    findCategory,
   }
 
   // File path of our saved user data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + '/CategoryData.txt'
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = 'None;none.svg\nHome;home.svg\nWork;work.svg\nEntertainment;entertainment.svg';
+  const defaultFileContents = 'Uncategorized;Uncategorized.svg\nHome;home.svg\nWork;work.svg\nSchool;school.svg';
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -96,10 +123,9 @@ const CategoriesProvider = ({children}) => {
     }
   }
 
-  // Check if user saved data exists on component mount.
-  useEffect(() => {
-    checkAndCreateFile();
-  }, []);
+  if (loading) {
+    return;
+  }
 
   return (
     <CategoriesContext.Provider value={contextValue}>

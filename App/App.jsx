@@ -15,13 +15,13 @@ import BottomNavigation from './BottomNavigation';
 const App = (props) => {
   return (
     <SafeAreaProvider>
-      <TransactionsProvider>
-        <CategoriesProvider>
+      <CategoriesProvider>
+        <TransactionsProvider>
           <NavigationContainer>
             <BottomNavigation />
           </NavigationContainer>
-        </CategoriesProvider>
-      </TransactionsProvider>
+        </TransactionsProvider>
+      </CategoriesProvider>
     </SafeAreaProvider>
   );
 }

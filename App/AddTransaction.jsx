@@ -2,20 +2,21 @@ import {useContext, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
-import Category from './Category';
 import Categories from './Categories';
 import Transaction from './Transaction';
+import CategoriesContext from './CategoriesContext';
 import TransactionsContext from './TransactionsContext';
 
 /* 
    Class representing the AddTransaction modal of the application.
 */
 const AddTransaction = (props) => {
+  const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("None");
+  const [categoryInput, setCategoryInput] = useState("Uncategorized");
   const [dateInput, setDateInput] = useState("");
 
   const validateNameInput = () => {
@@ -93,9 +94,10 @@ const AddTransaction = (props) => {
     if (!validateInputs())
       return;
 
+    const categoryObject = categoriesContext.findCategory(categoryInput);
     const newTransaction = new Transaction({name: nameInput, 
                                             amount: parseFloat(amountInput), 
-                                            category: new Category({name: categoryInput}), 
+                                            category: categoryObject, 
                                             transactionDate: parseInt(dateInput), 
                                             creationDate: parseInt(0)
                                            }); 
@@ -107,7 +109,7 @@ const AddTransaction = (props) => {
   const closeModal = () => {
     setNameInput("")
     setAmountInput("");
-    setCategoryInput("None");
+    setCategoryInput("Uncategorized");
     setDateInput("");  
 
     props.setVisibility(false);

@@ -44,16 +44,6 @@ const RemoveCategory = (props) => {
     const newCategories = [...categoryContext.categoryData];
     newCategories.splice(item.id, 1);
     categoryContext._setCategoryData(newCategories);
-
-    console.log("Index: " + item.id + " Name: " + item.name);
-
-    const newUserData = [...transactionContext.userData]
-    newUserData.map((element) => {
-      if (element.getCategory().getName() === item.name)
-        element.getCategory().setName("None");
-    });
-
-    transactionContext._setUserData(newUserData);
   }
 
   // Function that returns the contents of the AddTransaction modal.
