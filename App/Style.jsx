@@ -56,8 +56,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginTop: 10,
-    marginBottom: 10,  
-    width: 375,
+    width: 380,
     borderRadius: 30,
   },
   modalButton: {
@@ -143,6 +142,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 20,
     paddingBottom: 20,
+  },
+  lastItem: {
+    paddingBottom: 100,
   },
   transactionElement: {
     paddingLeft: 10,

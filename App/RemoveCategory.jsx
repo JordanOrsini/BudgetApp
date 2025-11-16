@@ -26,10 +26,11 @@ const RemoveCategory = (props) => {
     setData(newCategoryArray);
   }
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}, data) => {
+    const isLastItem = (item.id === data.length - 1);
     return (
       (item.id > 0) &&   
-      <View style={styles.transactionContainer}>
+      <View style={[styles.transactionContainer, isLastItem ? styles.lastItem : '']}>
         <Text style={styles.categoryElement}>{item.name}</Text>
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => removeItemHandler(item)}>
           <Text>X</Text>
@@ -52,7 +53,7 @@ const RemoveCategory = (props) => {
       <View style={styles.transactionContainer}>
         <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
       </View>
-      <FlatList data={data} renderItem={renderItem} keyExtractor={item => item.id} /> 
+      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.id} /> 
     </View>     
   );
 }

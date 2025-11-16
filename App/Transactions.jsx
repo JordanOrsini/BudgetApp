@@ -26,9 +26,10 @@ const Transactions = (props) => {
     setData(newDataArray);
   }
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}, data) => {
+    const isLastItem = (item.id === data.length - 1);
     return (
-      <View style={styles.transactionContainer}>
+      <View style={[styles.transactionContainer, isLastItem ? styles.lastItem : '']}>
         <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
         <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
         <Text style={styles.transactionElement}>{item.category}</Text>
@@ -61,7 +62,7 @@ const Transactions = (props) => {
           <Text style={styles.transactionElement}>Category</Text>
           <Text style={[styles.transactionElement, styles.transactionElementRight]}>Date</Text>
         </View>
-        <FlatList data={data} renderItem={renderItem} keyExtractor={item => item.id} /> 
+        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.id} /> 
       </View>      
     </SafeAreaView> 
     );
