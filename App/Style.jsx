@@ -118,6 +118,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 775,
     position: 'absolute',
+    paddingBottom: 40,
   },
   pageView: {
     alignItems: 'center',
