@@ -73,11 +73,20 @@ const TransactionsProvider = ({children}) => {
     setUserData([...userData]);
   }
 
+  const findTransaction = (name) => {
+    const filteredData = userData.filter(element => 
+      element.getName().toLowerCase().includes(name.toLowerCase())
+    );
+
+    return (filteredData[0]);
+  }
+
   // Values to expose in our context.
   const contextValue = {
     userData,
     _setUserData,
     totalAmount,
+    findTransaction,
   }
 
   // File path of our saved user data. Not user accessible. Cross-platform.

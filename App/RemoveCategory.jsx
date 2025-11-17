@@ -12,7 +12,7 @@ const RemoveCategory = (props) => {
   const categoryContext = useContext(CategoriesContext);
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [categoryNameToEdit, setCategoryNameToEdit] = useState("");
+  const [categoryToEdit, setCategoryToEdit] = useState(null);
 
   useEffect(() => {
     fillData();
@@ -44,7 +44,7 @@ const RemoveCategory = (props) => {
   }
 
   const editItemHandler = (item) => {
-    setCategoryNameToEdit(item.name);
+    setCategoryToEdit(categoryContext.findCategory(item.name));
     setModalVisible(true);
   }
 
@@ -58,7 +58,7 @@ const RemoveCategory = (props) => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={styles.mainBodyContainer}>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} editMode={true} categoryName={categoryNameToEdit} />
+      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} />
       <View style={styles.transactionContainer}>
         <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
       </View>

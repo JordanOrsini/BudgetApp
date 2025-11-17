@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   addCategoryModal: {
     margin: 20,
-    backgroundColor: '#FFB343',
+    backgroundColor: '#ECECEC',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -40,6 +40,8 @@ export const styles = StyleSheet.create({
   categoryElement: {
     paddingLeft: 10,
     paddingRight: 10,
+    paddingTop: 10,
+    height: 40,
     width: 290,
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
@@ -146,14 +148,17 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 20,
     paddingBottom: 20,
+    alignItems: 'center',
   },
   lastItem: {
     paddingBottom: 100,
   },
   transactionElement: {
+    paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    width: 80,
+    width: 70,
+    height: 40,
     backgroundColor: '#FFFFFF',
   },
   transactionElementLeft: {

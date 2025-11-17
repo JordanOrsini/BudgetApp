@@ -10,7 +10,7 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the AddTransaction modal of the application.
 */
-const AddTransaction = (props) => {
+const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -113,15 +113,29 @@ const AddTransaction = (props) => {
     if (!validateInputs())
       return;
 
-    const categoryObject = categoriesContext.findCategory(categoryInput);
-    const newTransaction = new Transaction({name: nameInput, 
-                                            amount: parseFloat(amountInput), 
-                                            category: categoryObject, 
-                                            transactionDate: parseInt(dateInput), 
-                                            creationDate: parseInt(0)
-                                           }); 
+    if (transactionToEdit) {
+      transactionToEdit.setName(nameInput);
+      transactionToEdit.setAmount(parseFloat(amountInput));
+
+      const categoryObject = categoriesContext.findCategory(categoryInput);
+      transactionToEdit.setCategory(categoryObject);
+      
+      transactionToEdit.setTransactionDate(parseInt(dateInput));
+
+      transactionsContext._setUserData([...transactionsContext.userData]);
+    }
+    else {
+      const categoryObject = categoriesContext.findCategory(categoryInput);
+      const newTransaction = new Transaction({name: nameInput, 
+                                              amount: parseFloat(amountInput), 
+                                              category: categoryObject, 
+                                              transactionDate: parseInt(dateInput), 
+                                              creationDate: parseInt(0)
+                                             }); 
                                        
-    transactionsContext._setUserData([newTransaction, ...transactionsContext.userData]);
+      transactionsContext._setUserData([newTransaction, ...transactionsContext.userData]);
+    }
+
     closeModal();
   }
 
@@ -135,7 +149,7 @@ const AddTransaction = (props) => {
     setInErrorAmount(false);
     setInErrorDate(false);
 
-    props.setVisibility(false);
+    setVisibility(false);
   }
 
   const onTextChange = (text, id) => {
@@ -151,13 +165,13 @@ const AddTransaction = (props) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <Modal visible={props.modalVisibility} transparent={true}> 
+    <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
-        <View style={styles.addTransactionModal}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+        <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '']}>
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getName() : ''} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getAmount().toString() : ''} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} />
-          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getTransactionDate().toString() : ''} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
               <Text>Y</Text>

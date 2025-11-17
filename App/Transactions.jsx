@@ -3,6 +3,7 @@ import {FlatList, Pressable, Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
+import AddTransaction from './AddTransaction';
 import TransactionsContext from './TransactionsContext';
 
 /* 
@@ -12,6 +13,8 @@ const Transactions = (props) => {
   const transactionContext = useContext(TransactionsContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [transactionToEdit, setTransactionToEdit] = useState(null);
 
   useEffect(() => {
     fillData();
@@ -34,7 +37,10 @@ const Transactions = (props) => {
         <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
         <Text style={styles.transactionElement}>{item.category}</Text>
         <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => removeItemHandler(item.id)}>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed ? styles.pressed : '']} onPress={() => editItemHandler(item)}>
+          <Text>E</Text>
+        </Pressable>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => removeItemHandler(item)}>
           <Text>X</Text>
         </Pressable>
       </View>
@@ -43,9 +49,14 @@ const Transactions = (props) => {
 
   // Function that handles the onPress event of a transaction element.
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
-  const removeItemHandler = (index) => {
-    transactionContext.userData.splice(index, 1);
+  const removeItemHandler = (item) => {
+    transactionContext.userData.splice(item.id, 1);
     transactionContext._setUserData([...transactionContext.userData]);
+  }
+
+  const editItemHandler = (item) => {
+    setTransactionToEdit(transactionContext.findTransaction(item.name));
+    setModalVisible(true);
   }
 
   // Function that returns the contents of the transactions screen.
@@ -55,6 +66,7 @@ const Transactions = (props) => {
       <Text>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text>   
 
       <View style={styles.mainBodyContainer}>
+        <AddTransaction modalVisibility={modalVisible} setVisibility={setModalVisible} transactionToEdit={transactionToEdit} />
         <View style={styles.transactionContainer}>
           <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
           <Text style={styles.transactionElement}>Amount</Text>
