@@ -72,7 +72,7 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
   }
 
   const onTextChange = (text) => {
-    setNameInput(text.trim());
+    setNameInput(text.trim().toUpperCase());
   }
 
   // Function that returns the contents of the AddTransaction modal.

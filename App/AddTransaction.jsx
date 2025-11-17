@@ -16,7 +16,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("Uncategorized");
+  const [categoryInput, setCategoryInput] = useState("NONE");
   const [dateInput, setDateInput] = useState("");
 
   const [inErrorName, setInErrorName] = useState(false);
@@ -139,7 +139,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
   const closeModal = () => {
     setNameInput("")
     setAmountInput("");
-    setCategoryInput("Uncategorized");
+    setCategoryInput("NONE");
     setDateInput("");  
 
     setInErrorName(false);

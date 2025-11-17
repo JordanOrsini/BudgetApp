@@ -93,10 +93,10 @@ const TransactionsProvider = ({children}) => {
   const filePath = RNFS.DocumentDirectoryPath + '/UserData.txt'
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = '1;1;Home;1;1\n2;2;Home;2;2\n3;3;Home;3;3\n4;4;Home;4;4\n' +
-                              '5;5;Work;5;5\n6;6;Work;6;6\n7;7;Work;7;7\n8;8;Work;8;8\n9;9;Work;9;9\n' +
-                              '10;10;School;10;10\n11;11;School;11;11\n12;12;School;12;12\n' +
-                              '13;13;School;13;13\n14;14;School;14;14\n15;15;School;15;15';
+  const defaultFileContents = '1;1;HOME;1;1\n2;2;HOME;2;2\n3;3;HOME;3;3\n4;4;HOME;4;4\n' +
+                              '5;5;WORK;5;5\n6;6;WORK;6;6\n7;7;WORK;7;7\n8;8;WORK;8;8\n9;9;WORK;9;9\n' +
+                              '10;10;SCHOOL;10;10\n11;11;SCHOOL;11;11\n12;12;SCHOOL;12;12\n' +
+                              '13;13;CAR;13;13\n14;14;CAR;14;14\n15;15;CAR;15;15';
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
