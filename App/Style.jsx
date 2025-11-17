@@ -40,12 +40,15 @@ export const styles = StyleSheet.create({
   categoryElement: {
     paddingLeft: 10,
     paddingRight: 10,
-    width: 320,
+    width: 290,
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
   },
   decline: {
     backgroundColor: '#F76464',
+  },
+  edit: {
+    backgroundColor: '#FFB343',
   },
   headerText: {
     fontSize: 50,

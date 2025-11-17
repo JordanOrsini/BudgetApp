@@ -65,13 +65,12 @@ const TransactionsProvider = ({children}) => {
   }
 
   const refreshData = () => {
-    const newDataArray = [...userData];
-    newDataArray.map((element) => {
+    userData.map((element) => {
       if (categoriesContext.findCategory(element.getCategory().getName()) === undefined)
         element.setCategory(categoriesContext.findCategory("Uncategorized"));
     })
 
-    setUserData(newDataArray);
+    setUserData([...userData]);
   }
 
   // Values to expose in our context.

@@ -44,9 +44,8 @@ const Transactions = (props) => {
   // Function that handles the onPress event of a transaction element.
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
   const removeItemHandler = (index) => {
-    const newTransactions = [...transactionContext.userData];
-    newTransactions.splice(index, 1);
-    transactionContext._setUserData(newTransactions);
+    transactionContext.userData.splice(index, 1);
+    transactionContext._setUserData([...transactionContext.userData]);
   }
 
   // Function that returns the contents of the transactions screen.

@@ -8,7 +8,7 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the AddCategory modal of the application.
 */
-const AddCategory = (props) => {
+const AddCategory = ({modalVisibility, setVisibility, setSelected, editMode = false, categoryName}) => {
   const categoriesContext = useContext(CategoriesContext);
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
@@ -51,16 +51,25 @@ const AddCategory = (props) => {
       setInErrorName(true);
       return;
     }
-         
-    props.setSelected(categoriesContext.categoryData.length);
-    categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: nameInput})]);
+
+    if (!editMode) {     
+      setSelected(categoriesContext.categoryData.length);
+      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: nameInput})]);
+    }
+    else {
+      const categoryToModify = categoriesContext.findCategory(categoryName);
+      categoryToModify.setName(nameInput);
+
+      categoriesContext._setCategoryData([...categoriesContext.categoryData]);
+    }
+
     closeModal();
   }
 
   const closeModal = () => {
     setNameInput("");
     setInErrorName(false);
-    props.setVisibility(false);
+    setVisibility(false);
   }
 
   const onTextChange = (text) => {
@@ -69,10 +78,10 @@ const AddCategory = (props) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <Modal visible={props.modalVisibility} transparent={true}> 
+    <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={styles.addCategoryModal}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} placeholder="Name" onChangeText={(text) => onTextChange(text)} />
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={categoryName} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
               <Text>Y</Text>
