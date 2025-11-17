@@ -49,7 +49,6 @@ const AddTransaction = (props) => {
       Success = false;
     }
 
-    setInErrorName(!Success);
     return Success;
   }
 
@@ -67,7 +66,6 @@ const AddTransaction = (props) => {
       Success = false;
     }
 
-    setInErrorAmount(!Success);
     return Success;
   }
 
@@ -85,7 +83,6 @@ const AddTransaction = (props) => {
       Success = false;
     }
 
-    setInErrorDate(!Success);
     return Success;
   }
 
@@ -93,16 +90,19 @@ const AddTransaction = (props) => {
     let Success = true;
     if (!validateNameInput()) {
       console.log("Name invalid!\n");
+      setInErrorName(true);
       Success = false;
     }
 
     if (!validateAmountInput()) {
       console.log("Amount invalid!\n");
+      setInErrorAmount(true);
       Success = false;
     }
 
     if (!validateDateInput()) {
       console.log("Date invalid!\n");
+      setInErrorDate(true);
       Success = false;
     }
 

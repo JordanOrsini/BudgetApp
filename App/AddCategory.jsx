@@ -11,10 +11,10 @@ import CategoriesContext from './CategoriesContext';
 const AddCategory = (props) => {
   const categoriesContext = useContext(CategoriesContext);
   const [nameInput, setNameInput] = useState("");
-  const [inError, setInError] = useState(false);
+  const [inErrorName, setInErrorName] = useState(false);
 
   useEffect(() => {
-    setInError(false);
+    setInErrorName(false);
   }, [nameInput]);
 
   const validateNameInput = () => {
@@ -42,13 +42,15 @@ const AddCategory = (props) => {
       Success = false;
     }
 
-    setInError(!Success);
     return Success;
   }
 
   const createNewCategory = () => {
-    if (!validateNameInput())
+    if (!validateNameInput()) {
+      console.log("Name invalid!\n");
+      setInErrorName(true);
       return;
+    }
          
     props.setSelected(categoriesContext.categoryData.length);
     categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: nameInput})]);
@@ -57,7 +59,7 @@ const AddCategory = (props) => {
 
   const closeModal = () => {
     setNameInput("");
-    setInError(false);
+    setInErrorName(false);
     props.setVisibility(false);
   }
 
@@ -70,7 +72,7 @@ const AddCategory = (props) => {
     <Modal visible={props.modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={styles.addCategoryModal}>
-          <TextInput style={[styles.textInput, inError ? styles.decline : '']} placeholder="Name" onChangeText={(text) => onTextChange(text)} />
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} placeholder="Name" onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
               <Text>Y</Text>
