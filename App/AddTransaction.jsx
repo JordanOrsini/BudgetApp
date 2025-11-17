@@ -167,7 +167,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
         <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '']}>
           <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getName() : ''} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getAmount().toString() : ''} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? 1 : 0} />
+          <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} />
           <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getTransactionDate().toString() : ''} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>

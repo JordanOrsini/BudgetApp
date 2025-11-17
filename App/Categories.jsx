@@ -30,7 +30,6 @@ const Categories = ({setSelection, defaultSelection}) => {
 
   const onSelectionChange = (item) => {
     setSelection(item.category);
-    setLastSelectedIndex(item.id);
 
     const newDataArray = [...data];
     newDataArray.map((element => {
@@ -58,7 +57,7 @@ const Categories = ({setSelection, defaultSelection}) => {
 
   return (
     <View>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelected={setLastSelectedIndex}/>
+      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelection={setSelection} setSelected={setLastSelectedIndex}/>
       <View style={styles.categoryContainer}>
         <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={item => item.id} numColumns={3} />      
       </View>

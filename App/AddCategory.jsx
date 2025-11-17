@@ -8,7 +8,7 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the AddCategory modal of the application.
 */
-const AddCategory = ({modalVisibility, setVisibility, setSelected, categoryToEdit}) => {
+const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected, categoryToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
@@ -56,8 +56,10 @@ const AddCategory = ({modalVisibility, setVisibility, setSelected, categoryToEdi
       categoriesContext._setCategoryData([...categoriesContext.categoryData]);
     }
     else {
-      setSelected(categoriesContext.categoryData.length);
       categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: nameInput})]);
+
+      setSelection(nameInput);
+      setSelected(categoriesContext.categoryData.length); 
     }
 
     closeModal();
