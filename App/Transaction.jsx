@@ -8,12 +8,12 @@ class Transaction {
   #transactionDate = null;
   #creationDate = null;
 
-  constructor (props) {
-    this.#name = props.name;
-    this.#amount = props.amount;
-    this.#category = props.category;
-    this.#transactionDate = props.transactionDate;
-    this.#creationDate = props.creationDate; 
+  constructor ({name, amount, category, transactionDate, creationDate}) {
+    this.#name = name;
+    this.#amount = amount;
+    this.#category = category;
+    this.#transactionDate = transactionDate;
+    this.#creationDate = creationDate; 
   }
 
   getName () {

@@ -6,10 +6,10 @@ class Transaction {
   #amount = null;
   #recurring = null;
 
-  constructor (props) {
-    this.#name = props.name;
-    this.#amount = props.amount;
-    this.#recurring = props.recurring; 
+  constructor ({name, amount, recurring}) {
+    this.#name = name;
+    this.#amount = amount;
+    this.#recurring = recurring; 
   }
 
   getName () {

@@ -7,7 +7,7 @@ import RemoveCategory from "./RemoveCategory";
 /* 
    Class representing the settings screen of the application.
 */
-const Settings = (props) => {
+const Settings = () => {
   // Function that returns the contents of the settings screen.
   return (
     <SafeAreaView style={styles.pageView}>

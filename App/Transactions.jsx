@@ -9,7 +9,7 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the transactions screen of the application.
 */
-const Transactions = (props) => {
+const Transactions = () => {
   const transactionContext = useContext(TransactionsContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   const [data, setData] = useState([]);
@@ -50,8 +50,9 @@ const Transactions = (props) => {
   // Function that handles the onPress event of a transaction element.
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
   const removeItemHandler = (item) => {
-    transactionContext.userData.splice(item.id, 1);
-    transactionContext._setUserData([...transactionContext.userData]);
+    const modifiedTransactionArray = [...transactionContext.userData];
+    modifiedTransactionArray.splice(item.id, 1);
+    transactionContext._setUserData(modifiedTransactionArray);
   }
 
   const editItemHandler = (item) => {

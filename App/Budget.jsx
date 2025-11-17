@@ -5,7 +5,7 @@ import {Text, View} from "react-native";
 /* 
    Class representing the budget screen of the application.
 */
-const Budget = (props) => {
+const Budget = () => {
 
   // Function that returns the contents of the budget screen.
   return (

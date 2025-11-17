@@ -8,7 +8,7 @@ import AddTransaction from "./AddTransaction";
 /* 
    Class representing the navigation component of the application.
 */
-const Navigation = (props) => {
+const Navigation = ({state, navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // Function that returns the navigation component.
@@ -17,19 +17,19 @@ const Navigation = (props) => {
       <AddTransaction modalVisibility={modalVisible} setVisibility={setModalVisible}/>
 
       <View style={styles.navigationContainer}>
-        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonLeft, (props.state.index === 0) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => props.navigation.navigate('Overview')}>
+        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonLeft, (state.index === 0) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => navigation.navigate('Overview')}>
           <Text>Overview</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleLeft, (props.state.index === 1) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => props.navigation.navigate('Budget')}>
+        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleLeft, (state.index === 1) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => navigation.navigate('Budget')}>
           <Text>Budget</Text>
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddle, pressed ? styles.pressed : '']} onPress={() => setModalVisible(true)}>
           <Text>+</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleRight, (props.state.index === 2) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => props.navigation.navigate('Transactions')}>
+        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonMiddleRight, (state.index === 2) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => navigation.navigate('Transactions')}>
           <Text>Transactions</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonRight, (props.state.index === 3) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => props.navigation.navigate('Settings')}>
+        <Pressable style={({pressed}) => [styles.navButton, styles.navButtonRight, (state.index === 3) ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => navigation.navigate('Settings')}>
           <Text>Settings</Text>
         </Pressable>
       </View>

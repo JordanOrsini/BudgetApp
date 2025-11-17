@@ -12,7 +12,7 @@ import BottomNavigation from './BottomNavigation';
    Navigation between the main screens of the application is defined here. 
    SafeAreaProvider ensures content of the application is not displayed where camera cutouts are located.
 */
-const App = (props) => {
+const App = () => {
   return (
     <SafeAreaProvider>
       <CategoriesProvider>

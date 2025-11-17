@@ -19,21 +19,20 @@ const AddCategory = ({modalVisibility, setVisibility, setSelected, categoryToEdi
 
   const validateNameInput = () => {
     let Success = true;
-    const stringToValidate = nameInput;
 
-    if (stringToValidate.length === 0) {
+    if (nameInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (stringToValidate.includes(';')) {
+    if (nameInput.includes(';')) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }
 
     let duplicateFound = false;
     categoriesContext.categoryData.map((element) => {
-      if (element.getName() === stringToValidate)
+      if (element.getName() === nameInput)
         duplicateFound = true;
     })
 
@@ -71,7 +70,7 @@ const AddCategory = ({modalVisibility, setVisibility, setSelected, categoryToEdi
   }
 
   const onTextChange = (text) => {
-    setNameInput(text);
+    setNameInput(text.trim());
   }
 
   // Function that returns the contents of the AddTransaction modal.

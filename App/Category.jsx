@@ -5,9 +5,9 @@ class Category {
   #name = null;
   #iconPath = null;
 
-  constructor (props) {
-    this.#name = props.name;
-    this.#iconPath = props.iconPath;
+  constructor ({name, iconPath}) {
+    this.#name = name;
+    this.#iconPath = iconPath;
   }
 
   getName () {

@@ -37,14 +37,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
 
   const validateNameInput = () => {
     let Success = true;
-    const stringToValidate = nameInput;
 
-    if (stringToValidate.length === 0) {
+    if (nameInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (stringToValidate.includes(';')) {
+    if (nameInput.includes(';')) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }
@@ -54,14 +53,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
 
   const validateAmountInput = () => {
     let Success = true;
-    const stringToValidate = amountInput;
 
-    if (stringToValidate.length === 0) {
+    if (amountInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(stringToValidate)) {
+    if (isNaN(amountInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -71,14 +69,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
 
   const validateDateInput = () => {
     let Success = true;
-    const stringToValidate = dateInput;
 
-    if (stringToValidate.length === 0) {
+    if (dateInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(stringToValidate)) {
+    if (isNaN(dateInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -155,11 +152,11 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
   const onTextChange = (text, id) => {
     switch(id) {
       case("nameInput"):
-        setNameInput(text);
+        setNameInput(text.trim());
       case("amountInput"):
-        setAmountInput(text);
+        setAmountInput(text.trim());
       case("dateInput"):
-        setDateInput(text);
+        setDateInput(text.trim());
     }
   }
 
@@ -170,7 +167,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
         <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '']}>
           <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getName() : ''} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getAmount().toString() : ''} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <Categories setSelection={setCategoryInput} />
+          <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? 1 : 0} />
           <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getTransactionDate().toString() : ''} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>

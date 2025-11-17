@@ -8,7 +8,7 @@ import AddCategory from './AddCategory';
 /* 
    Class representing the RemoveCategory modal of the application.
 */
-const RemoveCategory = (props) => {
+const RemoveCategory = () => {
   const categoryContext = useContext(CategoriesContext);
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -51,8 +51,9 @@ const RemoveCategory = (props) => {
   // Function that handles the onPress event of a category element.
   // The function takes an index and will remove the corresponding category object from the category array.
   const removeItemHandler = (item) => {
-    categoryContext.categoryData.splice(item.id, 1);
-    categoryContext._setCategoryData([...categoryContext.categoryData]);
+    const modifiedCategoryArray = [...categoryContext.categoryData];
+    modifiedCategoryArray.splice(item.id, 1);
+    categoryContext._setCategoryData(modifiedCategoryArray);
   }
 
   // Function that returns the contents of the AddTransaction modal.

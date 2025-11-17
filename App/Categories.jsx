@@ -8,12 +8,12 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the Category class of the application.
 */
-const Categories = (props) => {
+const Categories = ({setSelection, defaultSelection}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState([]);
-  const [lastSelectedIndex, setLastSelectedIndex] = useState(0);
+  const [lastSelectedIndex, setLastSelectedIndex] = useState(defaultSelection);
 
   useEffect(() => {
     fillData();
@@ -29,7 +29,7 @@ const Categories = (props) => {
   }
 
   const onSelectionChange = (item) => {
-    props.setSelection(item.category);
+    setSelection(item.category);
     setLastSelectedIndex(item.id);
 
     const newDataArray = [...data];
