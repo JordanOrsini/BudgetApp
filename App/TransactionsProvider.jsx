@@ -67,7 +67,7 @@ const TransactionsProvider = ({children}) => {
   const refreshData = () => {
     userData.map((element) => {
       if (categoriesContext.findCategory(element.getCategory().getName()) === undefined)
-        element.setCategory(categoriesContext.findCategory("Uncategorized"));
+        element.setCategory(categoriesContext.findCategory("NONE"));
     })
 
     setUserData([...userData]);
