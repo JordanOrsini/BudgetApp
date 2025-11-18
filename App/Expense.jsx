@@ -5,11 +5,13 @@ class Expense {
   #name = null;
   #amount = null;
   #interval = null;
+  #startDate = null;
 
-  constructor ({name, amount, interval}) {
+  constructor ({name, amount, interval, startDate}) {
     this.#name = name;
     this.#amount = amount;
-    this.#interval = interval; 
+    this.#interval = interval;
+    this.#startDate = startDate 
   }
 
   getName () {
@@ -36,8 +38,16 @@ class Expense {
     this.#interval = newInterval;
   }
 
+  getStartDate () {
+    return this.#startDate;
+  }
+
+  setStartDate (newStartDate) {
+    this.#startDate = newStartDate;
+  }
+
   toString() {
-    return this.#name + ';' + this.#amount + ';' + this.#interval;
+    return this.#name + ';' + this.#amount + ';' + this.#interval + ';' + this.#startDate;
   }
 }
 

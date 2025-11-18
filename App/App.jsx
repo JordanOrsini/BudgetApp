@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import CategoriesProvider from './CategoriesProvider';
+import ExpensesProvider from './ExpensesProvider';
 import TransactionsProvider from './TransactionsProvider';
 
 import BottomNavigation from './BottomNavigation';
@@ -16,11 +17,13 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <CategoriesProvider>
-        <TransactionsProvider>
-          <NavigationContainer>
-            <BottomNavigation />
-          </NavigationContainer>
-        </TransactionsProvider>
+        <ExpensesProvider>
+          <TransactionsProvider>
+            <NavigationContainer>
+              <BottomNavigation />
+            </NavigationContainer>
+          </TransactionsProvider>
+        </ExpensesProvider>
       </CategoriesProvider>
     </SafeAreaProvider>
   );

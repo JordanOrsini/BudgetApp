@@ -10,7 +10,7 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the AddTransaction modal of the application.
 */
-const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit}) => {
+const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit, setParentVisibility}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -153,6 +153,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
                                              }); 
                                        
       transactionsContext._setUserData([newTransaction, ...transactionsContext.userData]);
+      setParentVisibility(false);
     }
 
     closeModal();
