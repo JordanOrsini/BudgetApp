@@ -52,6 +52,14 @@ export const styles = StyleSheet.create({
   edit: {
     backgroundColor: '#FFB343',
   },
+  expenseElement: {
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: 90,
+    height: 40,
+    backgroundColor: '#FFFFFF',
+  },
   headerText: {
     fontSize: 50,
     fontWeight: 'bold',

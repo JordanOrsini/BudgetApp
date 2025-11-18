@@ -1,11 +1,14 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Expense from './Expense';
 import Intervals from './Intervals';
+import ExpensesContext from './ExpensesContext';
 
 const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
+  const expensesContext = useContext(ExpensesContext);
+
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
   const [intervalInput, setIntervalInput] = useState("NONE");
@@ -119,8 +122,7 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
                                           startDate: parseInt(dateInput),
                                          });
 
-    console.log("New expense object!: " + newExpenseObject);
-
+    expensesContext._setExpenseData([newExpenseObject, ...expensesContext.expenseData]);
     setParentVisibility(false);
     closeModal();
   }

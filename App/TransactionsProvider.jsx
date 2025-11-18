@@ -7,7 +7,7 @@ import TransactionsContext from './TransactionsContext';
 
 const TransactionsProvider = ({children}) => {
   const categoriesContext = useContext(CategoriesContext);
-  const [userData, setUserData] = useState([]);
+  const [transactionData, setTransactionData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -42,9 +42,8 @@ const TransactionsProvider = ({children}) => {
     setTotalAmount(newTotalAmount);
   }
 
-  // Custom setter, writing memory's contents to file before updating userData.
-  const _setUserData = (newData) => {
-
+  // Custom setter, writing memory's contents to file before updating transactionData.
+  const _setTransactionData = (newData) => {
     let stringToWrite = "";
     newData.map((item) => {
       stringToWrite = stringToWrite + item.toString() + "\n";
@@ -60,21 +59,21 @@ const TransactionsProvider = ({children}) => {
       return;
     }
     
-    setUserData(newData);
+    setTransactionData(newData);
     _setTotalAmount(newData);
   }
 
   const refreshData = () => {
-    userData.map((element) => {
+    transactionData.map((element) => {
       if (categoriesContext.findCategoryByName(element.getCategory().getName()) === undefined)
         element.setCategory(categoriesContext.findCategoryByName("NONE"));
     })
 
-    setUserData([...userData]);
+    setTransactionData([...transactionData]);
   }
 
   const findTransactionById = (id) => {
-    const filteredData = userData.filter(element => 
+    const filteredData = transactionData.filter(element => 
       element.getId() === id
     );
 
@@ -86,14 +85,14 @@ const TransactionsProvider = ({children}) => {
 
   // Values to expose in our context.
   const contextValue = {
-    userData,
-    _setUserData,
+    transactionData,
+    _setTransactionData,
     totalAmount,
     findTransactionById,
   }
 
-  // File path of our saved user data. Not user accessible. Cross-platform.
-  const filePath = RNFS.DocumentDirectoryPath + '/UserData.txt'
+  // File path of our saved transaction data. Not user accessible. Cross-platform.
+  const filePath = RNFS.DocumentDirectoryPath + '/TransactionData.txt'
 
   // [TODO]: Temporary data for testing.
   const defaultFileContents = '1;1;HOME;1;1\n2;2;HOME;2;2\n3;3;HOME;3;3\n4;4;HOME;4;4\n' +
@@ -148,13 +147,13 @@ const TransactionsProvider = ({children}) => {
                                                        amount: parseFloat(transactionDataArray[1]), 
                                                        category: categoryObject, 
                                                        transactionDate: parseInt(transactionDataArray[3]), 
-                                                       creationDate: parseInt(transactionDataArray[4])}
-                                                     )); 
+                                                       creationDate: parseInt(transactionDataArray[4])
+                                                      })); 
         }
       });
 
       // Update state with parsed data
-      setUserData(transactionObjectArray);
+      setTransactionData(transactionObjectArray);
       _setTotalAmount(transactionObjectArray);
     } 
     catch (error) {

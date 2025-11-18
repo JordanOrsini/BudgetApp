@@ -18,11 +18,11 @@ const Transactions = () => {
 
   useEffect(() => {
     fillData();
-  }, [transactionContext.userData]);
+  }, [transactionContext.transactionData]);
 
   const fillData = () => {
     const newDataArray = [];
-    transactionContext.userData.map((element, index) => {
+    transactionContext.transactionData.map((element, index) => {
       newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
     });
 
@@ -50,9 +50,9 @@ const Transactions = () => {
   // Function that handles the onPress event of a transaction element.
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
   const removeItemHandler = (item) => {
-    const modifiedTransactionArray = [...transactionContext.userData];
+    const modifiedTransactionArray = [...transactionContext.transactionData];
     modifiedTransactionArray.splice(item.index, 1);
-    transactionContext._setUserData(modifiedTransactionArray);
+    transactionContext._setTransactionData(modifiedTransactionArray);
   }
 
   const editItemHandler = (item) => {

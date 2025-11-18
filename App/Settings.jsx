@@ -1,6 +1,6 @@
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
-import {Text, View} from "react-native";
+import {Text} from "react-native";
 
 import RemoveCategory from "./RemoveCategory";
 

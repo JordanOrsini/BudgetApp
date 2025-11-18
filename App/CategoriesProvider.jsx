@@ -25,9 +25,8 @@ const CategoriesProvider = ({children}) => {
     fetchData();
   }, []);
 
-  // Custom setter, writing memory's contents to file before updating userData.
+  // Custom setter, writing memory's contents to file before updating categoryData.
   const _setCategoryData = (newData) => {
-
     let stringToWrite = "";
     newData.map((item) => {
       stringToWrite = stringToWrite + item.toString() + "\n";
@@ -64,7 +63,7 @@ const CategoriesProvider = ({children}) => {
     findCategoryByName,
   }
 
-  // File path of our saved user data. Not user accessible. Cross-platform.
+  // File path of our saved category data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + '/CategoryData.txt'
 
   // [TODO]: Temporary data for testing.
@@ -116,8 +115,8 @@ const CategoriesProvider = ({children}) => {
         if (item != "") {      
           const categoryDataArray = item.split(';');
           categoriesArray.push(new Category({name: categoryDataArray[0], 
-                                             iconPath: categoryDataArray[1]}
-                                           )); 
+                                             iconPath: categoryDataArray[1]
+                                            })); 
         }
       });
 

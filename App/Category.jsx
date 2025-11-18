@@ -1,5 +1,5 @@
 /* 
-   Class representing a transaction object.
+   Class representing a category object.
 */
 class Category {
   #name = null;

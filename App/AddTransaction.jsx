@@ -141,7 +141,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       transactionToEdit.setCategory(categoryObject);
 
-      transactionsContext._setUserData([...transactionsContext.userData]);
+      transactionsContext._setTransactionData([...transactionsContext.transactionData]);
     }
     else {
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
@@ -152,7 +152,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
                                               creationDate: parseInt(0)
                                              }); 
                                        
-      transactionsContext._setUserData([newTransaction, ...transactionsContext.userData]);
+      transactionsContext._setTransactionData([newTransaction, ...transactionsContext.transactionData]);
       setParentVisibility(false);
     }
 

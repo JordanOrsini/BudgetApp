@@ -1,17 +1,27 @@
 /* 
-   Class representing an Expense object.
+   Class representing an expense object.
 */
 class Expense {
+  static id = 0;
+
+  #id = null;
   #name = null;
   #amount = null;
   #interval = null;
   #startDate = null;
 
   constructor ({name, amount, interval, startDate}) {
+    this.#id = Expense.id;
+    Expense.id++;
+
     this.#name = name;
     this.#amount = amount;
     this.#interval = interval;
     this.#startDate = startDate 
+  }
+
+  getId () {
+    return this.#id;
   }
 
   getName () {
