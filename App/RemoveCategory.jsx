@@ -59,7 +59,7 @@ const RemoveCategory = () => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={styles.mainBodyContainer}>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} />
+      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} clearCategoryToEdit={() => setCategoryToEdit(null)} />
       <View style={styles.transactionContainer}>
         <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
       </View>

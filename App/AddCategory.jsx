@@ -8,10 +8,16 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the AddCategory modal of the application.
 */
-const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected, categoryToEdit}) => {
+const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected, categoryToEdit, clearCategoryToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
+
+  useEffect(() => {
+    if (categoryToEdit) {
+      setNameInput(categoryToEdit.getName());
+    }
+  }, [categoryToEdit]);
 
   useEffect(() => {
     setInErrorName(false);
@@ -68,6 +74,10 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
   const closeModal = () => {
     setNameInput("");
     setInErrorName(false);
+
+    if (categoryToEdit)
+      clearCategoryToEdit();
+
     setVisibility(false);
   }
 
@@ -80,7 +90,7 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={[styles.addCategoryModal, categoryToEdit ? styles.edit : '']}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={categoryToEdit ? categoryToEdit.getName() : ''} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
               <Text>Y</Text>

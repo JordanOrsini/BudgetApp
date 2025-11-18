@@ -10,7 +10,7 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the AddTransaction modal of the application.
 */
-const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => {
+const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -22,6 +22,15 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
   const [inErrorName, setInErrorName] = useState(false);
   const [inErrorAmount, setInErrorAmount] = useState(false);
   const [inErrorDate, setInErrorDate] = useState(false);
+
+  useEffect(() => {
+    if (transactionToEdit) {
+      setNameInput(transactionToEdit.getName());
+      setAmountInput(transactionToEdit.getAmount());
+      setCategoryInput(transactionToEdit.getCategory().getName());
+      setDateInput(transactionToEdit.getTransactionDate());
+    }
+  }, [transactionToEdit]);
 
   useEffect(() => {
     setInErrorName(false);
@@ -113,11 +122,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
     if (transactionToEdit) {
       transactionToEdit.setName(nameInput);
       transactionToEdit.setAmount(parseFloat(amountInput));
+      transactionToEdit.setTransactionDate(parseInt(dateInput));
 
       const categoryObject = categoriesContext.findCategory(categoryInput);
       transactionToEdit.setCategory(categoryObject);
-      
-      transactionToEdit.setTransactionDate(parseInt(dateInput));
 
       transactionsContext._setUserData([...transactionsContext.userData]);
     }
@@ -146,17 +154,25 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
     setInErrorAmount(false);
     setInErrorDate(false);
 
+    if (transactionToEdit)
+      clearTransactionToEdit();
+
     setVisibility(false);
   }
 
   const onTextChange = (text, id) => {
     switch(id) {
-      case("nameInput"):
+      case ("nameInput"):
         setNameInput(text.trim());
-      case("amountInput"):
+        break;
+      case ("amountInput"):
         setAmountInput(text.trim());
-      case("dateInput"):
+        break;
+      case ("dateInput"):
         setDateInput(text.trim());
+        break;
+      default:
+        break;
     }
   }
 
@@ -165,10 +181,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit}) => 
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '']}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getName() : ''} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getAmount().toString() : ''} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} />
-          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={transactionToEdit ? transactionToEdit.getTransactionDate().toString() : ''} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
               <Text>Y</Text>
