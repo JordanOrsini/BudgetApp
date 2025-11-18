@@ -59,9 +59,6 @@ export const styles = StyleSheet.create({
   hide: {
     opacity: 0,
   },
-  horizontal: {
-    flexDirection: 'row',
-  },
   mainBodyContainer: {
     backgroundColor: '#E1E1E1',
     flex: 1,
@@ -189,7 +186,6 @@ export const styles = StyleSheet.create({
     height: 20,
     borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'center',
     marginLeft: 10,
     marginRight: 10,
     elevation: 5,

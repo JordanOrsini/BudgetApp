@@ -175,18 +175,22 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   }
 
   const onTextChange = (text, id) => {
-    switch(id) {
-      case ("nameInput"):
+    switch (id) {
+      case ("nameInput"): {
         setNameInput(text);
         break;
-      case ("amountInput"):
+      }
+      case ("amountInput"): {
         setAmountInput(text);
         break;
-      case ("dateInput"):
+      }
+      case ("dateInput"): {
         setDateInput(text);
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
   }
 
@@ -201,10 +205,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
-              <Text>Submit</Text>
+              <Text>+</Text>
             </Pressable>
             <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
-              <Text>Close</Text>
+              <Text>x</Text>
             </Pressable>
           </View>
         </View>    

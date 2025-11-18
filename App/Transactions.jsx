@@ -38,10 +38,10 @@ const Transactions = () => {
         <Text style={styles.transactionElement}>{item.category}</Text>
         <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed ? styles.pressed : '']} onPress={() => editItemHandler(item)}>
-          <Text>E</Text>
+          <Text>e</Text>
         </Pressable>
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => removeItemHandler(item)}>
-          <Text>X</Text>
+          <Text>x</Text>
         </Pressable>
       </View>
     );

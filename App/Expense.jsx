@@ -1,15 +1,15 @@
 /* 
    Class representing an Expense object.
 */
-class Transaction {
+class Expense {
   #name = null;
   #amount = null;
-  #recurring = null;
+  #interval = null;
 
-  constructor ({name, amount, recurring}) {
+  constructor ({name, amount, interval}) {
     this.#name = name;
     this.#amount = amount;
-    this.#recurring = recurring; 
+    this.#interval = interval; 
   }
 
   getName () {
@@ -28,16 +28,16 @@ class Transaction {
     this.#amount = newAmount;
   }
 
-  getRecurring () {
-    return this.#recurring;
+  getInterval () {
+    return this.#interval;
   }
 
-  setRecurring (newRecurring) {
-    this.#recurring = newRecurring;
+  setInterval (newInterval) {
+    this.#interval = newInterval;
   }
 
   toString() {
-    return this.#name + ';' + this.#amount + ';' + this.#recurring;
+    return this.#name + ';' + this.#amount + ';' + this.#interval;
   }
 }
 
