@@ -57,7 +57,10 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   hide: {
-    display: 'none',
+    opacity: 0,
+  },
+  horizontal: {
+    flexDirection: 'row',
   },
   mainBodyContainer: {
     backgroundColor: '#E1E1E1',
@@ -79,6 +82,15 @@ export const styles = StyleSheet.create({
   },
   modalButtonsContainer: {
     flexDirection: 'row',
+  },
+  modalMenuModal: {
+    margin: 75,
+    marginBottom: 20,
+    backgroundColor: '#ECECEC',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    elevation: 5,
   },
   modalPositioning: {
     justifyContent: 'flex-end',

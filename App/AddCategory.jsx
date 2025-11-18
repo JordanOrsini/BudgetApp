@@ -99,10 +99,10 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
           <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
-              <Text>Y</Text>
+              <Text>Submit</Text>
             </Pressable>
             <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
-              <Text>N</Text>
+              <Text>Close</Text>
             </Pressable>
           </View>
         </View>    

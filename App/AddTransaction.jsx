@@ -201,10 +201,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
-              <Text>Y</Text>
+              <Text>Submit</Text>
             </Pressable>
             <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
-              <Text>N</Text>
+              <Text>Close</Text>
             </Pressable>
           </View>
         </View>    
