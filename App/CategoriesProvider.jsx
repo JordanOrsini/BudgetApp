@@ -51,6 +51,9 @@ const CategoriesProvider = ({children}) => {
       element.getName().toLowerCase().includes(name.toLowerCase())
     );
 
+    if (filteredData.length !== 1)
+      return;
+    
     return (filteredData[0]);
   }
 

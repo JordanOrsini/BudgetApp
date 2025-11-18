@@ -23,22 +23,22 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
     setInErrorName(false);
   }, [nameInput]);
 
-  const validateNameInput = () => {
+  const validateNameInput = (processedNameInput) => {
     let Success = true;
 
-    if (nameInput.length === 0) {
+    if (processedNameInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (nameInput.includes(';')) {
+    if (processedNameInput.includes(';')) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }
 
     let duplicateFound = false;
     categoriesContext.categoryData.map((element) => {
-      if (element.getName() === nameInput)
+      if (element.getName() === processedNameInput)
         duplicateFound = true;
     })
 
@@ -51,20 +51,26 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
   }
 
   const createNewCategory = () => {
-    if (!validateNameInput()) {
+    const processedNameInput = nameInput.trim().toUpperCase();
+    if (categoryToEdit && categoryToEdit.getName() === processedNameInput) {
+      closeModal();
+      return;
+    }
+
+    if (!validateNameInput(processedNameInput)) {
       console.log("Name invalid!\n");
       setInErrorName(true);
       return;
     }
 
     if (categoryToEdit) {
-      categoryToEdit.setName(nameInput);
+      categoryToEdit.setName(processedNameInput);
       categoriesContext._setCategoryData([...categoriesContext.categoryData]);
     }
     else {
-      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: nameInput})]);
+      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: processedNameInput})]);
 
-      setSelection(nameInput);
+      setSelection(processedNameInput);
       setSelected(categoriesContext.categoryData.length); 
     }
 
@@ -82,7 +88,7 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
   }
 
   const onTextChange = (text) => {
-    setNameInput(text.trim().toUpperCase());
+    setNameInput(text);
   }
 
   // Function that returns the contents of the AddTransaction modal.

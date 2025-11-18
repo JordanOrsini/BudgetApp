@@ -78,6 +78,9 @@ const TransactionsProvider = ({children}) => {
       element.getId() === id
     );
 
+    if (filteredData.length !== 1)
+      return;
+    
     return (filteredData[0]);
   }
 

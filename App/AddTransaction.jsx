@@ -46,15 +46,15 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     setInErrorDate(false);
   }, [dateInput]);
 
-  const validateNameInput = () => {
+  const validateNameInput = (processedNameInput) => {
     let Success = true;
 
-    if (nameInput.length === 0) {
+    if (processedNameInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (nameInput.includes(';')) {
+    if (processedNameInput.includes(';')) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }
@@ -94,9 +94,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     return Success;
   }
 
-  const validateInputs = () => {
+  const validateInputs = (processedNameInput) => {
     let Success = true;
-    if (!validateNameInput()) {
+
+    if (!validateNameInput(processedNameInput)) {
       console.log("Name invalid!\n");
       setInErrorName(true);
       Success = false;
@@ -118,11 +119,22 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   }
 
   const createNewTransaction = () => {
-    if (!validateInputs())
+    const processedNameInput = nameInput.trim();
+
+    if (transactionToEdit && 
+        transactionToEdit.getName() === processedNameInput &&
+        transactionToEdit.getAmount() == amountInput &&
+        transactionToEdit.getCategory().getName() === categoryInput &&
+        transactionToEdit.getTransactionDate() == dateInput) {
+      closeModal();
+      return;
+    }
+
+    if (!validateInputs(processedNameInput))
       return;
 
     if (transactionToEdit) {
-      transactionToEdit.setName(nameInput);
+      transactionToEdit.setName(processedNameInput);
       transactionToEdit.setAmount(parseFloat(amountInput));
       transactionToEdit.setTransactionDate(parseInt(dateInput));
 
@@ -133,7 +145,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     }
     else {
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
-      const newTransaction = new Transaction({name: nameInput, 
+      const newTransaction = new Transaction({name: processedNameInput, 
                                               amount: parseFloat(amountInput), 
                                               category: categoryObject, 
                                               transactionDate: parseInt(dateInput), 
@@ -165,13 +177,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   const onTextChange = (text, id) => {
     switch(id) {
       case ("nameInput"):
-        setNameInput(text.trim());
+        setNameInput(text);
         break;
       case ("amountInput"):
-        setAmountInput(text.trim());
+        setAmountInput(text);
         break;
       case ("dateInput"):
-        setDateInput(text.trim());
+        setDateInput(text);
         break;
       default:
         break;
