@@ -23,6 +23,8 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   const [inErrorAmount, setInErrorAmount] = useState(false);
   const [inErrorDate, setInErrorDate] = useState(false);
 
+  const [hidden, setHidden] = useState(false);
+
   useEffect(() => {
     if (transactionToEdit) {
       setNameInput(transactionToEdit.getName());
@@ -180,10 +182,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   return (
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
-        <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '']}>
+        <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '', hidden ? styles.hide : '']}>
           <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} />
+          <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
           <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}> 
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>

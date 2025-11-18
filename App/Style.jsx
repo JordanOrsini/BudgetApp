@@ -56,6 +56,9 @@ export const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
   },
+  hide: {
+    display: 'none',
+  },
   mainBodyContainer: {
     backgroundColor: '#E1E1E1',
     flex: 1,

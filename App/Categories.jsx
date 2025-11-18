@@ -8,12 +8,16 @@ import CategoriesContext from './CategoriesContext';
 /* 
    Class representing the Category class of the application.
 */
-const Categories = ({setSelection, defaultSelection}) => {
+const Categories = ({setSelection, defaultSelection, setHidden}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState([]);
   const [lastSelectedIndex, setLastSelectedIndex] = useState(defaultSelection);
+
+  useEffect(() => {
+    setHidden(modalVisible);
+  }, [modalVisible]);
 
   useEffect(() => {
     fillData();
