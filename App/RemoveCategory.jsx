@@ -44,7 +44,7 @@ const RemoveCategory = () => {
   }
 
   const editItemHandler = (item) => {
-    setCategoryToEdit(categoryContext.findCategory(item.name));
+    setCategoryToEdit(categoryContext.findCategoryByName(item.name));
     setModalVisible(true);
   }
 

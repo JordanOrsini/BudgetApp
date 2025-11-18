@@ -23,14 +23,14 @@ const Transactions = () => {
   const fillData = () => {
     const newDataArray = [];
     transactionContext.userData.map((element, index) => {
-      newDataArray.push({id: index, name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
+      newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
     });
 
     setData(newDataArray);
   }
 
   const renderItem = ({item}, data) => {
-    const isLastItem = (item.id === data.length - 1);
+    const isLastItem = (item.index === data.length - 1);
     return (
       <View style={[styles.transactionContainer, isLastItem ? styles.lastItem : '']}>
         <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
@@ -51,12 +51,12 @@ const Transactions = () => {
   // The function takes an index and will remove the corresponding transaction object from the transactions array.
   const removeItemHandler = (item) => {
     const modifiedTransactionArray = [...transactionContext.userData];
-    modifiedTransactionArray.splice(item.id, 1);
+    modifiedTransactionArray.splice(item.index, 1);
     transactionContext._setUserData(modifiedTransactionArray);
   }
 
   const editItemHandler = (item) => {
-    setTransactionToEdit(transactionContext.findTransaction(item.name));
+    setTransactionToEdit(transactionContext.findTransactionById(item.id));
     setModalVisible(true);
   }
 
@@ -74,7 +74,7 @@ const Transactions = () => {
           <Text style={styles.transactionElement}>Category</Text>
           <Text style={[styles.transactionElement, styles.transactionElementRight]}>Date</Text>
         </View>
-        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.id} /> 
+        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} /> 
       </View>      
     </SafeAreaView> 
     );

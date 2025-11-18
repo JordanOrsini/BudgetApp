@@ -46,7 +46,7 @@ const CategoriesProvider = ({children}) => {
     setCategoryData(newData);
   }
 
-  const findCategory = (name) => {
+  const findCategoryByName = (name) => {
     const filteredData = categoryData.filter(element => 
       element.getName().toLowerCase().includes(name.toLowerCase())
     );
@@ -58,7 +58,7 @@ const CategoriesProvider = ({children}) => {
   const contextValue = {
     categoryData,
     _setCategoryData,
-    findCategory,
+    findCategoryByName,
   }
 
   // File path of our saved user data. Not user accessible. Cross-platform.

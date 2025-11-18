@@ -126,13 +126,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       transactionToEdit.setAmount(parseFloat(amountInput));
       transactionToEdit.setTransactionDate(parseInt(dateInput));
 
-      const categoryObject = categoriesContext.findCategory(categoryInput);
+      const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       transactionToEdit.setCategory(categoryObject);
 
       transactionsContext._setUserData([...transactionsContext.userData]);
     }
     else {
-      const categoryObject = categoriesContext.findCategory(categoryInput);
+      const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       const newTransaction = new Transaction({name: nameInput, 
                                               amount: parseFloat(amountInput), 
                                               category: categoryObject, 

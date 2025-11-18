@@ -2,6 +2,9 @@
    Class representing a transaction object.
 */
 class Transaction {
+  static id = 0;
+
+  #id = null;
   #name = null;
   #amount = null;
   #category = null;
@@ -9,11 +12,18 @@ class Transaction {
   #creationDate = null;
 
   constructor ({name, amount, category, transactionDate, creationDate}) {
+    this.#id = Transaction.id;
+    Transaction.id++;
+
     this.#name = name;
     this.#amount = amount;
     this.#category = category;
     this.#transactionDate = transactionDate;
     this.#creationDate = creationDate; 
+  }
+
+  getId() {
+    return this.#id;
   }
 
   getName () {

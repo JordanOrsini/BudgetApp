@@ -66,16 +66,16 @@ const TransactionsProvider = ({children}) => {
 
   const refreshData = () => {
     userData.map((element) => {
-      if (categoriesContext.findCategory(element.getCategory().getName()) === undefined)
-        element.setCategory(categoriesContext.findCategory("NONE"));
+      if (categoriesContext.findCategoryByName(element.getCategory().getName()) === undefined)
+        element.setCategory(categoriesContext.findCategoryByName("NONE"));
     })
 
     setUserData([...userData]);
   }
 
-  const findTransaction = (name) => {
+  const findTransactionById = (id) => {
     const filteredData = userData.filter(element => 
-      element.getName().toLowerCase().includes(name.toLowerCase())
+      element.getId() === id
     );
 
     return (filteredData[0]);
@@ -86,7 +86,7 @@ const TransactionsProvider = ({children}) => {
     userData,
     _setUserData,
     totalAmount,
-    findTransaction,
+    findTransactionById,
   }
 
   // File path of our saved user data. Not user accessible. Cross-platform.
@@ -140,7 +140,7 @@ const TransactionsProvider = ({children}) => {
         if (item != "") {      
           const transactionDataArray = item.split(';');
 
-          const categoryObject = categoriesContext.findCategory(transactionDataArray[2]);   
+          const categoryObject = categoriesContext.findCategoryByName(transactionDataArray[2]);   
           transactionObjectArray.push(new Transaction({name: transactionDataArray[0], 
                                                        amount: parseFloat(transactionDataArray[1]), 
                                                        category: categoryObject, 
