@@ -33,12 +33,7 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expens
   }, [amountInput]);
 
   const closeModal = () => {
-    setNameInput("");
-    setAmountInput("");
-    setIntervalInput("NONE");
-
-    setInErrorName(false);
-    setInErrorAmount(false);
+    clearModal();
 
     if (expenseToEdit)
       clearExpenseToEdit();
@@ -46,6 +41,15 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expens
       setParentVisibility(false);
 
     setVisibility(false);
+  }
+
+  const clearModal = () => {
+    setNameInput("");
+    setAmountInput("");
+    setIntervalInput("NONE");
+
+    setInErrorName(false);
+    setInErrorAmount(false);
   }
 
   const validateNameInput = (processedNameInput) => {
@@ -98,9 +102,9 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expens
     return Success;
   }
 
-  const createNewExpense= () => {
+  const createNewExpense = (addAnother = false) => {
     const processedNameInput = nameInput.trim();
-    const processedAmountInput = amountInput.toString().trim();
+    const processedAmountInput = parseFloat(amountInput).toFixed(2);
 
     if (expenseToEdit && 
         expenseToEdit.getName() === processedNameInput &&
@@ -115,21 +119,24 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expens
 
     if (expenseToEdit) {
       expenseToEdit.setName(processedNameInput);
-      expenseToEdit.setAmount(parseFloat(processedAmountInput));
+      expenseToEdit.setAmount(processedAmountInput);
       expenseToEdit.setInterval(intervalInput);
 
       expensesContext._setExpenseData([...expensesContext.expenseData]);
     }
     else {
       const newExpenseObject = new Expense({name: processedNameInput,
-                                            amount: parseFloat(processedAmountInput),
+                                            amount: processedAmountInput,
                                             interval: intervalInput
                                            });
 
       expensesContext._setExpenseData([newExpenseObject, ...expensesContext.expenseData]);
     }
 
-    closeModal();
+    if (addAnother)
+      clearModal();
+    else
+      closeModal();
   }
 
   const onTextChange = (text, id) => {
@@ -148,19 +155,37 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expens
     }
   }
 
+  const removeItemHandler = () => {
+    const modifiedExpenseArray = [...expensesContext.expenseData];
+    modifiedExpenseArray.splice(expensesContext.expenseData.indexOf(expenseToEdit), 1);
+    expensesContext._setExpenseData(modifiedExpenseArray);
+
+    closeModal();
+  }
+
   return (
     <Modal visible={modalVisibility} transparent={true} >
       <View style={styles.modalPositioning}>
         <View style={[styles.addTransactionModal, expenseToEdit && styles.edit]}>
+          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+            <Text>x</Text>
+          </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Intervals setSelection={setIntervalInput} defaultSelection={expenseToEdit ? intervalInput : "NONE"} />
           <View style={styles.modalButtonsContainer}>
-            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense()}>
-              <Text>Submit</Text>
-            </Pressable>
-            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
-              <Text>Close</Text>
+            {!expenseToEdit &&
+              <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense(true)}>
+                <Text>Add another</Text>
+              </Pressable>
+            }
+            {expenseToEdit &&
+              <Pressable style={({pressed}) => [styles.standardButton, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
+                <Text>Delete</Text>
+              </Pressable>
+            }
+            <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense()}>
+              <Text>Confirm</Text>
             </Pressable>
           </View>
         </View>

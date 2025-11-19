@@ -38,17 +38,8 @@ const Budget = () => {
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler(item)}>
-          <Text>x</Text>
-        </Pressable>
       </View>
     );
-  }
-
-  const removeItemHandler = (item) => {
-    const modifiedExpenseArray = [...expensesContext.expenseData];
-    modifiedExpenseArray.splice(item.index, 1);
-    expensesContext._setExpenseData(modifiedExpenseArray);
   }
 
   const editItemHandler = (item) => {

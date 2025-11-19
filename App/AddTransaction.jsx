@@ -120,8 +120,8 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
 
   const createNewTransaction = (addAnother = false) => {
     const processedNameInput = nameInput.trim();
-    const processedAmountInput = amountInput.toString().trim();
-    const processedDateInput = dateInput.toString().trim();
+    const processedAmountInput = parseFloat(amountInput).toFixed(2);
+    const processedDateInput = parseInt(dateInput);
 
     if (transactionToEdit && 
         transactionToEdit.getName() === processedNameInput &&
@@ -137,8 +137,8 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
 
     if (transactionToEdit) {
       transactionToEdit.setName(processedNameInput);
-      transactionToEdit.setAmount(parseFloat(processedAmountInput));
-      transactionToEdit.setTransactionDate(parseInt(processedDateInput));
+      transactionToEdit.setAmount(processedAmountInput);
+      transactionToEdit.setTransactionDate(processedDateInput);
 
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       transactionToEdit.setCategory(categoryObject);
@@ -148,9 +148,9 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
     else {
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       const newTransaction = new Transaction({name: processedNameInput, 
-                                              amount: parseFloat(processedAmountInput), 
+                                              amount: processedAmountInput, 
                                               category: categoryObject, 
-                                              transactionDate: parseInt(processedDateInput),
+                                              transactionDate: processedDateInput,
                                               creationDate: parseInt(0)
                                              }); 
                                        
@@ -220,31 +220,29 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={[styles.addTransactionModal, transactionToEdit && styles.edit, hidden && styles.hide]}>
+          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+            <Text>x</Text>
+          </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
-          <TextInput style={[styles.textInput, inErrorDate && styles.decline]} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <TextInput style={[styles.textInput, inErrorDate && styles.decline]} defaultValue={dateInput.toString()} placeholder="DD/MM/YYYY" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           {transactionToEdit &&
             <Text style={styles.creationText}>Created on: {transactionToEdit.getCreationDate()}</Text>
           }
           <View style={styles.modalButtonsContainer}> 
             {!transactionToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, pressed && styles.pressed]} onPress={() => createNewTransaction(true)} >
+              <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction(true)} >
                 <Text>Add another</Text>
               </Pressable>
             }
             {transactionToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, pressed && styles.pressed]} onPress={removeItemHandler}>
+              <Pressable style={({pressed}) => [styles.standardButton, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
                 <Text>Delete</Text>
               </Pressable>
             }
-          </View>
-          <View style={styles.modalButtonsContainer}> 
-            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction()}>
-              <Text>Submit</Text>
-            </Pressable>
-            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
-              <Text>Close</Text>
+            <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction()}>
+              <Text>Confirm</Text>
             </Pressable>
           </View>
         </View>    

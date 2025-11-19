@@ -35,9 +35,6 @@ const RemoveCategory = () => {
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler(item)}>
-          <Text>x</Text>
-        </Pressable>
       </View>
     );
   }
@@ -45,14 +42,6 @@ const RemoveCategory = () => {
   const editItemHandler = (item) => {
     setCategoryToEdit(categoryContext.findCategoryByName(item.name));
     setModalVisible(true);
-  }
-
-  // Function that handles the onPress event of a category element.
-  // The function takes an index and will remove the corresponding category object from the category array.
-  const removeItemHandler = (item) => {
-    const modifiedCategoryArray = [...categoryContext.categoryData];
-    modifiedCategoryArray.splice(item.id, 1);
-    categoryContext._setCategoryData(modifiedCategoryArray);
   }
 
   // Function that returns the contents of the AddTransaction modal.

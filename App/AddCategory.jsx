@@ -77,9 +77,13 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
     closeModal();
   }
 
-  const closeModal = () => {
+  const clearModal = () => {
     setNameInput("");
     setInErrorName(false);
+  }
+
+  const closeModal = () => {
+    clearModal();
 
     if (categoryToEdit)
       clearCategoryToEdit();
@@ -91,18 +95,31 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
     setNameInput(text);
   }
 
+  const removeItemHandler = () => {
+    const modifiedCategoryArray = [...categoriesContext.categoryData];
+    modifiedCategoryArray.splice(categoriesContext.categoryData.indexOf(categoryToEdit), 1);
+    categoriesContext._setCategoryData(modifiedCategoryArray);
+
+    closeModal();
+  }
+
   // Function that returns the contents of the AddTransaction modal.
   return (
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={[styles.addCategoryModal, categoryToEdit && styles.edit]}>
+          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+            <Text>x</Text>
+          </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
-          <View style={styles.modalButtonsContainer}> 
-            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewCategory()}>
-              <Text>Submit</Text>
-            </Pressable>
-            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
-              <Text>Close</Text>
+          <View style={styles.modalButtonsContainer}>
+            {categoryToEdit &&
+              <Pressable style={({pressed}) => [styles.standardButton, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
+                <Text>Delete</Text>
+              </Pressable>
+            } 
+            <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewCategory()}>
+              <Text>Confirm</Text>
             </Pressable>
           </View>
         </View>    
