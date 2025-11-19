@@ -4,6 +4,7 @@ import {styles} from "./Style";
 import {FlatList, Pressable, Text, View} from "react-native";
 
 import ExpensesContext from './ExpensesContext';
+import AddExpense from './AddExpense';
 
 /* 
    Class representing the budget screen of the application.
@@ -12,6 +13,8 @@ const Budget = () => {
   const expensesContext = useContext(ExpensesContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [expenseToEdit, setExpenseToEdit] = useState(null);
 
   useEffect(() => {
     fillData();
@@ -51,8 +54,8 @@ const Budget = () => {
   }
 
   const editItemHandler = (item) => {
-    //setExpenseToEdit(expensesContext.findExpenseById(item.id));
-    //setModalVisible(true);
+    setExpenseToEdit(expensesContext.findExpenseById(item.id));
+    setModalVisible(true);
   }
 
   // Function that returns the contents of the budget screen.
@@ -60,7 +63,8 @@ const Budget = () => {
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Budget</Text>
 
-      <View style={styles.mainBodyContainer}>      
+      <View style={styles.mainBodyContainer}>  
+        <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
         <View style={styles.transactionContainer}>
           <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
           <Text style={styles.transactionElement}>Amount</Text>

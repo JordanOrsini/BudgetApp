@@ -1,14 +1,26 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {FlatList, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
-const Intervals = ({setSelection}) => {
+const Intervals = ({setSelection, defaultSelection}) => {
   const [intervalData, setIntervalData] = useState([{id: 0, interval: "NONE", selected: true},
                                                     {id: 1, interval: "WEEKLY", selected: false}, 
                                                     {id: 2, interval: "BI-MONTHLY", selected: false},
                                                     {id: 3, interval: "MONTHLY", selected: false}, 
                                                     {id: 4, interval: "QUARTERLY", selected: false}, 
                                                     {id: 5, interval: "ANNUALLY", selected: false}]);
+
+  useEffect(() => {
+    if (defaultSelection) {
+      const newIntervalData = [...intervalData];
+      newIntervalData.map((element) => {
+        element.selected = (element.interval === defaultSelection);
+      })
+    
+    setIntervalData(newIntervalData);
+    }
+  }, [defaultSelection]);
+  
 
   const onSelectionChange = (item) => {
     setSelection(item.interval);

@@ -6,17 +6,26 @@ import Expense from './Expense';
 import Intervals from './Intervals';
 import ExpensesContext from './ExpensesContext';
 
-const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
+const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expenseToEdit, clearExpenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
   const [intervalInput, setIntervalInput] = useState("NONE");
-  const [dateInput, setDateInput] = useState("NONE");
+  const [dateInput, setDateInput] = useState("");
 
   const [inErrorName, setInErrorName] = useState(false);
   const [inErrorAmount, setInErrorAmount] = useState(false);
   const [inErrorDate, setInErrorDate] = useState(false);
+
+  useEffect(() => {
+    if (expenseToEdit) {
+      setNameInput(expenseToEdit.getName());
+      setAmountInput(expenseToEdit.getAmount());
+      setIntervalInput(expenseToEdit.getInterval());
+      setDateInput(expenseToEdit.getStartDate());
+    }
+  }, [expenseToEdit]);
 
   useEffect(() => {
     setInErrorName(false);
@@ -34,6 +43,14 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
     setNameInput("");
     setAmountInput("");
     setIntervalInput("NONE");
+    setDateInput("");
+
+    setInErrorName(false);
+    setInErrorAmount(false);
+    setInErrorDate(false);
+
+    if (expenseToEdit)
+      clearExpenseToEdit();
 
     setVisibility(false);
   }
@@ -54,15 +71,15 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
     return Success;
   }
 
-  const validateAmountInput = () => {
+  const validateAmountInput = (processedAmountInput) => {
     let Success = true;
 
-    if (amountInput.length === 0) {
+    if (processedAmountInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(amountInput)) {
+    if (isNaN(processedAmountInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -70,15 +87,15 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
     return Success;
   }
 
-  const validateDateInput = () => {
+  const validateDateInput = (processedDateInput) => {
     let Success = true;
 
-    if (dateInput.length === 0) {
+    if (processedDateInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(dateInput)) {
+    if (isNaN(processedDateInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -86,7 +103,7 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
     return Success;
   }
 
-  const validateInputs = (processedNameInput) => {
+  const validateInputs = (processedNameInput, processedAmountInput, processedDateInput) => {
     let Success = true;
 
     if (!validateNameInput(processedNameInput)) {
@@ -95,13 +112,13 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
       Success = false;
     }
 
-    if (!validateAmountInput()) {
+    if (!validateAmountInput(processedAmountInput)) {
       console.log("Amount invalid!\n");
       setInErrorAmount(true);
       Success = false;
     }
 
-    if (!validateDateInput()) {
+    if (!validateDateInput(processedDateInput)) {
       console.log("Date invalid!\n");
       setInErrorDate(true);
       Success = false;
@@ -112,18 +129,40 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
 
   const createNewExpense= () => {
     const processedNameInput = nameInput.trim();
+    const processedAmountInput = amountInput.toString().trim();
+    const processedDateInput = dateInput.toString().trim();
 
-    if (!validateInputs(processedNameInput))
+    if (expenseToEdit && 
+        expenseToEdit.getName() === processedNameInput &&
+        expenseToEdit.getAmount() == processedAmountInput &&
+        expenseToEdit.getInterval() === intervalInput &&
+        expenseToEdit.getStartDate() == processedDateInput) {
+      closeModal();
+      return;
+    }
+
+    if (!validateInputs(processedNameInput, processedAmountInput, processedDateInput))
       return;
 
-    const newExpenseObject = new Expense({name: processedNameInput,
-                                          amount: parseFloat(amountInput),
-                                          interval: intervalInput,
-                                          startDate: parseInt(dateInput),
-                                         });
+    if (expenseToEdit) {
+      expenseToEdit.setName(processedNameInput);
+      expenseToEdit.setAmount(parseFloat(processedAmountInput));
+      expenseToEdit.setInterval(intervalInput);
+      expenseToEdit.setStartDate(parseInt(processedDateInput));
 
-    expensesContext._setExpenseData([newExpenseObject, ...expensesContext.expenseData]);
-    setParentVisibility(false);
+      expensesContext._setExpenseData([...expensesContext.expenseData]);
+    }
+    else {
+      const newExpenseObject = new Expense({name: processedNameInput,
+                                            amount: parseFloat(processedAmountInput),
+                                            interval: intervalInput,
+                                            startDate: parseInt(processedDateInput),
+                                           });
+
+      expensesContext._setExpenseData([newExpenseObject, ...expensesContext.expenseData]);
+      setParentVisibility(false);
+    }
+
     closeModal();
   }
 
@@ -150,11 +189,11 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility}) => {
   return (
     <Modal visible={modalVisibility} transparent={true} >
       <View style={styles.modalPositioning}>
-        <View style={styles.addTransactionModal}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <Intervals setSelection={setIntervalInput}/>
-          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} placeholder="Start date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+        <View style={[styles.addTransactionModal, expenseToEdit ? styles.edit : '']}>
+          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+          <Intervals setSelection={setIntervalInput} defaultSelection={expenseToEdit ? intervalInput : "NONE"} />
+          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={dateInput.toString()} placeholder="Start date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
           <View style={styles.modalButtonsContainer}>
             <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewExpense()}>
               <Text>+</Text>

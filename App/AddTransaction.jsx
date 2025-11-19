@@ -10,7 +10,7 @@ import TransactionsContext from './TransactionsContext';
 /* 
    Class representing the AddTransaction modal of the application.
 */
-const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit, setParentVisibility}) => {
+const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, transactionToEdit, clearTransactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -62,15 +62,15 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     return Success;
   }
 
-  const validateAmountInput = () => {
+  const validateAmountInput = (processedAmountInput) => {
     let Success = true;
 
-    if (amountInput.length === 0) {
+    if (processedAmountInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(amountInput)) {
+    if (isNaN(processedAmountInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -78,15 +78,15 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     return Success;
   }
 
-  const validateDateInput = () => {
+  const validateDateInput = (processedDateInput) => {
     let Success = true;
 
-    if (dateInput.length === 0) {
+    if (processedDateInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(dateInput)) {
+    if (isNaN(processedDateInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -94,7 +94,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     return Success;
   }
 
-  const validateInputs = (processedNameInput) => {
+  const validateInputs = (processedNameInput, processedAmountInput, processedDateInput) => {
     let Success = true;
 
     if (!validateNameInput(processedNameInput)) {
@@ -103,13 +103,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       Success = false;
     }
 
-    if (!validateAmountInput()) {
+    if (!validateAmountInput(processedAmountInput)) {
       console.log("Amount invalid!\n");
       setInErrorAmount(true);
       Success = false;
     }
 
-    if (!validateDateInput()) {
+    if (!validateDateInput(processedDateInput)) {
       console.log("Date invalid!\n");
       setInErrorDate(true);
       Success = false;
@@ -120,23 +120,25 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
 
   const createNewTransaction = () => {
     const processedNameInput = nameInput.trim();
+    const processedAmountInput = amountInput.trim();
+    const processedDateInput = dateInput.trim();
 
     if (transactionToEdit && 
         transactionToEdit.getName() === processedNameInput &&
-        transactionToEdit.getAmount() == amountInput &&
+        transactionToEdit.getAmount() == processedAmountInput &&
         transactionToEdit.getCategory().getName() === categoryInput &&
-        transactionToEdit.getTransactionDate() == dateInput) {
+        transactionToEdit.getTransactionDate() == processedDateInput) {
       closeModal();
       return;
     }
 
-    if (!validateInputs(processedNameInput))
+    if (!validateInputs(processedNameInput, processedAmountInput, processedDateInput))
       return;
 
     if (transactionToEdit) {
       transactionToEdit.setName(processedNameInput);
-      transactionToEdit.setAmount(parseFloat(amountInput));
-      transactionToEdit.setTransactionDate(parseInt(dateInput));
+      transactionToEdit.setAmount(parseFloat(processedAmountInput));
+      transactionToEdit.setTransactionDate(parseInt(processedDateInput));
 
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       transactionToEdit.setCategory(categoryObject);
@@ -146,9 +148,9 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     else {
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
       const newTransaction = new Transaction({name: processedNameInput, 
-                                              amount: parseFloat(amountInput), 
+                                              amount: parseFloat(processedAmountInput), 
                                               category: categoryObject, 
-                                              transactionDate: parseInt(dateInput), 
+                                              transactionDate: parseInt(processedDateInput), 
                                               creationDate: parseInt(0)
                                              }); 
                                        
