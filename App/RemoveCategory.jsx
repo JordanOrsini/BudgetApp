@@ -28,10 +28,9 @@ const RemoveCategory = () => {
   }
 
   const renderItem = ({item}, data) => {
-    const isLastItem = (item.id === data.length - 1);
     return (
       (item.id > 0) &&   
-      <View style={[styles.transactionContainer, isLastItem ? styles.lastItem : '']}>
+      <View style={styles.transactionContainer}>
         <Text style={styles.categoryElement}>{item.name}</Text>
         <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed ? styles.pressed : '']} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
@@ -58,13 +57,15 @@ const RemoveCategory = () => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={styles.mainBodyContainer}>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} clearCategoryToEdit={() => setCategoryToEdit(null)} />
-      <View style={styles.transactionContainer}>
-        <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
-      </View>
-      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.id} /> 
-    </View>     
+    <View>
+      <View style={styles.mainBodyContainerSmall}>
+        <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} clearCategoryToEdit={() => setCategoryToEdit(null)} />
+        <View style={styles.transactionContainer}>
+          <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
+        </View>
+        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.id} /> 
+      </View>     
+    </View>
   );
 }
 

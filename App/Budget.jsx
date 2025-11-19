@@ -30,9 +30,8 @@ const Budget = () => {
   }
 
   const renderItem = ({item}, data) => {
-    const isLastItem = (item.index === data.length - 1);
     return (
-      <View style={[styles.transactionContainer, isLastItem ? styles.lastItem : '']}>
+      <View style={styles.transactionContainer}>
         <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
         <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
         <Text style={styles.transactionElement}>{item.interval}</Text>
@@ -63,7 +62,7 @@ const Budget = () => {
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Budget</Text>
 
-      <View style={styles.mainBodyContainer}>  
+      <View style={styles.mainBodyContainerSmall}>  
         <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
         <View style={styles.transactionContainer}>
           <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
@@ -72,7 +71,8 @@ const Budget = () => {
           <Text style={[styles.transactionElement, styles.transactionElementRight]}>Start date</Text>
         </View>
         <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} /> 
-      </View>  
+      </View>
+      <View style={styles.mainBodyContainerSmall}></View>  
     </SafeAreaView>
   );
 }

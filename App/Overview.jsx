@@ -1,4 +1,4 @@
-import {Text, View} from "react-native";
+import {ScrollView, Text, View} from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from "./Style";
 
@@ -10,7 +10,12 @@ const Overview  = () => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Overview</Text>
-      <View style={styles.mainBodyContainer}></View>    
+
+      <ScrollView>
+        <View style={styles.mainBodyContainerMicro}></View>    
+        <View style={styles.mainBodyContainerSmall}></View> 
+        <View style={styles.mainBodyContainerSmall}></View> 
+      </ScrollView>
     </SafeAreaView>  
   );
 }

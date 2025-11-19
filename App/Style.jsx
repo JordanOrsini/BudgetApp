@@ -59,12 +59,28 @@ export const styles = StyleSheet.create({
   hide: {
     opacity: 0,
   },
-  mainBodyContainer: {
+  mainBodyContainerMicro: {
     backgroundColor: '#E1E1E1',
-    flex: 1,
     padding: 10,
     marginTop: 10,
     width: 380,
+    height: 160,
+    borderRadius: 30,
+  },
+  mainBodyContainerSmall: {
+    backgroundColor: '#E1E1E1',
+    padding: 10,
+    marginTop: 10,
+    width: 380,
+    height: 320,
+    borderRadius: 30,
+  },
+  mainBodyContainerLarge: {
+    backgroundColor: '#E1E1E1',
+    padding: 10,
+    marginTop: 10,
+    width: 380,
+    flex: 1,
     borderRadius: 30,
   },
   modalButton: {

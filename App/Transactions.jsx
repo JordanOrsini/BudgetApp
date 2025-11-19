@@ -66,7 +66,7 @@ const Transactions = () => {
       <Text style={styles.headerText}>Transactions</Text>
       <Text>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text>   
 
-      <View style={styles.mainBodyContainer}>
+      <View style={styles.mainBodyContainerLarge}>
         <AddTransaction modalVisibility={modalVisible} setVisibility={setModalVisible} transactionToEdit={transactionToEdit} clearTransactionToEdit={() => setTransactionToEdit(null)} />
         <View style={styles.transactionContainer}>
           <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
