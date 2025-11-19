@@ -1,9 +1,9 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from "react";
 import {FlatList, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
-import CategoriesContext from './CategoriesContext';
-import AddCategory from './AddCategory';
+import CategoriesContext from "./CategoriesContext";
+import AddCategory from "./AddCategory";
 
 /* 
    Class representing the RemoveCategory modal of the application.
@@ -32,10 +32,10 @@ const RemoveCategory = () => {
       (item.id > 0) &&   
       <View style={styles.transactionContainer}>
         <Text style={styles.categoryElement}>{item.name}</Text>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed ? styles.pressed : '']} onPress={() => editItemHandler(item)}>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => removeItemHandler(item)}>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler(item)}>
           <Text>x</Text>
         </Pressable>
       </View>

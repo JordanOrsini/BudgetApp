@@ -1,9 +1,9 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from "react";
 import {FlatList, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
-import AddCategory from './AddCategory';
-import CategoriesContext from './CategoriesContext';
+import AddCategory from "./AddCategory";
+import CategoriesContext from "./CategoriesContext";
 
 /* 
    Class representing the Category class of the application.
@@ -46,14 +46,14 @@ const Categories = ({setSelection, defaultSelection, setHidden}) => {
   const renderItem = ({item}) => {
     if (item.addCategory) {
       return (
-        <Pressable style={({pressed}) => [styles.categoryButtons, pressed ? styles.pressed : '']} onPress={() => setModalVisible(true)}>
+        <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} onPress={() => setModalVisible(true)}>
           <Text>+</Text>
         </Pressable>
       );
     }
 
     return (
-      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => onSelectionChange(item)}>
+      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
         <Text>{item.category}</Text>
       </Pressable>
     );

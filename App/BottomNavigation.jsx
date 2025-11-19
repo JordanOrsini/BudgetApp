@@ -1,11 +1,11 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
-import Budget from './Budget';
-import Overview from './Overview';
-import Settings from './Settings';
-import Transactions from './Transactions';
+import Budget from "./Budget";
+import Overview from "./Overview";
+import Settings from "./Settings";
+import Transactions from "./Transactions";
 
-import Navigation from './Navigation';
+import Navigation from "./Navigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 */
 const BottomNavigation = () => {
   return (
-    <Tab.Navigator backBehavior={'history'} tabBar={(props) => <Navigation {...props}/>} screenOptions={{headerShown: false}}>
+    <Tab.Navigator backBehavior={"history"} tabBar={(props) => <Navigation {...props}/>} screenOptions={{headerShown: false}}>
       <Tab.Screen name="Overview" component={Overview} />
       <Tab.Screen name="Budget" component={Budget} />
       <Tab.Screen name="Transactions" component={Transactions} />

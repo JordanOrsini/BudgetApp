@@ -1,9 +1,9 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from "react";
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
-import Category from './Category';
-import CategoriesContext from './CategoriesContext';
+import Category from "./Category";
+import CategoriesContext from "./CategoriesContext";
 
 /* 
    Class representing the AddCategory modal of the application.
@@ -95,14 +95,14 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
   return (
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
-        <View style={[styles.addCategoryModal, categoryToEdit ? styles.edit : '']}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
+        <View style={[styles.addCategoryModal, categoryToEdit && styles.edit]}>
+          <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}> 
-            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewCategory()}>
-              <Text>+</Text>
+            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewCategory()}>
+              <Text>Submit</Text>
             </Pressable>
-            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
-              <Text>x</Text>
+            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+              <Text>Close</Text>
             </Pressable>
           </View>
         </View>    

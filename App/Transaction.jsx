@@ -9,8 +9,9 @@ class Transaction {
   #amount = null;
   #category = null;
   #transactionDate = null;
+  #creationDate = null
 
-  constructor ({name, amount, category, transactionDate}) {
+  constructor ({name, amount, category, transactionDate, creationDate}) {
     this.#id = Transaction.id;
     Transaction.id++;
 
@@ -18,6 +19,7 @@ class Transaction {
     this.#amount = amount;
     this.#category = category;
     this.#transactionDate = transactionDate;
+    this.#creationDate = creationDate;
   }
 
   getId() {
@@ -56,8 +58,12 @@ class Transaction {
     this.#transactionDate = newTransactionDate;
   }
 
+  getCreationDate () {
+    return this.#creationDate;
+  }
+
   toString() {
-    return this.#name + ';' + this.#amount + ';' + this.#category + ';' + this.#transactionDate;
+    return this.#name + ";" + this.#amount + ";" + this.#category + ";" + this.#transactionDate + ";" + this.#creationDate;
   }
 }
 

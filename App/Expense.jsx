@@ -8,16 +8,14 @@ class Expense {
   #name = null;
   #amount = null;
   #interval = null;
-  #startDate = null;
 
-  constructor ({name, amount, interval, startDate}) {
+  constructor ({name, amount, interval}) {
     this.#id = Expense.id;
     Expense.id++;
 
     this.#name = name;
     this.#amount = amount;
     this.#interval = interval;
-    this.#startDate = startDate 
   }
 
   getId () {
@@ -48,16 +46,8 @@ class Expense {
     this.#interval = newInterval;
   }
 
-  getStartDate () {
-    return this.#startDate;
-  }
-
-  setStartDate (newStartDate) {
-    this.#startDate = newStartDate;
-  }
-
   toString() {
-    return this.#name + ';' + this.#amount + ';' + this.#interval + ';' + this.#startDate;
+    return this.#name + ";" + this.#amount + ";" + this.#interval;
   }
 }
 

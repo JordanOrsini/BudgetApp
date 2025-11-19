@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState} from "react";
 import {FlatList, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
@@ -35,7 +35,7 @@ const Intervals = ({setSelection, defaultSelection}) => {
 
   const renderItem = ({item}) => {
     return (
-      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected ? styles.selected : '', pressed ? styles.pressed : '']} onPress={() => onSelectionChange(item)}>
+      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
         <Text>{item.interval}</Text>
       </Pressable>
     );

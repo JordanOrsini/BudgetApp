@@ -1,11 +1,11 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from "react";
 import {Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
-import Categories from './Categories';
-import Transaction from './Transaction';
-import CategoriesContext from './CategoriesContext';
-import TransactionsContext from './TransactionsContext';
+import Categories from "./Categories";
+import Transaction from "./Transaction";
+import CategoriesContext from "./CategoriesContext";
+import TransactionsContext from "./TransactionsContext";
 
 /* 
    Class representing the AddTransaction modal of the application.
@@ -118,7 +118,7 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
     return Success;
   }
 
-  const createNewTransaction = () => {
+  const createNewTransaction = (addAnother = false) => {
     const processedNameInput = nameInput.trim();
     const processedAmountInput = amountInput.toString().trim();
     const processedDateInput = dateInput.toString().trim();
@@ -150,17 +150,31 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
       const newTransaction = new Transaction({name: processedNameInput, 
                                               amount: parseFloat(processedAmountInput), 
                                               category: categoryObject, 
-                                              transactionDate: parseInt(processedDateInput)
+                                              transactionDate: parseInt(processedDateInput),
+                                              creationDate: parseInt(0)
                                              }); 
                                        
       transactionsContext._setTransactionData([newTransaction, ...transactionsContext.transactionData]);
-      setParentVisibility(false);
     }
 
-    closeModal();
+    if (addAnother)
+      clearModal();
+    else
+      closeModal();
   }
 
   const closeModal = () => {
+    clearModal();
+
+    if (transactionToEdit)
+      clearTransactionToEdit();
+    else
+      setParentVisibility(false);
+
+    setVisibility(false);
+  }
+
+  const clearModal = () => {
     setNameInput("")
     setAmountInput("");
     setCategoryInput("NONE");
@@ -169,11 +183,6 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
     setInErrorName(false);
     setInErrorAmount(false);
     setInErrorDate(false);
-
-    if (transactionToEdit)
-      clearTransactionToEdit();
-
-    setVisibility(false);
   }
 
   const onTextChange = (text, id) => {
@@ -196,21 +205,46 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
     }
   }
 
+  // Function that handles the onPress event of a transaction element.
+  // The function takes an index and will remove the corresponding transaction object from the transactions array.
+  const removeItemHandler = () => {
+    const modifiedTransactionArray = [...transactionsContext.transactionData];
+    modifiedTransactionArray.splice(transactionsContext.transactionData.indexOf(transactionToEdit), 1);
+    transactionsContext._setTransactionData(modifiedTransactionArray);
+
+    closeModal();
+  }
+
   // Function that returns the contents of the AddTransaction modal.
   return (
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
-        <View style={[styles.addTransactionModal, transactionToEdit ? styles.edit : '', hidden ? styles.hide : '']}>
-          <TextInput style={[styles.textInput, inErrorName ? styles.decline : '']} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : '']} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
+        <View style={[styles.addTransactionModal, transactionToEdit && styles.edit, hidden && styles.hide]}>
+          <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="Amount" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
-          <TextInput style={[styles.textInput, inErrorDate ? styles.decline : '']} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <TextInput style={[styles.textInput, inErrorDate && styles.decline]} defaultValue={dateInput.toString()} placeholder="Date" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          {transactionToEdit &&
+            <Text style={styles.creationText}>Created on: {transactionToEdit.getCreationDate()}</Text>
+          }
           <View style={styles.modalButtonsContainer}> 
-            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed ? styles.pressed : '']} onPress={() => createNewTransaction()}>
-              <Text>+</Text>
+            {!transactionToEdit &&
+              <Pressable style={({pressed}) => [styles.standardButton, pressed && styles.pressed]} onPress={() => createNewTransaction(true)} >
+                <Text>Add another</Text>
+              </Pressable>
+            }
+            {transactionToEdit &&
+              <Pressable style={({pressed}) => [styles.standardButton, pressed && styles.pressed]} onPress={removeItemHandler}>
+                <Text>Delete</Text>
+              </Pressable>
+            }
+          </View>
+          <View style={styles.modalButtonsContainer}> 
+            <Pressable style={({pressed}) => [styles.modalButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction()}>
+              <Text>Submit</Text>
             </Pressable>
-            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed ? styles.pressed : '']} onPress={() => closeModal()}>
-              <Text>x</Text>
+            <Pressable style={({pressed}) => [styles.modalButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+              <Text>Close</Text>
             </Pressable>
           </View>
         </View>    

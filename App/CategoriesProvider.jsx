@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState} from "react";
 
-import RNFS from 'react-native-fs';
-import Category from './Category';
-import CategoriesContext from './CategoriesContext';
+import RNFS from "react-native-fs";
+import Category from "./Category";
+import CategoriesContext from "./CategoriesContext";
 
 const CategoriesProvider = ({children}) => {
   const [categoryData, setCategoryData] = useState([]);
@@ -15,7 +15,7 @@ const CategoriesProvider = ({children}) => {
         await checkAndCreateFile();
       }
       catch (error) {
-        console.error('Error in useEffect:', error);
+        console.error("Error in useEffect: ", error);
       }
       finally {
         setLoading(false);
@@ -32,13 +32,13 @@ const CategoriesProvider = ({children}) => {
       stringToWrite = stringToWrite + item.toString() + "\n";
     });
 
-    console.log('stringToWrite:\n', stringToWrite);
+    console.log("stringToWrite:\n", stringToWrite);
 
     try {
-      RNFS.writeFile(filePath, stringToWrite, 'utf8');
+      RNFS.writeFile(filePath, stringToWrite, "utf8");
     }
     catch (error) {
-      console.error('Error writing to file:', error);
+      console.error("Error writing to file: ", error);
       return;
     }
     
@@ -64,14 +64,14 @@ const CategoriesProvider = ({children}) => {
   }
 
   // File path of our saved category data. Not user accessible. Cross-platform.
-  const filePath = RNFS.DocumentDirectoryPath + '/CategoryData.txt'
+  const filePath = RNFS.DocumentDirectoryPath + "/CategoryData.txt";
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = 'NONE;none.svg\n' +
-                              'HOME;home.svg\n' +
-                              'WORK;work.svg\n' +
-                              'SCHOOL;school.svg\n' +
-                              'CAR;car.svg';
+  const defaultFileContents = "NONE;none.svg\n" +
+                              "HOME;home.svg\n" +
+                              "WORK;work.svg\n" +
+                              "SCHOOL;school.svg\n" +
+                              "CAR;car.svg";
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -79,19 +79,19 @@ const CategoriesProvider = ({children}) => {
       // Check if file exists.
       const fileExists = await RNFS.exists(filePath);
       if (fileExists) {
-        console.log('File exists:', filePath);
+        console.log("File exists: ", filePath);
       } 
       else {
         // File does not exists, we must create it.
-        console.log('File does not exist, creating it:', filePath);
+        console.log("File does not exist, creating it: ", filePath);
 
         // Create a blank file.
-        await RNFS.writeFile(filePath, '', 'utf8');
-        console.log('File created successfully.');
+        await RNFS.writeFile(filePath, "", "utf8");
+        console.log("File created successfully.");
       }
     } 
     catch (error) {
-      console.error('Error checking or creating file:', error);
+      console.error("Error checking or creating file: ", error);
       return;
     }
 
@@ -101,19 +101,19 @@ const CategoriesProvider = ({children}) => {
   async function readAndParseFile() {
     try {
       // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, 'utf8');
+      await RNFS.writeFile(filePath, defaultFileContents, "utf8");
 
-      const content = await RNFS.readFile(filePath, 'utf8');
-      console.log('File content:\n', content);
+      const content = await RNFS.readFile(filePath, "utf8");
+      console.log("File content:\n", content);
           
       // Split the content by line
       const lines = content.split('\n');
-      console.log('Lines:\n', lines); 
+      console.log("Lines:\n", lines); 
 
       const categoriesArray = [];
       lines.map((item) => {
         if (item != "") {      
-          const categoryDataArray = item.split(';');
+          const categoryDataArray = item.split(";");
           categoriesArray.push(new Category({name: categoryDataArray[0], 
                                              iconPath: categoryDataArray[1]
                                             })); 
@@ -124,7 +124,7 @@ const CategoriesProvider = ({children}) => {
       setCategoryData(categoriesArray);
     } 
     catch (error) {
-      console.error('Error reading file:', error); 
+      console.error("Error reading file: ", error); 
       return;
     }
   }

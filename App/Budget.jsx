@@ -1,10 +1,10 @@
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useContext, useEffect, useState} from 'react';
+import {SafeAreaView} from "react-native-safe-area-context";
+import {useContext, useEffect, useState} from "react";
 import {styles} from "./Style";
 import {FlatList, Pressable, Text, View} from "react-native";
 
-import ExpensesContext from './ExpensesContext';
-import AddExpense from './AddExpense';
+import ExpensesContext from "./ExpensesContext";
+import AddExpense from "./AddExpense";
 
 /* 
    Class representing the budget screen of the application.
@@ -23,7 +23,7 @@ const Budget = () => {
   const fillData = () => {
     const newDataArray = [];
     expensesContext.expenseData.map((element, index) => {
-      newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), interval: element.getInterval(), date: element.getStartDate()});
+      newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), interval: element.getInterval()});
     });
 
     setData(newDataArray);
@@ -32,14 +32,13 @@ const Budget = () => {
   const renderItem = ({item}, data) => {
     return (
       <View style={styles.transactionContainer}>
-        <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
-        <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={styles.transactionElement}>{item.interval}</Text>
-        <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed ? styles.pressed : '']} onPress={() => editItemHandler(item)}>
+        <Text style={[styles.expenseElement, styles.transactionElementLeft]}>{item.name}</Text>
+        <Text style={styles.expenseElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={[styles.expenseElement, styles.transactionElementRight]}>{item.interval}</Text>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed ? styles.pressed : '']} onPress={() => removeItemHandler(item)}>
+        <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler(item)}>
           <Text>x</Text>
         </Pressable>
       </View>
@@ -65,10 +64,9 @@ const Budget = () => {
       <View style={styles.mainBodyContainerSmall}>  
         <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
         <View style={styles.transactionContainer}>
-          <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
-          <Text style={styles.transactionElement}>Amount</Text>
-          <Text style={styles.transactionElement}>Interval</Text>
-          <Text style={[styles.transactionElement, styles.transactionElementRight]}>Start date</Text>
+          <Text style={[styles.expenseElement, styles.transactionElementLeft]}>Name</Text>
+          <Text style={styles.expenseElement}>Amount</Text>
+          <Text style={[styles.expenseElement, styles.transactionElementRight]}>Interval</Text>
         </View>
         <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} /> 
       </View>

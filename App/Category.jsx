@@ -27,7 +27,7 @@ class Category {
   }
 
   toString() {
-    return this.#name + ';' + this.#iconPath;
+    return this.#name + ";" + this.#iconPath;
   }
 }
 
