@@ -150,8 +150,7 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
       const newTransaction = new Transaction({name: processedNameInput, 
                                               amount: parseFloat(processedAmountInput), 
                                               category: categoryObject, 
-                                              transactionDate: parseInt(processedDateInput), 
-                                              creationDate: parseInt(0)
+                                              transactionDate: parseInt(processedDateInput)
                                              }); 
                                        
       transactionsContext._setTransactionData([newTransaction, ...transactionsContext.transactionData]);
