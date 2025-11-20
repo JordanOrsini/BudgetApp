@@ -1,7 +1,5 @@
 import {NavigationContainer} from "@react-navigation/native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
-import {useEffect} from "react";
-import {LogBox} from "react-native";
 
 import CategoriesProvider from "./CategoriesProvider";
 import ExpensesProvider from "./ExpensesProvider";
@@ -16,10 +14,6 @@ import BottomNavigation from "./BottomNavigation";
    SafeAreaProvider ensures content of the application is not displayed where camera cutouts are located.
 */
 const App = () => {
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  }, []);
-
   return (
     <SafeAreaProvider>
       <CategoriesProvider>

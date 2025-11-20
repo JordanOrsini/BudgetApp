@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {Platform, StyleSheet} from "react-native";
 
 /* 
    Style sheets CSS for the entire application.
@@ -36,6 +36,7 @@ export const styles = StyleSheet.create({
   categoryContainer: {
     flexDirection: "row",
     height: 200,
+    width: 300,
   },
   categoryElement: {
     paddingLeft: 10,
@@ -151,9 +152,16 @@ export const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 775,
     position: "absolute",
     paddingBottom: 40,
+    ...Platform.select({
+      ios: {
+        marginTop: 750,
+      },
+      default: {
+        marginTop: 775,
+      },    
+    }),
   },
   pageView: {
     alignItems: "center",
@@ -192,7 +200,14 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   lastItem: {
-    paddingBottom: 100,
+    ...Platform.select({
+      ios: {
+        paddingBottom: 75,
+      },
+      default: {
+        paddingBottom: 100,
+      },    
+    }),
   },
   transactionElement: {
     paddingTop: 10,
