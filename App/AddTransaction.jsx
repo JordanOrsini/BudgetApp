@@ -120,8 +120,8 @@ const AddTransaction = ({modalVisibility, setVisibility, setParentVisibility, tr
 
   const createNewTransaction = () => {
     const processedNameInput = nameInput.trim();
-    const processedAmountInput = amountInput.trim();
-    const processedDateInput = dateInput.trim();
+    const processedAmountInput = amountInput.toString().trim();
+    const processedDateInput = dateInput.toString().trim();
 
     if (transactionToEdit && 
         transactionToEdit.getName() === processedNameInput &&
