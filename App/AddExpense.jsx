@@ -6,7 +6,7 @@ import Expense from "./Expense";
 import Intervals from "./Intervals";
 import ExpensesContext from "./ExpensesContext";
 
-const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expenseToEdit, clearExpenseToEdit}) => {
+const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [nameInput, setNameInput] = useState("");
@@ -37,8 +37,6 @@ const AddExpense = ({modalVisibility, setVisibility, setParentVisibility, expens
 
     if (expenseToEdit)
       clearExpenseToEdit();
-    else
-      setParentVisibility(false);
 
     setVisibility(false);
   }

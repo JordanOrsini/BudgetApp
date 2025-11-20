@@ -1,7 +1,7 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {useContext, useEffect, useState} from "react";
 import {styles} from "./Style";
-import {FlatList, Pressable, Text, View} from "react-native";
+import {FlatList, Pressable, ScrollView, Text, View} from "react-native";
 
 import ExpensesContext from "./ExpensesContext";
 import AddExpense from "./AddExpense";
@@ -52,16 +52,19 @@ const Budget = () => {
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Budget</Text>
 
-      <View style={styles.mainBodyContainerSmall}>  
-        <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
-        <View style={styles.transactionContainer}>
-          <Text style={[styles.expenseElement, styles.transactionElementLeft]}>Name</Text>
-          <Text style={styles.expenseElement}>Amount</Text>
-          <Text style={[styles.expenseElement, styles.transactionElementRight]}>Interval</Text>
+      <ScrollView>
+        <View style={styles.mainBodyContainerSmall}>  
+          <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
+          <View style={styles.transactionContainer}>
+            <Text style={[styles.expenseElement, styles.transactionElementLeft]}>Name</Text>
+            <Text style={styles.expenseElement}>Amount</Text>
+            <Text style={[styles.expenseElement, styles.transactionElementRight]}>Interval</Text>
+          </View>
+          <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} /> 
         </View>
-        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} /> 
-      </View>
-      <View style={styles.mainBodyContainerSmall}></View>  
+        <View style={styles.mainBodyContainerSmall}></View>  
+        <View style={styles.mainBodyContainerSmall}></View> 
+      </ScrollView>
     </SafeAreaView>
   );
 }

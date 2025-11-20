@@ -1,6 +1,6 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
-import {Text, View} from "react-native";
+import {ScrollView, Text, View} from "react-native";
 
 import RemoveCategory from "./RemoveCategory";
 
@@ -12,9 +12,12 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Settings</Text>
-      <View style={styles.mainBodyContainerMicro}></View>
-      <View style={styles.mainBodyContainerMicro}></View>
-      <RemoveCategory />
+      <ScrollView>
+        <View style={styles.mainBodyContainerMicro}></View>
+        <RemoveCategory />
+        <View style={styles.mainBodyContainerMicro}></View>
+        <View style={styles.mainBodyContainerMicro}></View>
+      </ScrollView>
     </SafeAreaView> 
   );
 }
