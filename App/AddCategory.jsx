@@ -108,7 +108,7 @@ const AddCategory = ({modalVisibility, setVisibility, setSelection, setSelected,
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={[styles.addCategoryModal, categoryToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />

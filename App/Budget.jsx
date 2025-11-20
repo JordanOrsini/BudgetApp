@@ -35,7 +35,7 @@ const Budget = () => {
         <Text style={[styles.expenseElement, styles.transactionElementLeft]}>{item.name}</Text>
         <Text style={styles.expenseElement}>{myNumberFormatter.format(item.amount)}</Text>
         <Text style={[styles.expenseElement, styles.transactionElementRight]}>{item.interval}</Text>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
+        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
       </View>

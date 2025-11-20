@@ -37,7 +37,7 @@ const Transactions = () => {
         <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
         <Text style={styles.transactionElement}>{item.category}</Text>
         <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
-        <Pressable style={({pressed}) => [styles.transactionRemove, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
+        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
       </View>

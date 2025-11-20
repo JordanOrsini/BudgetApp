@@ -35,15 +35,17 @@ const Intervals = ({setSelection, defaultSelection}) => {
 
   const renderItem = ({item}) => {
     return (
-      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
-        <Text>{item.interval}</Text>
-      </Pressable>
+      <View>
+        <Pressable style={({pressed}) => [styles.standardButton, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
+          <Text>{item.interval}</Text>
+        </Pressable>
+      </View>
     );
   }
 
   return (
     <View>
-      <View style={styles.categoryContainer}>
+      <View style={styles.intervalContainer}>
         <FlatList data={intervalData} renderItem={renderItem} keyExtractor={item => item.id} numColumns={3} />      
       </View>
     </View>

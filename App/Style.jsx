@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   categoryContainer: {
-    flexDirection: "row",
     height: 200,
     width: 300,
   },
@@ -71,6 +70,10 @@ export const styles = StyleSheet.create({
   hide: {
     opacity: 0,
   },
+  intervalContainer: {
+    height: 125,
+    width: 300,
+  },
   mainBodyContainerMicro: {
     backgroundColor: "#E1E1E1",
     padding: 10,
@@ -98,6 +101,10 @@ export const styles = StyleSheet.create({
   modalButtonsContainer: {
     flexDirection: "row",
     paddingBottom: 10,
+  },
+  modalMenuContent: {
+    alignItems: "center",
+    paddingTop: 10,
   },
   modalMenuModal: {
     margin: 75,
@@ -177,8 +184,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 2.5,
-    marginRight: 2.5,
+    margin: 10,
     elevation: 5,
   },
   pressed: {
@@ -209,6 +215,15 @@ export const styles = StyleSheet.create({
       },    
     }),
   },
+  smallButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 25,
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10,
+    elevation: 5,
+  },
   transactionElement: {
     paddingTop: 10,
     paddingLeft: 10,
@@ -224,14 +239,5 @@ export const styles = StyleSheet.create({
   transactionElementRight: {
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
-  },
-  transactionRemove: {
-    width: 20,
-    height: 20,
-    borderRadius: 25,
-    alignItems: "center",
-    marginLeft: 10,
-    marginRight: 10,
-    elevation: 5,
   },
 });

@@ -165,7 +165,7 @@ const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpense
     <Modal visible={modalVisibility} transparent={true} >
       <View style={styles.modalPositioning}>
         <View style={[styles.addTransactionModal, expenseToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />

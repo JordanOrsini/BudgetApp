@@ -19,14 +19,15 @@ const ModalMenu = ({modalVisibility, setVisibility}) => {
         <View style={[styles.modalMenuModal, (addExpenseVisibility || addtransactionVisibility) ? styles.hide : '']}>
           <AddExpense modalVisibility={addExpenseVisibility} setVisibility={setAddExpenseVisibility} />
           <AddTransaction modalVisibility={addtransactionVisibility} setVisibility={setAddTransactionVisibility} />
-          <Pressable style={({pressed}) => [styles.transactionRemove, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
-          <View style={styles.modalButtonsContainer}>
-            <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} onPress={() => setAddExpenseVisibility(true)}>
+          <View style={styles.modalMenuContent}>
+            <Pressable style={({pressed}) => [styles.standardButton, pressed && styles.pressed]} onPress={() => setAddExpenseVisibility(true)}>
               <Text>Expense</Text>
             </Pressable>
-            <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} onPress={() => setAddTransactionVisibility(true)}>
+            <Text>OR</Text>
+            <Pressable style={({pressed}) => [styles.standardButton, pressed && styles.pressed]} onPress={() => setAddTransactionVisibility(true)}>
               <Text>Transaction</Text>
             </Pressable>
           </View>
