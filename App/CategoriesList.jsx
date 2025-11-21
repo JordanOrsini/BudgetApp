@@ -9,7 +9,7 @@ import CategoriesContext from "./CategoriesContext";
 /* 
    Class representing the Category class of the application.
 */
-const CategoriesList = ({setSelection, defaultSelection, setDefaultSelection, setHidden}) => {
+const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -26,7 +26,7 @@ const CategoriesList = ({setSelection, defaultSelection, setDefaultSelection, se
   const fillData = () => {
     const newDataArray = [];
     categoriesContext.categoryData.map((category, index) => {
-      newDataArray.push({id: index, category: category.getName(), selected: (defaultSelection === index)});
+      newDataArray.push({id: index, category: category.getName(), selected: (defaultSelection === category.getName())});
     });
 
     setData(newDataArray);
@@ -34,7 +34,6 @@ const CategoriesList = ({setSelection, defaultSelection, setDefaultSelection, se
 
   const onSelectionChange = (item) => {
     setSelection(item.category);
-    setDefaultSelection(item.id);
 
     const newDataArray = [...data];
     newDataArray.map((element => {
@@ -62,7 +61,7 @@ const CategoriesList = ({setSelection, defaultSelection, setDefaultSelection, se
 
   return (
     <View>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelectionInput={setSelection} setSelectedButton={setDefaultSelection}/>
+      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelectionInput={setSelection}/>
       <View style={styles.categoryContainer}>
         <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
       </View>
