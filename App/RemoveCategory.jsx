@@ -27,7 +27,7 @@ const RemoveCategory = () => {
     setData(newCategoryArray);
   }
 
-  const renderItem = ({item}, data) => {
+  const renderItem = ({item}) => {
     return (
       (item.id > 0) &&   
       <View style={styles.transactionContainer}>
@@ -52,7 +52,7 @@ const RemoveCategory = () => {
         <View style={styles.transactionContainer}>
           <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
         </View>
-        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.id} /> 
+        <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={item => item.id} /> 
       </View>     
     </View>
   );

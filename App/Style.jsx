@@ -205,6 +205,16 @@ export const styles = StyleSheet.create({
     paddingBottom: 20,
     alignItems: "center",
   },
+  lastContainer: {
+    ...Platform.select({
+      ios: {
+        marginBottom: 75,
+      },
+      default: {
+        marginBottom: 100,
+      },    
+    }),
+  },
   lastItem: {
     ...Platform.select({
       ios: {
