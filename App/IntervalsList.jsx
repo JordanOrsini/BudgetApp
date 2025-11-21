@@ -37,7 +37,7 @@ const IntervalsList = ({setSelection, defaultSelection}) => {
   const renderItem = ({item}) => {
     return (
       <View>
-        <Pressable style={({pressed}) => [styles.standardButton, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
+        <Pressable style={({pressed}) => [styles.button, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
           <Text>{item.interval}</Text>
         </Pressable>
       </View>

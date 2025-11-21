@@ -6,7 +6,7 @@ import Expense from "./Expense";
 import IntervalsList from "./IntervalsList";
 import ExpensesContext from "./ExpensesContext";
 
-const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpenseToEdit}) => {
+const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearExpenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [nameInput, setNameInput] = useState("");
@@ -164,8 +164,8 @@ const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpense
   return (
     <Modal visible={modalVisibility} transparent={true} >
       <View style={styles.modalPositioning}>
-        <View style={[styles.addTransactionModal, expenseToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+        <View style={[styles.modal, expenseToEdit && styles.edit]}>
+          <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
@@ -173,16 +173,16 @@ const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpense
           <IntervalsList setSelection={setIntervalInput} defaultSelection={intervalInput} />
           <View style={styles.modalButtonsContainer}>
             {!expenseToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense(true)}>
+              <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense(true)}>
                 <Text>Add another</Text>
               </Pressable>
             }
             {expenseToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
+              <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
                 <Text>Delete</Text>
               </Pressable>
             }
-            <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense()}>
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense()}>
               <Text>Confirm</Text>
             </Pressable>
           </View>
@@ -192,4 +192,4 @@ const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpense
   );
 }
 
-export default AddExpense;
+export default AddExpenseModal;

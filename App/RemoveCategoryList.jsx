@@ -4,7 +4,7 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import CategoriesContext from "./CategoriesContext";
-import AddCategory from "./AddCategory";
+import AddCategoryModal from "./AddCategoryModal";
 
 /* 
    Class representing the RemoveCategory modal of the application.
@@ -31,9 +31,9 @@ const RemoveCategoryList = ({style}) => {
   const renderItem = ({item}) => {
     return (
       (item.id > 0) &&   
-      <View style={styles.transactionContainer}>
-        <Text style={styles.categoryElement}>{item.name}</Text>
-        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
+      <View style={styles.listContainer}>
+        <Text style={[styles.listElement, styles.categoryListElement]}>{item.name}</Text>
+        <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
       </View>
@@ -48,10 +48,10 @@ const RemoveCategoryList = ({style}) => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View>
-      <View style={[styles.mainBodyContainerSmall, style]}>
-        <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} clearCategoryToEdit={() => setCategoryToEdit(null)} />
-        <View style={styles.transactionContainer}>
-          <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
+      <View style={[styles.mainBodyContainer, style]}>
+        <AddCategoryModal modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} clearCategoryToEdit={() => setCategoryToEdit(null)} />
+        <View style={styles.listContainer}>
+          <Text style={[styles.listElement, styles.listElementTitle]}>REMOVE CATEGORIES</Text>
         </View>
         <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} /> 
       </View>     

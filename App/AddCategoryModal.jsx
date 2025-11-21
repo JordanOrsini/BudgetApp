@@ -8,7 +8,7 @@ import CategoriesContext from "./CategoriesContext";
 /* 
    Class representing the AddCategory modal of the application.
 */
-const AddCategory = ({modalVisibility, setVisibility, setSelectionInput, categoryToEdit, clearCategoryToEdit}) => {
+const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, categoryToEdit, clearCategoryToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
@@ -108,18 +108,18 @@ const AddCategory = ({modalVisibility, setVisibility, setSelectionInput, categor
   return (
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
-        <View style={[styles.addCategoryModal, categoryToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+        <View style={[styles.modal, categoryToEdit && styles.edit]}>
+          <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder={"Name"} onChangeText={(text) => onTextChange(text)} />
           <View style={styles.modalButtonsContainer}>
             {categoryToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
+              <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
                 <Text>Delete</Text>
               </Pressable>
             } 
-            <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewCategory()}>
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewCategory()}>
               <Text>Confirm</Text>
             </Pressable>
           </View>
@@ -129,4 +129,4 @@ const AddCategory = ({modalVisibility, setVisibility, setSelectionInput, categor
   );
 }
 
-export default AddCategory;
+export default AddCategoryModal;

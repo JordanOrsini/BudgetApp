@@ -16,12 +16,12 @@ const Settings = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
         );
       }
       case 1: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
         );
       }
       case 2: {
@@ -31,12 +31,12 @@ const Settings = () => {
       }
       case 3: {
         return (
-          <View style={[styles.mainBodyContainerMicro, styles.lastContainer]}></View>
+          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro, styles.lastContainer]}></View>
         );
       }
       default: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
         );
       }
     }

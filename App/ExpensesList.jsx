@@ -4,7 +4,7 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import ExpensesContext from "./ExpensesContext";
-import AddExpense from "./AddExpense";
+import AddExpenseModal from "./AddExpenseModal";
 
 const ExpensesList = ({style}) => {
   const [data, setData] = useState([]);
@@ -29,11 +29,11 @@ const ExpensesList = ({style}) => {
 
   const renderItem = ({item}) => {
     return (
-      <View style={styles.transactionContainer}>
-        <Text style={[styles.expenseElement, styles.transactionElementLeft]}>{item.name}</Text>
-        <Text style={styles.expenseElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={[styles.expenseElement, styles.transactionElementRight]}>{item.interval}</Text>
-        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
+      <View style={styles.listContainer}>
+        <Text style={[styles.listElement, styles.expenseListElement, styles.listElementStart]}>{item.name}</Text>
+        <Text style={[styles.listElement, styles.expenseListElement]}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={[styles.listElement, styles.expenseListElement, styles.listElementEnd]}>{item.interval}</Text>
+        <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
       </View>
@@ -47,12 +47,12 @@ const ExpensesList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerSmall, style]}>  
-      <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
-      <View style={styles.transactionContainer}>
-        <Text style={[styles.expenseElement, styles.transactionElementLeft]}>Name</Text>
-        <Text style={styles.expenseElement}>Amount</Text>
-        <Text style={[styles.expenseElement, styles.transactionElementRight]}>Interval</Text>
+    <View style={[styles.mainBodyContainer, style]}>  
+      <AddExpenseModal modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
+      <View style={styles.listContainer}>
+        <Text style={[styles.listElement, styles.expenseListElement, styles.listElementStart]}>Name</Text>
+        <Text style={[styles.listElement, styles.expenseListElement]}>Amount</Text>
+        <Text style={[styles.listElement, styles.expenseListTitleEnd, styles.listElementEnd]}>Interval</Text>
       </View>
       <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} /> 
     </View>

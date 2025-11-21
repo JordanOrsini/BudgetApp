@@ -3,7 +3,7 @@ import {Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-import AddCategory from "./AddCategory";
+import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
 /* 
@@ -46,14 +46,14 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   const renderItem = ({item}) => {
     if (item.addCategory) {
       return (
-        <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} onPress={() => setModalVisible(true)}>
+        <Pressable style={({pressed}) => [styles.button, styles.categoryButtons, pressed && styles.pressed]} onPress={() => setModalVisible(true)}>
           <Text>+</Text>
         </Pressable>
       );
     }
 
     return (
-      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
+      <Pressable style={({pressed}) => [styles.button, styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
         <Text>{item.category}</Text>
       </Pressable>
     );
@@ -61,7 +61,7 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
 
   return (
     <View>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelectionInput={setSelection}/>
+      <AddCategoryModal modalVisibility={modalVisible} setVisibility={setModalVisible} setSelectionInput={setSelection}/>
       <View style={styles.categoryContainer}>
         <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
       </View>

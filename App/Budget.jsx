@@ -21,17 +21,17 @@ const Budget = () => {
       }
       case 1: {
         return (
-          <View style={styles.mainBodyContainerSmall}></View> 
+          <View style={styles.mainBodyContainer}></View> 
         );
       }
       case 2: {
         return (
-          <View style={[styles.mainBodyContainerSmall, styles.lastContainer]}></View>
+          <View style={[styles.mainBodyContainer, styles.lastContainer]}></View>
         );
       }
       default: {
         return (
-          <View style={styles.mainBodyContainerSmall}></View> 
+          <View style={styles.mainBodyContainer}></View> 
         );
       }
     }

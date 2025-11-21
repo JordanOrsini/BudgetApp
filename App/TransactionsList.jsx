@@ -3,7 +3,7 @@ import {Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-import AddTransaction from "./AddTransaction";
+import AddTransactionModal from "./AddTransactionModal";
 import TransactionsContext from "./TransactionsContext";
 
 const TransactionsList = ({style}) => {
@@ -29,12 +29,12 @@ const TransactionsList = ({style}) => {
   const renderItem = ({item}, data) => {
     const isLastItem = (item.index === data.length - 1);
     return (
-      <View style={[styles.transactionContainer, isLastItem && styles.lastItem]}>
-        <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
-        <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={styles.transactionElement}>{item.category}</Text>
-        <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
-        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
+      <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
+        <Text style={[styles.listElement, styles.listElementStart]}>{item.name}</Text>
+        <Text style={styles.listElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={styles.listElement}>{item.category}</Text>
+        <Text style={[styles.listElement, styles.listElementEnd]}>{item.date}</Text>
+        <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.edit, pressed && styles.pressed]} onPress={() => editItemHandler(item)}>
           <Text>e</Text>
         </Pressable>
       </View>
@@ -47,13 +47,13 @@ const TransactionsList = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerLarge, style]}>
-      <AddTransaction modalVisibility={modalVisible} setVisibility={setModalVisible} transactionToEdit={transactionToEdit} clearTransactionToEdit={() => setTransactionToEdit(null)} />
-      <View style={styles.transactionContainer}>
-        <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>
-        <Text style={styles.transactionElement}>Amount</Text>
-        <Text style={styles.transactionElement}>Category</Text>
-        <Text style={[styles.transactionElement, styles.transactionElementRight]}>Date</Text>
+    <View style={[styles.mainBodyContainer, styles.mainBodyContainerLarge, style]}>
+      <AddTransactionModal modalVisibility={modalVisible} setVisibility={setModalVisible} transactionToEdit={transactionToEdit} clearTransactionToEdit={() => setTransactionToEdit(null)} />
+      <View style={styles.listContainer}>
+        <Text style={[styles.listElement, styles.listElementStart]}>Name</Text>
+        <Text style={styles.listElement}>Amount</Text>
+        <Text style={styles.listElement}>Category</Text>
+        <Text style={[styles.listElement, styles.transactionListTitleEnd, styles.listElementEnd]}>Date</Text>
       </View>
       <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={(item) => item.index} /> 
     </View>      

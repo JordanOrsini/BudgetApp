@@ -17,7 +17,7 @@ const Overview  = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
         );
       }
       case 1: {
@@ -32,7 +32,7 @@ const Overview  = () => {
       }
       default: {
         return (
-          <View style={styles.mainBodyContainerSmall}></View> 
+          <View style={styles.mainBodyContainer}></View> 
         );
       }
     }

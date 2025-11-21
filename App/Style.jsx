@@ -1,53 +1,37 @@
 import {Platform, StyleSheet} from "react-native";
 
-/* 
-   Style sheets CSS for the entire application.
-*/
+// Style sheets CSS for the entire application.
 export const styles = StyleSheet.create({
-  accept: {
-    backgroundColor: "#A0FAA0",
-  },
-  addCategoryModal: {
-    margin: 20,
-    backgroundColor: "#ECECEC",
-    borderRadius: 20,
-    padding: 35,
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Button CSS classes ///////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  button: {
+    backgroundColor: "#FFFFFF",
+    width: 80,
+    height: 40,
+    borderRadius: 10,
     alignItems: "center",
-    elevation: 5,
-  },
-  addTransactionModal: {
-    margin: 20,
-    backgroundColor: "#ECECEC",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
     elevation: 5,
   },
   categoryButtons: {
     borderRadius: 50,
-    width: 80,
     height: 80,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-    elevation: 5,
-    margin: 10,
   },
-  categoryContainer: {
-    height: 200,
-    width: 300,
+  smallButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 25,
+    marginTop: 0,
+    marginBottom: 0,
+    justifyContent: "normal",
   },
-  categoryElement: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
-    height: 40,
-    width: 325,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-  },
-  creationText: {
-    paddingBottom: 10,
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Colour CSS classes ///////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  accept: {
+    backgroundColor: "#A0FAA0",
   },
   decline: {
     backgroundColor: "#F76464",
@@ -55,72 +39,143 @@ export const styles = StyleSheet.create({
   edit: {
     backgroundColor: "#FFB343",
   },
-  expenseElement: {
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: 105,
-    height: 40,
-    backgroundColor: "#FFFFFF",
-  },
-  headerText: {
-    fontSize: 50,
-    fontWeight: "bold",
-  },
   hide: {
     opacity: 0,
+  },
+  pressed: {
+    backgroundColor: "#FDFD96",
+  },
+  selected: {
+    backgroundColor: "#ADD8E6",
+  },
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Container CSS classes ////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  categoryContainer: {
+    height: 200,
+    width: 300,
   },
   intervalContainer: {
     height: 125,
     width: 300,
   },
-  mainBodyContainerMicro: {
-    backgroundColor: "#E1E1E1",
-    padding: 10,
-    marginTop: 10,
-    width: 380,
-    height: 160,
-    borderRadius: 30,
+  lastContainer: {
+    ...Platform.select({
+      ios: {
+        marginBottom: 75,
+      },
+      default: {
+        marginBottom: 100,
+      },    
+    }),
   },
-  mainBodyContainerSmall: {
+  mainBodyContainer: {
     backgroundColor: "#E1E1E1",
     padding: 10,
     marginTop: 10,
     width: 380,
-    height: 320,
     borderRadius: 30,
+    height: 320,
   },
   mainBodyContainerLarge: {
-    backgroundColor: "#E1E1E1",
-    padding: 10,
-    marginTop: 10,
-    width: 380,
     flex: 1,
-    borderRadius: 30,
   },
-  modalButtonsContainer: {
+  mainBodyContainerMicro: {  
+    height: 160,
+  },
+  modalNavContainer: {
+    position: "absolute",
+    width: "100%",
+  },
+  pageView: {
+    alignItems: "center",
+    flex: 1,
+  },
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // List element CSS classes /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  categoryListElement: {
+    width: 325,
+    borderRadius: 20,
+  },
+  expenseListElement: {
+    width: 105,
+  },
+  expenseListTitleEnd: {
+    width: 150,
+  },
+  lastItem: {
+    ...Platform.select({
+      ios: {
+        paddingBottom: 75,
+      },
+      default: {
+        paddingBottom: 100,
+      },    
+    }),
+  },
+  listContainer: {
     flexDirection: "row",
-    paddingBottom: 10,
     alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 20,
   },
-  modalMenuContent: {
-    alignItems: "center",
+  listElement: {
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingTop: 10,
+    height: 40,
+    backgroundColor: "#FFFFFF",
+    width: 80,
   },
-  modalMenuModal: {
-    margin: 75,
-    marginBottom: 20,
+  listElementEnd: {
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  listElementStart: {
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  listElementTitle: {
+    width: 360,
+    borderRadius: 20,
+  },
+  recentExpenseListElement: {
+    width: 120,
+  },
+  recentTransactionListElement: {
+    width: 90,
+  },
+  transactionListTitleEnd: {
+    width: 120,
+  },
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Modal classes ////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  modal: {
+    margin: 20,
     backgroundColor: "#ECECEC",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
     elevation: 5,
   },
+  modalButtonsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  menuModal: {
+    margin: 75,
+    marginBottom: 20,
+  },
   modalPositioning: {
     justifyContent: "flex-end",
     flex: 1,
     marginBottom: 100,
   },
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Navigation CSS classes ///////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
   navButton: {
     elevation: 5,
     alignItems: "center",
@@ -153,10 +208,6 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 50,
     marginRight: 10,
   },
-  modalNavContainer: {
-    position: "absolute",
-    width: "100%",
-  },
   navigationContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -171,25 +222,15 @@ export const styles = StyleSheet.create({
       },    
     }),
   },
-  pageView: {
-    alignItems: "center",
-    flex: 1,
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Text classes /////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  creationText: {
+    paddingBottom: 10,
   },
-  selected: {
-    backgroundColor: "#ADD8E6",
-  },
-  standardButton: {
-    backgroundColor: "#FFFFFF",
-    width: 80,
-    height: 40,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    elevation: 5,
-  },
-  pressed: {
-    backgroundColor: "#FDFD96",
+  headerText: {
+    fontSize: 50,
+    fontWeight: "bold",
   },
   textInput: {
     borderRadius: 20,
@@ -203,82 +244,5 @@ export const styles = StyleSheet.create({
   textInputDate: {
     width: 260,
     backgroundColor: "#E1E1E1",
-  },
-  transactionContainer: {
-    flexDirection: "row",
-    paddingTop: 20,
-    paddingBottom: 20,
-    alignItems: "center",
-  },
-  lastContainer: {
-    ...Platform.select({
-      ios: {
-        marginBottom: 75,
-      },
-      default: {
-        marginBottom: 100,
-      },    
-    }),
-  },
-  lastItem: {
-    ...Platform.select({
-      ios: {
-        paddingBottom: 75,
-      },
-      default: {
-        paddingBottom: 100,
-      },    
-    }),
-  },
-  recentTransactionElementTitle: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
-    height: 40,
-    width: 360,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-  },
-  recentExpenseElement: {
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: 120,
-    height: 40,
-    backgroundColor: "#FFFFFF",
-  },
-  recentTransactionElement: {
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: 90,
-    height: 40,
-    backgroundColor: "#FFFFFF",
-  },
-  smallButton: {
-    width: 20,
-    height: 20,
-    borderRadius: 25,
-    alignItems: "center",
-    marginLeft: 10,
-    marginRight: 10,
-    elevation: 5,
-    backgroundColor: "#FFFFFF",
-  },
-  transactionElement: {
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: 80,
-    height: 40,
-    backgroundColor: "#FFFFFF",
-  },
-  transactionElementLeft: {
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 20,
-  },
-  transactionElementRight: {
-    borderTopRightRadius: 20,
-    borderBottomRightRadius: 20,
   },
 });

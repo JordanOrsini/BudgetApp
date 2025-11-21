@@ -11,7 +11,7 @@ import TransactionsContext from "./TransactionsContext";
 /* 
    Class representing the AddTransaction modal of the application.
 */
-const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit}) => {
+const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -196,8 +196,8 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   return (
     <Modal visible={modalVisibility} transparent={true}> 
       <View style={styles.modalPositioning}>    
-        <View style={[styles.addTransactionModal, transactionToEdit && styles.edit, hidden && styles.hide]}>
-          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+        <View style={[styles.modal, transactionToEdit && styles.edit, hidden && styles.hide]}>
+          <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
@@ -209,7 +209,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
                 <DateTimePicker value={dateInput} onChange={onChangeDate} />
               }       
               <TextInput style={[styles.textInput, styles.textInputDate]} defaultValue={dateInput.toDateString()} editable={false} />
-              <Pressable style={({pressed}) => [styles.smallButton, pressed && styles.pressed]} onPress={() => setCalendarShow(true)} >
+              <Pressable style={({pressed}) => [styles.button, styles.smallButton, pressed && styles.pressed]} onPress={() => setCalendarShow(true)} >
                 <Text>c</Text>
               </Pressable>
             </View>
@@ -222,16 +222,16 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           }
           <View style={styles.modalButtonsContainer}> 
             {!transactionToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction(true)} >
+              <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction(true)} >
                 <Text>Add another</Text>
               </Pressable>
             }
             {transactionToEdit &&
-              <Pressable style={({pressed}) => [styles.standardButton, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
+              <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
                 <Text>Delete</Text>
               </Pressable>
             }
-            <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction()}>
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction()}>
               <Text>Confirm</Text>
             </Pressable>
           </View>
@@ -241,4 +241,4 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   );
 }
 
-export default AddTransaction;
+export default AddTransactionModal;

@@ -26,20 +26,20 @@ const RecentTransactionsList = ({style}) => {
 
   const renderItem = ({item}) => {
     return (
-      <View style={styles.transactionContainer}>
-        <Text style={[styles.recentTransactionElement, styles.transactionElementLeft]}>{item.name}</Text>
-        <Text style={styles.recentTransactionElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={styles.recentTransactionElement}>{item.category}</Text>
-        <Text style={[styles.recentTransactionElement, styles.transactionElementRight]}>{item.date}</Text>
+      <View style={styles.listContainer}>
+        <Text style={[styles.listElement, styles.recentTransactionListElement, styles.listElementStart]}>{item.name}</Text>
+        <Text style={[styles.listElement, styles.recentTransactionListElement]}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={[styles.listElement, styles.recentTransactionListElement]}>{item.category}</Text>
+        <Text style={[styles.listElement, styles.recentTransactionListElement, styles.listElementEnd]}>{item.date}</Text>
       </View>
     );
   }
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerSmall, style]}>
-      <View style={styles.transactionContainer}>
-        <Text style={styles.recentTransactionElementTitle}>RECENT TRANSACTIONS</Text>
+    <View style={[styles.mainBodyContainer, style]}>
+      <View style={styles.listContainer}>
+        <Text style={[styles.listElement, styles.listElementTitle]}>RECENT TRANSACTIONS</Text>
       </View>
       <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} scrollEnabled={false} /> 
     </View>     
