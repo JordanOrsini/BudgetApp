@@ -6,7 +6,7 @@ import {styles} from "./Style";
 import ExpensesContext from "./ExpensesContext";
 import AddExpense from "./AddExpense";
 
-const Expenses = () => {
+const ExpensesList = () => {
   const [data, setData] = useState([]);
   const expensesContext = useContext(ExpensesContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
@@ -59,4 +59,4 @@ const Expenses = () => {
   );
 }
 
-export default Expenses;
+export default ExpensesList;

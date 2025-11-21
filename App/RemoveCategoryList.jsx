@@ -9,7 +9,7 @@ import AddCategory from "./AddCategory";
 /* 
    Class representing the RemoveCategory modal of the application.
 */
-const RemoveCategory = () => {
+const RemoveCategoryList = () => {
   const categoryContext = useContext(CategoriesContext);
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -59,4 +59,4 @@ const RemoveCategory = () => {
   );
 }
 
-export default RemoveCategory;
+export default RemoveCategoryList;

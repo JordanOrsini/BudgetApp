@@ -4,7 +4,7 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import {useState} from "react";
 import {styles} from "./Style";
 
-import RecentTransactions from "./RecentTransactions";
+import RecentTransactionsList from "./RecentTransactionsList";
 
 /* 
    Class representing the overview screen of the application.
@@ -22,7 +22,7 @@ const Overview  = () => {
 
     if (item.index === 1) {
       return (
-        <RecentTransactions />
+        <RecentTransactionsList />
       );
     }
 

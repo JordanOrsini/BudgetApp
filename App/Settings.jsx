@@ -4,7 +4,7 @@ import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {useState} from "react";
 
-import RemoveCategory from "./RemoveCategory";
+import RemoveCategoryList from "./RemoveCategoryList";
 
 /* 
    Class representing the settings screen of the application.
@@ -16,7 +16,7 @@ const Settings = () => {
     const isLastContainer = (item.index === data.length - 1);
     if (item.index === 2) {
       return (
-        <RemoveCategory />
+        <RemoveCategoryList />
       );
     }
 

@@ -5,7 +5,7 @@ import {styles} from "./Style";
 
 import TransactionsContext from "./TransactionsContext";
 
-const RecentTransactions = () => {
+const RecentTransactionsList = () => {
   const transactionsContext = useContext(TransactionsContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   const [data, setData] = useState([]);
@@ -48,4 +48,4 @@ const RecentTransactions = () => {
   );
 }
 
-export default RecentTransactions;
+export default RecentTransactionsList;

@@ -3,7 +3,7 @@ import {Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-const Intervals = ({setSelection, defaultSelection}) => {
+const IntervalsList = ({setSelection, defaultSelection}) => {
   const [intervalData, setIntervalData] = useState([{id: 0, interval: "NONE", selected: true},
                                                     {id: 1, interval: "WEEKLY", selected: false}, 
                                                     {id: 2, interval: "BI-MONTHLY", selected: false},
@@ -53,4 +53,4 @@ const Intervals = ({setSelection, defaultSelection}) => {
   );
 }
 
-export default Intervals;
+export default IntervalsList;

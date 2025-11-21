@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {Modal, Platform, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
-import Categories from "./Categories";
+import CategoriesList from "./CategoriesList";
 import Transaction from "./Transaction";
 import CategoriesContext from "./CategoriesContext";
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -202,7 +202,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
+          <CategoriesList setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
           {Platform.OS !== 'ios' &&
             <View style={styles.modalButtonsContainer}>
               {calendarShow &&

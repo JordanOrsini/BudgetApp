@@ -4,7 +4,7 @@ import {styles} from "./Style";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 
-import Expenses from "./Expenses";
+import ExpensesList from "./ExpensesList";
 
 /* 
    Class representing the budget screen of the application.
@@ -16,7 +16,7 @@ const Budget = () => {
     const isLastContainer = (item.index === data.length - 1);
     if (item.index === 0) {
       return (
-        <Expenses />
+        <ExpensesList />
       );
     }
 

@@ -9,7 +9,7 @@ import CategoriesContext from "./CategoriesContext";
 /* 
    Class representing the Category class of the application.
 */
-const Categories = ({setSelection, defaultSelection, setHidden}) => {
+const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -70,4 +70,4 @@ const Categories = ({setSelection, defaultSelection, setHidden}) => {
   );
 }
 
-export default Categories;
+export default CategoriesList;
