@@ -101,6 +101,7 @@ export const styles = StyleSheet.create({
   modalButtonsContainer: {
     flexDirection: "row",
     paddingBottom: 10,
+    alignItems: "center",
   },
   modalMenuContent: {
     alignItems: "center",
@@ -199,6 +200,10 @@ export const styles = StyleSheet.create({
     padding: "10",
     elevation: 5,
   },
+  textInputDate: {
+    width: 260,
+    backgroundColor: "#ECECEC",
+  },
   transactionContainer: {
     flexDirection: "row",
     paddingTop: 20,
@@ -250,6 +255,7 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     elevation: 5,
+    backgroundColor: "#FFFFFF",
   },
   transactionElement: {
     paddingTop: 10,

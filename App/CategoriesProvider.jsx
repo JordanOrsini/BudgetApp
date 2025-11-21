@@ -29,7 +29,7 @@ const CategoriesProvider = ({children}) => {
   const _setCategoryData = (newData) => {
     let stringToWrite = "";
     newData.map((item) => {
-      stringToWrite = stringToWrite + item.toString() + "\n";
+      stringToWrite = stringToWrite + item.toStringCategory() + "\n";
     });
 
     console.log("stringToWrite:\n", stringToWrite);

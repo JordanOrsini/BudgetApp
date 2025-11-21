@@ -5,6 +5,7 @@ import {styles} from "./Style";
 import Categories from "./Categories";
 import Transaction from "./Transaction";
 import CategoriesContext from "./CategoriesContext";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import TransactionsContext from "./TransactionsContext";
 
 /* 
@@ -14,14 +15,15 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
+  const [dateInput, setDateInput] = useState(new Date());
+  const [calendarShow, setCalendarShow] = useState(false);
+
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("NONE");
-  const [dateInput, setDateInput] = useState("");
 
   const [inErrorName, setInErrorName] = useState(false);
   const [inErrorAmount, setInErrorAmount] = useState(false);
-  const [inErrorDate, setInErrorDate] = useState(false);
 
   const [hidden, setHidden] = useState(false);
 
@@ -30,7 +32,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       setNameInput(transactionToEdit.getName());
       setAmountInput(transactionToEdit.getAmount());
       setCategoryInput(transactionToEdit.getCategory().getName());
-      setDateInput(transactionToEdit.getTransactionDate());
+      setDateInput(new Date(transactionToEdit.getTransactionDate()));
     }
   }, [transactionToEdit]);
 
@@ -41,10 +43,6 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   useEffect(() => {
     setInErrorAmount(false);
   }, [amountInput]);
-
-  useEffect(() => {
-    setInErrorDate(false);
-  }, [dateInput]);
 
   const validateNameInput = (processedNameInput) => {
     let Success = true;
@@ -78,23 +76,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     return Success;
   }
 
-  const validateDateInput = (processedDateInput) => {
-    let Success = true;
-
-    if (processedDateInput.length === 0) {
-      console.log("Blank string!\n");
-      Success = false;
-    }
-
-    if (isNaN(processedDateInput)) {
-      console.log("Not a number!\n");
-      Success = false;
-    }
-
-    return Success;
-  }
-
-  const validateInputs = (processedNameInput, processedAmountInput, processedDateInput) => {
+  const validateInputs = (processedNameInput, processedAmountInput) => {
     let Success = true;
 
     if (!validateNameInput(processedNameInput)) {
@@ -109,19 +91,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       Success = false;
     }
 
-    if (!validateDateInput(processedDateInput)) {
-      console.log("Date invalid!\n");
-      setInErrorDate(true);
-      Success = false;
-    }
-
     return Success;
   }
 
   const createNewTransaction = (addAnother = false) => {
     const processedNameInput = nameInput.trim();
     const processedAmountInput = parseFloat(amountInput).toFixed(2);
-    const processedDateInput = parseInt(dateInput);
+    const processedDateInput = dateInput.getTime();
 
     if (transactionToEdit && 
         transactionToEdit.getName() === processedNameInput &&
@@ -132,7 +108,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       return;
     }
 
-    if (!validateInputs(processedNameInput, processedAmountInput, processedDateInput))
+    if (!validateInputs(processedNameInput, processedAmountInput))
       return;
 
     if (transactionToEdit) {
@@ -151,7 +127,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
                                               amount: processedAmountInput, 
                                               category: categoryObject, 
                                               transactionDate: processedDateInput,
-                                              creationDate: parseInt(0)
+                                              creationDate: new Date().getTime()
                                              }); 
                                        
       transactionsContext._setTransactionData([newTransaction, ...transactionsContext.transactionData]);
@@ -176,11 +152,10 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     setNameInput("")
     setAmountInput("");
     setCategoryInput("NONE");
-    setDateInput("");  
+    setDateInput(new Date());  
 
     setInErrorName(false);
     setInErrorAmount(false);
-    setInErrorDate(false);
   }
 
   const onTextChange = (text, id) => {
@@ -191,10 +166,6 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       }
       case ("amountInput"): {
         setAmountInput(text);
-        break;
-      }
-      case ("dateInput"): {
-        setDateInput(text);
         break;
       }
       default: {
@@ -213,6 +184,11 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     closeModal();
   }
 
+  const onChangeDate = (event, selectedDate) => {
+    setDateInput(selectedDate);
+    setCalendarShow(false);
+  }
+
   // Function that returns the contents of the AddTransaction modal.
   return (
     <Modal visible={modalVisibility} transparent={true}> 
@@ -224,9 +200,17 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
-          <TextInput style={[styles.textInput, inErrorDate && styles.decline]} defaultValue={dateInput.toString()} placeholder="DD/MM/YYYY" onChangeText={(text, id) => onTextChange(text, "dateInput")} />
+          <View style={styles.modalButtonsContainer}>
+            <TextInput style={[styles.textInput, styles.textInputDate]} defaultValue={dateInput.toDateString()} editable={false} />
+            <Pressable style={({pressed}) => [styles.smallButton, pressed && styles.pressed]} onPress={() => setCalendarShow(true)} >
+              <Text>c</Text>
+            </Pressable>
+          </View>
+          {calendarShow && 
+            <DateTimePicker value={dateInput} mode={"date"} onChange={onChangeDate} />
+          }       
           {transactionToEdit &&
-            <Text style={styles.creationText}>Created on: {transactionToEdit.getCreationDate()}</Text>
+            <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
           }
           <View style={styles.modalButtonsContainer}> 
             {!transactionToEdit &&

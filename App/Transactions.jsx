@@ -24,7 +24,7 @@ const Transactions = () => {
   const fillData = () => {
     const newDataArray = [];
     transactionContext.transactionData.map((element, index) => {
-      newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
+      newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: new Date(element.getTransactionDate()).toLocaleDateString()});
     });
 
     setData(newDataArray);

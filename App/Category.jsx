@@ -27,6 +27,10 @@ class Category {
   }
 
   toString() {
+    return this.#name;
+  }
+
+  toStringCategory() {
     return this.#name + ";" + this.#iconPath;
   }
 }
