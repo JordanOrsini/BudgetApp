@@ -1,6 +1,7 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
-import {FlatList, Text, View} from "react-native";
+import {Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 import {useState} from "react";
 
 import RemoveCategory from "./RemoveCategory";
@@ -28,7 +29,7 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Settings</Text>      
-      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} />
+      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={(item) => item.index} />
     </SafeAreaView> 
   );
 }

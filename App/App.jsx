@@ -1,3 +1,4 @@
+import {GestureHandlerRootView} from "react-native-gesture-handler";
 import {NavigationContainer} from "@react-navigation/native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 
@@ -15,17 +16,19 @@ import BottomNavigation from "./BottomNavigation";
 */
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <CategoriesProvider>
-        <ExpensesProvider>
-          <TransactionsProvider>
-            <NavigationContainer>
-              <BottomNavigation />
-            </NavigationContainer>
-          </TransactionsProvider>
-        </ExpensesProvider>
-      </CategoriesProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <CategoriesProvider>
+          <ExpensesProvider>
+            <TransactionsProvider>
+              <NavigationContainer>
+                <BottomNavigation />
+              </NavigationContainer>
+            </TransactionsProvider>
+          </ExpensesProvider>
+        </CategoriesProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 

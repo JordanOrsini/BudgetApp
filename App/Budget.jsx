@@ -1,7 +1,8 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {useState} from "react";
 import {styles} from "./Style";
-import {FlatList, Text, View} from "react-native";
+import {Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 
 import Expenses from "./Expenses";
 
@@ -28,7 +29,7 @@ const Budget = () => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Budget</Text>
-      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} />
+      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={(item) => item.index} />
     </SafeAreaView>
   );
 }

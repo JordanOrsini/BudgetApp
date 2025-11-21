@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import {FlatList, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import ExpensesContext from "./ExpensesContext";
@@ -53,7 +54,7 @@ const Expenses = () => {
         <Text style={styles.expenseElement}>Amount</Text>
         <Text style={[styles.expenseElement, styles.transactionElementRight]}>Interval</Text>
       </View>
-      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={item => item.index} /> 
+      <FlatList style={styles.flatListSmall} data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} /> 
     </View>
   );
 }

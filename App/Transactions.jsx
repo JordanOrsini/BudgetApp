@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import {FlatList, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
@@ -63,7 +64,7 @@ const Transactions = () => {
           <Text style={styles.transactionElement}>Category</Text>
           <Text style={[styles.transactionElement, styles.transactionElementRight]}>Date</Text>
         </View>
-        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={item => item.index} /> 
+        <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={(item) => item.index} /> 
       </View>      
     </SafeAreaView> 
     );

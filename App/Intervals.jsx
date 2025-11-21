@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
-import {FlatList, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 const Intervals = ({setSelection, defaultSelection}) => {
@@ -46,7 +47,7 @@ const Intervals = ({setSelection, defaultSelection}) => {
   return (
     <View>
       <View style={styles.intervalContainer}>
-        <FlatList data={intervalData} renderItem={renderItem} keyExtractor={item => item.id} numColumns={3} />      
+        <FlatList data={intervalData} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
       </View>
     </View>
   );

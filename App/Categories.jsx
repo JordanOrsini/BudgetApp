@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import {FlatList, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import AddCategory from "./AddCategory";
@@ -63,7 +64,7 @@ const Categories = ({setSelection, defaultSelection, setHidden}) => {
     <View>
       <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelection={setSelection} setSelected={setLastSelectedIndex}/>
       <View style={styles.categoryContainer}>
-        <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={item => item.id} numColumns={3} />      
+        <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
       </View>
     </View>
   );

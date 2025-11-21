@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import {FlatList, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import CategoriesContext from "./CategoriesContext";
@@ -52,7 +53,7 @@ const RemoveCategory = () => {
         <View style={styles.transactionContainer}>
           <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
         </View>
-        <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={item => item.id} /> 
+        <FlatList style={styles.flatListSmall} data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} /> 
       </View>     
     </View>
   );

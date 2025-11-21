@@ -82,6 +82,9 @@ export const styles = StyleSheet.create({
     height: 160,
     borderRadius: 30,
   },
+  flatListSmall: {
+    height: 320,
+  },
   mainBodyContainerSmall: {
     backgroundColor: "#E1E1E1",
     padding: 10,
