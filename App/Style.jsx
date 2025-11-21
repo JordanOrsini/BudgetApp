@@ -239,6 +239,14 @@ export const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 20,
   },
+  recentExpenseElement: {
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: 120,
+    height: 40,
+    backgroundColor: "#FFFFFF",
+  },
   recentTransactionElement: {
     paddingTop: 10,
     paddingLeft: 10,

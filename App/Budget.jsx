@@ -12,24 +12,36 @@ import ExpensesList from "./ExpensesList";
 const Budget = () => {
   const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}]);
   
-  const renderItem = ({item}, data) => {
-    const isLastContainer = (item.index === data.length - 1);
-    if (item.index === 0) {
-      return (
-        <ExpensesList />
-      );
+  const renderItem = ({item}) => {
+    switch (item.index) {
+      case 0: {
+        return (
+          <ExpensesList />
+        );
+      }
+      case 1: {
+        return (
+          <View style={styles.mainBodyContainerSmall}></View> 
+        );
+      }
+      case 2: {
+        return (
+          <View style={[styles.mainBodyContainerSmall, styles.lastContainer]}></View>
+        );
+      }
+      default: {
+        return (
+          <View style={styles.mainBodyContainerSmall}></View> 
+        );
+      }
     }
-
-    return (
-      <View style={[styles.mainBodyContainerSmall, isLastContainer && styles.lastContainer]}></View> 
-    );
   }
 
   // Function that returns the contents of the budget screen.
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Budget</Text>
-      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={(item) => item.index} />
+      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} />
     </SafeAreaView>
   );
 }

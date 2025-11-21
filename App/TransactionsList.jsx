@@ -6,7 +6,7 @@ import {styles} from "./Style";
 import AddTransaction from "./AddTransaction";
 import TransactionsContext from "./TransactionsContext";
 
-const TransactionsList = () => {
+const TransactionsList = ({style}) => {
   const transactionsContext = useContext(TransactionsContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   const [data, setData] = useState([]);
@@ -47,7 +47,7 @@ const TransactionsList = () => {
   }
 
   return (
-    <View style={styles.mainBodyContainerLarge}>
+    <View style={[styles.mainBodyContainerLarge, style]}>
       <AddTransaction modalVisibility={modalVisible} setVisibility={setModalVisible} transactionToEdit={transactionToEdit} clearTransactionToEdit={() => setTransactionToEdit(null)} />
       <View style={styles.transactionContainer}>
         <Text style={[styles.transactionElement, styles.transactionElementLeft]}>Name</Text>

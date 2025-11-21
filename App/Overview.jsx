@@ -4,6 +4,7 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import {useState} from "react";
 import {styles} from "./Style";
 
+import RecentExpenses from "./RecentExpenses";
 import RecentTransactionsList from "./RecentTransactionsList";
 
 /* 
@@ -12,30 +13,36 @@ import RecentTransactionsList from "./RecentTransactionsList";
 const Overview  = () => {
   const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}]);
   
-  const renderItem = ({item}, data) => {
-    const isLastContainer = (item.index === data.length - 1);
-    if (item.index === 0) {
-      return (
-        <View style={styles.mainBodyContainerMicro}></View> 
-      );
+  const renderItem = ({item}) => {
+    switch (item.index) {
+      case 0: {
+        return (
+          <View style={styles.mainBodyContainerMicro}></View> 
+        );
+      }
+      case 1: {
+        return (
+          <RecentExpenses />
+        );
+      }
+      case 2: {
+        return (
+          <RecentTransactionsList style={styles.lastContainer} />
+        );
+      }
+      default: {
+        return (
+          <View style={styles.mainBodyContainerSmall}></View> 
+        );
+      }
     }
-
-    if (item.index === 1) {
-      return (
-        <RecentTransactionsList />
-      );
-    }
-
-    return (
-      <View style={[styles.mainBodyContainerSmall, isLastContainer && styles.lastContainer]}></View> 
-    );
   }
 
   // Function that returns the contents of the overview screen.
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Overview</Text>
-      <FlatList data={data} renderItem={(item) => renderItem(item, data)} keyExtractor={(item) => item.index} />
+      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} />
     </SafeAreaView>  
   );
 }

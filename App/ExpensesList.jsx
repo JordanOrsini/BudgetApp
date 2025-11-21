@@ -6,7 +6,7 @@ import {styles} from "./Style";
 import ExpensesContext from "./ExpensesContext";
 import AddExpense from "./AddExpense";
 
-const ExpensesList = () => {
+const ExpensesList = ({style}) => {
   const [data, setData] = useState([]);
   const expensesContext = useContext(ExpensesContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
@@ -47,7 +47,7 @@ const ExpensesList = () => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={styles.mainBodyContainerSmall}>  
+    <View style={[styles.mainBodyContainerSmall, style]}>  
       <AddExpense modalVisibility={modalVisible} setVisibility={setModalVisible} expenseToEdit={expenseToEdit} clearExpenseToEdit={() => setExpenseToEdit(null)} />    
       <View style={styles.transactionContainer}>
         <Text style={[styles.expenseElement, styles.transactionElementLeft]}>Name</Text>

@@ -3,22 +3,22 @@ import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-import TransactionsContext from "./TransactionsContext";
+import ExpensesContext from "./ExpensesContext";
 
 const RecentTransactionsList = ({style}) => {
-  const transactionsContext = useContext(TransactionsContext);
+  const expensesContext = useContext(ExpensesContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fillData();
-  }, [transactionsContext.transactionData]);
+  }, [expensesContext.expenseData]);
 
   const fillData = () => {
     const newDataArray = [];
-    transactionsContext.transactionData.map((element, index) => {
+    expensesContext.expenseData.map((element, index) => {
       if (index < 3)
-        newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: new Date(element.getTransactionDate()).toLocaleDateString()});
+        newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), interval: element.getInterval()});
     });
    
     setData(newDataArray);
@@ -27,10 +27,9 @@ const RecentTransactionsList = ({style}) => {
   const renderItem = ({item}) => {
     return (
       <View style={styles.transactionContainer}>
-        <Text style={[styles.recentTransactionElement, styles.transactionElementLeft]}>{item.name}</Text>
-        <Text style={styles.recentTransactionElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={styles.recentTransactionElement}>{item.category}</Text>
-        <Text style={[styles.recentTransactionElement, styles.transactionElementRight]}>{item.date}</Text>
+        <Text style={[styles.recentExpenseElement, styles.transactionElementLeft]}>{item.name}</Text>
+        <Text style={styles.recentExpenseElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={[styles.recentExpenseElement, styles.transactionElementRight]}>{item.interval}</Text>
       </View>
     );
   }
@@ -39,7 +38,7 @@ const RecentTransactionsList = ({style}) => {
   return (
     <View style={[styles.mainBodyContainerSmall, style]}>
       <View style={styles.transactionContainer}>
-        <Text style={styles.recentTransactionElementTitle}>RECENT TRANSACTIONS</Text>
+        <Text style={styles.recentTransactionElementTitle}>RECENT EXPENSES</Text>
       </View>
       <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} scrollEnabled={false} /> 
     </View>     

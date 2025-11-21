@@ -9,7 +9,7 @@ import AddCategory from "./AddCategory";
 /* 
    Class representing the RemoveCategory modal of the application.
 */
-const RemoveCategoryList = () => {
+const RemoveCategoryList = ({style}) => {
   const categoryContext = useContext(CategoriesContext);
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,7 +48,7 @@ const RemoveCategoryList = () => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View>
-      <View style={styles.mainBodyContainerSmall}>
+      <View style={[styles.mainBodyContainerSmall, style]}>
         <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} categoryToEdit={categoryToEdit} clearCategoryToEdit={() => setCategoryToEdit(null)} />
         <View style={styles.transactionContainer}>
           <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
