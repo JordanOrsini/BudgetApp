@@ -202,7 +202,7 @@ export const styles = StyleSheet.create({
   },
   textInputDate: {
     width: 260,
-    backgroundColor: "#ECECEC",
+    backgroundColor: "#E1E1E1",
   },
   transactionContainer: {
     flexDirection: "row",
