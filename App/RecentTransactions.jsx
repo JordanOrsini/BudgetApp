@@ -1,0 +1,51 @@
+import {useContext, useEffect, useState} from "react";
+import {Text, View} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
+import {styles} from "./Style";
+
+import TransactionsContext from "./TransactionsContext";
+
+const RecentTransactions = () => {
+  const transactionsContext = useContext(TransactionsContext);
+  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fillData();
+  }, [transactionsContext.transactionData]);
+
+  const fillData = () => {
+    const newDataArray = [];
+    transactionsContext.transactionData.map((element, index) => {
+      if (index < 3)
+        newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: element.getTransactionDate()});
+    });
+
+    setData(newDataArray);
+  }
+
+  const renderItem = ({item}, data) => {
+    return (
+      <View style={[styles.transactionContainer]}>
+        <Text style={[styles.transactionElement, styles.transactionElementLeft]}>{item.name}</Text>
+        <Text style={styles.transactionElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={styles.transactionElement}>{item.category}</Text>
+        <Text style={[styles.transactionElement, styles.transactionElementRight]}>{item.date}</Text>
+      </View>
+    );
+  }
+
+  // Function that returns the contents of the AddTransaction modal.
+  return (
+    <View>
+      <View style={styles.mainBodyContainerSmall}>
+        <View style={styles.transactionContainer}>
+          <Text style={styles.categoryElement}>RECENT TRANSACTIONS</Text>
+        </View>
+        <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} scrollEnabled={false} /> 
+      </View>     
+    </View>
+  );
+}
+
+export default RecentTransactions;

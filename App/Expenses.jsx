@@ -54,7 +54,7 @@ const Expenses = () => {
         <Text style={styles.expenseElement}>Amount</Text>
         <Text style={[styles.expenseElement, styles.transactionElementRight]}>Interval</Text>
       </View>
-      <FlatList style={styles.flatListSmall} data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} /> 
+      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} /> 
     </View>
   );
 }

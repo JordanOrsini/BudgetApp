@@ -53,7 +53,7 @@ const RemoveCategory = () => {
         <View style={styles.transactionContainer}>
           <Text style={styles.categoryElement}>REMOVE CATEGORIES</Text>
         </View>
-        <FlatList style={styles.flatListSmall} data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} /> 
+        <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} /> 
       </View>     
     </View>
   );

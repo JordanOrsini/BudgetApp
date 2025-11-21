@@ -4,6 +4,8 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import {useState} from "react";
 import {styles} from "./Style";
 
+import RecentTransactions from "./RecentTransactions";
+
 /* 
    Class representing the overview screen of the application.
 */
@@ -15,6 +17,12 @@ const Overview  = () => {
     if (item.index === 0) {
       return (
         <View style={styles.mainBodyContainerMicro}></View> 
+      );
+    }
+
+    if (item.index === 1) {
+      return (
+        <RecentTransactions />
       );
     }
 
