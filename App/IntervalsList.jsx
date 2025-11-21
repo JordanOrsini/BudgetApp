@@ -28,7 +28,7 @@ const IntervalsList = ({setSelection, defaultSelection}) => {
 
     const newDataArray = [...intervalData];
     newDataArray.map((element => {
-      element.selected = (element.id === item.id) ? true : false;
+      element.selected = (element.id === item.id);
     }));
 
     setIntervalData(newDataArray);

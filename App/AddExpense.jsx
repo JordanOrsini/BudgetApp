@@ -170,7 +170,7 @@ const AddExpense = ({modalVisibility, setVisibility, expenseToEdit, clearExpense
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <IntervalsList setSelection={setIntervalInput} defaultSelection={expenseToEdit ? intervalInput : "NONE"} />
+          <IntervalsList setSelection={setIntervalInput} defaultSelection={intervalInput} />
           <View style={styles.modalButtonsContainer}>
             {!expenseToEdit &&
               <Pressable style={({pressed}) => [styles.standardButton, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense(true)}>

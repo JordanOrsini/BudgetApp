@@ -9,12 +9,11 @@ import CategoriesContext from "./CategoriesContext";
 /* 
    Class representing the Category class of the application.
 */
-const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
+const CategoriesList = ({setSelection, defaultSelection, setDefaultSelection, setHidden}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState([]);
-  const [lastSelectedIndex, setLastSelectedIndex] = useState(defaultSelection);
 
   useEffect(() => {
     setHidden(modalVisible);
@@ -22,12 +21,12 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
 
   useEffect(() => {
     fillData();
-  }, [categoriesContext.categoryData]);
+  }, [categoriesContext.categoryData, defaultSelection]);
 
   const fillData = () => {
     const newDataArray = [];
     categoriesContext.categoryData.map((category, index) => {
-      newDataArray.push({id: index, category: category.getName(), selected: (lastSelectedIndex === index) ? true : false});
+      newDataArray.push({id: index, category: category.getName(), selected: (defaultSelection === index)});
     });
 
     setData(newDataArray);
@@ -35,10 +34,11 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
 
   const onSelectionChange = (item) => {
     setSelection(item.category);
+    setDefaultSelection(item.id);
 
     const newDataArray = [...data];
     newDataArray.map((element => {
-      element.selected = (element.id === item.id) ? true : false;
+      element.selected = (element.id === item.id);
     }));
 
     setData(newDataArray);
@@ -62,7 +62,7 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
 
   return (
     <View>
-      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelection={setSelection} setSelected={setLastSelectedIndex}/>
+      <AddCategory modalVisibility={modalVisible} setVisibility={setModalVisible} setSelectionInput={setSelection} setSelectedButton={setDefaultSelection}/>
       <View style={styles.categoryContainer}>
         <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
       </View>

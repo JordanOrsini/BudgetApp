@@ -15,12 +15,13 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
-  const [dateInput, setDateInput] = useState(new Date());
   const [calendarShow, setCalendarShow] = useState(false);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("NONE");
+  const [dateInput, setDateInput] = useState(new Date());
+  const [defaultSelectedCategory, setDefaultSelectedCategory] = useState(0);
 
   const [inErrorName, setInErrorName] = useState(false);
   const [inErrorAmount, setInErrorAmount] = useState(false);
@@ -33,6 +34,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
       setAmountInput(transactionToEdit.getAmount());
       setCategoryInput(transactionToEdit.getCategory().getName());
       setDateInput(new Date(transactionToEdit.getTransactionDate()));
+      setDefaultSelectedCategory(categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()));
     }
   }, [transactionToEdit]);
 
@@ -154,6 +156,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     setCategoryInput("NONE");
     setDateInput(new Date());
     setCalendarShow(false);
+    setDefaultSelectedCategory(0);
 
     setInErrorName(false);
     setInErrorAmount(false);
@@ -202,7 +205,7 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <CategoriesList setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
+          <CategoriesList setSelection={setCategoryInput} defaultSelection={defaultSelectedCategory} setDefaultSelection={setDefaultSelectedCategory} setHidden={setHidden} />
           {Platform.OS !== 'ios' &&
             <View style={styles.modalButtonsContainer}>
               {calendarShow &&
