@@ -225,6 +225,23 @@ export const styles = StyleSheet.create({
       },    
     }),
   },
+  recentTransactionElementTitle: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    height: 40,
+    width: 360,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+  },
+  recentTransactionElement: {
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: 90,
+    height: 40,
+    backgroundColor: "#FFFFFF",
+  },
   smallButton: {
     width: 20,
     height: 20,
