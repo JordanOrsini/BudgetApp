@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Modal, Platform, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Categories from "./Categories";
@@ -152,7 +152,8 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
     setNameInput("")
     setAmountInput("");
     setCategoryInput("NONE");
-    setDateInput(new Date());  
+    setDateInput(new Date());
+    setCalendarShow(false);
 
     setInErrorName(false);
     setInErrorAmount(false);
@@ -186,7 +187,9 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
 
   const onChangeDate = (event, selectedDate) => {
     setDateInput(selectedDate);
-    setCalendarShow(false);
+
+    if (Platform.OS !== 'ios')
+      setCalendarShow(false);
   }
 
   // Function that returns the contents of the AddTransaction modal.
@@ -200,15 +203,20 @@ const AddTransaction = ({modalVisibility, setVisibility, transactionToEdit, clea
           <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
           <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
           <Categories setSelection={setCategoryInput} defaultSelection={transactionToEdit ? categoriesContext.categoryData.indexOf(transactionToEdit.getCategory()) : 0} setHidden={setHidden} />
-          <View style={styles.modalButtonsContainer}>
-            <TextInput style={[styles.textInput, styles.textInputDate]} defaultValue={dateInput.toDateString()} editable={false} />
-            <Pressable style={({pressed}) => [styles.smallButton, pressed && styles.pressed]} onPress={() => setCalendarShow(true)} >
-              <Text>c</Text>
-            </Pressable>
-          </View>
-          {calendarShow && 
-            <DateTimePicker value={dateInput} mode={"date"} onChange={onChangeDate} />
-          }       
+          {Platform.OS !== 'ios' &&
+            <View style={styles.modalButtonsContainer}>
+              {calendarShow &&
+                <DateTimePicker value={dateInput} onChange={onChangeDate} />
+              }       
+              <TextInput style={[styles.textInput, styles.textInputDate]} defaultValue={dateInput.toDateString()} editable={false} />
+              <Pressable style={({pressed}) => [styles.smallButton, pressed && styles.pressed]} onPress={() => setCalendarShow(true)} >
+                <Text>c</Text>
+              </Pressable>
+            </View>
+          }
+          {Platform.OS === 'ios' && 
+            <DateTimePicker value={dateInput} onChange={onChangeDate} />
+          }     
           {transactionToEdit &&
             <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
           }
