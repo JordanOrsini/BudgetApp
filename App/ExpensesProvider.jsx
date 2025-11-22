@@ -5,8 +5,8 @@ import Expense from "./Expense";
 import ExpensesContext from "./ExpensesContext";
 
 const ExpensesProvider = ({children}) => {
-  const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expenseData, setExpenseData] = useState([]);
 
   // Check if user saved data exists on component mount.
   useEffect(() => {
@@ -25,53 +25,25 @@ const ExpensesProvider = ({children}) => {
     fetchData();
   }, []);
 
-  // Custom setter, writing memory's contents to file before updating transactionData.
-  const _setExpenseData = (newData) => {
-    let stringToWrite = "";
-    newData.map((item) => {
-      stringToWrite = stringToWrite + item.toString() + "\n";
-    });
-  
-    console.log("stringToWrite:\n", stringToWrite);
-  
-    try {
-      RNFS.writeFile(filePath, stringToWrite, "utf8");
-    }
-    catch (error) {
-      console.error("Error writing to file: ", error);
-      return;
-    }
-      
-    setExpenseData(newData);
-    }
-
-  const findExpenseById = (id) => {
-    const filteredData = expenseData.filter(element => 
-      element.getId() === id
-    );
-
-    if (filteredData.length !== 1)
-      return;
-    
-    return (filteredData[0]);
-  }
-
-  // Values to expose in our context.
-  const contextValue = {
-    expenseData,
-    _setExpenseData,
-    findExpenseById,
-  }
-
   // File path of our saved expense data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/ExpenseData.txt";
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = "1;1;WEEKLY\n2;2;WEEKLY\n3;3;WEEKLY\n4;4;WEEKLY\n" +
-                              "5;5;BI-MONTHLY\n6;6;BI-MONTHLY\n" +
-                              "7;7;MONTHLY\n8;8;MONTHLY\n9;9;MONTHLY\n" +
-                              "10;10;QUARTERLY\n11;11;QUARTERLY\n12;12;QUARTERLY\n" +
-                              "13;13;ANNUALLY\n14;14;ANNUALLY\n15;15;ANNUALLY";
+  const defaultFileContents = "1;1;WEEKLY\n" +
+                              "2;2;WEEKLY\n" +
+                              "3;3;WEEKLY\n" +
+                              "4;4;WEEKLY\n" +
+                              "5;5;BI-MONTHLY\n" +
+                              "6;6;BI-MONTHLY\n" +
+                              "7;7;MONTHLY\n" +
+                              "8;8;MONTHLY\n" +
+                              "9;9;MONTHLY\n" +
+                              "10;10;QUARTERLY\n" +
+                              "11;11;QUARTERLY\n" +
+                              "12;12;QUARTERLY\n" +
+                              "13;13;ANNUALLY\n" +
+                              "14;14;ANNUALLY\n" +
+                              "15;15;ANNUALLY";
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -96,6 +68,17 @@ const ExpensesProvider = ({children}) => {
     }
   
     await readAndParseFile();
+  }
+
+  const findExpenseById = (id) => {
+    const filteredData = expenseData.filter(element => 
+      element.getId() === id
+    );
+
+    if (filteredData.length !== 1)
+      return;
+    
+    return (filteredData[0]);
   }
 
   async function readAndParseFile() {
@@ -129,6 +112,33 @@ const ExpensesProvider = ({children}) => {
       console.error("Error reading file: ", error); 
       return;
     }
+  }
+
+  // Custom setter, writing memory's contents to file before updating transactionData.
+  const _setExpenseData = (newData) => {
+    let stringToWrite = "";
+    newData.map((item) => {
+      stringToWrite = stringToWrite + item.toString() + "\n";
+    });
+  
+    console.log("stringToWrite:\n", stringToWrite);
+  
+    try {
+      RNFS.writeFile(filePath, stringToWrite, "utf8");
+    }
+    catch (error) {
+      console.error("Error writing to file: ", error);
+      return;
+    }
+      
+    setExpenseData(newData);
+  }
+
+  // Values to expose in our context.
+  const contextValue = {
+    expenseData,
+    _setExpenseData,
+    findExpenseById,
   }
 
   if (loading) {

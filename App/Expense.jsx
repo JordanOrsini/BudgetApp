@@ -1,5 +1,5 @@
 /* 
-   Class representing an expense object.
+   Class representing an Expense object.
 */
 class Expense {
   static id = 0;
@@ -18,18 +18,7 @@ class Expense {
     this.#interval = interval;
   }
 
-  getId () {
-    return this.#id;
-  }
-
-  getName () {
-    return this.#name;
-  }
-
-  setName (newName) {
-    this.#name = newName;
-  }
-
+  // amount
   getAmount () {
     return this.#amount;
   }
@@ -38,6 +27,12 @@ class Expense {
     this.#amount = newAmount;
   }
 
+  // id
+  getId () {
+    return this.#id;
+  }
+
+  // interval
   getInterval () {
     return this.#interval;
   }
@@ -46,6 +41,16 @@ class Expense {
     this.#interval = newInterval;
   }
 
+  // name
+  getName () {
+    return this.#name;
+  }
+
+  setName (newName) {
+    this.#name = newName;
+  }
+
+  // For exporting Expense objects.
   toString() {
     return this.#name + ";" + this.#amount + ";" + this.#interval;
   }

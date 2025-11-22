@@ -4,7 +4,7 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 const IntervalsList = ({setSelection, defaultSelection}) => {
-  const [intervalData, setIntervalData] = useState([{id: 0, interval: "NONE", selected: true},
+  const [intervalData, setIntervalData] = useState([{id: 0, interval: "NONE", selected: false},
                                                     {id: 1, interval: "WEEKLY", selected: false}, 
                                                     {id: 2, interval: "BI-MONTHLY", selected: false},
                                                     {id: 3, interval: "MONTHLY", selected: false}, 
@@ -37,7 +37,8 @@ const IntervalsList = ({setSelection, defaultSelection}) => {
   const renderItem = ({item}) => {
     return (
       <View>
-        <Pressable style={({pressed}) => [styles.button, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
+        <Pressable style={({pressed}) => [styles.button, item.selected && styles.selected, pressed && styles.pressed]} 
+                   onPress={() => onSelectionChange(item)}>
           <Text>{item.interval}</Text>
         </Pressable>
       </View>
@@ -47,7 +48,10 @@ const IntervalsList = ({setSelection, defaultSelection}) => {
   return (
     <View>
       <View style={styles.intervalContainer}>
-        <FlatList data={intervalData} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
+        <FlatList data={intervalData} 
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id} 
+                  numColumns={3} />      
       </View>
     </View>
   );

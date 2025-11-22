@@ -6,14 +6,11 @@ import {styles} from "./Style";
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
-/* 
-   Class representing the Category class of the application.
-*/
 const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   const categoriesContext = useContext(CategoriesContext);
 
-  const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     setHidden(modalVisible);
@@ -26,7 +23,9 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   const fillData = () => {
     const newDataArray = [];
     categoriesContext.categoryData.map((category, index) => {
-      newDataArray.push({id: index, category: category.getName(), selected: (defaultSelection === category.getName())});
+      newDataArray.push({id: index, 
+                         category: category.getName(),
+                         selected: (defaultSelection === category.getName())});
     });
 
     setData(newDataArray);
@@ -46,14 +45,16 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   const renderItem = ({item}) => {
     if (item.addCategory) {
       return (
-        <Pressable style={({pressed}) => [styles.button, styles.categoryButtons, pressed && styles.pressed]} onPress={() => setModalVisible(true)}>
+        <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} 
+                   onPress={() => setModalVisible(true)}>
           <Text>+</Text>
         </Pressable>
       );
     }
 
     return (
-      <Pressable style={({pressed}) => [styles.button, styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} onPress={() => onSelectionChange(item)}>
+      <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} 
+                 onPress={() => onSelectionChange(item)}>
         <Text>{item.category}</Text>
       </Pressable>
     );
@@ -61,9 +62,14 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
 
   return (
     <View>
-      <AddCategoryModal modalVisibility={modalVisible} setVisibility={setModalVisible} setSelectionInput={setSelection}/>
+      <AddCategoryModal modalVisibility={modalVisible} 
+                        setVisibility={setModalVisible} 
+                        setSelectionInput={setSelection}/>
       <View style={styles.categoryContainer}>
-        <FlatList data={[...data, {addCategory: true}]} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={3} />      
+        <FlatList data={[...data, {addCategory: true}]}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id}
+                  numColumns={3} />      
       </View>
     </View>
   );

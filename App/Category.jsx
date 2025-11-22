@@ -1,5 +1,5 @@
 /* 
-   Class representing a category object.
+   Class representing a Category object.
 */
 class Category {
   #name = null;
@@ -10,14 +10,7 @@ class Category {
     this.#iconPath = iconPath;
   }
 
-  getName () {
-    return this.#name;
-  }
-
-  setName (newName) {
-    this.#name = newName;
-  }
-
+  // iconPath
   getIconPath () {
     return this.#iconPath;
   }
@@ -26,10 +19,22 @@ class Category {
     this.#iconPath = newIconPath;
   }
 
+  // name
+  getName () {
+    return this.#name;
+  }
+  
+  setName (newName) {
+    this.#name = newName;
+  }
+
+
+  // For exporting Transaction objects.
   toString() {
     return this.#name;
   }
 
+  // For exporting Category objects.
   toStringCategory() {
     return this.#name + ";" + this.#iconPath;
   }

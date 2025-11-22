@@ -7,9 +7,10 @@ import TransactionsContext from "./TransactionsContext";
 
 const TransactionsProvider = ({children}) => {
   const categoriesContext = useContext(CategoriesContext);
-  const [transactionData, setTransactionData] = useState([]);
-  const [totalAmount, setTotalAmount] = useState(0);
+
   const [loading, setLoading] = useState(true);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [transactionData, setTransactionData] = useState([]);
 
   // Check if user saved data exists on component mount.
   useEffect(() => {
@@ -32,37 +33,6 @@ const TransactionsProvider = ({children}) => {
     refreshData();
   }, [categoriesContext.categoryData]);
 
-  const _setTotalAmount = (newData) => {
-    let newTotalAmount = 0;
-    
-    newData.map((element) => {
-      newTotalAmount = newTotalAmount + element.getAmount();
-    });
-
-    setTotalAmount(newTotalAmount);
-  }
-
-  // Custom setter, writing memory's contents to file before updating transactionData.
-  const _setTransactionData = (newData) => {
-    let stringToWrite = "";
-    newData.map((item) => {
-      stringToWrite = stringToWrite + item.toString() + "\n";
-    });
-
-    console.log("stringToWrite:\n", stringToWrite);
-
-    try {
-      RNFS.writeFile(filePath, stringToWrite, "utf8");
-    }
-    catch (error) {
-      console.error("Error writing to file: ", error);
-      return;
-    }
-    
-    setTransactionData(newData);
-    _setTotalAmount(newData);
-  }
-
   const refreshData = () => {
     transactionData.map((element) => {
       if (categoriesContext.findCategoryByName(element.getCategory().getName()) === undefined)
@@ -72,33 +42,25 @@ const TransactionsProvider = ({children}) => {
     setTransactionData([...transactionData]);
   }
 
-  const findTransactionById = (id) => {
-    const filteredData = transactionData.filter(element => 
-      element.getId() === id
-    );
-
-    if (filteredData.length !== 1)
-      return;
-    
-    return (filteredData[0]);
-  }
-
-  // Values to expose in our context.
-  const contextValue = {
-    transactionData,
-    _setTransactionData,
-    totalAmount,
-    findTransactionById,
-  }
-
   // File path of our saved transaction data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/TransactionData.txt";
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = "1;1;HOME;1598051730000;1598051730000\n2;2;HOME;1598051730000;1598051730000\n3;3;HOME;1598051730000;1598051730000\n4;4;HOME;1598051730000;1598051730000\n" +
-                              "5;5;WORK;1598051730000;1598051730000\n6;6;WORK;1598051730000;1598051730000\n7;7;WORK;1598051730000;1598051730000\n8;8;WORK;1598051730000;1598051730000\n9;9;WORK;1598051730000;1598051730000\n" +
-                              "10;10;SCHOOL;1598051730000;1598051730000\n11;11;SCHOOL;1598051730000;1598051730000\n12;12;SCHOOL;1598051730000;1598051730000\n" +
-                              "13;13;CAR;1598051730000;1598051730000\n14;14;CAR;1598051730000;1598051730000\n15;15;CAR;1598051730000;1598051730000";
+  const defaultFileContents = "1;1;HOME;1598051730000;1598051730000\n" + 
+                              "2;2;HOME;1598051730000;1598051730000\n" + 
+                              "3;3;HOME;1598051730000;1598051730000\n" +
+                              "4;4;HOME;1598051730000;1598051730000\n" +
+                              "5;5;WORK;1598051730000;1598051730000\n" +
+                              "6;6;WORK;1598051730000;1598051730000\n" +
+                              "7;7;WORK;1598051730000;1598051730000\n" +
+                              "8;8;WORK;1598051730000;1598051730000\n" +
+                              "9;9;WORK;1598051730000;1598051730000\n" +
+                              "10;10;SCHOOL;1598051730000;1598051730000\n" +
+                              "11;11;SCHOOL;1598051730000;1598051730000\n" +
+                              "12;12;SCHOOL;1598051730000;1598051730000\n" +
+                              "13;13;CAR;1598051730000;1598051730000\n" +
+                              "14;14;CAR;1598051730000;1598051730000\n" +
+                              "15;15;CAR;1598051730000;1598051730000";
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -123,6 +85,17 @@ const TransactionsProvider = ({children}) => {
     }
 
     await readAndParseFile();
+  }
+
+  const findTransactionById = (id) => {
+    const filteredData = transactionData.filter(element => 
+      element.getId() === id
+    );
+
+    if (filteredData.length !== 1)
+      return;
+    
+    return (filteredData[0]);
   }
 
   async function readAndParseFile() {
@@ -160,6 +133,45 @@ const TransactionsProvider = ({children}) => {
       console.error("Error reading file: ", error); 
       return;
     }
+  }
+
+  const _setTotalAmount = (newData) => {
+    let newTotalAmount = 0;
+    
+    newData.map((element) => {
+      newTotalAmount = newTotalAmount + element.getAmount();
+    });
+
+    setTotalAmount(newTotalAmount);
+  }
+
+  // Custom setter, writing memory's contents to file before updating transactionData.
+  const _setTransactionData = (newData) => {
+    let stringToWrite = "";
+    newData.map((item) => {
+      stringToWrite = stringToWrite + item.toString() + "\n";
+    });
+
+    console.log("stringToWrite:\n", stringToWrite);
+
+    try {
+      RNFS.writeFile(filePath, stringToWrite, "utf8");
+    }
+    catch (error) {
+      console.error("Error writing to file: ", error);
+      return;
+    }
+    
+    setTransactionData(newData);
+    _setTotalAmount(newData);
+  }
+
+  // Values to expose in our context.
+  const contextValue = {
+    transactionData,
+    _setTransactionData,
+    totalAmount,
+    findTransactionById,
   }
 
   if (loading) {

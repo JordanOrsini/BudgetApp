@@ -1,5 +1,5 @@
 /* 
-   Class representing a transaction object.
+   Class representing a Transaction object.
 */
 class Transaction {
   static id = 0;
@@ -22,18 +22,7 @@ class Transaction {
     this.#creationDate = creationDate;
   }
 
-  getId() {
-    return this.#id;
-  }
-
-  getName () {
-    return this.#name;
-  }
-
-  setName (newName) {
-    this.#name = newName;
-  }
-
+  // amount
   getAmount () {
     return this.#amount;
   }
@@ -42,6 +31,7 @@ class Transaction {
     this.#amount = newAmount;
   }
 
+  // category
   getCategory () {
     return this.#category;
   }
@@ -50,6 +40,26 @@ class Transaction {
     this.#category = newCategory;
   }
 
+  // creationDate
+  getCreationDate () {
+    return this.#creationDate;
+  }
+
+  // id
+  getId() {
+    return this.#id;
+  }
+
+  // name
+  getName () {
+    return this.#name;
+  }
+
+  setName (newName) {
+    this.#name = newName;
+  }
+
+  // transactionDate
   getTransactionDate () {
     return this.#transactionDate;
   }
@@ -58,10 +68,7 @@ class Transaction {
     this.#transactionDate = newTransactionDate;
   }
 
-  getCreationDate () {
-    return this.#creationDate;
-  }
-
+  // For exporting Transaction objects.
   toString() {
     return this.#name + ";" + this.#amount + ";" + this.#category + ";" + this.#transactionDate + ";" + this.#creationDate;
   }

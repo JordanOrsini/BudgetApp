@@ -1,15 +1,12 @@
+import {useState} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
-import {useState} from "react";
 import {styles} from "./Style";
 
 import RecentExpenses from "./RecentExpenses";
 import RecentTransactionsList from "./RecentTransactionsList";
 
-/* 
-   Class representing the overview screen of the application.
-*/
 const Overview  = () => {
   const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}]);
   
@@ -17,7 +14,7 @@ const Overview  = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
+          <View style={styles.mainBodyContainerMicro}></View> 
         );
       }
       case 1: {
@@ -31,9 +28,7 @@ const Overview  = () => {
         );
       }
       default: {
-        return (
-          <View style={styles.mainBodyContainer}></View> 
-        );
+        break;
       }
     }
   }
@@ -42,7 +37,9 @@ const Overview  = () => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Overview</Text>
-      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} />
+      <FlatList data={data} 
+                renderItem={(item) => renderItem(item)} 
+                keyExtractor={(item) => item.index} />
     </SafeAreaView>  
   );
 }

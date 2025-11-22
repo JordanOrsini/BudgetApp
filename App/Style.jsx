@@ -1,25 +1,86 @@
 import {Platform, StyleSheet} from "react-native";
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Inheritance classes ////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+const button = {
+  backgroundColor: "#FFFFFF",
+  width: 80,
+  height: 40,
+  borderRadius: 10,
+  alignItems: "center",
+  justifyContent: "center",
+  margin: 10,
+  elevation: 5,
+};
+
+const listElement = {
+  paddingLeft: 10,
+  paddingRight: 10,
+  paddingTop: 10,
+  height: 40,
+  backgroundColor: "#FFFFFF",
+  width: 80,
+};
+
+const listElementEnd = {
+  ...listElement,
+  borderTopRightRadius: 20,
+  borderBottomRightRadius: 20,
+};
+
+const mainBodyContainer = {
+  backgroundColor: "#E1E1E1",
+  padding: 10,
+  marginTop: 10,
+  width: 380,
+  borderRadius: 30,
+  height: 320,
+};
+
+const modal = {
+  margin: 20,
+  backgroundColor: "#ECECEC",
+  borderRadius: 20,
+  padding: 35,
+  alignItems: "center",
+  elevation: 5,
+};
+
+const navButton = {
+  elevation: 5,
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "#FFFFFF",
+  flex: 1,
+  height: 40,
+};
+
+const textInput = {
+  borderRadius: 20,
+  width: "100%",
+  marginTop: 10,
+  marginBottom: 10,
+  backgroundColor: "#FFFFFF",
+  padding: "10",
+  elevation: 5,
+};
+
 // Style sheets CSS for the entire application.
 export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Button CSS classes ///////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   button: {
-    backgroundColor: "#FFFFFF",
-    width: 80,
-    height: 40,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    elevation: 5,
+    ...button,
   },
   categoryButtons: {
+    ...button,
     borderRadius: 50,
     height: 80,
   },
   smallButton: {
+    ...button,
     width: 20,
     height: 20,
     borderRadius: 25,
@@ -70,17 +131,14 @@ export const styles = StyleSheet.create({
     }),
   },
   mainBodyContainer: {
-    backgroundColor: "#E1E1E1",
-    padding: 10,
-    marginTop: 10,
-    width: 380,
-    borderRadius: 30,
-    height: 320,
+    ...mainBodyContainer,
   },
   mainBodyContainerLarge: {
+    ...mainBodyContainer,
     flex: 1,
   },
-  mainBodyContainerMicro: {  
+  mainBodyContainerMicro: { 
+    ...mainBodyContainer, 
     height: 160,
   },
   modalNavContainer: {
@@ -95,10 +153,12 @@ export const styles = StyleSheet.create({
   // List element CSS classes /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   categoryListElement: {
+    ...listElement,
     width: 325,
     borderRadius: 20,
   },
   expenseListElement: {
+    ...listElement,
     width: 105,
   },
   expenseListTitleEnd: {
@@ -121,50 +181,45 @@ export const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   listElement: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
-    height: 40,
-    backgroundColor: "#FFFFFF",
-    width: 80,
+    ...listElement,
   },
   listElementEnd: {
-    borderTopRightRadius: 20,
-    borderBottomRightRadius: 20,
+    ...listElementEnd,
   },
   listElementStart: {
+    ...listElement,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
   },
   listElementTitle: {
+    ...listElement,
     width: 360,
     borderRadius: 20,
   },
   recentExpenseListElement: {
+    ...listElement,
     width: 120,
   },
   recentTransactionListElement: {
+    ...listElement,
     width: 90,
   },
   transactionListTitleEnd: {
+    ...listElementEnd,
     width: 120,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Modal classes ////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   modal: {
-    margin: 20,
-    backgroundColor: "#ECECEC",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    elevation: 5,
+    ...modal,
   },
   modalButtonsContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
   menuModal: {
+    ...modal,
     margin: 75,
     marginBottom: 20,
   },
@@ -177,33 +232,33 @@ export const styles = StyleSheet.create({
   // Navigation CSS classes ///////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   navButton: {
-    elevation: 5,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-    flex: 1,
-    height: 40,
+    ...navButton,
   },
   navButtonLeft: {
+    ...navButton,
     borderTopLeftRadius: 50,
     borderBottomLeftRadius: 50,
     marginLeft: 10,
   },
   navButtonMiddle: {
+    ...navButton,
     borderRadius: 50,
     height: 80,
     marginLeft: 5,
     marginRight: 5,
   },
   navButtonMiddleLeft: {
+    ...navButton,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
   },
   navButtonMiddleRight: {
+    ...navButton,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
   },
   navButtonRight: {
+    ...navButton,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
     marginRight: 10,
@@ -233,15 +288,10 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textInput: {
-    borderRadius: 20,
-    width: "100%",
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#FFFFFF",
-    padding: "10",
-    elevation: 5,
+    ...textInput,
   },
   textInputDate: {
+    ...textInput,
     width: 260,
     backgroundColor: "#E1E1E1",
   },

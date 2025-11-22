@@ -2,20 +2,16 @@ import {useContext, useEffect, useState} from "react";
 import {Modal, Platform, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
-import CategoriesList from "./CategoriesList";
-import Transaction from "./Transaction";
-import CategoriesContext from "./CategoriesContext";
 import DateTimePicker from '@react-native-community/datetimepicker';
+
+import Transaction from "./Transaction";
+import CategoriesList from "./CategoriesList";
+import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
 
-/* 
-   Class representing the AddTransaction modal of the application.
-*/
 const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
-
-  const [calendarShow, setCalendarShow] = useState(false);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
@@ -26,6 +22,15 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
   const [inErrorAmount, setInErrorAmount] = useState(false);
 
   const [hidden, setHidden] = useState(false);
+  const [calendarShow, setCalendarShow] = useState(false);
+
+  useEffect(() => {
+    setInErrorName(false);
+  }, [nameInput]);
+
+  useEffect(() => {
+    setInErrorAmount(false);
+  }, [amountInput]);
 
   useEffect(() => {
     if (transactionToEdit) {
@@ -36,62 +41,25 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
     }
   }, [transactionToEdit]);
 
-  useEffect(() => {
+  const clearModal = () => {
+    setNameInput("")
+    setAmountInput("");
+    setCategoryInput("NONE");
+    setDateInput(new Date());
+
     setInErrorName(false);
-  }, [nameInput]);
-
-  useEffect(() => {
     setInErrorAmount(false);
-  }, [amountInput]);
 
-  const validateNameInput = (processedNameInput) => {
-    let Success = true;
-
-    if (processedNameInput.length === 0) {
-      console.log("Blank string!\n");
-      Success = false;
-    }
-
-    if (processedNameInput.includes(';')) {
-      console.log("Invalid character found: ';'\n");
-      Success = false;
-    }
-
-    return Success;
+    setCalendarShow(false);
   }
 
-  const validateAmountInput = (processedAmountInput) => {
-    let Success = true;
+  const closeModal = () => {
+    clearModal();
 
-    if (processedAmountInput.length === 0) {
-      console.log("Blank string!\n");
-      Success = false;
-    }
+    if (transactionToEdit)
+      clearTransactionToEdit();
 
-    if (isNaN(processedAmountInput)) {
-      console.log("Not a number!\n");
-      Success = false;
-    }
-
-    return Success;
-  }
-
-  const validateInputs = (processedNameInput, processedAmountInput) => {
-    let Success = true;
-
-    if (!validateNameInput(processedNameInput)) {
-      console.log("Name invalid!\n");
-      setInErrorName(true);
-      Success = false;
-    }
-
-    if (!validateAmountInput(processedAmountInput)) {
-      console.log("Amount invalid!\n");
-      setInErrorAmount(true);
-      Success = false;
-    }
-
-    return Success;
+    setVisibility(false);
   }
 
   const createNewTransaction = (addAnother = false) => {
@@ -139,24 +107,11 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
       closeModal();
   }
 
-  const closeModal = () => {
-    clearModal();
+  const onChangeDate = (event, selectedDate) => {
+    setDateInput(selectedDate);
 
-    if (transactionToEdit)
-      clearTransactionToEdit();
-
-    setVisibility(false);
-  }
-
-  const clearModal = () => {
-    setNameInput("")
-    setAmountInput("");
-    setCategoryInput("NONE");
-    setDateInput(new Date());
-    setCalendarShow(false);
-
-    setInErrorName(false);
-    setInErrorAmount(false);
+    if (Platform.OS !== 'ios')
+      setCalendarShow(false);
   }
 
   const onTextChange = (text, id) => {
@@ -185,53 +140,117 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
     closeModal();
   }
 
-  const onChangeDate = (event, selectedDate) => {
-    setDateInput(selectedDate);
+  const validateAmountInput = (processedAmountInput) => {
+    let Success = true;
 
-    if (Platform.OS !== 'ios')
-      setCalendarShow(false);
+    if (processedAmountInput.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (isNaN(processedAmountInput)) {
+      console.log("Not a number!\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  const validateInputs = (processedNameInput, processedAmountInput) => {
+    let Success = true;
+
+    if (!validateNameInput(processedNameInput)) {
+      console.log("Name invalid!\n");
+      setInErrorName(true);
+      Success = false;
+    }
+
+    if (!validateAmountInput(processedAmountInput)) {
+      console.log("Amount invalid!\n");
+      setInErrorAmount(true);
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  const validateNameInput = (processedNameInput) => {
+    let Success = true;
+
+    if (processedNameInput.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (processedNameInput.includes(';')) {
+      console.log("Invalid character found: ';'\n");
+      Success = false;
+    }
+
+    return Success;
   }
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <Modal visible={modalVisibility} transparent={true}> 
+    <Modal visible={modalVisibility}
+           transparent={true}> 
       <View style={styles.modalPositioning}>    
         <View style={[styles.modal, transactionToEdit && styles.edit, hidden && styles.hide]}>
-          <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} 
+                     onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
-          <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <CategoriesList setSelection={setCategoryInput} defaultSelection={categoryInput} setHidden={setHidden} />
-          {Platform.OS !== 'ios' &&
-            <View style={styles.modalButtonsContainer}>
-              {calendarShow &&
-                <DateTimePicker value={dateInput} onChange={onChangeDate} />
-              }       
-              <TextInput style={[styles.textInput, styles.textInputDate]} defaultValue={dateInput.toDateString()} editable={false} />
-              <Pressable style={({pressed}) => [styles.button, styles.smallButton, pressed && styles.pressed]} onPress={() => setCalendarShow(true)} >
-                <Text>c</Text>
-              </Pressable>
-            </View>
-          }
+          <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                     defaultValue={nameInput} 
+                     placeholder="Name" 
+                     onChangeText={(text) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
+                     defaultValue={amountInput.toString()} 
+                     placeholder="$ 0,000.00" 
+                     onChangeText={(text) => onTextChange(text, "amountInput")} />
+          <CategoriesList setSelection={setCategoryInput} 
+                          defaultSelection={categoryInput} 
+                          setHidden={setHidden} />
+
           {Platform.OS === 'ios' && 
-            <DateTimePicker value={dateInput} onChange={onChangeDate} />
-          }     
+          <DateTimePicker value={dateInput} 
+                          onChange={onChangeDate} />
+          }  
+          {Platform.OS !== 'ios' &&
+          <View style={styles.modalButtonsContainer}>
+            {calendarShow &&
+            <DateTimePicker value={dateInput} 
+                            onChange={onChangeDate} />
+            }       
+            <TextInput style={styles.textInputDate} 
+                       defaultValue={dateInput.toDateString()} 
+                       editable={false} />
+            <Pressable style={({pressed}) => [styles.smallButton, pressed && styles.pressed]} 
+                       onPress={() => setCalendarShow(true)} >
+              <Text>c</Text>
+            </Pressable>
+          </View>
+          }   
+          
           {transactionToEdit &&
-            <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
+          <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
           }
+
           <View style={styles.modalButtonsContainer}> 
-            {!transactionToEdit &&
-              <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction(true)} >
-                <Text>Add another</Text>
-              </Pressable>
-            }
             {transactionToEdit &&
-              <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
-                <Text>Delete</Text>
-              </Pressable>
+            <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
+                       onPress={() => removeItemHandler()}>
+              <Text>Delete</Text>
+            </Pressable>
             }
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewTransaction()}>
+            {!transactionToEdit &&
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                       onPress={() => createNewTransaction(true)} >
+              <Text>Add another</Text>
+            </Pressable>
+            }
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                       onPress={() => createNewTransaction()}>
               <Text>Confirm</Text>
             </Pressable>
           </View>

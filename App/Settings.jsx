@@ -1,14 +1,11 @@
-import {SafeAreaView} from "react-native-safe-area-context";
-import {styles} from "./Style";
+import {useState} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
-import {useState} from "react";
+import {SafeAreaView} from "react-native-safe-area-context";
+import {styles} from "./Style";
 
 import RemoveCategoryList from "./RemoveCategoryList";
 
-/* 
-   Class representing the settings screen of the application.
-*/
 const Settings = () => {
   const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}, {index: 3}]);
   
@@ -16,12 +13,12 @@ const Settings = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
+          <View style={styles.mainBodyContainerMicro}></View> 
         );
       }
       case 1: {
         return (
-          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
+          <View style={styles.mainBodyContainerMicro}></View> 
         );
       }
       case 2: {
@@ -31,13 +28,11 @@ const Settings = () => {
       }
       case 3: {
         return (
-          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro, styles.lastContainer]}></View>
+          <View style={[styles.mainBodyContainerMicro, styles.lastContainer]}></View>
         );
       }
       default: {
-        return (
-          <View style={[styles.mainBodyContainer, styles.mainBodyContainerMicro]}></View> 
-        );
+        break;
       }
     }
   }
@@ -46,7 +41,9 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.pageView}>
       <Text style={styles.headerText}>Settings</Text>      
-      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.index} />
+      <FlatList data={data} 
+                renderItem={(item) => renderItem(item)} 
+                keyExtractor={(item) => item.index} />
     </SafeAreaView> 
   );
 }

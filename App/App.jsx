@@ -1,9 +1,9 @@
-import {GestureHandlerRootView} from "react-native-gesture-handler";
-import {NavigationContainer} from "@react-navigation/native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
+import {NavigationContainer} from "@react-navigation/native";
+import {GestureHandlerRootView} from "react-native-gesture-handler";
 
-import CategoriesProvider from "./CategoriesProvider";
 import ExpensesProvider from "./ExpensesProvider";
+import CategoriesProvider from "./CategoriesProvider";
 import TransactionsProvider from "./TransactionsProvider";
 
 import BottomNavigation from "./BottomNavigation";

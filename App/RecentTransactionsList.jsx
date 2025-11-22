@@ -7,8 +7,9 @@ import TransactionsContext from "./TransactionsContext";
 
 const RecentTransactionsList = ({style}) => {
   const transactionsContext = useContext(TransactionsContext);
-  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
+
   const [data, setData] = useState([]);
+  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   useEffect(() => {
     fillData();
@@ -18,7 +19,12 @@ const RecentTransactionsList = ({style}) => {
     const newDataArray = [];
     transactionsContext.transactionData.map((element, index) => {
       if (index < 3)
-        newDataArray.push({index: index, id: element.getId(), name: element.getName(), amount: element.getAmount(), category: element.getCategory().getName(), date: new Date(element.getTransactionDate()).toLocaleDateString()});
+        newDataArray.push({index: index,
+                           id: element.getId(),
+                           name: element.getName(),
+                           amount: element.getAmount(), 
+                           category: element.getCategory().getName(), 
+                           date: new Date(element.getTransactionDate()).toLocaleDateString()});
     });
    
     setData(newDataArray);
@@ -27,21 +33,23 @@ const RecentTransactionsList = ({style}) => {
   const renderItem = ({item}) => {
     return (
       <View style={styles.listContainer}>
-        <Text style={[styles.listElement, styles.recentTransactionListElement, styles.listElementStart]}>{item.name}</Text>
-        <Text style={[styles.listElement, styles.recentTransactionListElement]}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={[styles.listElement, styles.recentTransactionListElement]}>{item.category}</Text>
-        <Text style={[styles.listElement, styles.recentTransactionListElement, styles.listElementEnd]}>{item.date}</Text>
+        <Text style={[styles.listElementStart, styles.recentTransactionListElement]}>{item.name}</Text>
+        <Text style={styles.recentTransactionListElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={styles.recentTransactionListElement}>{item.category}</Text>
+        <Text style={[styles.listElementEnd, styles.recentTransactionListElement]}>{item.date}</Text>
       </View>
     );
   }
 
-  // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={[styles.mainBodyContainer, style]}>
       <View style={styles.listContainer}>
-        <Text style={[styles.listElement, styles.listElementTitle]}>RECENT TRANSACTIONS</Text>
+        <Text style={styles.listElementTitle}>RECENT TRANSACTIONS</Text>
       </View>
-      <FlatList data={data} renderItem={(item) => renderItem(item)} keyExtractor={(item) => item.id} scrollEnabled={false} /> 
+      <FlatList data={data} 
+                renderItem={(item) => renderItem(item)} 
+                keyExtractor={(item) => item.id}
+                scrollEnabled={false} /> 
     </View>     
   );
 }

@@ -6,9 +6,6 @@ import {styles} from "./Style";
 import TransactionsList from "./TransactionsList";
 import TransactionsContext from "./TransactionsContext";
 
-/* 
-   Class representing the transactions screen of the application.
-*/
 const Transactions = () => {
   const transactionContext = useContext(TransactionsContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});

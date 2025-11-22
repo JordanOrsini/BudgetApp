@@ -5,8 +5,8 @@ import Category from "./Category";
 import CategoriesContext from "./CategoriesContext";
 
 const CategoriesProvider = ({children}) => {
-  const [categoryData, setCategoryData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [categoryData, setCategoryData] = useState([]);
 
   // Check if user saved data exists on component mount.
   useEffect(() => {
@@ -24,44 +24,6 @@ const CategoriesProvider = ({children}) => {
     
     fetchData();
   }, []);
-
-  // Custom setter, writing memory's contents to file before updating categoryData.
-  const _setCategoryData = (newData) => {
-    let stringToWrite = "";
-    newData.map((item) => {
-      stringToWrite = stringToWrite + item.toStringCategory() + "\n";
-    });
-
-    console.log("stringToWrite:\n", stringToWrite);
-
-    try {
-      RNFS.writeFile(filePath, stringToWrite, "utf8");
-    }
-    catch (error) {
-      console.error("Error writing to file: ", error);
-      return;
-    }
-    
-    setCategoryData(newData);
-  }
-
-  const findCategoryByName = (name) => {
-    const filteredData = categoryData.filter(element => 
-      element.getName().toLowerCase().includes(name.toLowerCase())
-    );
-
-    if (filteredData.length !== 1)
-      return;
-    
-    return (filteredData[0]);
-  }
-
-  // Values to expose in our context.
-  const contextValue = {
-    categoryData,
-    _setCategoryData,
-    findCategoryByName,
-  }
 
   // File path of our saved category data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/CategoryData.txt";
@@ -98,6 +60,17 @@ const CategoriesProvider = ({children}) => {
     await readAndParseFile();
   }
 
+  const findCategoryByName = (name) => {
+    const filteredData = categoryData.filter(element => 
+      element.getName().toLowerCase().includes(name.toLowerCase())
+    );
+
+    if (filteredData.length !== 1)
+      return;
+    
+    return (filteredData[0]);
+  }
+
   async function readAndParseFile() {
     try {
       // [TODO]: Temporarily write to file for testing.
@@ -127,6 +100,33 @@ const CategoriesProvider = ({children}) => {
       console.error("Error reading file: ", error); 
       return;
     }
+  }
+
+  // Custom setter, writing memory's contents to file before updating categoryData.
+  const _setCategoryData = (newData) => {
+    let stringToWrite = "";
+    newData.map((item) => {
+      stringToWrite = stringToWrite + item.toStringCategory() + "\n";
+    });
+
+    console.log("stringToWrite:\n", stringToWrite);
+
+    try {
+      RNFS.writeFile(filePath, stringToWrite, "utf8");
+    }
+    catch (error) {
+      console.error("Error writing to file: ", error);
+      return;
+    }
+    
+    setCategoryData(newData);
+  }
+
+  // Values to expose in our context.
+  const contextValue = {
+    categoryData,
+    _setCategoryData,
+    findCategoryByName,
   }
 
   if (loading) {

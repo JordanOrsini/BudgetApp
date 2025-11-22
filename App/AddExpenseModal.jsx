@@ -17,14 +17,6 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
   const [inErrorAmount, setInErrorAmount] = useState(false);
 
   useEffect(() => {
-    if (expenseToEdit) {
-      setNameInput(expenseToEdit.getName());
-      setAmountInput(expenseToEdit.getAmount());
-      setIntervalInput(expenseToEdit.getInterval());
-    }
-  }, [expenseToEdit]);
-
-  useEffect(() => {
     setInErrorName(false);
   }, [nameInput]);
   
@@ -32,14 +24,13 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
     setInErrorAmount(false);
   }, [amountInput]);
 
-  const closeModal = () => {
-    clearModal();
-
-    if (expenseToEdit)
-      clearExpenseToEdit();
-
-    setVisibility(false);
-  }
+  useEffect(() => {
+    if (expenseToEdit) {
+      setNameInput(expenseToEdit.getName());
+      setAmountInput(expenseToEdit.getAmount());
+      setIntervalInput(expenseToEdit.getInterval());
+    }
+  }, [expenseToEdit]);
 
   const clearModal = () => {
     setNameInput("");
@@ -50,54 +41,13 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
     setInErrorAmount(false);
   }
 
-  const validateNameInput = (processedNameInput) => {
-    let Success = true;
+  const closeModal = () => {
+    clearModal();
 
-    if (processedNameInput.length === 0) {
-      console.log("Blank string!\n");
-      Success = false;
-    }
+    if (expenseToEdit)
+      clearExpenseToEdit();
 
-    if (processedNameInput.includes(';')) {
-      console.log("Invalid character found: ';'\n");
-      Success = false;
-    }
-
-    return Success;
-  }
-
-  const validateAmountInput = (processedAmountInput) => {
-    let Success = true;
-
-    if (processedAmountInput.length === 0) {
-      console.log("Blank string!\n");
-      Success = false;
-    }
-
-    if (isNaN(processedAmountInput)) {
-      console.log("Not a number!\n");
-      Success = false;
-    }
-
-    return Success;
-  }
-
-  const validateInputs = (processedNameInput, processedAmountInput) => {
-    let Success = true;
-
-    if (!validateNameInput(processedNameInput)) {
-      console.log("Name invalid!\n");
-      setInErrorName(true);
-      Success = false;
-    }
-
-    if (!validateAmountInput(processedAmountInput)) {
-      console.log("Amount invalid!\n");
-      setInErrorAmount(true);
-      Success = false;
-    }
-
-    return Success;
+    setVisibility(false);
   }
 
   const createNewExpense = (addAnother = false) => {
@@ -161,28 +111,90 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
     closeModal();
   }
 
+  const validateAmountInput = (processedAmountInput) => {
+    let Success = true;
+
+    if (processedAmountInput.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (isNaN(processedAmountInput)) {
+      console.log("Not a number!\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  const validateInputs = (processedNameInput, processedAmountInput) => {
+    let Success = true;
+
+    if (!validateNameInput(processedNameInput)) {
+      console.log("Name invalid!\n");
+      setInErrorName(true);
+      Success = false;
+    }
+
+    if (!validateAmountInput(processedAmountInput)) {
+      console.log("Amount invalid!\n");
+      setInErrorAmount(true);
+      Success = false;
+    }
+
+    return Success;
+  }
+
+  const validateNameInput = (processedNameInput) => {
+    let Success = true;
+
+    if (processedNameInput.length === 0) {
+      console.log("Blank string!\n");
+      Success = false;
+    }
+
+    if (processedNameInput.includes(';')) {
+      console.log("Invalid character found: ';'\n");
+      Success = false;
+    }
+
+    return Success;
+  }
+
   return (
-    <Modal visible={modalVisibility} transparent={true} >
+    <Modal visible={modalVisibility} 
+           transparent={true} >
       <View style={styles.modalPositioning}>
         <View style={[styles.modal, expenseToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.decline, pressed && styles.pressed]} onPress={() => closeModal()}>
+          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]}
+                     onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
-          <TextInput style={[styles.textInput, inErrorName && styles.decline]} defaultValue={nameInput} placeholder="Name" onChangeText={(text, id) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} defaultValue={amountInput.toString()} placeholder="$ 0,000.00" onChangeText={(text, id) => onTextChange(text, "amountInput")} />
-          <IntervalsList setSelection={setIntervalInput} defaultSelection={intervalInput} />
+          <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                     defaultValue={nameInput} 
+                     placeholder="Name" 
+                     onChangeText={(text) => onTextChange(text, "nameInput")} />
+          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]}
+                     defaultValue={amountInput.toString()} 
+                     placeholder="$ 0,000.00"
+                     onChangeText={(text) => onTextChange(text, "amountInput")} />
+          <IntervalsList setSelection={setIntervalInput} 
+                         defaultSelection={intervalInput} />
           <View style={styles.modalButtonsContainer}>
-            {!expenseToEdit &&
-              <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense(true)}>
-                <Text>Add another</Text>
-              </Pressable>
-            }
             {expenseToEdit &&
-              <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} onPress={() => removeItemHandler()}>
-                <Text>Delete</Text>
-              </Pressable>
+            <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
+                       onPress={() => removeItemHandler()}>
+              <Text>Delete</Text>
+            </Pressable>
             }
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} onPress={() => createNewExpense()}>
+            {!expenseToEdit &&
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                       onPress={() => createNewExpense(true)}>
+              <Text>Add another</Text>
+            </Pressable>
+            }         
+            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                       onPress={() => createNewExpense()}>
               <Text>Confirm</Text>
             </Pressable>
           </View>
