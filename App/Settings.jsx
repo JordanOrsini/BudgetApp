@@ -7,26 +7,33 @@ import {styles} from "./Style";
 import RemoveCategoryList from "./RemoveCategoryList";
 
 const Settings = () => {
-  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}, {index: 3}]);
+  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}, {index: 3}, {index: 4}]);
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <View style={styles.mainBodyContainerMicro}>
+            <Text style={styles.headerText}>Settings</Text>  
+          </View> 
         );
       }
       case 1: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <RemoveCategoryList />
         );
       }
       case 2: {
         return (
-          <RemoveCategoryList />
+          <View style={styles.mainBodyContainerMicro}></View>
         );
       }
       case 3: {
+        return (
+          <View style={styles.mainBodyContainerMicro}></View>
+        );
+      }
+      case 4: {
         return (
           <View style={[styles.mainBodyContainerMicro, styles.lastContainer]}></View>
         );
@@ -39,8 +46,7 @@ const Settings = () => {
 
   // Function that returns the contents of the settings screen.
   return (
-    <SafeAreaView style={styles.pageView}>
-      <Text style={styles.headerText}>Settings</Text>      
+    <SafeAreaView style={styles.pageView}>    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index} />

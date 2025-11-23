@@ -37,9 +37,10 @@ const ExpensesList = ({style}) => {
     setData(newDataArray);
   }
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}, data) => {
+    const isLastItem = (item.index === data.length - 1);
     return (
-      <View style={styles.listContainer}>
+      <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
         <Text style={[styles.listElementStart, styles.expenseListElement]}>{item.name}</Text>
         <Text style={styles.expenseListElement}>{myNumberFormatter.format(item.amount)}</Text>
         <Text style={[styles.listElementEnd, styles.expenseListElement]}>{item.interval}</Text>
@@ -53,18 +54,13 @@ const ExpensesList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainer, style]}>  
+    <View style={[styles.mainBodyContainerLarge, style]}>  
       <AddExpenseModal modalVisibility={modalVisible}
                        setVisibility={setModalVisible}
                        expenseToEdit={expenseToEdit}
                        clearExpenseToEdit={() => setExpenseToEdit(null)} />    
-      <View style={styles.listContainer}>
-        <Text style={[styles.listElementStart, styles.expenseListElement]}>Name</Text>
-        <Text style={styles.expenseListElement}>Amount</Text>
-        <Text style={[styles.listElementEnd, styles.expenseListTitleEnd]}>Interval</Text>
-      </View>
       <FlatList data={data} 
-                renderItem={(item) => renderItem(item)} 
+                renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index} /> 
     </View>
   );

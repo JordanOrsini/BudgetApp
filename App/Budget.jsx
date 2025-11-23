@@ -7,23 +7,20 @@ import {styles} from "./Style";
 import ExpensesList from "./ExpensesList";
 
 const Budget = () => {
-  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}]);
+  const [data, setData] = useState([{index: 0}, {index: 1}]);
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <ExpensesList />
+          <View style={styles.mainBodyContainerMicro}>
+            <Text style={styles.headerText}>Budget</Text>
+          </View>
         );
       }
       case 1: {
         return (
-          <View style={styles.mainBodyContainer}></View> 
-        );
-      }
-      case 2: {
-        return (
-          <View style={[styles.mainBodyContainer, styles.lastContainer]}></View>
+          <ExpensesList style={styles.lastContainer} />
         );
       }
       default: {
@@ -35,10 +32,10 @@ const Budget = () => {
   // Function that returns the contents of the budget screen.
   return (
     <SafeAreaView style={styles.pageView}>
-      <Text style={styles.headerText}>Budget</Text>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
-                keyExtractor={(item) => item.index} />
+                keyExtractor={(item) => item.index}
+                scrollEnabled={false} />
     </SafeAreaView>
   );
 }

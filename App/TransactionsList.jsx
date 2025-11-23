@@ -60,12 +60,6 @@ const TransactionsList = ({style}) => {
                            setVisibility={setModalVisible} 
                            transactionToEdit={transactionToEdit} 
                            clearTransactionToEdit={() => setTransactionToEdit(null)} />
-      <View style={styles.listContainer}>
-        <Text style={styles.listElementStart}>Name</Text>
-        <Text style={styles.listElement}>Amount</Text>
-        <Text style={styles.listElement}>Category</Text>
-        <Text style={styles.transactionListTitleEnd}>Date</Text>
-      </View>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index} /> 

@@ -14,7 +14,9 @@ const Overview  = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}></View> 
+          <View style={styles.mainBodyContainerMicro}>
+            <Text style={styles.headerText}>Overview</Text>
+          </View> 
         );
       }
       case 1: {
@@ -36,7 +38,6 @@ const Overview  = () => {
   // Function that returns the contents of the overview screen.
   return (
     <SafeAreaView style={styles.pageView}>
-      <Text style={styles.headerText}>Overview</Text>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index} />

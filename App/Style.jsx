@@ -135,7 +135,7 @@ export const styles = StyleSheet.create({
   },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
-    flex: 1,
+    height: 640,
   },
   mainBodyContainerMicro: { 
     ...mainBodyContainer, 
@@ -161,16 +161,13 @@ export const styles = StyleSheet.create({
     ...listElement,
     width: 105,
   },
-  expenseListTitleEnd: {
-    width: 150,
-  },
   lastItem: {
     ...Platform.select({
       ios: {
         paddingBottom: 75,
       },
       default: {
-        paddingBottom: 100,
+        paddingBottom: 85,
       },    
     }),
   },
@@ -191,11 +188,6 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
   },
-  listElementTitle: {
-    ...listElement,
-    width: 360,
-    borderRadius: 20,
-  },
   recentExpenseListElement: {
     ...listElement,
     width: 120,
@@ -203,10 +195,6 @@ export const styles = StyleSheet.create({
   recentTransactionListElement: {
     ...listElement,
     width: 90,
-  },
-  transactionListTitleEnd: {
-    ...listElementEnd,
-    width: 120,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Modal classes ////////////////////////////////////////////////////////////////////////////////

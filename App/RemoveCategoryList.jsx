@@ -48,14 +48,11 @@ const RemoveCategoryList = ({style}) => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View>
-      <View style={[styles.mainBodyContainer, style]}>
+      <View style={[styles.mainBodyContainerMicro, style]}>
         <AddCategoryModal modalVisibility={modalVisible} 
                           setVisibility={setModalVisible}
                           categoryToEdit={categoryToEdit} 
                           clearCategoryToEdit={() => setCategoryToEdit(null)} />
-        <View style={styles.listContainer}>
-          <Text style={styles.listElementTitle}>REMOVE CATEGORIES</Text>
-        </View>
         <FlatList data={data} 
                   renderItem={(item) => renderItem(item)} 
                   keyExtractor={(item) => item.id} /> 

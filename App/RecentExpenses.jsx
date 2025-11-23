@@ -18,7 +18,7 @@ const RecentTransactionsList = ({style}) => {
   const fillData = () => {
     const newDataArray = [];
     expensesContext.expenseData.map((element, index) => {
-      if (index < 3)
+      if (index < 4)
         newDataArray.push({index: index, 
                            id: element.getId(), 
                            name: element.getName(), 
@@ -41,9 +41,6 @@ const RecentTransactionsList = ({style}) => {
 
   return (
     <View style={[styles.mainBodyContainer, style]}>
-      <View style={styles.listContainer}>
-        <Text style={styles.listElementTitle}>RECENT EXPENSES</Text>
-      </View>
       <FlatList data={data}
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.id} 
