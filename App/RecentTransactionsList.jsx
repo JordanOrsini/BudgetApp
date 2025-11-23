@@ -18,7 +18,7 @@ const RecentTransactionsList = ({style}) => {
   const fillData = () => {
     const newDataArray = [];
     transactionsContext.transactionData.map((element, index) => {
-      if (index < 4)
+      if (index < 5)
         newDataArray.push({index: index,
                            id: element.getId(),
                            name: element.getName(),

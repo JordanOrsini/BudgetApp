@@ -19,7 +19,7 @@ const Transactions = () => {
         return (
           <View style={styles.mainBodyContainerMicro}>      
             <Text style={styles.headerText}>Transactions</Text>
-            <Text>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
+            <Text style={styles.text}>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
           </View>
         );
       }

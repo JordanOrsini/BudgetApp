@@ -20,7 +20,7 @@ const listElement = {
   paddingTop: 10,
   height: 40,
   backgroundColor: "#FFFFFF",
-  width: 80,
+  width: 82,
 };
 
 const listElementEnd = {
@@ -135,7 +135,14 @@ export const styles = StyleSheet.create({
   },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
-    height: 640,
+    ...Platform.select({
+      ios: {
+        height: 580,
+      },
+      default: {
+        height: 640,
+      },    
+    }),
   },
   mainBodyContainerMicro: { 
     ...mainBodyContainer, 
@@ -154,17 +161,17 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   categoryListElement: {
     ...listElement,
-    width: 325,
+    width: 330,
     borderRadius: 20,
   },
   expenseListElement: {
     ...listElement,
-    width: 105,
+    width: 110,
   },
   lastItem: {
     ...Platform.select({
       ios: {
-        paddingBottom: 75,
+        paddingBottom: 70,
       },
       default: {
         paddingBottom: 85,
@@ -174,8 +181,8 @@ export const styles = StyleSheet.create({
   listContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   listElement: {
     ...listElement,
@@ -274,6 +281,9 @@ export const styles = StyleSheet.create({
   headerText: {
     fontSize: 50,
     fontWeight: "bold",
+  },
+  text: {
+    fontSize: 20,
   },
   textInput: {
     ...textInput,
