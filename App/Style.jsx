@@ -152,6 +152,7 @@ export const styles = StyleSheet.create({
   },
   pageView: {
     alignItems: "center",
+    justifyContent: "center",
     flex: 1,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -286,7 +287,7 @@ export const styles = StyleSheet.create({
   textInput: {
     ...appShadows,
     borderRadius: 20,
-    width: "100%",
+    width: 275,
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: "#FFFFFF",
@@ -297,6 +298,6 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   calendarIcon: {
     position: "absolute",
-    marginLeft: 150,
+    marginLeft: 140,
   },
 });

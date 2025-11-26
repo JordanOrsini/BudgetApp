@@ -107,7 +107,7 @@ const TransactionsProvider = ({children}) => {
       console.log("File content:\n", content);
           
       // Split the content by line
-      const lines = content.split('\n');
+      const lines = content.split("\n");
       console.log("Lines:\n", lines); 
 
       const transactionObjectArray = [];

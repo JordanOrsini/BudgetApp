@@ -1,13 +1,15 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
 import RecentExpenses from "./RecentExpenses";
+import UserDataContext from "./UserDataContext";
 import RecentTransactionsList from "./RecentTransactionsList";
 
 const Overview  = () => {
+  const userDataContext = useContext(UserDataContext);
   const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}]);
   
   const renderItem = ({item}) => {
@@ -16,6 +18,7 @@ const Overview  = () => {
         return (
           <View style={styles.mainBodyContainerMicro}>
             <Text style={styles.headerText}>Overview</Text>
+            <Text style={styles.text}>Welcome {userDataContext.userData.getName()}!</Text>
           </View> 
         );
       }

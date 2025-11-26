@@ -83,7 +83,7 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
       Success = false;
     }
 
-    if (processedNameInput.includes(';')) {
+    if (processedNameInput.includes(";")) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }

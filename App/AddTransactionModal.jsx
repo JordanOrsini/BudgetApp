@@ -61,7 +61,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
 
   const createNewTransaction = (addAnother = false) => {
     const processedNameInput = nameInput.trim();
-    const processedAmountInput = parseFloat(amountInput).toFixed(2);
+    const processedAmountInput = parseFloat(parseFloat(amountInput).toFixed(2));
     const processedDateInput = dateInput.getTime();
 
     if (transactionToEdit && 
@@ -172,7 +172,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
       Success = false;
     }
 
-    if (processedNameInput.includes(';')) {
+    if (processedNameInput.includes(";")) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }

@@ -153,7 +153,7 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
       Success = false;
     }
 
-    if (processedNameInput.includes(';')) {
+    if (processedNameInput.includes(";")) {
       console.log("Invalid character found: ';'\n");
       Success = false;
     }

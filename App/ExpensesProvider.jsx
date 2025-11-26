@@ -90,13 +90,13 @@ const ExpensesProvider = ({children}) => {
       console.log("File content:\n", content);
           
       // Split the content by line
-      const lines = content.split('\n');
+      const lines = content.split("\n");
       console.log("Lines:\n", lines); 
 
       const expenseObjectArray = [];
       lines.map((item) => {
         if (item != "") {      
-          const expenseDataArray = item.split(';');
+          const expenseDataArray = item.split(";");
   
           expenseObjectArray.push(new Expense({name: expenseDataArray[0], 
                                                amount: parseFloat(expenseDataArray[1]), 

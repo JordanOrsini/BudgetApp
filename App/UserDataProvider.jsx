@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 
+import User from "./User";
 import RNFS from "react-native-fs";
-import Category from "./Category";
-import CategoriesContext from "./CategoriesContext";
+import UserDataContext from "./UserDataContext";
 
-const CategoriesProvider = ({children}) => {
+const UserDataProvider = ({children}) => {
   const [loading, setLoading] = useState(true);
-  const [categoryData, setCategoryData] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   // Check if user saved data exists on component mount.
   useEffect(() => {
@@ -25,15 +25,11 @@ const CategoriesProvider = ({children}) => {
     fetchData();
   }, []);
 
-  // File path of our saved category data. Not user accessible. Cross-platform.
-  const filePath = RNFS.DocumentDirectoryPath + "/CategoryData.txt";
+  // File path of our saved user data. Not user accessible. Cross-platform.
+  const filePath = RNFS.DocumentDirectoryPath + "/UserData.txt";
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = "NONE;none.svg\n" +
-                              "HOME;home.svg\n" +
-                              "WORK;work.svg\n" +
-                              "SCHOOL;school.svg\n" +
-                              "CAR;car.svg";
+  const defaultFileContents = "Jordan;50000";
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -60,17 +56,6 @@ const CategoriesProvider = ({children}) => {
     await readAndParseFile();
   }
 
-  const findCategoryByName = (name) => {
-    const filteredData = categoryData.filter(element => 
-      element.getName().toLowerCase().includes(name.toLowerCase())
-    );
-
-    if (filteredData.length !== 1)
-      return;
-    
-    return (filteredData[0]);
-  }
-
   async function readAndParseFile() {
     try {
       // [TODO]: Temporarily write to file for testing.
@@ -80,21 +65,15 @@ const CategoriesProvider = ({children}) => {
       console.log("File content:\n", content);
           
       // Split the content by line
-      const lines = content.split("\n");
-      console.log("Lines:\n", lines); 
+      const data = content.split(";");
+      console.log("Data:\n", data); 
 
-      const categoriesArray = [];
-      lines.map((item) => {
-        if (item != "") {      
-          const categoryDataArray = item.split(";");
-          categoriesArray.push(new Category({name: categoryDataArray[0], 
-                                             iconPath: categoryDataArray[1]
-                                            })); 
-        }
-      });
+      const newUserObject = new User({name: data[0], 
+                                      salary: parseFloat(data[1])
+                                     }); 
 
       // Update state with parsed data
-      setCategoryData(categoriesArray);
+      setUserData(newUserObject);
     } 
     catch (error) {
       console.error("Error reading file: ", error); 
@@ -102,13 +81,9 @@ const CategoriesProvider = ({children}) => {
     }
   }
 
-  // Custom setter, writing memory's contents to file before updating categoryData.
-  const _setCategoryData = (newData) => {
-    let stringToWrite = "";
-    newData.map((item) => {
-      stringToWrite = stringToWrite + item.toStringCategory() + "\n";
-    });
-
+  // Custom setter, writing memory's contents to file before updating userData.
+  const _setUserData = (newData) => {
+    const stringToWrite = newData.toString();
     console.log("stringToWrite:\n", stringToWrite);
 
     try {
@@ -119,14 +94,13 @@ const CategoriesProvider = ({children}) => {
       return;
     }
     
-    setCategoryData(newData);
+    setUserData(newData);
   }
 
   // Values to expose in our context.
   const contextValue = {
-    categoryData,
-    _setCategoryData,
-    findCategoryByName,
+    userData,
+    _setUserData,
   }
 
   if (loading) {
@@ -134,10 +108,10 @@ const CategoriesProvider = ({children}) => {
   }
 
   return (
-    <CategoriesContext.Provider value={contextValue}>
+    <UserDataContext.Provider value={contextValue}>
       {children}
-    </CategoriesContext.Provider>
+    </UserDataContext.Provider>
   );
 }
 
-export default CategoriesProvider;
+export default UserDataProvider;
