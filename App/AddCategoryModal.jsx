@@ -37,6 +37,7 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
 
   const createNewCategory = () => {
     const processedNameInput = nameInput.trim().toUpperCase();
+    
     if (categoryToEdit && categoryToEdit.getName() === processedNameInput) {
       closeModal();
       return;

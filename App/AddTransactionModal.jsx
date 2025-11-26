@@ -73,7 +73,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
       return;
     }
 
-    if (!validateInputs(processedNameInput, processedAmountInput))
+    if (!validateInputs(processedNameInput))
       return;
 
     if (transactionToEdit) {
@@ -130,15 +130,15 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
     closeModal();
   }
 
-  const validateAmountInput = (processedAmountInput) => {
+  const validateAmountInput = () => {
     let Success = true;
 
-    if (processedAmountInput.length === 0) {
+    if (amountInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(processedAmountInput)) {
+    if (isNaN(amountInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -146,7 +146,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
     return Success;
   }
 
-  const validateInputs = (processedNameInput, processedAmountInput) => {
+  const validateInputs = (processedNameInput) => {
     let Success = true;
 
     if (!validateNameInput(processedNameInput)) {
@@ -155,7 +155,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
       Success = false;
     }
 
-    if (!validateAmountInput(processedAmountInput)) {
+    if (!validateAmountInput()) {
       console.log("Amount invalid!\n");
       setInErrorAmount(true);
       Success = false;

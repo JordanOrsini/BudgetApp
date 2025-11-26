@@ -5,7 +5,7 @@ class User {
   #name = null;
   #salary = null;
 
-  constructor ({name, salary}) {
+  constructor (name = "New User", salary = 0) {
     this.#name = name;
     this.#salary = salary;
   }

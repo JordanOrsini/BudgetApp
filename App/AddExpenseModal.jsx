@@ -52,7 +52,7 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
 
   const createNewExpense = (addAnother = false) => {
     const processedNameInput = nameInput.trim();
-    const processedAmountInput = parseFloat(amountInput).toFixed(2);
+    const processedAmountInput = parseFloat(parseFloat(amountInput).toFixed(2));
 
     if (expenseToEdit && 
         expenseToEdit.getName() === processedNameInput &&
@@ -62,7 +62,7 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
       return;
     }
 
-    if (!validateInputs(processedNameInput, processedAmountInput))
+    if (!validateInputs(processedNameInput))
       return;
 
     if (expenseToEdit) {
@@ -111,15 +111,15 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
     closeModal();
   }
 
-  const validateAmountInput = (processedAmountInput) => {
+  const validateAmountInput = () => {
     let Success = true;
 
-    if (processedAmountInput.length === 0) {
+    if (amountInput.length === 0) {
       console.log("Blank string!\n");
       Success = false;
     }
 
-    if (isNaN(processedAmountInput)) {
+    if (isNaN(amountInput)) {
       console.log("Not a number!\n");
       Success = false;
     }
@@ -127,7 +127,7 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
     return Success;
   }
 
-  const validateInputs = (processedNameInput, processedAmountInput) => {
+  const validateInputs = (processedNameInput) => {
     let Success = true;
 
     if (!validateNameInput(processedNameInput)) {
@@ -136,7 +136,7 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
       Success = false;
     }
 
-    if (!validateAmountInput(processedAmountInput)) {
+    if (!validateAmountInput()) {
       console.log("Amount invalid!\n");
       setInErrorAmount(true);
       Success = false;

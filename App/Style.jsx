@@ -77,6 +77,11 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     height: 80,
   },
+  deleteAllButton: {
+    ...button,
+    height: 80,
+    width: 160,
+  },
   smallButton: {
     ...button,
     width: 20,

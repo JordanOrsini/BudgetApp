@@ -1,13 +1,17 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
 import ExpensesList from "./ExpensesList";
+import UserDataContext from "./UserDataContext";
 
 const Budget = () => {
+  const userDataContext = useContext(UserDataContext);
+
   const [data, setData] = useState([{index: 0}, {index: 1}]);
+  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   
   const renderItem = ({item}) => {
     switch (item.index) {
@@ -15,6 +19,7 @@ const Budget = () => {
         return (
           <View style={styles.mainBodyContainerMicro}>
             <Text style={styles.headerText}>Budget</Text>
+            <Text style={styles.text}>Salary: {myNumberFormatter.format(userDataContext.userData.getSalary())}</Text>
           </View>
         );
       }

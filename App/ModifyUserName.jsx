@@ -8,8 +8,12 @@ import UserDataContext from "./UserDataContext";
 const RemoveUserName = ({style}) => {
   const userDataContext = useContext(UserDataContext);
 
-  const [nameInput, setNameInput] = useState(userDataContext.userData.getName());
+  const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
+
+  useEffect(() => {
+    setNameInput(userDataContext.userData.getName());
+  }, [userDataContext.userData]);
 
   useEffect(() => {
     setInErrorName(false);
@@ -28,8 +32,9 @@ const RemoveUserName = ({style}) => {
       return;
     }
 
-    userDataContext._setUserData(new User({name: processedNameInput,
-                                           salary: userDataContext.userData.getSalary()}));
+    userDataContext._setUserData(new User(processedNameInput, // name
+                                          userDataContext.userData.getSalary() // salary
+                                         )); 
   }
 
   const onTextChange = (text) => {
@@ -53,20 +58,18 @@ const RemoveUserName = ({style}) => {
   }
 
   return (
-    <View>
-      <View style={[styles.mainBodyContainerMicro, style]}>
-        <View style={styles.pageView}>
-          <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                     defaultValue={nameInput} 
-                     placeholder="Name" 
-                     onChangeText={(text) => onTextChange(text)} /> 
-          <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
-                     onPress={() => modifyUserName()} >
-            <Text>Edit</Text>
-          </Pressable> 
-        </View>  
-      </View>     
-    </View>
+    <View style={[styles.mainBodyContainerMicro, style]}>
+      <View style={styles.pageView}>
+        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                   defaultValue={nameInput} 
+                   placeholder="Name" 
+                   onChangeText={(text) => onTextChange(text)} /> 
+        <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
+                   onPress={() => modifyUserName()} >
+          <Text>Edit</Text>
+        </Pressable> 
+      </View>  
+    </View>     
   );
 }
 

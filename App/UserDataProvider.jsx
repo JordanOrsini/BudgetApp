@@ -68,9 +68,9 @@ const UserDataProvider = ({children}) => {
       const data = content.split(";");
       console.log("Data:\n", data); 
 
-      const newUserObject = new User({name: data[0], 
-                                      salary: parseFloat(data[1])
-                                     }); 
+      const newUserObject = new User(data[0], // name
+                                     parseFloat(data[1]) // salary
+                                    ); 
 
       // Update state with parsed data
       setUserData(newUserObject);

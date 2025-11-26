@@ -4,6 +4,8 @@ import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
+import ModifySalary from "./ModifySalary";
+import DeleteAllData from "./DeleteAllData";
 import ModifyUserName from "./ModifyUserName";
 import RemoveCategoryList from "./RemoveCategoryList";
 
@@ -26,7 +28,7 @@ const Settings = () => {
       }
       case 2: {
         return (
-          <RemoveCategoryList />
+          <ModifySalary />
         );
       }
       case 3: {
@@ -36,7 +38,7 @@ const Settings = () => {
       }
       case 4: {
         return (
-          <View style={[styles.mainBodyContainerMicro, styles.lastContainer]}></View>
+          <DeleteAllData style={styles.lastContainer} />
         );
       }
       default: {
