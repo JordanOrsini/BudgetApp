@@ -3,7 +3,21 @@ import {Platform, StyleSheet} from "react-native";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Inheritance CSS classes ////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+const appShadows = {
+  ...Platform.select({
+    ios: {
+      shadowColor: "#000",
+      shadowOffset: {width: 0, height: 5},
+      shadowOpacity: 0.3,
+      shadowRadius: 5,
+    },
+    default: {
+      elevation: 5,
+    },    
+  }),
+};
 const button = {
+  ...appShadows,
   backgroundColor: "#FFFFFF",
   width: 80,
   height: 40,
@@ -11,9 +25,7 @@ const button = {
   alignItems: "center",
   justifyContent: "center",
   margin: 10,
-  elevation: 5,
 };
-
 const listElement = {
   paddingLeft: 10,
   paddingRight: 10,
@@ -22,13 +34,11 @@ const listElement = {
   backgroundColor: "#FFFFFF",
   width: 82,
 };
-
 const listElementEnd = {
   ...listElement,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
 };
-
 const mainBodyContainer = {
   backgroundColor: "#E1E1E1",
   padding: 10,
@@ -37,18 +47,16 @@ const mainBodyContainer = {
   borderRadius: 30,
   height: 320,
 };
-
 const modal = {
+  ...appShadows,
   margin: 20,
   backgroundColor: "#ECECEC",
   borderRadius: 20,
   padding: 35,
   alignItems: "center",
-  elevation: 5,
 };
-
 const navButton = {
-  elevation: 5,
+  ...appShadows,
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "#FFFFFF",
@@ -276,13 +284,13 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   textInput: {
+    ...appShadows,
     borderRadius: 20,
     width: "100%",
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: "#FFFFFF",
     padding: "10",
-    elevation: 5,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Icon CSS classes /////////////////////////////////////////////////////////////////////////////
