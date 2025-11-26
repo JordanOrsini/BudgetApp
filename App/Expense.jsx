@@ -9,7 +9,7 @@ class Expense {
   #amount = null;
   #interval = null;
 
-  constructor ({name, amount, interval}) {
+  constructor(name = "", amount = 0, interval = "NONE") {
     this.#id = Expense.id;
     Expense.id++;
 
@@ -19,34 +19,34 @@ class Expense {
   }
 
   // amount
-  getAmount () {
+  getAmount() {
     return this.#amount;
   }
 
-  setAmount (newAmount) {
+  setAmount(newAmount) {
     this.#amount = newAmount;
   }
 
   // id
-  getId () {
+  getId() {
     return this.#id;
   }
 
   // interval
-  getInterval () {
+  getInterval() {
     return this.#interval;
   }
 
-  setInterval (newInterval) {
+  setInterval(newInterval) {
     this.#interval = newInterval;
   }
 
   // name
-  getName () {
+  getName() {
     return this.#name;
   }
 
-  setName (newName) {
+  setName(newName) {
     this.#name = newName;
   }
 

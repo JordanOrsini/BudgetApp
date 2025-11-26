@@ -11,7 +11,7 @@ class Transaction {
   #transactionDate = null;
   #creationDate = null
 
-  constructor ({name, amount, category, transactionDate, creationDate}) {
+  constructor(name = "", amount = "0", category = null, transactionDate = 1598051730000, creationDate = 1598051730000) {
     this.#id = Transaction.id;
     Transaction.id++;
 
@@ -23,25 +23,25 @@ class Transaction {
   }
 
   // amount
-  getAmount () {
+  getAmount() {
     return this.#amount;
   }
 
-  setAmount (newAmount) {
+  setAmount(newAmount) {
     this.#amount = newAmount;
   }
 
   // category
-  getCategory () {
+  getCategory() {
     return this.#category;
   }
 
-  setCategory (newCategory) {
+  setCategory(newCategory) {
     this.#category = newCategory;
   }
 
   // creationDate
-  getCreationDate () {
+  getCreationDate() {
     return this.#creationDate;
   }
 
@@ -51,20 +51,20 @@ class Transaction {
   }
 
   // name
-  getName () {
+  getName() {
     return this.#name;
   }
 
-  setName (newName) {
+  setName(newName) {
     this.#name = newName;
   }
 
   // transactionDate
-  getTransactionDate () {
+  getTransactionDate() {
     return this.#transactionDate;
   }
 
-  setTransactionDate (newTransactionDate) {
+  setTransactionDate(newTransactionDate) {
     this.#transactionDate = newTransactionDate;
   }
 

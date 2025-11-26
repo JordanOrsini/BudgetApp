@@ -5,26 +5,26 @@ class Category {
   #name = null;
   #iconPath = null;
 
-  constructor ({name, iconPath}) {
+  constructor(name = "NONE", iconPath = "none.svg") {
     this.#name = name;
     this.#iconPath = iconPath;
   }
 
   // iconPath
-  getIconPath () {
+  getIconPath() {
     return this.#iconPath;
   }
 
-  setIconPath (newIconPath) {
+  setIconPath(newIconPath) {
     this.#iconPath = newIconPath;
   }
 
   // name
-  getName () {
+  getName() {
     return this.#name;
   }
   
-  setName (newName) {
+  setName(newName) {
     this.#name = newName;
   }
 

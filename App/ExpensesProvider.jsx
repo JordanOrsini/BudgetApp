@@ -98,10 +98,10 @@ const ExpensesProvider = ({children}) => {
         if (item != "") {      
           const expenseDataArray = item.split(";");
   
-          expenseObjectArray.push(new Expense({name: expenseDataArray[0], 
-                                               amount: parseFloat(expenseDataArray[1]), 
-                                               interval: expenseDataArray[2]
-                                              })); 
+          expenseObjectArray.push(new Expense(expenseDataArray[0], // name
+                                              parseFloat(expenseDataArray[1]), // amount
+                                              expenseDataArray[2] // interval
+                                             )); 
         }
       });
 

@@ -54,9 +54,7 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
       categoriesContext._setCategoryData([...categoriesContext.categoryData]);
     }
     else {
-      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category({name: processedNameInput,
-                                                                                           iconPath: "none.svg"
-                                                                                          })]);
+      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category(processedNameInput)]);
 
       setSelectionInput(processedNameInput);
     }

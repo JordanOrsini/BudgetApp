@@ -73,10 +73,10 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
       expensesContext._setExpenseData([...expensesContext.expenseData]);
     }
     else {
-      const newExpenseObject = new Expense({name: processedNameInput,
-                                            amount: processedAmountInput,
-                                            interval: intervalInput
-                                           });
+      const newExpenseObject = new Expense(processedNameInput, // name
+                                           processedAmountInput, // amount
+                                           intervalInput // interval
+                                          );
 
       expensesContext._setExpenseData([newExpenseObject, ...expensesContext.expenseData]);
     }

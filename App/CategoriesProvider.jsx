@@ -87,9 +87,9 @@ const CategoriesProvider = ({children}) => {
       lines.map((item) => {
         if (item != "") {      
           const categoryDataArray = item.split(";");
-          categoriesArray.push(new Category({name: categoryDataArray[0], 
-                                             iconPath: categoryDataArray[1]
-                                            })); 
+          categoriesArray.push(new Category(categoryDataArray[0], // name
+                                            categoryDataArray[1] // iconPath
+                                           )); 
         }
       });
 

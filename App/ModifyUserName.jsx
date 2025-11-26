@@ -62,7 +62,7 @@ const RemoveUserName = ({style}) => {
       <View style={styles.pageView}>
         <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                    defaultValue={nameInput} 
-                   placeholder="Name" 
+                   placeholder="User name" 
                    onChangeText={(text) => onTextChange(text)} /> 
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
                    onPress={() => modifyUserName()} >

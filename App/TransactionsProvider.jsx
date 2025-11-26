@@ -116,12 +116,12 @@ const TransactionsProvider = ({children}) => {
           const transactionDataArray = item.split(";");
 
           const categoryObject = categoriesContext.findCategoryByName(transactionDataArray[2]);   
-          transactionObjectArray.push(new Transaction({name: transactionDataArray[0], 
-                                                       amount: parseFloat(transactionDataArray[1]), 
-                                                       category: categoryObject, 
-                                                       transactionDate: parseInt(transactionDataArray[3]),
-                                                       creationDate: parseInt(transactionDataArray[4])                                                 
-                                                      })); 
+          transactionObjectArray.push(new Transaction(transactionDataArray[0], // name
+                                                      parseFloat(transactionDataArray[1]), // amount
+                                                      categoryObject, // category 
+                                                      parseInt(transactionDataArray[3]), // transactionDate
+                                                      parseInt(transactionDataArray[4]) // creationDate                                        
+                                                     )); 
         }
       });
 

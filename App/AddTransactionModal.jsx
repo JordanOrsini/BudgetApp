@@ -88,12 +88,12 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
     }
     else {
       const categoryObject = categoriesContext.findCategoryByName(categoryInput);
-      const newTransaction = new Transaction({name: processedNameInput, 
-                                              amount: processedAmountInput, 
-                                              category: categoryObject, 
-                                              transactionDate: processedDateInput,
-                                              creationDate: new Date().getTime()
-                                             }); 
+      const newTransaction = new Transaction(processedNameInput, // name
+                                             processedAmountInput, // amount
+                                             categoryObject, // category
+                                             processedDateInput, // transactionDate
+                                             new Date().getTime() // creationDate
+                                            ); 
                                        
       transactionsContext._setTransactionData([newTransaction, ...transactionsContext.transactionData]);
     }
