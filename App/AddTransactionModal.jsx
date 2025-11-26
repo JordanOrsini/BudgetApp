@@ -1,8 +1,7 @@
-import {useContext, useEffect, useState} from "react";
-import {Modal, Platform, Pressable, Text, TextInput, View} from "react-native";
+import {useContext, useEffect, useRef, useState} from "react";
+import {Modal, Pressable, Text, TextInput, View} from "react-native";
+import {DatePicker} from "@s77rt/react-native-date-picker";
 import {styles} from "./Style";
-
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Transaction from "./Transaction";
 import CategoriesList from "./CategoriesList";
@@ -22,7 +21,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
   const [inErrorAmount, setInErrorAmount] = useState(false);
 
   const [hidden, setHidden] = useState(false);
-  const [calendarShow, setCalendarShow] = useState(false);
+  const datePickerModal = useRef(null);
 
   useEffect(() => {
     setInErrorName(false);
@@ -49,8 +48,6 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
 
     setInErrorName(false);
     setInErrorAmount(false);
-
-    setCalendarShow(false);
   }
 
   const closeModal = () => {
@@ -105,13 +102,6 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
       clearModal();
     else
       closeModal();
-  }
-
-  const onChangeDate = (event, selectedDate) => {
-    setDateInput(selectedDate);
-
-    if (Platform.OS !== 'ios')
-      setCalendarShow(false);
   }
 
   const onTextChange = (text, id) => {
@@ -211,27 +201,17 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
           <CategoriesList setSelection={setCategoryInput} 
                           defaultSelection={categoryInput} 
                           setHidden={setHidden} />
-
-          {Platform.OS === 'ios' && 
-          <DateTimePicker value={dateInput} 
-                          onChange={onChangeDate} />
-          }  
-          {Platform.OS !== 'ios' &&
-          <View style={styles.modalButtonsContainer}>
-            {calendarShow &&
-            <DateTimePicker value={dateInput} 
-                            onChange={onChangeDate} />
-            }       
-            <TextInput style={styles.textInputDate} 
-                       defaultValue={dateInput.toDateString()} 
-                       editable={false} />
-            <Pressable style={({pressed}) => [styles.smallButton, pressed && styles.pressed]} 
-                       onPress={() => setCalendarShow(true)} >
-              <Text>c</Text>
-            </Pressable>
-          </View>
-          }   
-          
+          <DatePicker ref={datePickerModal}
+                      type="date"
+				              value={dateInput}
+				              onChange={setDateInput} />    
+          <Pressable style={({pressed}) => [styles.button, styles.textInput, pressed && styles.pressed]} 
+                     onPress={() => datePickerModal.current?.showPicker()}>
+            <View style={styles.modalButtonsContainer}>  
+              <Text>{dateInput.toLocaleDateString()}</Text>
+              <Text style={styles.calendarIcon}>📅</Text>
+            </View>
+            </Pressable>        
           {transactionToEdit &&
           <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
           }
