@@ -44,7 +44,7 @@ const TransactionsList = ({style}) => {
       <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
         <Pressable onPress={() => editItemHandler(item)}>
           {({pressed}) => (
-          <View style={styles.modalButtonsContainer}>
+          <View style={styles.horizontalContainer}>
             <Text style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
             <Text style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
             <Text style={[styles.listElement, pressed && styles.pressed]}>{item.category}</Text>

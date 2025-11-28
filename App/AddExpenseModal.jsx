@@ -180,7 +180,7 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
                      onChangeText={(text) => onTextChange(text, "amountInput")} />
           <IntervalsList setSelection={setIntervalInput} 
                          defaultSelection={intervalInput} />
-          <View style={styles.modalButtonsContainer}>
+          <View style={styles.horizontalContainer}>
             {expenseToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
                        onPress={() => removeItemHandler()}>

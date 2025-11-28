@@ -23,7 +23,7 @@ const Settings = () => {
       }
       case 1: {
         return (
-          <View style={styles.modalButtonsContainer}>
+          <View style={styles.horizontalContainer}>
             <ModifyUserName />
             <ModifySalary />
           </View>

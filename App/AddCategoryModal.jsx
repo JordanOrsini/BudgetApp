@@ -115,7 +115,7 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
                      defaultValue={nameInput} 
                      placeholder={"Name"} 
                      onChangeText={(text) => onTextChange(text)} />
-          <View style={styles.modalButtonsContainer}>
+          <View style={styles.horizontalContainer}>
             {categoryToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
                        onPress={() => removeItemHandler()}>

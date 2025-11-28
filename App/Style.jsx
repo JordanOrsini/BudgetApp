@@ -128,6 +128,9 @@ export const styles = StyleSheet.create({
     height: 200,
     width: 300,
   },
+  horizontalContainer: {
+    flexDirection: "row",
+  },
   intervalContainer: {
     height: 125,
     width: 300,
@@ -154,10 +157,10 @@ export const styles = StyleSheet.create({
     ...mainBodyContainer,
     ...Platform.select({
       ios: {
-        height: 580,
+        height: 640,
       },
       default: {
-        height: "690",
+        height: 690,
       },    
     }),
   },
@@ -223,11 +226,6 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   modal: {
     ...modal,
-  },
-  modalButtonsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
   },
   menuModal: {
     ...modal,

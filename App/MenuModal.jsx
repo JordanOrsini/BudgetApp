@@ -26,7 +26,7 @@ const MenuModal = ({modalVisibility, setVisibility}) => {
                      onPress={() => closeModal()}>
             <Text>x</Text>
           </Pressable>
-          <View style={styles.modalButtonsContainer}>
+          <View style={styles.horizontalContainer}>
             <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
                        onPress={() => setAddExpenseVisibility(true)}>
               <Text>Expense</Text>

@@ -207,7 +207,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
 				              onChange={setDateInput} />    
           <Pressable style={({pressed}) => [styles.button, styles.textInput, pressed && styles.pressed]} 
                      onPress={() => datePickerModal.current?.showPicker()}>
-            <View style={styles.modalButtonsContainer}>  
+            <View style={styles.horizontalContainer}>  
               <Text>{dateInput.toLocaleDateString()}</Text>
               <Text style={styles.calendarIcon}>📅</Text>
             </View>
@@ -216,7 +216,7 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
           <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
           }
 
-          <View style={styles.modalButtonsContainer}> 
+          <View style={styles.horizontalContainer}> 
             {transactionToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
                        onPress={() => removeItemHandler()}>
