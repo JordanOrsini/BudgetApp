@@ -33,10 +33,10 @@ const RecentTransactionsList = ({style}) => {
   const renderItem = ({item}) => {
     return (
       <View style={styles.listContainer}>
-        <Text style={[styles.listElementStart, styles.recentTransactionListElement]}>{item.name}</Text>
-        <Text style={styles.recentTransactionListElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={styles.recentTransactionListElement}>{item.category}</Text>
-        <Text style={[styles.listElementEnd, styles.recentTransactionListElement]}>{item.date}</Text>
+        <Text style={[styles.listElementStart, styles.listElement]}>{item.name}</Text>
+        <Text style={styles.listElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={styles.listElement}>{item.category}</Text>
+        <Text style={[styles.listElementEnd, styles.listElement]}>{item.date}</Text>
       </View>
     );
   }

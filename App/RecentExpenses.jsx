@@ -32,9 +32,9 @@ const RecentTransactionsList = ({style}) => {
   const renderItem = ({item}) => {
     return (
       <View style={styles.listContainer}>
-        <Text style={[styles.listElementStart, styles.recentExpenseListElement]}>{item.name}</Text>
-        <Text style={styles.recentExpenseListElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={[styles.listElementEnd, styles.recentExpenseListElement]}>{item.interval}</Text>
+        <Text style={[styles.listElementStart, styles.expenseListElement]}>{item.name}</Text>
+        <Text style={styles.expenseListElement}>{myNumberFormatter.format(item.amount)}</Text>
+        <Text style={[styles.listElementEnd, styles.expenseListElement]}>{item.interval}</Text>
       </View>
     );
   }

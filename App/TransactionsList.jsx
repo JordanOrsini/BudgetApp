@@ -42,13 +42,15 @@ const TransactionsList = ({style}) => {
     const isLastItem = (item.index === data.length - 1);
     return (
       <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
-        <Text style={styles.listElementStart}>{item.name}</Text>
-        <Text style={styles.listElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={styles.listElement}>{item.category}</Text>
-        <Text style={styles.listElementEnd}>{item.date}</Text>
-        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]} 
-                   onPress={() => editItemHandler(item)}>
-          <Text>e</Text>
+        <Pressable onPress={() => editItemHandler(item)}>
+          {({pressed}) => (
+          <View style={styles.modalButtonsContainer}>
+            <Text style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
+            <Text style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
+            <Text style={[styles.listElement, pressed && styles.pressed]}>{item.category}</Text>
+            <Text style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
+          </View>
+          )}
         </Pressable>
       </View>
     );

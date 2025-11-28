@@ -32,7 +32,7 @@ const listElement = {
   paddingTop: 10,
   height: 40,
   backgroundColor: "#FFFFFF",
-  width: 81,
+  width: 90,
 };
 const listElementEnd = {
   ...listElement,
@@ -189,7 +189,7 @@ export const styles = StyleSheet.create({
   },
   expenseListElement: {
     ...listElement,
-    width: 108,
+    width: 120,
   },
   lastItem: {
     ...Platform.select({
@@ -217,14 +217,6 @@ export const styles = StyleSheet.create({
     ...listElement,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
-  },
-  recentExpenseListElement: {
-    ...listElement,
-    width: 120,
-  },
-  recentTransactionListElement: {
-    ...listElement,
-    width: 90,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Modal CSS classes ////////////////////////////////////////////////////////////////////////////

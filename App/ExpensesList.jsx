@@ -41,12 +41,14 @@ const ExpensesList = ({style}) => {
     const isLastItem = (item.index === data.length - 1);
     return (
       <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
-        <Text style={[styles.listElementStart, styles.expenseListElement]}>{item.name}</Text>
-        <Text style={styles.expenseListElement}>{myNumberFormatter.format(item.amount)}</Text>
-        <Text style={[styles.listElementEnd, styles.expenseListElement]}>{item.interval}</Text>
-        <Pressable style={({pressed}) => [styles.smallButton, styles.edit, pressed && styles.pressed]}
-                   onPress={() => editItemHandler(item)}>
-          <Text>e</Text>
+        <Pressable onPress={() => editItemHandler(item)}>
+          {({pressed}) => (
+          <View style={styles.modalButtonsContainer}>
+            <Text style={[styles.listElementStart, styles.expenseListElement, pressed && styles.pressed]}>{item.name}</Text>
+            <Text style={[styles.expenseListElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
+            <Text style={[styles.listElementEnd, styles.expenseListElement, pressed && styles.pressed]}>{item.interval}</Text>
+          </View>
+          )}
         </Pressable>
       </View>
     );
