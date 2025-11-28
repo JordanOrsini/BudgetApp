@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Pressable, Text, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
+import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
 import MenuModal from "./MenuModal";
