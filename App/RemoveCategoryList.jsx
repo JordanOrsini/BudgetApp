@@ -47,7 +47,7 @@ const RemoveCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerMicro, style]}>
+    <View style={[styles.mainBodyContainer, style]}>
       <AddCategoryModal modalVisibility={modalVisible} 
                         setVisibility={setModalVisible}
                         categoryToEdit={categoryToEdit} 

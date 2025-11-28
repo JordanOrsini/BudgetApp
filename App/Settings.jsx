@@ -10,33 +10,31 @@ import ModifyUserName from "./ModifyUserName";
 import RemoveCategoryList from "./RemoveCategoryList";
 
 const Settings = () => {
-  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}, {index: 3}, {index: 4}]);
+  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}, {index: 3}]);
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}>
+          <View style={styles.mainBodyContainerHeader}>
             <Text style={styles.headerText}>Settings</Text>  
           </View> 
         );
       }
       case 1: {
         return (
-          <ModifyUserName />
+          <View style={styles.modalButtonsContainer}>
+            <ModifyUserName />
+            <ModifySalary />
+          </View>
         );
       }
       case 2: {
         return (
-          <ModifySalary />
-        );
-      }
-      case 3: {
-        return (
           <RemoveCategoryList />
         );
       }
-      case 4: {
+      case 3: {
         return (
           <DeleteAllData style={styles.lastContainer} />
         );

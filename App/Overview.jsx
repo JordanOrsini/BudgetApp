@@ -16,9 +16,9 @@ const Overview  = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}>
+          <View style={styles.mainBodyContainerHeader}>
             <Text style={styles.headerText}>Overview</Text>
-            <Text style={styles.text}>Welcome {userDataContext.userData.getName()}!</Text>
+            <Text style={styles.subHeaderText}>Welcome {userDataContext.userData.getName()}!</Text>
           </View> 
         );
       }

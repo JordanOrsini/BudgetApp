@@ -17,9 +17,9 @@ const Budget = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}>
+          <View style={styles.mainBodyContainerHeader}>
             <Text style={styles.headerText}>Budget</Text>
-            <Text style={styles.text}>Salary: {myNumberFormatter.format(userDataContext.userData.getSalary())}</Text>
+            <Text style={styles.subHeaderText}>Salary: {myNumberFormatter.format(userDataContext.userData.getSalary())}</Text>
           </View>
         );
       }

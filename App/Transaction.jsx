@@ -1,3 +1,5 @@
+import Category from "./Category";
+
 /* 
    Class representing a Transaction object.
 */
@@ -11,7 +13,7 @@ class Transaction {
   #transactionDate = null;
   #creationDate = null
 
-  constructor(name = "", amount = "0", category = null, transactionDate = 1598051730000, creationDate = 1598051730000) {
+  constructor(name = "", amount = "0", category = new Category(), transactionDate = 1598051730000, creationDate = 1598051730000) {
     this.#id = Transaction.id;
     Transaction.id++;
 

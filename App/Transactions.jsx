@@ -17,9 +17,9 @@ const Transactions = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerMicro}>      
+          <View style={styles.mainBodyContainerHeader}>      
             <Text style={styles.headerText}>Transactions</Text>
-            <Text style={styles.text}>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
+            <Text style={styles.subHeaderText}>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
           </View>
         );
       }

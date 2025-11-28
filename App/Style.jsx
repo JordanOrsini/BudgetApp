@@ -32,7 +32,7 @@ const listElement = {
   paddingTop: 10,
   height: 40,
   backgroundColor: "#FFFFFF",
-  width: 82,
+  width: 81,
 };
 const listElementEnd = {
   ...listElement,
@@ -41,8 +41,8 @@ const listElementEnd = {
 };
 const mainBodyContainer = {
   backgroundColor: "#E1E1E1",
+  margin: 5,
   padding: 10,
-  marginTop: 10,
   width: 380,
   borderRadius: 30,
   height: 320,
@@ -62,6 +62,15 @@ const navButton = {
   backgroundColor: "#FFFFFF",
   flex: 1,
   height: 40,
+};
+const textInput = {
+  ...appShadows,
+  borderRadius: 20,
+  width: 275,
+  marginTop: 10,
+  marginBottom: 10,
+  backgroundColor: "#FFFFFF",
+  padding: 10,
 };
 
 // Style sheets CSS for the entire application.
@@ -136,6 +145,11 @@ export const styles = StyleSheet.create({
   mainBodyContainer: {
     ...mainBodyContainer,
   },
+  mainBodyContainerHeader: { 
+    ...mainBodyContainer, 
+    height: "auto",
+    backgroundColor: "transparent",
+  },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
     ...Platform.select({
@@ -143,13 +157,18 @@ export const styles = StyleSheet.create({
         height: 580,
       },
       default: {
-        height: 640,
+        height: "690",
       },    
     }),
   },
   mainBodyContainerMicro: { 
     ...mainBodyContainer, 
     height: 160,
+  },
+  mainBodyContainerNano: { 
+    ...mainBodyContainer, 
+    height: 160,
+    width: 185,
   },
   modalNavContainer: {
     position: "absolute",
@@ -165,12 +184,12 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   categoryListElement: {
     ...listElement,
-    width: 330,
+    width: 326,
     borderRadius: 20,
   },
   expenseListElement: {
     ...listElement,
-    width: 110,
+    width: 108,
   },
   lastItem: {
     ...Platform.select({
@@ -216,6 +235,7 @@ export const styles = StyleSheet.create({
   modalButtonsContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   menuModal: {
     ...modal,
@@ -286,17 +306,15 @@ export const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
   },
-  text: {
+  subHeaderText: {
     fontSize: 20,
   },
   textInput: {
-    ...appShadows,
-    borderRadius: 20,
-    width: 275,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#FFFFFF",
-    padding: "10",
+    ...textInput,
+  },
+  textInputSmall: {
+    ...textInput,
+    width: 160,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Icon CSS classes /////////////////////////////////////////////////////////////////////////////

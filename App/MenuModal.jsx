@@ -31,7 +31,6 @@ const MenuModal = ({modalVisibility, setVisibility}) => {
                        onPress={() => setAddExpenseVisibility(true)}>
               <Text>Expense</Text>
             </Pressable>
-            <Text>OR</Text>
             <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
                        onPress={() => setAddTransactionVisibility(true)}>
               <Text>Transaction</Text>

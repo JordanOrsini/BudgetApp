@@ -58,9 +58,9 @@ const ModifySalary = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerMicro, style]}>
+    <View style={[styles.mainBodyContainerNano, style]}>
       <View style={styles.pageView}>
-        <TextInput style={[styles.textInput, inErrorSalary && styles.decline]}
+        <TextInput style={[styles.textInputSmall, inErrorSalary && styles.decline]}
                    defaultValue={salaryInput} 
                    placeholder="$ 0,000.00" 
                    onChangeText={(text) => onTextChange(text)} /> 

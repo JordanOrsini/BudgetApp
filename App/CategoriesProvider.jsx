@@ -33,7 +33,9 @@ const CategoriesProvider = ({children}) => {
                               "HOME;home.svg\n" +
                               "WORK;work.svg\n" +
                               "SCHOOL;school.svg\n" +
-                              "CAR;car.svg";
+                              "CAR;car.svg\n" +
+                              "ENTERTAINMENT;entertainment.svg\n" +
+                              "RESTAURANT;restaurant.svg";
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
