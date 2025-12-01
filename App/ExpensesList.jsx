@@ -6,7 +6,7 @@ import {styles} from "./Style";
 import AddExpenseModal from "./AddExpenseModal";
 import ExpensesContext from "./ExpensesContext";
 
-const ExpensesList = ({style}) => {
+const ExpensesList = ({style, size}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [data, setData] = useState([]);
@@ -27,18 +27,19 @@ const ExpensesList = ({style}) => {
   const fillData = () => {
     const newDataArray = [];
     expensesContext.expenseData.map((element, index) => {
-      newDataArray.push({index: index,
-                         id: element.getId(), 
-                         name: element.getName(), 
-                         amount: element.getAmount(),
-                         interval: element.getInterval()});
+      if (!size || (size && index < size))
+        newDataArray.push({index: index,
+                           id: element.getId(), 
+                           name: element.getName(), 
+                           amount: element.getAmount(),
+                           interval: element.getInterval()});
     });
 
     setData(newDataArray);
   }
 
   const renderItem = ({item}, data) => {
-    const isLastItem = (item.index === data.length - 1);
+    const isLastItem = (!size && (item.index === data.length - 1));
     return (
       <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
         <Pressable onPress={() => editItemHandler(item)}>
@@ -63,7 +64,9 @@ const ExpensesList = ({style}) => {
                        clearExpenseToEdit={() => setExpenseToEdit(null)} />    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
-                keyExtractor={(item) => item.index} /> 
+                keyExtractor={(item) => item.index}
+                scrollEnabled={size === undefined}
+                showsVerticalScrollIndicator={false} /> 
     </View>
   );
 }

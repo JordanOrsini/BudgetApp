@@ -7,12 +7,12 @@ const appShadows = {
   ...Platform.select({
     ios: {
       shadowColor: "#000",
-      shadowOffset: {width: 0, height: 5},
+      shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.3,
       shadowRadius: 5,
     },
     default: {
-      elevation: 5,
+      elevation: 2,
     },    
   }),
 };
@@ -27,6 +27,7 @@ const button = {
   margin: 10,
 };
 const listElement = {
+  ...appShadows,
   paddingLeft: 10,
   paddingRight: 10,
   paddingTop: 10,
@@ -145,9 +146,6 @@ export const styles = StyleSheet.create({
       },    
     }),
   },
-  mainBodyContainer: {
-    ...mainBodyContainer,
-  },
   mainBodyContainerHeader: { 
     ...mainBodyContainer, 
     height: "auto",
@@ -163,15 +161,22 @@ export const styles = StyleSheet.create({
         height: 690,
       },    
     }),
+    backgroundColor: "transparent",
   },
-  mainBodyContainerMicro: { 
-    ...mainBodyContainer, 
-    height: 160,
+  mainBodyContainerMedium: {
+    ...appShadows,
+    ...mainBodyContainer,
   },
-  mainBodyContainerNano: { 
+  mainBodyContainerMicro: {
+    ...appShadows, 
     ...mainBodyContainer, 
     height: 160,
     width: 185,
+  },
+  mainBodyContainerSmall: {
+    ...appShadows, 
+    ...mainBodyContainer, 
+    height: 160,
   },
   modalNavContainer: {
     position: "absolute",
@@ -187,7 +192,7 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   categoryListElement: {
     ...listElement,
-    width: 326,
+    width: 360,
     borderRadius: 20,
   },
   expenseListElement: {

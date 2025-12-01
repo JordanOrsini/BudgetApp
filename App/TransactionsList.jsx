@@ -6,7 +6,7 @@ import {styles} from "./Style";
 import AddTransactionModal from "./AddTransactionModal";
 import TransactionsContext from "./TransactionsContext";
 
-const TransactionsList = ({style}) => {
+const TransactionsList = ({style, size}) => {
   const transactionsContext = useContext(TransactionsContext);
 
   const [data, setData] = useState([]);
@@ -27,19 +27,20 @@ const TransactionsList = ({style}) => {
   const fillData = () => {
     const newDataArray = [];
     transactionsContext.transactionData.map((element, index) => {
-      newDataArray.push({index: index, 
-                         id: element.getId(),
-                         name: element.getName(), 
-                         amount: element.getAmount(), 
-                         category: element.getCategory().getName(),
-                         date: new Date(element.getTransactionDate()).toLocaleDateString()});
+      if (!size || (size && index < size))
+        newDataArray.push({index: index, 
+                           id: element.getId(),
+                           name: element.getName(), 
+                           amount: element.getAmount(), 
+                           category: element.getCategory().getName(),
+                           date: new Date(element.getTransactionDate()).toLocaleDateString()});
     });
 
     setData(newDataArray);
   }
 
   const renderItem = ({item}, data) => {
-    const isLastItem = (item.index === data.length - 1);
+    const isLastItem = (!size && (item.index === data.length - 1));
     return (
       <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
         <Pressable onPress={() => editItemHandler(item)}>
@@ -64,7 +65,9 @@ const TransactionsList = ({style}) => {
                            clearTransactionToEdit={() => setTransactionToEdit(null)} />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
-                keyExtractor={(item) => item.index} /> 
+                keyExtractor={(item) => item.index}
+                scrollEnabled={size === undefined}
+                showsVerticalScrollIndicator={false} /> 
     </View>      
     );
 }

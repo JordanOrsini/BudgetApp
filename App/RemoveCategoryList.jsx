@@ -36,10 +36,10 @@ const RemoveCategoryList = ({style}) => {
     return (
       (item.id > 0) &&   
       <View style={styles.listContainer}>
-        <Text style={styles.categoryListElement}>{item.name}</Text>
-        <Pressable style={({pressed}) => [styles.button, styles.smallButton, styles.edit, pressed && styles.pressed]}
-                   onPress={() => editItemHandler(item)}>
-          <Text>e</Text>
+        <Pressable onPress={() => editItemHandler(item)}>
+          {({pressed}) => (
+          <Text style={[styles.categoryListElement, pressed && styles.pressed]}>{item.name}</Text>
+          )}
         </Pressable>
       </View>
     );
@@ -47,14 +47,15 @@ const RemoveCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainer, style]}>
+    <View style={[styles.mainBodyContainerMedium, style]}>
       <AddCategoryModal modalVisibility={modalVisible} 
                         setVisibility={setModalVisible}
                         categoryToEdit={categoryToEdit} 
                         clearCategoryToEdit={() => setCategoryToEdit(null)} />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
-                keyExtractor={(item) => item.id} /> 
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false} /> 
     </View>     
   );
 }

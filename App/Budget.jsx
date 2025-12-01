@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
@@ -10,7 +10,7 @@ import UserDataContext from "./UserDataContext";
 const Budget = () => {
   const userDataContext = useContext(UserDataContext);
 
-  const [data, setData] = useState([{index: 0}, {index: 1}]);
+  const data = [{index: 0}, {index: 1}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   
   const renderItem = ({item}) => {
@@ -40,7 +40,8 @@ const Budget = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={false} />
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false} />
     </SafeAreaView>
   );
 }

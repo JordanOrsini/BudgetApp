@@ -69,7 +69,8 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
         <FlatList data={[...data, {addCategory: true}]}
                   renderItem={renderItem}
                   keyExtractor={(item) => item.id}
-                  numColumns={3} />      
+                  numColumns={3}
+                  showsVerticalScrollIndicator={false} />      
       </View>
     </View>
   );

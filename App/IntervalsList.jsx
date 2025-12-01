@@ -51,7 +51,9 @@ const IntervalsList = ({setSelection, defaultSelection}) => {
         <FlatList data={intervalData} 
                   renderItem={renderItem}
                   keyExtractor={(item) => item.id} 
-                  numColumns={3} />      
+                  numColumns={3}
+                  scrollEnabled={false}
+                  showsVerticalScrollIndicator={false} />      
       </View>
     </View>
   );

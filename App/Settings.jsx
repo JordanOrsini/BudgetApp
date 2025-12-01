@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
@@ -10,7 +9,7 @@ import ModifyUserName from "./ModifyUserName";
 import RemoveCategoryList from "./RemoveCategoryList";
 
 const Settings = () => {
-  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}, {index: 3}]);
+  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}, {index: 4}];
   
   const renderItem = ({item}) => {
     switch (item.index) {
@@ -23,18 +22,20 @@ const Settings = () => {
       }
       case 1: {
         return (
-          <View style={styles.horizontalContainer}>
-            <ModifyUserName />
-            <ModifySalary />
-          </View>
+          <ModifyUserName />
         );
       }
       case 2: {
         return (
-          <RemoveCategoryList />
+          <ModifySalary />
         );
       }
       case 3: {
+        return (
+          <RemoveCategoryList />
+        );
+      }
+      case 4: {
         return (
           <DeleteAllData style={styles.lastContainer} />
         );
@@ -50,7 +51,8 @@ const Settings = () => {
     <SafeAreaView style={styles.pageView}>    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
-                keyExtractor={(item) => item.index} />
+                keyExtractor={(item) => item.index}
+                showsVerticalScrollIndicator={false} />
     </SafeAreaView> 
   );
 }

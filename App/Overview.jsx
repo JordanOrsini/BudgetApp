@@ -1,16 +1,16 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
-import RecentExpenses from "./RecentExpenses";
+import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
-import RecentTransactionsList from "./RecentTransactionsList";
+import TransactionsList from "./TransactionsList";
 
 const Overview  = () => {
   const userDataContext = useContext(UserDataContext);
-  const [data, setData] = useState([{index: 0}, {index: 1}, {index: 2}]);
+  const data = [{index: 0}, {index: 1}, {index: 2}];
   
   const renderItem = ({item}) => {
     switch (item.index) {
@@ -24,12 +24,12 @@ const Overview  = () => {
       }
       case 1: {
         return (
-          <RecentExpenses />
+          <ExpensesList size={5} style={styles.mainBodyContainerMedium} />
         );
       }
       case 2: {
         return (
-          <RecentTransactionsList style={styles.lastContainer} />
+          <TransactionsList size={5} style={[styles.mainBodyContainerMedium, styles.lastContainer]} />
         );
       }
       default: {
@@ -43,7 +43,8 @@ const Overview  = () => {
     <SafeAreaView style={styles.pageView}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
-                keyExtractor={(item) => item.index} />
+                keyExtractor={(item) => item.index}
+                showsVerticalScrollIndicator={false} />
     </SafeAreaView>  
   );
 }

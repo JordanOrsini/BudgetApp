@@ -58,9 +58,9 @@ const RemoveUserName = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerNano, style]}>
+    <View style={[styles.mainBodyContainerSmall, style]}>
       <View style={styles.pageView}>
-        <TextInput style={[styles.textInputSmall, inErrorName && styles.decline]}
+        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                    defaultValue={nameInput} 
                    placeholder="User name" 
                    onChangeText={(text) => onTextChange(text)} /> 
