@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Pressable, Text, View} from "react-native";
+import {Image, Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
@@ -47,7 +47,9 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
       return (
         <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} 
                    onPress={() => setModalVisible(true)}>
-          <Text>+</Text>
+          <Image style={styles.icon}
+                 source={require("./icons/plusIcon.png")}
+                 alt="+" />
         </Pressable>
       );
     }

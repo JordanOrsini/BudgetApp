@@ -1,5 +1,5 @@
 import {useContext, useEffect, useRef, useState} from "react";
-import {Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Image, Modal, Pressable, Text, TextInput, View} from "react-native";
 import {DatePicker} from "@s77rt/react-native-date-picker";
 import {styles} from "./Style";
 
@@ -188,7 +188,9 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
         <View style={[styles.modal, transactionToEdit && styles.edit, hidden && styles.hide]}>
           <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} 
                      onPress={() => closeModal()}>
-            <Text>x</Text>
+            <Image style={styles.icon}
+                   source={require("./icons/closeIcon.png")}
+                   alt="x" />
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                      defaultValue={nameInput} 
@@ -205,11 +207,13 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
                       type="date"
 				              value={dateInput}
 				              onChange={setDateInput} />    
-          <Pressable style={({pressed}) => [styles.button, styles.textInput, pressed && styles.pressed]} 
+          <Pressable style={({pressed}) => [styles.textInputCalendar, pressed && styles.pressed]} 
                      onPress={() => datePickerModal.current?.showPicker()}>
             <View style={styles.horizontalContainer}>  
               <Text>{dateInput.toLocaleDateString()}</Text>
-              <Text style={styles.calendarIcon}>📅</Text>
+              <Image style={[styles.icon, styles.calendarIcon]}
+                     source={require("./icons/calendarIcon.png")}
+                     alt="📅" />
             </View>
             </Pressable>        
           {transactionToEdit &&
@@ -220,18 +224,29 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
             {transactionToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
                        onPress={() => removeItemHandler()}>
-              <Text>Delete</Text>
+              <Image style={styles.icon}
+                     source={require("./icons/deleteIcon.png")}
+                     alt="Delete" />
             </Pressable>
             }
             {!transactionToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
-                       onPress={() => createNewTransaction(true)} >
-              <Text>Add another</Text>
+                       onPress={() => createNewTransaction(true)}>
+              <View style={styles.horizontalContainer}>
+                <Image style={styles.icon}
+                       source={require("./icons/checkIcon.png")}
+                       alt="Add another" />
+                <Image style={styles.icon}
+                       source={require("./icons/plusIcon.png")}
+                       alt="Add another" />
+              </View>
             </Pressable>
             }
             <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
                        onPress={() => createNewTransaction()}>
-              <Text>Confirm</Text>
+              <Image style={styles.icon}
+                     source={require("./icons/checkIcon.png")}
+                     alt="Confirm" />
             </Pressable>
           </View>
         </View>    

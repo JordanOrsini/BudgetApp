@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Image, Modal, Pressable, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Category from "./Category";
@@ -109,7 +109,9 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
         <View style={[styles.modal, categoryToEdit && styles.edit]}>
           <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} 
                      onPress={() => closeModal()}>
-            <Text>x</Text>
+            <Image style={styles.icon}
+                   source={require("./icons/closeIcon.png")}
+                   alt="x" />
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                      defaultValue={nameInput} 
@@ -119,12 +121,16 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
             {categoryToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
                        onPress={() => removeItemHandler()}>
-              <Text>Delete</Text>
+              <Image style={styles.icon}
+                     source={require("./icons/deleteIcon.png")}
+                     alt="Delete" />
             </Pressable>
             } 
             <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
                        onPress={() => createNewCategory()}>
-              <Text>Confirm</Text>
+              <Image style={styles.icon}
+                     source={require("./icons/checkIcon.png")}
+                     alt="Confirm" />
             </Pressable>
           </View>
         </View>    

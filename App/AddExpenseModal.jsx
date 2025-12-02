@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Image, Modal, Pressable, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Expense from "./Expense";
@@ -168,7 +168,9 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
         <View style={[styles.modal, expenseToEdit && styles.edit]}>
           <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]}
                      onPress={() => closeModal()}>
-            <Text>x</Text>
+            <Image style={styles.icon}
+                   source={require("./icons/closeIcon.png")}
+                   alt="x" />
           </Pressable>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                      defaultValue={nameInput} 
@@ -184,18 +186,29 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
             {expenseToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
                        onPress={() => removeItemHandler()}>
-              <Text>Delete</Text>
+              <Image style={styles.icon}
+                     source={require("./icons/deleteIcon.png")}
+                     alt="Delete" />
             </Pressable>
             }
             {!expenseToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
                        onPress={() => createNewExpense(true)}>
-              <Text>Add another</Text>
+              <View style={styles.horizontalContainer}>
+                <Image style={styles.icon}
+                       source={require("./icons/checkIcon.png")}
+                       alt="Add another" />
+                <Image style={styles.icon}
+                       source={require("./icons/plusIcon.png")}
+                       alt="Add another" />
+              </View>
             </Pressable>
             }         
             <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
                        onPress={() => createNewExpense()}>
-              <Text>Confirm</Text>
+              <Image style={styles.icon}
+                     source={require("./icons/checkIcon.png")}
+                     alt="Confirm" />
             </Pressable>
           </View>
         </View>

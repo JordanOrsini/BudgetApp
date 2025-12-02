@@ -19,12 +19,12 @@ const appShadows = {
 const button = {
   ...appShadows,
   backgroundColor: "#FFFFFF",
-  width: 80,
-  height: 40,
+  width: 90,
+  height: 45,
   borderRadius: 10,
   alignItems: "center",
   justifyContent: "center",
-  margin: 10,
+  margin: 5,
 };
 const listElement = {
   ...appShadows,
@@ -67,7 +67,7 @@ const navButton = {
 const textInput = {
   ...appShadows,
   borderRadius: 20,
-  width: 275,
+  width: 295,
   marginTop: 10,
   marginBottom: 10,
   backgroundColor: "#FFFFFF",
@@ -85,7 +85,8 @@ export const styles = StyleSheet.create({
   categoryButtons: {
     ...button,
     borderRadius: 50,
-    height: 80,
+    height: 90,
+    width: 90,
   },
   deleteAllButton: {
     ...button,
@@ -94,12 +95,11 @@ export const styles = StyleSheet.create({
   },
   smallButton: {
     ...button,
-    width: 20,
-    height: 20,
+    width: 25,
+    height: 25,
     borderRadius: 25,
     marginTop: 0,
     marginBottom: 0,
-    justifyContent: "normal",
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Colour CSS classes ///////////////////////////////////////////////////////////////////////////
@@ -131,6 +131,7 @@ export const styles = StyleSheet.create({
   },
   horizontalContainer: {
     flexDirection: "row",
+    alignItems: "center",
   },
   intervalContainer: {
     height: 125,
@@ -307,6 +308,10 @@ export const styles = StyleSheet.create({
   textInput: {
     ...textInput,
   },
+  textInputCalendar: {
+    ...textInput,
+    alignItems: "center",
+  },
   textInputSmall: {
     ...textInput,
     width: 160,
@@ -318,8 +323,12 @@ export const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: 140,
   },
-  navigationIcon: {
+  icon: {
     height: 25,
     width: 25,
+  },
+  iconLarge: {
+    height: 50,
+    width: 50,
   },
 });

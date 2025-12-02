@@ -17,31 +17,31 @@ const Navigation = ({state, navigation}) => {
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Overview")}>
-          <Image style={styles.navigationIcon}
+          <Image style={styles.icon}
                  source={require("./icons/homeIcon.png")}
                  alt="Overview" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddleLeft, (state.index === 1) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Budget")}>
-          <Image style={styles.navigationIcon}
+          <Image style={styles.icon}
                  source={require("./icons/budgetIcon.png")}
                  alt="Budget" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddle, pressed && styles.pressed]}
                    onPress={() => setModalVisible(true)}>
-          <Image style={styles.navigationIcon}
+          <Image style={styles.icon}
                  source={require("./icons/plusIcon.png")}
                  alt="+" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddleRight, (state.index === 2) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Transactions")}>
-          <Image style={styles.navigationIcon}
+          <Image style={styles.icon}
                  source={require("./icons/transactionIcon.png")}
                  alt="Transactions" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonRight, (state.index === 3) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Settings")}>
-          <Image style={styles.navigationIcon}
+          <Image style={styles.icon}
                  source={require("./icons/settingsIcon.png")}
                  alt="Settings" />
         </Pressable>

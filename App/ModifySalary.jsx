@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Pressable, Text, TextInput, View} from "react-native";
+import {Image, Pressable, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import User from "./User";
@@ -66,7 +66,9 @@ const ModifySalary = ({style}) => {
                    onChangeText={(text) => onTextChange(text)} /> 
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
                    onPress={() => modifySalary()} >
-          <Text>Edit</Text>
+          <Image style={styles.icon}
+                 source={require("./icons/editIcon.png")}
+                 alt="Edit" />
         </Pressable> 
       </View>  
     </View>     

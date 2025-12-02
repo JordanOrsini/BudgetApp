@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Modal, Pressable, Text, View} from "react-native";
+import {Image, Modal, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
 import AddExpenseModal from "./AddExpenseModal";
@@ -24,7 +24,9 @@ const MenuModal = ({modalVisibility, setVisibility}) => {
                                setVisibility={setAddTransactionVisibility} />
           <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} 
                      onPress={() => closeModal()}>
-            <Text>x</Text>
+            <Image style={styles.icon}
+                   source={require("./icons/closeIcon.png")}
+                   alt="x" />
           </Pressable>
           <View style={styles.horizontalContainer}>
             <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 

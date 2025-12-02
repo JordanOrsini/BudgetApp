@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Pressable, Text, View} from "react-native";
+import {Image, Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
 import User from "./User";
@@ -26,7 +26,9 @@ const ModifySalary = ({style}) => {
       <View style={styles.pageView}>
         <Pressable style={({pressed}) => [styles.deleteAllButton, styles.decline, pressed && styles.pressed]} 
                    onPress={() => deletaAllData()} >
-          <Text>Delete all data</Text>
+          <Image style={styles.iconLarge}
+                 source={require("./icons/deleteAllIcon.png")}
+                 alt="Delete all data" />
         </Pressable> 
       </View>  
     </View>     
