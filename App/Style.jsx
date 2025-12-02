@@ -318,4 +318,8 @@ export const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: 140,
   },
+  navigationIcon: {
+    height: 25,
+    width: 25,
+  },
 });

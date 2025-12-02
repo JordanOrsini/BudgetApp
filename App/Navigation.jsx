@@ -1,7 +1,6 @@
 import {useState} from "react";
-import {Pressable, Text, View} from "react-native";
+import {Image, Pressable, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
-import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
 import MenuModal from "./MenuModal";
@@ -18,23 +17,33 @@ const Navigation = ({state, navigation}) => {
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Overview")}>
-          <Text>Overview</Text>
+          <Image style={styles.navigationIcon}
+                 source={require("./icons/homeIcon.png")}
+                 alt="Overview" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddleLeft, (state.index === 1) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Budget")}>
-          <Text>Budget</Text>
+          <Image style={styles.navigationIcon}
+                 source={require("./icons/budgetIcon.png")}
+                 alt="Budget" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddle, pressed && styles.pressed]}
                    onPress={() => setModalVisible(true)}>
-          <Text>+</Text>
+          <Image style={styles.navigationIcon}
+                 source={require("./icons/plusIcon.png")}
+                 alt="+" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddleRight, (state.index === 2) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Transactions")}>
-          <Text>Transactions</Text>
+          <Image style={styles.navigationIcon}
+                 source={require("./icons/transactionIcon.png")}
+                 alt="Transactions" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonRight, (state.index === 3) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Settings")}>
-          <Text>Settings</Text>
+          <Image style={styles.navigationIcon}
+                 source={require("./icons/settingsIcon.png")}
+                 alt="Settings" />
         </Pressable>
       </View>
     </SafeAreaView>
