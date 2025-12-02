@@ -34,11 +34,17 @@ const listElement = {
   height: 40,
   backgroundColor: "#FFFFFF",
   width: 90,
+  alignItems: "center",
 };
 const listElementEnd = {
   ...listElement,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
+};
+const listElementStart = {
+  ...listElement,
+  borderTopLeftRadius: 20,
+  borderBottomLeftRadius: 20,
 };
 const mainBodyContainer = {
   backgroundColor: "#E1E1E1",
@@ -87,6 +93,7 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     height: 90,
     width: 90,
+    padding: 15,
   },
   deleteAllButton: {
     ...button,
@@ -191,10 +198,13 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // List element CSS classes /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  categoryListElement: {
-    ...listElement,
-    width: 360,
-    borderRadius: 20,
+  categoryListElementEnd: {
+    ...listElementEnd,
+    width: 180,
+  },
+  categoryListElementStart: {
+    ...listElementStart,
+    width: 180,
   },
   expenseListElement: {
     ...listElement,
@@ -223,9 +233,7 @@ export const styles = StyleSheet.create({
     ...listElementEnd,
   },
   listElementStart: {
-    ...listElement,
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 20,
+    ...listElementStart,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Modal CSS classes ////////////////////////////////////////////////////////////////////////////
@@ -301,6 +309,9 @@ export const styles = StyleSheet.create({
   headerText: {
     fontSize: 50,
     fontWeight: "bold",
+  },
+  smallText: {
+    fontSize: 12,
   },
   subHeaderText: {
     fontSize: 20,

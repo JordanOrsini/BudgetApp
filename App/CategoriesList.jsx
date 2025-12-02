@@ -3,6 +3,7 @@ import {Image, Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
+import CategoryIconManager from "./CategoryIconManager";
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
@@ -24,7 +25,8 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
     const newDataArray = [];
     categoriesContext.categoryData.map((category, index) => {
       newDataArray.push({id: index, 
-                         category: category.getName(),
+                         name: category.getName(),
+                         iconPath: category.getIconPath(),
                          selected: (defaultSelection === category.getName())});
     });
 
@@ -32,7 +34,7 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   }
 
   const onSelectionChange = (item) => {
-    setSelection(item.category);
+    setSelection(item.name);
 
     const newDataArray = [...data];
     newDataArray.map((element => {
@@ -47,7 +49,7 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
       return (
         <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} 
                    onPress={() => setModalVisible(true)}>
-          <Image style={styles.icon}
+          <Image style={styles.iconLarge}
                  source={require("./icons/plusIcon.png")}
                  alt="+" />
         </Pressable>
@@ -57,7 +59,8 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
     return (
       <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} 
                  onPress={() => onSelectionChange(item)}>
-        <Text>{item.category}</Text>
+        {CategoryIconManager(item.iconPath, true /*large*/)}
+        <Text numberOfLines={1} style={styles.smallText}>{item.name}</Text>
       </Pressable>
     );
   }

@@ -5,6 +5,7 @@ import {styles} from "./Style";
 
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
+import CategoryIconManager from "./CategoryIconManager";
 
 const RemoveCategoryList = ({style}) => {
   const categoryContext = useContext(CategoriesContext);
@@ -26,7 +27,8 @@ const RemoveCategoryList = ({style}) => {
     const newCategoryArray = [];
     categoryContext.categoryData.map((element, index) => {
       newCategoryArray.push({id: index, 
-                             name: element.getName()});
+                             name: element.getName(),
+                             iconPath: element.getIconPath()});
     });
 
     setData(newCategoryArray);
@@ -38,7 +40,10 @@ const RemoveCategoryList = ({style}) => {
       <View style={styles.listContainer}>
         <Pressable onPress={() => editItemHandler(item)}>
           {({pressed}) => (
-          <Text style={[styles.categoryListElement, pressed && styles.pressed]}>{item.name}</Text>
+          <View style={styles.horizontalContainer}>
+            <Text style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
+            <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>{CategoryIconManager(item.iconPath)}</View>
+          </View>
           )}
         </Pressable>
       </View>

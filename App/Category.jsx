@@ -5,7 +5,7 @@ class Category {
   #name = null;
   #iconPath = null;
 
-  constructor(name = "NONE", iconPath = "none.svg") {
+  constructor(name = "NONE", iconPath = "noneIcon.png") {
     this.#name = name;
     this.#iconPath = iconPath;
   }

@@ -18,7 +18,7 @@ const Overview  = () => {
         return (
           <View style={styles.mainBodyContainerHeader}>
             <Text style={styles.headerText}>Overview</Text>
-            <Text style={styles.subHeaderText}>Welcome {userDataContext.userData.getName()}!</Text>
+            <Text style={styles.subHeaderText}>Welcome {userDataContext.userData.getName()}! 😊</Text>
           </View> 
         );
       }

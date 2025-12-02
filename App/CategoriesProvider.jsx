@@ -33,6 +33,7 @@ const CategoriesProvider = ({children}) => {
                               "HOME;homeIcon.png\n" +
                               "WORK;workIcon.png\n" +
                               "SCHOOL;schoolIcon.png\n" +
+                              "GROCERIES;groceriesIcon.png\n" +
                               "CAR;carIcon.png\n" +
                               "ENTERTAINMENT;entertainmentIcon.png\n" +
                               "RESTAURANT;restaurantIcon.png";

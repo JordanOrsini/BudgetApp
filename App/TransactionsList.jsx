@@ -3,6 +3,7 @@ import {Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
+import CategoryIconManager from "./CategoryIconManager";
 import AddTransactionModal from "./AddTransactionModal";
 import TransactionsContext from "./TransactionsContext";
 
@@ -32,7 +33,7 @@ const TransactionsList = ({style, size}) => {
                            id: element.getId(),
                            name: element.getName(), 
                            amount: element.getAmount(), 
-                           category: element.getCategory().getName(),
+                           categoryIcon: element.getCategory().getIconPath(),
                            date: new Date(element.getTransactionDate()).toLocaleDateString()});
     });
 
@@ -47,8 +48,8 @@ const TransactionsList = ({style, size}) => {
           {({pressed}) => (
           <View style={styles.horizontalContainer}>
             <Text style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <Text style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
-            <Text style={[styles.listElement, pressed && styles.pressed]}>{item.category}</Text>
+            <Text style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
+            <View style={[styles.listElement, pressed && styles.pressed]}>{CategoryIconManager(item.categoryIcon)}</View>
             <Text style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
           </View>
           )}
