@@ -28,21 +28,22 @@ const button = {
 };
 const listElement = {
   ...appShadows,
-  paddingLeft: 10,
-  paddingRight: 10,
-  paddingTop: 10,
+  paddingLeft: 5,
+  paddingRight: 5,
+  paddingTop: 12,
   height: 40,
   backgroundColor: "#FFFFFF",
   width: 90,
-  alignItems: "center",
 };
 const listElementEnd = {
   ...listElement,
+  paddingRight: 10,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
 };
 const listElementStart = {
   ...listElement,
+  paddingLeft: 10,
   borderTopLeftRadius: 20,
   borderBottomLeftRadius: 20,
 };
@@ -201,14 +202,13 @@ export const styles = StyleSheet.create({
   categoryListElementEnd: {
     ...listElementEnd,
     width: 180,
+    paddingTop: 0,
+    justifyContent: "center",
+    alignItems: "center",
   },
   categoryListElementStart: {
     ...listElementStart,
     width: 180,
-  },
-  expenseListElement: {
-    ...listElement,
-    width: 120,
   },
   lastItem: {
     ...Platform.select({
@@ -229,11 +229,25 @@ export const styles = StyleSheet.create({
   listElement: {
     ...listElement,
   },
+  listElementAmount: {
+    ...listElement,
+    width: 100,
+  },
   listElementEnd: {
     ...listElementEnd,
+    width: 105,
+    textAlign: "center",
+  },
+  listElementIcon: {
+    ...listElement,
+    width: 40,
+    paddingTop: 0,
+    justifyContent: "center",
+    alignItems: "center",
   },
   listElementStart: {
     ...listElementStart,
+    width: 115,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Modal CSS classes ////////////////////////////////////////////////////////////////////////////

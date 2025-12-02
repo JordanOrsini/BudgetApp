@@ -41,8 +41,10 @@ const RemoveCategoryList = ({style}) => {
         <Pressable onPress={() => editItemHandler(item)}>
           {({pressed}) => (
           <View style={styles.horizontalContainer}>
-            <Text style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>{CategoryIconManager(item.iconPath)}</View>
+            <Text numberOfLines={1} style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
+            <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>
+              {CategoryIconManager(item.iconPath)}
+            </View>
           </View>
           )}
         </Pressable>

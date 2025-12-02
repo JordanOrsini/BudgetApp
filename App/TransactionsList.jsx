@@ -47,10 +47,12 @@ const TransactionsList = ({style, size}) => {
         <Pressable onPress={() => editItemHandler(item)}>
           {({pressed}) => (
           <View style={styles.horizontalContainer}>
-            <Text style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <Text style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
-            <View style={[styles.listElement, pressed && styles.pressed]}>{CategoryIconManager(item.categoryIcon)}</View>
-            <Text style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
+            <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
+            <Text numberOfLines={1} style={[styles.listElementAmount, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
+            <View style={[styles.listElementIcon, pressed && styles.pressed]}>
+              {CategoryIconManager(item.categoryIcon)}
+            </View>
+            <Text numberOfLines={1} style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
           </View>
           )}
         </Pressable>
