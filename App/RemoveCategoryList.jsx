@@ -4,6 +4,7 @@ import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
+import ListEmpty from "./ListEmpty";
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
@@ -34,6 +35,18 @@ const RemoveCategoryList = ({style}) => {
     setData(newCategoryArray);
   }
 
+  const ListHeader = () => {
+    return (
+      <View>
+        <Text style={styles.subHeaderText}>Remove category</Text>
+        <View style={styles.listContainer}>
+          <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
+          <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
+        </View>
+      </View>
+    );
+  }
+
   const renderItem = ({item}) => {
     return (
       (item.id > 0) &&   
@@ -59,9 +72,11 @@ const RemoveCategoryList = ({style}) => {
                         setVisibility={setModalVisible}
                         categoryToEdit={categoryToEdit} 
                         clearCategoryToEdit={() => setCategoryToEdit(null)} />
+      <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.id}
+                ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false} /> 
     </View>     
   );

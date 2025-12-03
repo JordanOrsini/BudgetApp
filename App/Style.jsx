@@ -30,7 +30,7 @@ const listElement = {
   ...appShadows,
   paddingLeft: 8,
   paddingRight: 8,
-  paddingTop: 12,
+  paddingTop: 10,
   height: 40,
   backgroundColor: "#FFFFFF",
   width: 105,
@@ -53,7 +53,7 @@ const mainBodyContainer = {
   padding: 10,
   width: 380,
   borderRadius: 30,
-  height: 320,
+  height: 340,
 };
 const modal = {
   ...appShadows,
@@ -75,8 +75,8 @@ const textInput = {
   ...appShadows,
   borderRadius: 20,
   width: 295,
-  marginTop: 10,
-  marginBottom: 10,
+  marginTop: 5,
+  marginBottom: 5,
   backgroundColor: "#FFFFFF",
   padding: 10,
 };
@@ -195,14 +195,34 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Icon CSS classes /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  calendarIcon: {
+    position: "absolute",
+    marginLeft: 140,
+  },
+  icon: {
+    height: 24,
+    width: 24,
+  },
+  iconLarge: {
+    height: 36,
+    width: 36,
+  },
+  /////////////////////////////////////////////////////////////////////////////////////////////////
   // List element CSS classes /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
+  categoryListElementEndHeader: {
+    ...listElementEnd,
+    width: 180,
+    textAlign: "center",
+  },
   categoryListElementEnd: {
     ...listElementEnd,
     width: 180,
     paddingTop: 0,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
   categoryListElementStart: {
     ...listElementStart,
@@ -220,7 +240,6 @@ export const styles = StyleSheet.create({
   },
   listContainer: {
     flexDirection: "row",
-    alignItems: "center",
     paddingTop: 10,
     paddingBottom: 10,
   },
@@ -235,8 +254,13 @@ export const styles = StyleSheet.create({
     ...listElement,
     width: 40,
     paddingTop: 0,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  listElementIconHeader: {
+    ...listElement,
+    width: 40,
+    textAlign: "center",
   },
   listElementStart: {
     ...listElementStart,
@@ -321,6 +345,7 @@ export const styles = StyleSheet.create({
   },
   subHeaderText: {
     fontSize: 20,
+    paddingLeft: 5,
   },
   textInput: {
     ...textInput,
@@ -332,20 +357,5 @@ export const styles = StyleSheet.create({
   textInputSmall: {
     ...textInput,
     width: 160,
-  },
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  // Icon CSS classes /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  calendarIcon: {
-    position: "absolute",
-    marginLeft: 140,
-  },
-  icon: {
-    height: 24,
-    width: 24,
-  },
-  iconLarge: {
-    height: 36,
-    width: 36,
   },
 });

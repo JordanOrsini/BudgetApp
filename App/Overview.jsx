@@ -24,12 +24,12 @@ const Overview  = () => {
       }
       case 1: {
         return (
-          <ExpensesList size={5} style={styles.mainBodyContainerMedium} />
+          <ExpensesList size={4} style={styles.mainBodyContainerMedium} />
         );
       }
       case 2: {
         return (
-          <TransactionsList size={5} style={[styles.mainBodyContainerMedium, styles.lastContainer]} />
+          <TransactionsList size={4} style={[styles.mainBodyContainerMedium, styles.lastContainer]} />
         );
       }
       default: {

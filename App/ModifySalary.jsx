@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Pressable, TextInput, View} from "react-native";
+import {Image, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import User from "./User";
@@ -59,6 +59,7 @@ const ModifySalary = ({style}) => {
 
   return (
     <View style={[styles.mainBodyContainerSmall, style]}>
+      <Text style={styles.subHeaderText}>Modify salary</Text>
       <View style={styles.pageView}>
         <TextInput style={[styles.textInput, inErrorSalary && styles.decline]}
                    defaultValue={salaryInput} 

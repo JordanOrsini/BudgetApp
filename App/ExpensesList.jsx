@@ -3,6 +3,7 @@ import {Image, Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
+import ListEmpty from "./ListEmpty";
 import AddExpenseModal from "./AddExpenseModal";
 import ExpensesContext from "./ExpensesContext";
 
@@ -38,6 +39,22 @@ const ExpensesList = ({style, size}) => {
     setData(newDataArray);
   }
 
+  const ListHeader = () => {
+    return (
+      <View>
+        {size &&
+        <Text style={styles.subHeaderText}>Recent expenses</Text>
+        }
+        <View style={styles.listContainer}>
+          <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
+          <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
+          <Text numberOfLines={1} style={styles.listElementIconHeader}>Rec</Text>
+          <Text numberOfLines={1} style={styles.listElementEnd}>Frequency</Text>
+        </View>
+      </View>
+    );
+  }
+
   const renderItem = ({item}, data) => {
     const isLastItem = (!size && (item.index === data.length - 1));
     return (
@@ -66,11 +83,13 @@ const ExpensesList = ({style, size}) => {
       <AddExpenseModal modalVisibility={modalVisible}
                        setVisibility={setModalVisible}
                        expenseToEdit={expenseToEdit}
-                       clearExpenseToEdit={() => setExpenseToEdit(null)} />    
+                       clearExpenseToEdit={() => setExpenseToEdit(null)} />
+      <ListHeader />    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
                 scrollEnabled={size === undefined}
+                ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false} /> 
     </View>
   );

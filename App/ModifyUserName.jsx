@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Pressable, TextInput, View} from "react-native";
+import {Image, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import User from "./User";
@@ -59,6 +59,7 @@ const RemoveUserName = ({style}) => {
 
   return (
     <View style={[styles.mainBodyContainerSmall, style]}>
+      <Text style={styles.subHeaderText}>Modify user name</Text>
       <View style={styles.pageView}>
         <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                    defaultValue={nameInput} 

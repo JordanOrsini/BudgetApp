@@ -4,6 +4,7 @@ import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
+import ListEmpty from "./ListEmpty";
 import AddTransactionModal from "./AddTransactionModal";
 import TransactionsContext from "./TransactionsContext";
 
@@ -40,6 +41,22 @@ const TransactionsList = ({style, size}) => {
     setData(newDataArray);
   }
 
+  const ListHeader = () => {
+    return (
+      <View>
+        {size &&
+        <Text style={styles.subHeaderText}>Recent transactions</Text>
+        }
+        <View style={styles.listContainer}>
+          <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
+          <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
+          <Text numberOfLines={1} style={styles.listElementIconHeader}>Cat</Text>
+          <Text numberOfLines={1} style={styles.listElementEnd}>Date</Text>
+        </View>
+      </View>
+    );
+  }
+
   const renderItem = ({item}, data) => {
     const isLastItem = (!size && (item.index === data.length - 1));
     return (
@@ -66,10 +83,12 @@ const TransactionsList = ({style, size}) => {
                            setVisibility={setModalVisible} 
                            transactionToEdit={transactionToEdit} 
                            clearTransactionToEdit={() => setTransactionToEdit(null)} />
+      <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
                 scrollEnabled={size === undefined}
+                ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false} /> 
     </View>      
     );

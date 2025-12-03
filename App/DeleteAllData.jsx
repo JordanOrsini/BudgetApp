@@ -29,6 +29,7 @@ const ModifySalary = ({style}) => {
           <Image style={styles.iconLarge}
                  source={require("./icons/deleteAllIcon.png")}
                  alt="Delete all data" />
+          <Text>DELETE ALL DATA</Text>
         </Pressable> 
       </View>  
     </View>     
