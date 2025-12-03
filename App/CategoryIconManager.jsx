@@ -1,72 +1,83 @@
 import {Image} from "react-native";
 import {styles} from "./Style";
 
-const CategoryIconManager = (iconPath, large = false) => {
+export const getIconFromPath = (iconPath, large = false) => {
   switch (iconPath) {
     case "carIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/carIcon.png")}
+               source={require("./icons/categoryIcons/carIcon.png")}
                alt="CAR" />
       );
     }
     case "entertainmentIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/entertainmentIcon.png")}
+               source={require("./icons/categoryIcons/entertainmentIcon.png")}
                alt="ENTERTAINMENT" />
       );
     }
     case "groceriesIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/groceriesIcon.png")}
+               source={require("./icons/categoryIcons/groceriesIcon.png")}
                alt="GROCERIES" />
       );
     }
     case "homeIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/homeIcon.png")}
+               source={require("./icons/categoryIcons/homeIcon.png")}
                alt="HOME" />
       );
     }
     case "noneIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/noneIcon.png")}
+               source={require("./icons/categoryIcons/noneIcon.png")}
                alt="NONE" />
       );
     }
     case "restaurantIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/restaurantIcon.png")}
+               source={require("./icons/categoryIcons/restaurantIcon.png")}
                alt="RESTAURANT" />
       );
     }
     case "schoolIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/schoolIcon.png")}
+               source={require("./icons/categoryIcons/schoolIcon.png")}
                alt="SCHOOL" />
       );
     }
     case "workIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/workIcon.png")}
+               source={require("./icons/categoryIcons/workIcon.png")}
                alt="WORK" />
       );
     }
     default: {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
-               source={require("./icons/noneIcon.png")}
+               source={require("./icons/categoryIcons/noneIcon.png")}
                alt="NONE" />
       );
     }         
   }
 }
 
-export default CategoryIconManager;
+export const getAllIconPaths = () => {
+  return (
+    ["noneIcon.png", 
+     "carIcon.png", 
+     "entertainmentIcon.png", 
+     "groceriesIcon.png", 
+     "homeIcon.png",
+     "restaurantIcon.png", 
+     "schoolIcon.png",
+     "workIcon.png"]
+  );   
+}

@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
 import {Image, Pressable, Text, View} from "react-native";
+import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-import CategoryIconManager from "./CategoryIconManager";
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
@@ -59,7 +59,7 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
     return (
       <Pressable style={({pressed}) => [styles.categoryButtons, item.selected && styles.selected, pressed && styles.pressed]} 
                  onPress={() => onSelectionChange(item)}>
-        {CategoryIconManager(item.iconPath, true /*large*/)}
+        {getIconFromPath(item.iconPath, true /*large*/)}
         <Text numberOfLines={1} style={styles.smallText}>{item.name}</Text>
       </Pressable>
     );

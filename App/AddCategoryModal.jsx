@@ -4,12 +4,14 @@ import {styles} from "./Style";
 
 import Category from "./Category";
 import CategoriesContext from "./CategoriesContext";
+import IconSelectionList from "./IconSelectionList";
 
 const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, categoryToEdit, clearCategoryToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
+  const [selectedIcon, setSelectedIcon] = useState("noneIcon.png");
 
   useEffect(() => {
     setInErrorName(false);
@@ -18,11 +20,14 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
   useEffect(() => {
     if (categoryToEdit) {
       setNameInput(categoryToEdit.getName());
+      setSelectedIcon(categoryToEdit.getIconPath())
     }
   }, [categoryToEdit]);
 
   const clearModal = () => {
     setNameInput("");
+    setSelectedIcon("noneIcon.png");
+
     setInErrorName(false);
   }
 
@@ -38,7 +43,9 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
   const createNewCategory = () => {
     const processedNameInput = nameInput.trim().toUpperCase();
     
-    if (categoryToEdit && categoryToEdit.getName() === processedNameInput) {
+    if (categoryToEdit && 
+        categoryToEdit.getName() === processedNameInput &&
+        categoryToEdit.getIconPath() === selectedIcon) {
       closeModal();
       return;
     }
@@ -51,10 +58,13 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
 
     if (categoryToEdit) {
       categoryToEdit.setName(processedNameInput);
+      categoryToEdit.setIconPath(selectedIcon);
       categoriesContext._setCategoryData([...categoriesContext.categoryData]);
     }
     else {
-      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category(processedNameInput)]);
+      categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category(processedNameInput, // name
+                                                                                          selectedIcon // iconPath
+                                                                                         )]);
 
       setSelectionInput(processedNameInput);
     }
@@ -117,6 +127,7 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
                      defaultValue={nameInput} 
                      placeholder={"Name"} 
                      onChangeText={(text) => onTextChange(text)} />
+          <IconSelectionList setSelection={setSelectedIcon} defaultSelection={selectedIcon} />
           <View style={styles.horizontalContainer}>
             {categoryToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 

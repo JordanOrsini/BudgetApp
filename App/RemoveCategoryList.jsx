@@ -1,11 +1,11 @@
 import {useContext, useEffect, useState} from "react";
 import {Pressable, Text, View} from "react-native";
+import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
-import CategoryIconManager from "./CategoryIconManager";
 
 const RemoveCategoryList = ({style}) => {
   const categoryContext = useContext(CategoriesContext);
@@ -43,7 +43,7 @@ const RemoveCategoryList = ({style}) => {
           <View style={styles.horizontalContainer}>
             <Text numberOfLines={1} style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
             <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>
-              {CategoryIconManager(item.iconPath)}
+              {getIconFromPath(item.iconPath)}
             </View>
           </View>
           )}

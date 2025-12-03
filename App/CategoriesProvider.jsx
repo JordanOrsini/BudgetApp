@@ -77,7 +77,7 @@ const CategoriesProvider = ({children}) => {
   async function readAndParseFile() {
     try {
       // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, "utf8");
+      //await RNFS.writeFile(filePath, defaultFileContents, "utf8");
 
       const content = await RNFS.readFile(filePath, "utf8");
       console.log("File content:\n", content);

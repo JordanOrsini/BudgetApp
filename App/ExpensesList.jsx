@@ -46,7 +46,7 @@ const ExpensesList = ({style, size}) => {
           {({pressed}) => (
           <View style={styles.horizontalContainer}>
             <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <Text numberOfLines={1} style={[styles.listElementAmount, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
+            <Text numberOfLines={1} style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
             <View style={[styles.listElementIcon, pressed && styles.pressed]}>
               <Image style={styles.icon}
                      source={require("./icons/recurringIcon.png")}

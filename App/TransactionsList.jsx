@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
 import {Pressable, Text, View} from "react-native";
+import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-import CategoryIconManager from "./CategoryIconManager";
 import AddTransactionModal from "./AddTransactionModal";
 import TransactionsContext from "./TransactionsContext";
 
@@ -48,9 +48,9 @@ const TransactionsList = ({style, size}) => {
           {({pressed}) => (
           <View style={styles.horizontalContainer}>
             <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <Text numberOfLines={1} style={[styles.listElementAmount, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
+            <Text numberOfLines={1} style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
             <View style={[styles.listElementIcon, pressed && styles.pressed]}>
-              {CategoryIconManager(item.categoryIcon)}
+              {getIconFromPath(item.categoryIcon)}
             </View>
             <Text numberOfLines={1} style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
           </View>
