@@ -28,6 +28,7 @@ const MenuModal = ({modalVisibility, setVisibility}) => {
                    source={require("./icons/closeIcon.png")}
                    alt="x" />
           </Pressable>
+          <Text style={styles.modalHeaderText}>Add new...?</Text>
           <View style={styles.horizontalContainer}>
             <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
                        onPress={() => setAddExpenseVisibility(true)}>

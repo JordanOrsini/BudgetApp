@@ -29,7 +29,7 @@ const UserDataProvider = ({children}) => {
   const filePath = RNFS.DocumentDirectoryPath + "/UserData.txt";
 
   // [TODO]: Temporary data for testing.
-  const defaultFileContents = "Jordan;50000";
+  const defaultFileContents = "Jordan;100000";
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {

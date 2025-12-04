@@ -97,15 +97,17 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
       Success = false;
     }
 
-    let duplicateFound = false;
-    categoriesContext.categoryData.map((element) => {
-      if (element.getName() === processedNameInput)
-        duplicateFound = true;
-    })
+    if (categoryToEdit.getName() !== processedNameInput) {
+      let duplicateFound = false;
+      categoriesContext.categoryData.map((element) => {
+        if (element.getName() === processedNameInput)
+          duplicateFound = true;
+      })
 
-    if (duplicateFound) {
-      console.log("Duplicate category name found!\n");
-      Success = false;
+      if (duplicateFound) {
+        console.log("Duplicate category name found!\n");
+        Success = false;
+      }
     }
 
     return Success;
@@ -135,7 +137,7 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
             <Text style={styles.inputHeaderText}>Name:</Text>
             <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                        defaultValue={nameInput} 
-                       placeholder="Enter name here..."
+                       placeholder="Enter category name..."
                        onChangeText={(text) => onTextChange(text)} />
 
             <Text style={styles.inputHeaderText}>Icon:</Text>

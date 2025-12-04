@@ -92,7 +92,8 @@ const TransactionsList = ({style, size}) => {
                 keyExtractor={(item) => item.index}
                 scrollEnabled={size === undefined}
                 ListEmptyComponent={ListEmpty}
-                showsVerticalScrollIndicator={false} /> 
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.flatListContentContainer} /> 
     </View>      
     );
 }

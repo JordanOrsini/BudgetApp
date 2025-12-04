@@ -50,6 +50,8 @@ const listElementStart = {
 const mainBodyContainer = {
   borderWidth: 2,
   borderColor: "#E1E1E1",
+  outlineWidth: 2,
+  outlineColor: "#FFFFFF",
   margin: 5,
   padding: 10,
   width: 380,
@@ -137,6 +139,9 @@ export const styles = StyleSheet.create({
   categoryContainer: {
     height: 200,
   },
+  flatListContentContainer: {
+    flexGrow: 1,
+  },
   horizontalContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -158,6 +163,7 @@ export const styles = StyleSheet.create({
     ...mainBodyContainer, 
     height: "auto",
     borderWidth: 0,
+    outlineWidth: 0,
   },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
@@ -182,9 +188,9 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
   pageView: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Icon CSS classes /////////////////////////////////////////////////////////////////////////////
@@ -338,11 +344,7 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
   },
   modalHeaderText: {
-    padding: 5,
     fontSize: 25,
-    borderWidth: 2,
-    borderColor: "#E1E1E1",
-    borderRadius: 20,
     fontWeight: "bold",
     marginBottom: 10,
   },

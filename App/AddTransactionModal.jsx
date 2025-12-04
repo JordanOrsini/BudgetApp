@@ -204,13 +204,13 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
             <Text style={styles.inputHeaderText}>Name:</Text>
             <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                        defaultValue={nameInput} 
-                       placeholder="Enter name here..." 
+                       placeholder="Enter transaction name..." 
                        onChangeText={(text) => onTextChange(text, "nameInput")} />
 
             <Text style={styles.inputHeaderText}>Amount:</Text>
             <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
                        defaultValue={amountInput.toString()} 
-                       placeholder="Enter amount here..." 
+                       placeholder="Enter dollar amount..." 
                        onChangeText={(text) => onTextChange(text, "amountInput")} />
 
             <Text style={styles.inputHeaderText}>Category:</Text>

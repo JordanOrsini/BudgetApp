@@ -119,13 +119,13 @@ const EditUser = ({style}) => {
           <Text style={styles.inputHeaderText}>Username:</Text>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                      defaultValue={nameInput} 
-                     placeholder="Enter username here..." 
+                     placeholder="Enter username..." 
                      onChangeText={(text) => onTextChange(text, "nameInput")} /> 
 
           <Text style={styles.inputHeaderText}>Salary:</Text>
           <TextInput style={[styles.textInput, inErrorSalary && styles.decline]}
                      defaultValue={salaryInput} 
-                     placeholder="Enter salary here..." 
+                     placeholder="Enter dollar amount..." 
                      onChangeText={(text) => onTextChange(text, "salaryInput")} />
         </View>
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
