@@ -48,12 +48,13 @@ const listElementStart = {
   borderBottomLeftRadius: 20,
 };
 const mainBodyContainer = {
-  backgroundColor: "#E1E1E1",
+  borderWidth: 2,
+  borderColor: "#E1E1E1",
   margin: 5,
   padding: 10,
   width: 380,
   borderRadius: 30,
-  height: 340,
+  height: 345,
 };
 const modal = {
   ...appShadows,
@@ -107,7 +108,7 @@ export const styles = StyleSheet.create({
     height: 25,
     borderRadius: 25,
     marginTop: 0,
-    marginBottom: 0,
+    marginBottom: 10,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Colour CSS classes ///////////////////////////////////////////////////////////////////////////
@@ -156,7 +157,7 @@ export const styles = StyleSheet.create({
   mainBodyContainerHeader: { 
     ...mainBodyContainer, 
     height: "auto",
-    backgroundColor: "transparent",
+    borderWidth: 0,
   },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
@@ -168,22 +169,13 @@ export const styles = StyleSheet.create({
         height: 690,
       },    
     }),
-    backgroundColor: "transparent",
   },
   mainBodyContainerMedium: {
-    ...appShadows,
     ...mainBodyContainer,
   },
-  mainBodyContainerMicro: {
-    ...appShadows, 
-    ...mainBodyContainer, 
-    height: 160,
-    width: 185,
-  },
   mainBodyContainerSmall: {
-    ...appShadows, 
     ...mainBodyContainer, 
-    height: 160,
+    height: 260,
   },
   modalNavContainer: {
     position: "absolute",
@@ -214,12 +206,12 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   categoryListElementEndHeader: {
     ...listElementEnd,
-    width: 180,
+    width: 175,
     textAlign: "center",
   },
   categoryListElementEnd: {
     ...listElementEnd,
-    width: 180,
+    width: 175,
     paddingTop: 0,
     alignItems: "center",
     justifyContent: "center",
@@ -334,11 +326,25 @@ export const styles = StyleSheet.create({
   // Text CSS classes /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   creationText: {
-    paddingBottom: 10,
+    fontSize: 12,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   headerText: {
     fontSize: 50,
     fontWeight: "bold",
+  },
+  inputHeaderText: {
+    marginLeft: 10,
+  },
+  modalHeaderText: {
+    padding: 5,
+    fontSize: 25,
+    borderWidth: 2,
+    borderColor: "#E1E1E1",
+    borderRadius: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   smallText: {
     fontSize: 12,

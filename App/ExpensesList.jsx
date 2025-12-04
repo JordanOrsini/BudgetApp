@@ -45,6 +45,9 @@ const ExpensesList = ({style, size}) => {
         {size &&
         <Text style={styles.subHeaderText}>Recent expenses</Text>
         }
+        {!size &&
+        <Text style={styles.subHeaderText}>Expenses</Text>
+        }
         <View style={styles.listContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    

@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Modal, Pressable, TextInput, View} from "react-native";
+import {Image, Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Expense from "./Expense";
@@ -54,6 +54,9 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
     const processedNameInput = nameInput.trim();
     const processedAmountInput = parseFloat(parseFloat(amountInput).toFixed(2));
 
+    if (!validateInputs(processedNameInput))
+      return;
+
     if (expenseToEdit && 
         expenseToEdit.getName() === processedNameInput &&
         expenseToEdit.getAmount() == processedAmountInput &&
@@ -61,9 +64,6 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
       closeModal();
       return;
     }
-
-    if (!validateInputs(processedNameInput))
-      return;
 
     if (expenseToEdit) {
       expenseToEdit.setName(processedNameInput);
@@ -172,16 +172,31 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
                    source={require("./icons/closeIcon.png")}
                    alt="x" />
           </Pressable>
-          <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                     defaultValue={nameInput} 
-                     placeholder="Name" 
-                     onChangeText={(text) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]}
-                     defaultValue={amountInput.toString()} 
-                     placeholder="$ 0,000.00"
-                     onChangeText={(text) => onTextChange(text, "amountInput")} />
-          <IntervalsList setSelection={setIntervalInput} 
-                         defaultSelection={intervalInput} />
+          
+          {expenseToEdit &&
+          <Text style={styles.modalHeaderText}>Edit Expense</Text>
+          }
+          {!expenseToEdit &&
+          <Text style={styles.modalHeaderText}>Add Expense</Text>
+          }
+
+          <View>
+            <Text style={styles.inputHeaderText}>Name:</Text>
+            <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                       defaultValue={nameInput}
+                       placeholder="Enter name here..."
+                       onChangeText={(text) => onTextChange(text, "nameInput")} />
+
+            <Text style={styles.inputHeaderText}>Amount:</Text>      
+            <TextInput style={[styles.textInput, inErrorAmount && styles.decline]}
+                       defaultValue={amountInput.toString()}
+                       placeholder="Enter amount here..."
+                       onChangeText={(text) => onTextChange(text, "amountInput")} />
+
+            <Text style={styles.inputHeaderText}>Interval:</Text>
+            <IntervalsList setSelection={setIntervalInput} 
+                           defaultSelection={intervalInput} />
+          </View>
           <View style={styles.horizontalContainer}>
             {expenseToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 

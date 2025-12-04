@@ -8,7 +8,7 @@ import ListEmpty from "./ListEmpty";
 import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
-const RemoveCategoryList = ({style}) => {
+const EditCategoryList = ({style}) => {
   const categoryContext = useContext(CategoriesContext);
 
   const [data, setData] = useState([]);
@@ -38,7 +38,7 @@ const RemoveCategoryList = ({style}) => {
   const ListHeader = () => {
     return (
       <View>
-        <Text style={styles.subHeaderText}>Remove category</Text>
+        <Text style={styles.subHeaderText}>Edit category</Text>
         <View style={styles.listContainer}>
           <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
           <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
@@ -82,4 +82,4 @@ const RemoveCategoryList = ({style}) => {
   );
 }
 
-export default RemoveCategoryList;
+export default EditCategoryList;

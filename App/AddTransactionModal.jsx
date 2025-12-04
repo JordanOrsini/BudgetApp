@@ -64,6 +64,9 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
     const processedAmountInput = parseFloat(parseFloat(amountInput).toFixed(2));
     const processedDateInput = dateInput.getTime();
 
+    if (!validateInputs(processedNameInput))
+      return;
+
     if (transactionToEdit && 
         transactionToEdit.getName() === processedNameInput &&
         transactionToEdit.getAmount() == processedAmountInput &&
@@ -72,9 +75,6 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
       closeModal();
       return;
     }
-
-    if (!validateInputs(processedNameInput))
-      return;
 
     if (transactionToEdit) {
       transactionToEdit.setName(processedNameInput);
@@ -192,21 +192,38 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
                    source={require("./icons/closeIcon.png")}
                    alt="x" />
           </Pressable>
-          <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                     defaultValue={nameInput} 
-                     placeholder="Name" 
-                     onChangeText={(text) => onTextChange(text, "nameInput")} />
-          <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
-                     defaultValue={amountInput.toString()} 
-                     placeholder="$ 0,000.00" 
-                     onChangeText={(text) => onTextChange(text, "amountInput")} />
-          <CategoriesList setSelection={setCategoryInput} 
-                          defaultSelection={categoryInput} 
-                          setHidden={setHidden} />
-          <DatePicker ref={datePickerModal}
-                      type="date"
-				              value={dateInput}
-				              onChange={setDateInput} />    
+
+          {transactionToEdit &&
+            <Text style={styles.modalHeaderText}>Edit Transaction</Text>
+          }
+          {!transactionToEdit &&
+          <Text style={styles.modalHeaderText}>Add Transaction</Text>
+          }
+          
+          <View>
+            <Text style={styles.inputHeaderText}>Name:</Text>
+            <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                       defaultValue={nameInput} 
+                       placeholder="Enter name here..." 
+                       onChangeText={(text) => onTextChange(text, "nameInput")} />
+
+            <Text style={styles.inputHeaderText}>Amount:</Text>
+            <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
+                       defaultValue={amountInput.toString()} 
+                       placeholder="Enter amount here..." 
+                       onChangeText={(text) => onTextChange(text, "amountInput")} />
+
+            <Text style={styles.inputHeaderText}>Category:</Text>
+            <CategoriesList setSelection={setCategoryInput} 
+                            defaultSelection={categoryInput} 
+                            setHidden={setHidden} />
+
+            <Text style={styles.inputHeaderText}>Date:</Text>
+            <DatePicker ref={datePickerModal}
+                        type="date"
+				                value={dateInput}
+				                onChange={setDateInput} />  
+          </View>  
           <Pressable style={({pressed}) => [styles.textInputCalendar, pressed && styles.pressed]} 
                      onPress={() => datePickerModal.current?.showPicker()}>
             <View style={styles.horizontalContainer}>  

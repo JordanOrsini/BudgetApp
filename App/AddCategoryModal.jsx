@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Modal, Pressable, TextInput, View} from "react-native";
+import {Image, Modal, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Category from "./Category";
@@ -42,17 +42,17 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
 
   const createNewCategory = () => {
     const processedNameInput = nameInput.trim().toUpperCase();
+
+    if (!validateNameInput(processedNameInput)) {
+      console.log("Name invalid!\n");
+      setInErrorName(true);
+      return;
+    }
     
     if (categoryToEdit && 
         categoryToEdit.getName() === processedNameInput &&
         categoryToEdit.getIconPath() === selectedIcon) {
       closeModal();
-      return;
-    }
-
-    if (!validateNameInput(processedNameInput)) {
-      console.log("Name invalid!\n");
-      setInErrorName(true);
       return;
     }
 
@@ -123,11 +123,24 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
                    source={require("./icons/closeIcon.png")}
                    alt="x" />
           </Pressable>
-          <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                     defaultValue={nameInput} 
-                     placeholder={"Name"} 
-                     onChangeText={(text) => onTextChange(text)} />
-          <IconSelectionList setSelection={setSelectedIcon} defaultSelection={selectedIcon} />
+
+          {categoryToEdit &&
+          <Text style={styles.modalHeaderText}>Edit Category</Text>
+          }
+          {!categoryToEdit &&
+          <Text style={styles.modalHeaderText}>Add Category</Text>
+          }
+          
+          <View>
+            <Text style={styles.inputHeaderText}>Name:</Text>
+            <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                       defaultValue={nameInput} 
+                       placeholder="Enter name here..."
+                       onChangeText={(text) => onTextChange(text)} />
+
+            <Text style={styles.inputHeaderText}>Icon:</Text>
+            <IconSelectionList setSelection={setSelectedIcon} defaultSelection={selectedIcon} />
+          </View>
           <View style={styles.horizontalContainer}>
             {categoryToEdit &&
             <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 

@@ -3,13 +3,12 @@ import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
-import ModifySalary from "./ModifySalary";
+import EditUser from "./EditUser";
 import DeleteAllData from "./DeleteAllData";
-import ModifyUserName from "./ModifyUserName";
-import RemoveCategoryList from "./RemoveCategoryList";
+import EditCategoryList from "./EditCategoryList";
 
 const Settings = () => {
-  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}, {index: 4}];
+  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
   
   const renderItem = ({item}) => {
     switch (item.index) {
@@ -22,20 +21,15 @@ const Settings = () => {
       }
       case 1: {
         return (
-          <ModifyUserName />
+          <EditUser />
         );
       }
       case 2: {
         return (
-          <ModifySalary />
+          <EditCategoryList />
         );
       }
       case 3: {
-        return (
-          <RemoveCategoryList />
-        );
-      }
-      case 4: {
         return (
           <DeleteAllData style={styles.lastContainer} />
         );
