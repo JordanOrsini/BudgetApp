@@ -51,10 +51,10 @@ const TransactionsList = ({style, size}) => {
         <Text style={styles.subHeaderText}>Transactions</Text>
         }
         <View style={styles.listContainer}>
-          <Text style={styles.listElementStart}>Name</Text>
-          <Text style={styles.listElement}>Amount</Text>    
-          <Text style={styles.listElementIconHeader}>Cat</Text>
-          <Text style={styles.listElementEnd}>Date</Text>
+          <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
+          <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
+          <Text numberOfLines={1} style={styles.listElementIconHeader}>Cat</Text>
+          <Text numberOfLines={1} style={styles.listElementEnd}>Date</Text>
         </View>
       </View>
     );

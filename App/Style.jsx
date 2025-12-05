@@ -28,8 +28,8 @@ const button = {
 };
 const listElement = {
   ...appShadows,
-  paddingLeft: 8,
-  paddingRight: 8,
+  paddingLeft: 6,
+  paddingRight: 6,
   lineHeight: 40,
   backgroundColor: "#FFFFFF",
   width: 105,

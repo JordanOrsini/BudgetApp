@@ -40,8 +40,8 @@ const EditCategoryList = ({style}) => {
       <View>
         <Text style={styles.subHeaderText}>Edit category</Text>
         <View style={styles.listContainer}>
-          <Text style={styles.categoryListElementStart}>Name</Text>   
-          <Text style={styles.categoryListElementEndHeader}>Icon</Text>
+          <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
+          <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
         </View>
       </View>
     );

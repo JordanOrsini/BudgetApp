@@ -49,10 +49,10 @@ const ExpensesList = ({style, size}) => {
         <Text style={styles.subHeaderText}>Expenses</Text>
         }
         <View style={styles.listContainer}>
-          <Text style={styles.listElementStart}>Name</Text>
-          <Text style={styles.listElement}>Amount</Text>    
-          <Text style={styles.listElementIconHeader}>Rec</Text>
-          <Text style={styles.listElementEnd}>Frequency</Text>
+          <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
+          <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
+          <Text numberOfLines={1} style={styles.listElementIconHeader}>Rec</Text>
+          <Text numberOfLines={1} style={styles.listElementEnd}>Frequency</Text>
         </View>
       </View>
     );
