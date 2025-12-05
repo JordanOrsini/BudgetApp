@@ -30,13 +30,13 @@ const listElement = {
   ...appShadows,
   paddingLeft: 8,
   paddingRight: 8,
-  paddingTop: 11,
-  height: 40,
+  lineHeight: 40,
   backgroundColor: "#FFFFFF",
   width: 105,
 };
 const listElementEnd = {
   ...listElement,
+  paddingRight: 12,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
 };
@@ -217,7 +217,7 @@ export const styles = StyleSheet.create({
   categoryListElementEnd: {
     ...listElementEnd,
     width: 175,
-    paddingTop: 0,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -250,7 +250,7 @@ export const styles = StyleSheet.create({
   listElementIcon: {
     ...listElement,
     width: 40,
-    paddingTop: 0,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
   },
