@@ -28,22 +28,21 @@ const button = {
 };
 const listElement = {
   ...appShadows,
-  paddingLeft: 7,
-  paddingRight: 7,
-  paddingTop: 12,
+  paddingLeft: 8,
+  paddingRight: 8,
+  paddingTop: 11,
   height: 40,
   backgroundColor: "#FFFFFF",
   width: 105,
 };
 const listElementEnd = {
   ...listElement,
-  paddingRight: 11,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
 };
 const listElementStart = {
   ...listElement,
-  paddingLeft: 11,
+  paddingLeft: 12,
   borderTopLeftRadius: 20,
   borderBottomLeftRadius: 20,
 };
