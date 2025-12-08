@@ -10,9 +10,10 @@ const Navigation = ({state, navigation}) => {
 
   // Function that returns the navigation component.
   return (
-    <SafeAreaView style={styles.modalNavContainer}>      
-      <MenuModal modalVisibility={modalVisible} 
-                 setVisibility={setModalVisible} />
+    <SafeAreaView style={styles.modalNavContainer}> 
+      {modalVisible &&     
+      <MenuModal setVisibility={setModalVisible} />
+      }
 
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}

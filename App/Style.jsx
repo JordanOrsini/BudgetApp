@@ -265,18 +265,31 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Modal CSS classes ////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  modal: {
-    ...modal,
+  bottomSheet: {
+    ...appShadows,
+    borderRadius: 20,
   },
-  menuModal: {
+  bottomSheetContent: {
+    ...appShadows,
+    backgroundColor: "#FFFFFF",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    alignItems: "center",
+    padding: 36,
+    paddingTop: 0, 
+  },
+  bottomSheetPositioning: {
+    marginLeft: 75,
+    marginRight: 75,
+    marginTop: 610,
+  },
+  modal: { 
     ...modal,
-    margin: 75,
-    marginBottom: 20,
   },
   modalPositioning: {
-    justifyContent: "flex-end",
     flex: 1,
     marginBottom: 100,
+    justifyContent: "flex-end",
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Navigation CSS classes ///////////////////////////////////////////////////////////////////////

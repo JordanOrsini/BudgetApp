@@ -97,7 +97,8 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
       Success = false;
     }
 
-    if (categoryToEdit.getName() !== processedNameInput) {
+    if (categoryToEdit &&
+        categoryToEdit.getName() !== processedNameInput) {
       let duplicateFound = false;
       categoriesContext.categoryData.map((element) => {
         if (element.getName() === processedNameInput)
