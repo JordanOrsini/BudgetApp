@@ -61,7 +61,7 @@ const MenuModal = ({setVisibility, content, setContent, editObject}) => {
                         (content === 3) ? styles.bottomSheetPositioningCategory :
                         (editObject)    ? styles.bottomSheetPositioningTransactionEdit : 
                                           styles.bottomSheetPositioningTransaction}
-                 backgroundStyle={[styles.bottomSheet, editObject && styles.edit]}
+                 backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
                  onChange={handleSheetChanges}
                  detached={true}
                  enablePanDownToClose={true}
