@@ -1,4 +1,3 @@
-import {useRef, useState} from "react";
 import {Pressable, Text, View} from "react-native";
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import {styles} from "./Style";
@@ -6,13 +5,12 @@ import {styles} from "./Style";
 import AddExpenseModal from "./AddExpenseModal";
 import AddTransactionModal from "./AddTransactionModal";
 
-const MenuModal = ({setVisibility}) => {
-  const [content, setContent] = useState(0);
-
-  const bottomSheetRef = useRef(null);
+const MenuModal = ({setVisibility, content, setContent, editObject, clearEditObject}) => {
   const handleSheetChanges = (index) => {
-    if (index === -1) 
+    if (index === -1) {
       setVisibility(false);
+      clearEditObject();
+    }
   }
 
   const getContent = () => {
@@ -36,22 +34,26 @@ const MenuModal = ({setVisibility}) => {
       }
       case 1: {
         return (
-          <AddExpenseModal setVisibility={setVisibility} />
+          <AddExpenseModal setVisibility={setVisibility}
+                           expenseToEdit={editObject} />
         );
       }
       case 2: {
         return (
-          <AddTransactionModal setVisibility={setVisibility} />
+          <AddTransactionModal setVisibility={setVisibility}
+                               transactionToEdit={editObject} />
         );
       }
     }
   }
 
   return (   
-    <BottomSheet style={(content === 0) ? styles.bottomSheetPositioning : (content === 1) ? styles.bottomSheetPositioningExpense : styles.bottomSheetPositioningTransaction}
-                 backgroundStyle={styles.bottomSheet}
+    <BottomSheet style={(content === 0) ? styles.bottomSheetPositioning :
+                        (content === 1) ? styles.bottomSheetPositioningExpense : 
+                        (editObject)    ? styles.bottomSheetPositioningTransactionEdit : 
+                                          styles.bottomSheetPositioningTransaction}
+                 backgroundStyle={[styles.bottomSheet, editObject && styles.edit]}
                  onChange={handleSheetChanges}
-                 ref={bottomSheetRef}
                  detached={true}
                  enablePanDownToClose={true}>     
       <BottomSheetView>

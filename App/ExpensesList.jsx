@@ -4,16 +4,12 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
-import AddExpenseModal from "./AddExpenseModal";
 import ExpensesContext from "./ExpensesContext";
 
-const ExpensesList = ({style, size}) => {
+const ExpensesList = ({style, size, setContent}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [data, setData] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [expenseToEdit, setExpenseToEdit] = useState(null);
-
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   useEffect(() => {
@@ -21,8 +17,7 @@ const ExpensesList = ({style, size}) => {
   }, [expensesContext.expenseData]);
 
   const editItemHandler = (item) => {
-    setExpenseToEdit(expensesContext.findExpenseById(item.id));
-    setModalVisible(true);
+    setContent(1, expensesContext.findExpenseById(item.id));
   }
 
   const fillData = () => {
@@ -83,12 +78,6 @@ const ExpensesList = ({style, size}) => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={[styles.mainBodyContainerLarge, style]}> 
-      {modalVisible && 
-      <AddExpenseModal modalVisibility={modalVisible}
-                       setVisibility={setModalVisible}
-                       expenseToEdit={expenseToEdit}
-                       clearExpenseToEdit={() => setExpenseToEdit(null)} />
-      }
       <ListHeader />    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 

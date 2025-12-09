@@ -7,9 +7,10 @@ import {styles} from "./Style";
 import TransactionsList from "./TransactionsList";
 import TransactionsContext from "./TransactionsContext";
 
-const Transactions = () => {
+const Transactions = ({route}) => {
   const transactionContext = useContext(TransactionsContext);
 
+  const {setModalContent} = route.params;
   const data = [{index: 0}, {index: 1}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
@@ -25,7 +26,8 @@ const Transactions = () => {
       }
       case 1: {
         return (
-          <TransactionsList style={styles.lastContainer} />   
+          <TransactionsList style={styles.lastContainer}
+                            setContent={setModalContent} />   
         );
       }
       default: {

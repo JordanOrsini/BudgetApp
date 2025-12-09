@@ -5,16 +5,12 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
-import AddTransactionModal from "./AddTransactionModal";
 import TransactionsContext from "./TransactionsContext";
 
-const TransactionsList = ({style, size}) => {
+const TransactionsList = ({style, size, setContent}) => {
   const transactionsContext = useContext(TransactionsContext);
 
   const [data, setData] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [transactionToEdit, setTransactionToEdit] = useState(null);
-
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   useEffect(() => {
@@ -22,8 +18,7 @@ const TransactionsList = ({style, size}) => {
   }, [transactionsContext.transactionData]);
 
   const editItemHandler = (item) => {
-    setTransactionToEdit(transactionsContext.findTransactionById(item.id));
-    setModalVisible(true);
+    setContent(2, transactionsContext.findTransactionById(item.id));
   }
 
   const fillData = () => {
@@ -82,12 +77,6 @@ const TransactionsList = ({style, size}) => {
 
   return (
     <View style={[styles.mainBodyContainerLarge, style]}>
-      {modalVisible &&
-      <AddTransactionModal modalVisibility={modalVisible} 
-                           setVisibility={setModalVisible} 
-                           transactionToEdit={transactionToEdit} 
-                           clearTransactionToEdit={() => setTransactionToEdit(null)} />
-      }
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 

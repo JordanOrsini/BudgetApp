@@ -272,6 +272,7 @@ export const styles = StyleSheet.create({
   bottomSheetContent: {
     ...appShadows,
     backgroundColor: "#FFFFFF",
+    borderTopWidth: 0,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     alignItems: "center",
@@ -292,6 +293,11 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 190,
+  },
+  bottomSheetPositioningTransactionEdit: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 160,
   },
   modal: { 
     ...modal,

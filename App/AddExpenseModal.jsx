@@ -6,7 +6,7 @@ import Expense from "./Expense";
 import IntervalsList from "./IntervalsList";
 import ExpensesContext from "./ExpensesContext";
 
-const AddExpenseModal = ({setVisibility, expenseToEdit, clearExpenseToEdit}) => {
+const AddExpenseModal = ({setVisibility, expenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [nameInput, setNameInput] = useState("");
@@ -43,10 +43,6 @@ const AddExpenseModal = ({setVisibility, expenseToEdit, clearExpenseToEdit}) => 
 
   const closeModal = () => {
     clearModal();
-
-    if (expenseToEdit)
-      clearExpenseToEdit();
-
     setVisibility(false);
   }
 

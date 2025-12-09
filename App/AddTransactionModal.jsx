@@ -8,7 +8,7 @@ import CategoriesList from "./CategoriesList";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
 
-const AddTransactionModal = ({setVisibility, transactionToEdit, clearTransactionToEdit}) => {
+const AddTransactionModal = ({setVisibility, transactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -52,10 +52,6 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, clearTransaction
 
   const closeModal = () => {
     clearModal();
-
-    if (transactionToEdit)
-      clearTransactionToEdit();
-
     setVisibility(false);
   }
 

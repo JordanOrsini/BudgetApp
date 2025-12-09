@@ -1,3 +1,4 @@
+import {LogBox} from 'react-native';
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer} from "@react-navigation/native";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
@@ -16,6 +17,10 @@ import BottomNavigation from "./BottomNavigation";
    SafeAreaProvider ensures content of the application is not displayed where camera cutouts are located.
 */
 const App = () => {
+  LogBox.ignoreLogs([
+    "Non-serializable values were found in the navigation state.",
+  ]);
+
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>

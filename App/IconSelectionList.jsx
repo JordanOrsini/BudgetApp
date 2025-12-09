@@ -44,14 +44,12 @@ const IconSelectionList = ({setSelection, defaultSelection}) => {
   }
 
   return (
-    <View>
-      <View style={styles.categoryContainer}>
-        <FlatList data={data}
-                  renderItem={renderItem}
-                  keyExtractor={(item) => item.id}
-                  numColumns={3}
-                  showsVerticalScrollIndicator={false} />      
-      </View>
+    <View style={styles.categoryContainer}>
+      <FlatList data={data}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+                numColumns={3}
+                showsVerticalScrollIndicator={false} />      
     </View>
   );
 }
