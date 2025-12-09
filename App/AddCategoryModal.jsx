@@ -6,7 +6,7 @@ import Category from "./Category";
 import CategoriesContext from "./CategoriesContext";
 import IconSelectionList from "./IconSelectionList";
 
-const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, categoryToEdit, clearCategoryToEdit}) => {
+const AddCategoryModal = ({setVisibility, categoryToEdit, setContent}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [nameInput, setNameInput] = useState("");
@@ -35,9 +35,9 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
     clearModal();
 
     if (categoryToEdit)
-      clearCategoryToEdit();
-
-    setVisibility(false);
+      setVisibility(false);
+    else
+      setContent(2);
   }
 
   const createNewCategory = () => {
@@ -65,8 +65,6 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
       categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category(processedNameInput, // name
                                                                                           selectedIcon // iconPath
                                                                                          )]);
-
-      setSelectionInput(processedNameInput);
     }
 
     closeModal();
@@ -116,53 +114,50 @@ const AddCategoryModal = ({modalVisibility, setVisibility, setSelectionInput, ca
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <Modal visible={modalVisibility}
-           transparent={true}> 
-      <View style={styles.modalPositioning}>    
-        <View style={[styles.modal, categoryToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} 
-                     onPress={() => closeModal()}>
-            <Image style={styles.icon}
-                   source={require("./icons/closeIcon.png")}
-                   alt="x" />
-          </Pressable>
-
-          {categoryToEdit &&
-          <Text style={styles.modalHeaderText}>Edit Category</Text>
-          }
-          {!categoryToEdit &&
-          <Text style={styles.modalHeaderText}>Add Category</Text>
-          }
+    <View style={[styles.bottomSheetContent, categoryToEdit && styles.edit]}>
+      {categoryToEdit &&
+      <Text style={styles.modalHeaderText}>Edit Category</Text>
+      }
+      {!categoryToEdit &&
+      <Text style={styles.modalHeaderText}>Add Category</Text>
+      }
           
-          <View>
-            <Text style={styles.inputHeaderText}>Name:</Text>
-            <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                       defaultValue={nameInput} 
-                       placeholder="Enter category name..."
-                       onChangeText={(text) => onTextChange(text)} />
+      <View>
+        <Text style={styles.inputHeaderText}>Name:</Text>
+        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                   defaultValue={nameInput} 
+                   placeholder="Enter category name..."
+                   onChangeText={(text) => onTextChange(text)} />
 
-            <Text style={styles.inputHeaderText}>Icon:</Text>
-            <IconSelectionList setSelection={setSelectedIcon} defaultSelection={selectedIcon} />
-          </View>
-          <View style={styles.horizontalContainer}>
-            {categoryToEdit &&
-            <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
-                       onPress={() => removeItemHandler()}>
-              <Image style={styles.icon}
-                     source={require("./icons/deleteIcon.png")}
-                     alt="Delete" />
-            </Pressable>
-            } 
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
-                       onPress={() => createNewCategory()}>
-              <Image style={styles.icon}
-                     source={require("./icons/checkIcon.png")}
-                     alt="Confirm" />
-            </Pressable>
-          </View>
-        </View>    
-      </View>    
-    </Modal>
+        <Text style={styles.inputHeaderText}>Icon:</Text>
+        <IconSelectionList setSelection={setSelectedIcon} 
+                           defaultSelection={selectedIcon} />
+      </View>
+      <View style={styles.horizontalContainer}>
+        {categoryToEdit &&
+        <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
+                   onPress={() => removeItemHandler()}>
+          <Image style={styles.icon}
+                 source={require("./icons/deleteIcon.png")}
+                 alt="Delete" />
+        </Pressable>
+        }
+        {!categoryToEdit &&
+        <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
+                   onPress={() => setContent(2)}>
+          <Image style={styles.icon}
+                 source={require("./icons/backIcon.png")}
+                 alt="Delete" />
+        </Pressable>
+        }  
+        <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                   onPress={() => createNewCategory()}>
+          <Image style={styles.icon}
+                 source={require("./icons/checkIcon.png")}
+                 alt="Confirm" />
+        </Pressable>
+      </View>
+    </View>    
   );
 }
 

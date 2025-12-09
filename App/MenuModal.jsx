@@ -1,16 +1,16 @@
 import {Pressable, Text, View} from "react-native";
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
+import BottomSheet from "@gorhom/bottom-sheet";
 import AddExpenseModal from "./AddExpenseModal";
+import AddCategoryModal from "./AddCategoryModal";
 import AddTransactionModal from "./AddTransactionModal";
 
-const MenuModal = ({setVisibility, content, setContent, editObject, clearEditObject}) => {
+const MenuModal = ({setVisibility, content, setContent, editObject}) => {
   const handleSheetChanges = (index) => {
-    if (index === -1) {
+    if (index === -1)
       setVisibility(false);
-      clearEditObject();
-    }
   }
 
   const getContent = () => {
@@ -41,21 +41,31 @@ const MenuModal = ({setVisibility, content, setContent, editObject, clearEditObj
       case 2: {
         return (
           <AddTransactionModal setVisibility={setVisibility}
-                               transactionToEdit={editObject} />
+                               transactionToEdit={editObject}
+                               setContent={setContent} />
+        );
+      }
+      case 3: {
+        return (
+          <AddCategoryModal setVisibility={setVisibility}
+                            categoryToEdit={editObject}
+                            setContent={setContent} />
         );
       }
     }
   }
 
-  return (   
+  return ( 
     <BottomSheet style={(content === 0) ? styles.bottomSheetPositioning :
                         (content === 1) ? styles.bottomSheetPositioningExpense : 
+                        (content === 3) ? styles.bottomSheetPositioningCategory :
                         (editObject)    ? styles.bottomSheetPositioningTransactionEdit : 
                                           styles.bottomSheetPositioningTransaction}
                  backgroundStyle={[styles.bottomSheet, editObject && styles.edit]}
                  onChange={handleSheetChanges}
                  detached={true}
-                 enablePanDownToClose={true}>     
+                 enablePanDownToClose={true}
+                 overDragResistanceFactor={2}>     
       <BottomSheetView>
         {getContent()}
       </BottomSheetView>

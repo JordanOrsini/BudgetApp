@@ -7,7 +7,8 @@ import EditUser from "./EditUser";
 import DeleteAllData from "./DeleteAllData";
 import EditCategoryList from "./EditCategoryList";
 
-const Settings = () => {
+const Settings = ({route}) => {
+  const {setModalContent} = route.params;
   const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
   
   const renderItem = ({item}) => {
@@ -26,7 +27,7 @@ const Settings = () => {
       }
       case 2: {
         return (
-          <EditCategoryList />
+          <EditCategoryList setContent={setModalContent} />
         );
       }
       case 3: {

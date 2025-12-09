@@ -5,23 +5,18 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
-import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
-const EditCategoryList = ({style}) => {
+const EditCategoryList = ({style, setContent}) => {
   const categoryContext = useContext(CategoriesContext);
-
   const [data, setData] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [categoryToEdit, setCategoryToEdit] = useState(null);
 
   useEffect(() => {
     fillData();
   }, [categoryContext.categoryData]);
 
   const editItemHandler = (item) => {
-    setCategoryToEdit(categoryContext.findCategoryByName(item.name));
-    setModalVisible(true);
+    setContent(3, categoryContext.findCategoryByName(item.name));
   }
 
   const fillData = () => {
@@ -39,9 +34,11 @@ const EditCategoryList = ({style}) => {
     return (
       <View>
         <Text style={styles.subHeaderText}>Edit category</Text>
-        <View style={styles.listContainer}>
-          <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
-          <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
+        <View style={{alignItems: "center"}}>
+          <View style={styles.listContainer}>
+            <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
+            <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
+          </View>
         </View>
       </View>
     );
@@ -49,18 +46,20 @@ const EditCategoryList = ({style}) => {
 
   const renderItem = ({item}) => {
     return (
-      (item.id > 0) &&   
-      <View style={styles.listContainer}>
-        <Pressable onPress={() => editItemHandler(item)}>
-          {({pressed}) => (
-          <View style={styles.horizontalContainer}>
-            <Text numberOfLines={1} style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>
-              {getIconFromPath(item.iconPath)}
+      (item.id > 0) &&
+      <View style={{alignItems: "center"}}>   
+        <View style={styles.listContainer}>
+          <Pressable onPress={() => editItemHandler(item)}>
+            {({pressed}) => (
+            <View style={styles.horizontalContainer}>
+              <Text numberOfLines={1} style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
+              <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>
+                {getIconFromPath(item.iconPath)}
+              </View>
             </View>
-          </View>
-          )}
-        </Pressable>
+            )}
+          </Pressable>
+        </View>
       </View>
     );
   }
@@ -68,10 +67,6 @@ const EditCategoryList = ({style}) => {
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={[styles.mainBodyContainerMedium, style]}>
-      <AddCategoryModal modalVisibility={modalVisible} 
-                        setVisibility={setModalVisible}
-                        categoryToEdit={categoryToEdit} 
-                        clearCategoryToEdit={() => setCategoryToEdit(null)} />
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

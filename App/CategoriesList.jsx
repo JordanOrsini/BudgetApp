@@ -4,18 +4,12 @@ import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
-import AddCategoryModal from "./AddCategoryModal";
 import CategoriesContext from "./CategoriesContext";
 
-const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
+const CategoriesList = ({setSelection, defaultSelection, setContent}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [data, setData] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    setHidden(modalVisible);
-  }, [modalVisible]);
 
   useEffect(() => {
     fillData();
@@ -48,7 +42,7 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
     if (item.addCategory) {
       return (
         <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} 
-                   onPress={() => setModalVisible(true)}>
+                   onPress={() => setContent(3)}>
           <Image style={styles.iconLarge}
                  source={require("./icons/plusIcon.png")}
                  alt="+" />
@@ -66,17 +60,12 @@ const CategoriesList = ({setSelection, defaultSelection, setHidden}) => {
   }
 
   return (
-    <View>
-      <AddCategoryModal modalVisibility={modalVisible} 
-                        setVisibility={setModalVisible} 
-                        setSelectionInput={setSelection}/>
-      <View style={styles.categoryContainer}>
-        <FlatList data={[...data, {addCategory: true}]}
-                  renderItem={renderItem}
-                  keyExtractor={(item) => item.id}
-                  numColumns={3}
-                  showsVerticalScrollIndicator={false} />      
-      </View>
+    <View style={styles.categoryContainer}>
+      <FlatList data={[...data, {addCategory: true}]}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+                numColumns={3}
+                showsVerticalScrollIndicator={false} />      
     </View>
   );
 }

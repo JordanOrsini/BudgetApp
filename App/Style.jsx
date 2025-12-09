@@ -101,7 +101,7 @@ export const styles = StyleSheet.create({
   deleteAllButton: {
     ...button,
     height: 80,
-    width: 160,
+    width: 290,
   },
   smallButton: {
     ...button,
@@ -223,7 +223,7 @@ export const styles = StyleSheet.create({
   },
   categoryListElementStart: {
     ...listElementStart,
-    width: 180,
+    width: 175,
   },
   lastItem: {
     ...Platform.select({
@@ -283,6 +283,11 @@ export const styles = StyleSheet.create({
     marginLeft: 75,
     marginRight: 75,
     marginTop: 610,
+  },
+  bottomSheetPositioningCategory: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 320,
   },
   bottomSheetPositioningExpense: {
     marginLeft: 20,

@@ -16,6 +16,17 @@ const Navigation = ({state, navigation}) => {
 
     if (newEditObject)
       setEditObject(newEditObject);
+    else
+      setEditObject(null);
+  }
+
+  const _setModalVisible = (isVisible) => {
+    setModalVisible(isVisible);
+
+    if (isVisible === false) {
+      setEditObject(null);
+      setContent(0);
+    }
   }
 
   useEffect(() => {
@@ -26,11 +37,10 @@ const Navigation = ({state, navigation}) => {
   return (
     <SafeAreaView style={styles.modalNavContainer}> 
       {modalVisible &&     
-      <MenuModal setVisibility={setModalVisible}
+      <MenuModal setVisibility={_setModalVisible}
                  content={content} 
-                 setContent={setContent}
-                 editObject={editObject}
-                 clearEditObject={() => setEditObject(null)} />
+                 setContent={_setContent}
+                 editObject={editObject} />
       }
 
       <View style={styles.navigationContainer}>
@@ -59,7 +69,7 @@ const Navigation = ({state, navigation}) => {
                  alt="Transactions" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonRight, (state.index === 3) && styles.selected, pressed && styles.pressed]}
-                   onPress={() => navigation.navigate("Settings")}>
+                   onPress={() => navigation.navigate("Settings", {setModalContent: _setContent})}>
           <Image style={styles.icon}
                  source={require("./icons/settingsIcon.png")}
                  alt="Settings" />

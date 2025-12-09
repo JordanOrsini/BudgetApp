@@ -8,7 +8,7 @@ import CategoriesList from "./CategoriesList";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
 
-const AddTransactionModal = ({setVisibility, transactionToEdit}) => {
+const AddTransactionModal = ({setVisibility, transactionToEdit, setContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -20,7 +20,6 @@ const AddTransactionModal = ({setVisibility, transactionToEdit}) => {
   const [inErrorName, setInErrorName] = useState(false);
   const [inErrorAmount, setInErrorAmount] = useState(false);
 
-  const [hidden, setHidden] = useState(false);
   const datePickerModal = useRef(null);
 
   useEffect(() => {
@@ -202,7 +201,7 @@ const AddTransactionModal = ({setVisibility, transactionToEdit}) => {
         <Text style={styles.inputHeaderText}>Category:</Text>
         <CategoriesList setSelection={setCategoryInput} 
                         defaultSelection={categoryInput} 
-                        setHidden={setHidden} />
+                        setContent={setContent} />
 
         <Text style={styles.inputHeaderText}>Date:</Text>
         <DatePicker ref={datePickerModal}
