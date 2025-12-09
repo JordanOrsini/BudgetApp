@@ -115,16 +115,16 @@ export const styles = StyleSheet.create({
   // Colour CSS classes ///////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   accept: {
-    backgroundColor: "#A0FAA0",
+    borderWidth: 2,
+    borderColor: "#A0FAA0",
   },
   decline: {
-    backgroundColor: "#F76464",
+    borderWidth: 2,
+    borderColor: "#F76464",
   },
   edit: {
-    backgroundColor: "#FFB343",
-  },
-  hide: {
-    opacity: 0,
+    borderWidth: 2,
+    borderColor: "#FFB343",
   },
   pressed: {
     backgroundColor: "#FDFD96",
@@ -282,6 +282,16 @@ export const styles = StyleSheet.create({
     marginLeft: 75,
     marginRight: 75,
     marginTop: 610,
+  },
+  bottomSheetPositioningExpense: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 330,
+  },
+  bottomSheetPositioningTransaction: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 190,
   },
   modal: { 
     ...modal,

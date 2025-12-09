@@ -7,8 +7,7 @@ import AddExpenseModal from "./AddExpenseModal";
 import AddTransactionModal from "./AddTransactionModal";
 
 const MenuModal = ({setVisibility}) => {
-  const [addExpenseVisibility, setAddExpenseVisibility] = useState(false);
-  const [addtransactionVisibility, setAddTransactionVisibility] = useState(false);
+  const [content, setContent] = useState(0);
 
   const bottomSheetRef = useRef(null);
   const handleSheetChanges = (index) => {
@@ -16,29 +15,47 @@ const MenuModal = ({setVisibility}) => {
       setVisibility(false);
   }
 
+  const getContent = () => {
+    switch (content) {
+      case 0: {
+        return (
+          <View style={styles.bottomSheetContent}>
+            <Text style={styles.modalHeaderText}>Add new...?</Text>
+            <View style={styles.horizontalContainer}>
+              <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
+                         onPress={() => setContent(1)}>
+                <Text>Expense</Text>
+              </Pressable>
+              <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
+                         onPress={() => setContent(2)}>
+                <Text>Transaction</Text>
+              </Pressable>
+            </View>
+          </View>
+        );
+      }
+      case 1: {
+        return (
+          <AddExpenseModal setVisibility={setVisibility} />
+        );
+      }
+      case 2: {
+        return (
+          <AddTransactionModal setVisibility={setVisibility} />
+        );
+      }
+    }
+  }
+
   return (   
-    <BottomSheet style={styles.bottomSheetPositioning}
+    <BottomSheet style={(content === 0) ? styles.bottomSheetPositioning : (content === 1) ? styles.bottomSheetPositioningExpense : styles.bottomSheetPositioningTransaction}
                  backgroundStyle={styles.bottomSheet}
                  onChange={handleSheetChanges}
                  ref={bottomSheetRef}
                  detached={true}
                  enablePanDownToClose={true}>     
-      <BottomSheetView style={styles.bottomSheetContent}>
-        <AddExpenseModal modalVisibility={addExpenseVisibility}
-                         setVisibility={setAddExpenseVisibility} />
-        <AddTransactionModal modalVisibility={addtransactionVisibility}
-                             setVisibility={setAddTransactionVisibility} />
-        <Text style={styles.modalHeaderText}>Add new...?</Text>
-        <View style={styles.horizontalContainer}>
-          <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
-                     onPress={() => setAddExpenseVisibility(true)}>
-            <Text>Expense</Text>
-          </Pressable>
-          <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
-                     onPress={() => setAddTransactionVisibility(true)}>
-            <Text>Transaction</Text>
-          </Pressable>
-        </View>
+      <BottomSheetView>
+        {getContent()}
       </BottomSheetView>
     </BottomSheet>
   );

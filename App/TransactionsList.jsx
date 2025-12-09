@@ -82,10 +82,12 @@ const TransactionsList = ({style, size}) => {
 
   return (
     <View style={[styles.mainBodyContainerLarge, style]}>
+      {modalVisible &&
       <AddTransactionModal modalVisibility={modalVisible} 
                            setVisibility={setModalVisible} 
                            transactionToEdit={transactionToEdit} 
                            clearTransactionToEdit={() => setTransactionToEdit(null)} />
+      }
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 

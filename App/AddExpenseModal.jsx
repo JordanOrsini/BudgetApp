@@ -1,12 +1,12 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Image, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Expense from "./Expense";
 import IntervalsList from "./IntervalsList";
 import ExpensesContext from "./ExpensesContext";
 
-const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearExpenseToEdit}) => {
+const AddExpenseModal = ({setVisibility, expenseToEdit, clearExpenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
 
   const [nameInput, setNameInput] = useState("");
@@ -162,73 +162,61 @@ const AddExpenseModal = ({modalVisibility, setVisibility, expenseToEdit, clearEx
   }
 
   return (
-    <Modal visible={modalVisibility} 
-           transparent={true} >
-      <View style={styles.modalPositioning}>
-        <View style={[styles.modal, expenseToEdit && styles.edit]}>
-          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]}
-                     onPress={() => closeModal()}>
-            <Image style={styles.icon}
-                   source={require("./icons/closeIcon.png")}
-                   alt="x" />
-          </Pressable>
-          
-          {expenseToEdit &&
-          <Text style={styles.modalHeaderText}>Edit Expense</Text>
-          }
-          {!expenseToEdit &&
-          <Text style={styles.modalHeaderText}>Add Expense</Text>
-          }
+    <View style={[styles.bottomSheetContent, expenseToEdit && styles.edit]}>          
+      {expenseToEdit &&
+      <Text style={styles.modalHeaderText}>Edit Expense</Text>
+      }
+      {!expenseToEdit &&
+      <Text style={styles.modalHeaderText}>Add Expense</Text>
+      }
 
-          <View>
-            <Text style={styles.inputHeaderText}>Name:</Text>
-            <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                       defaultValue={nameInput}
-                       placeholder="Enter expense name..."
-                       onChangeText={(text) => onTextChange(text, "nameInput")} />
+      <View>
+        <Text style={styles.inputHeaderText}>Name:</Text>
+        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                   defaultValue={nameInput}
+                   placeholder="Enter expense name..."
+                   onChangeText={(text) => onTextChange(text, "nameInput")} />
 
-            <Text style={styles.inputHeaderText}>Amount:</Text>      
-            <TextInput style={[styles.textInput, inErrorAmount && styles.decline]}
-                       defaultValue={amountInput.toString()}
-                       placeholder="Enter dollar amount..."
-                       onChangeText={(text) => onTextChange(text, "amountInput")} />
+        <Text style={styles.inputHeaderText}>Amount:</Text>      
+        <TextInput style={[styles.textInput, inErrorAmount && styles.decline]}
+                   defaultValue={amountInput.toString()}
+                   placeholder="Enter dollar amount..."
+                   onChangeText={(text) => onTextChange(text, "amountInput")} />
 
-            <Text style={styles.inputHeaderText}>Interval:</Text>
-            <IntervalsList setSelection={setIntervalInput} 
-                           defaultSelection={intervalInput} />
-          </View>
-          <View style={styles.horizontalContainer}>
-            {expenseToEdit &&
-            <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
-                       onPress={() => removeItemHandler()}>
-              <Image style={styles.icon}
-                     source={require("./icons/deleteIcon.png")}
-                     alt="Delete" />
-            </Pressable>
-            }
-            {!expenseToEdit &&
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
-                       onPress={() => createNewExpense(true)}>
-              <View style={styles.horizontalContainer}>
-                <Image style={styles.icon}
-                       source={require("./icons/checkIcon.png")}
-                       alt="Add another" />
-                <Image style={styles.icon}
-                       source={require("./icons/plusIcon.png")}
-                       alt="Add another" />
-              </View>
-            </Pressable>
-            }         
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
-                       onPress={() => createNewExpense()}>
-              <Image style={styles.icon}
-                     source={require("./icons/checkIcon.png")}
-                     alt="Confirm" />
-            </Pressable>
-          </View>
-        </View>
+        <Text style={styles.inputHeaderText}>Interval:</Text>
+        <IntervalsList setSelection={setIntervalInput} 
+                       defaultSelection={intervalInput} />
       </View>
-    </Modal>
+      <View style={styles.horizontalContainer}>
+        {expenseToEdit &&
+        <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
+                   onPress={() => removeItemHandler()}>
+          <Image style={styles.icon}
+                 source={require("./icons/deleteIcon.png")}
+                 alt="Delete" />
+        </Pressable>
+        }
+        {!expenseToEdit &&
+        <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                   onPress={() => createNewExpense(true)}>
+          <View style={styles.horizontalContainer}>
+            <Image style={styles.icon}
+                   source={require("./icons/checkIcon.png")}
+                   alt="Add another" />
+            <Image style={styles.icon}
+                   source={require("./icons/plusIcon.png")}
+                   alt="Add another" />
+          </View>
+        </Pressable>
+        }         
+        <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                   onPress={() => createNewExpense()}>
+          <Image style={styles.icon}
+                 source={require("./icons/checkIcon.png")}
+                 alt="Confirm" />
+        </Pressable>
+      </View>
+    </View>
   );
 }
 

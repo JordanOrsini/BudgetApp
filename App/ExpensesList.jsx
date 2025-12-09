@@ -82,11 +82,13 @@ const ExpensesList = ({style, size}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerLarge, style]}>  
+    <View style={[styles.mainBodyContainerLarge, style]}> 
+      {modalVisible && 
       <AddExpenseModal modalVisibility={modalVisible}
                        setVisibility={setModalVisible}
                        expenseToEdit={expenseToEdit}
                        clearExpenseToEdit={() => setExpenseToEdit(null)} />
+      }
       <ListHeader />    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 

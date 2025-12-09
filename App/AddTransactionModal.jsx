@@ -1,5 +1,5 @@
 import {useContext, useEffect, useRef, useState} from "react";
-import {Image, Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Image, Pressable, Text, TextInput, View} from "react-native";
 import {DatePicker} from "@s77rt/react-native-date-picker";
 import {styles} from "./Style";
 
@@ -8,7 +8,7 @@ import CategoriesList from "./CategoriesList";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
 
-const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit, clearTransactionToEdit}) => {
+const AddTransactionModal = ({setVisibility, transactionToEdit, clearTransactionToEdit}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -182,93 +182,80 @@ const AddTransactionModal = ({modalVisibility, setVisibility, transactionToEdit,
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <Modal visible={modalVisibility}
-           transparent={true}> 
-      <View style={styles.modalPositioning}>    
-        <View style={[styles.modal, transactionToEdit && styles.edit, hidden && styles.hide]}>
-          <Pressable style={({pressed}) => [styles.smallButton, styles.decline, pressed && styles.pressed]} 
-                     onPress={() => closeModal()}>
-            <Image style={styles.icon}
-                   source={require("./icons/closeIcon.png")}
-                   alt="x" />
-          </Pressable>
-
-          {transactionToEdit &&
-            <Text style={styles.modalHeaderText}>Edit Transaction</Text>
-          }
-          {!transactionToEdit &&
-          <Text style={styles.modalHeaderText}>Add Transaction</Text>
-          }
+    <View style={[styles.bottomSheetContent, transactionToEdit && styles.edit]}>
+      {transactionToEdit &&
+      <Text style={styles.modalHeaderText}>Edit Transaction</Text>
+      }
+      {!transactionToEdit &&
+      <Text style={styles.modalHeaderText}>Add Transaction</Text>
+      }
           
-          <View>
-            <Text style={styles.inputHeaderText}>Name:</Text>
-            <TextInput style={[styles.textInput, inErrorName && styles.decline]}
-                       defaultValue={nameInput} 
-                       placeholder="Enter transaction name..." 
-                       onChangeText={(text) => onTextChange(text, "nameInput")} />
+      <View>
+        <Text style={styles.inputHeaderText}>Name:</Text>
+        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+                   defaultValue={nameInput} 
+                   placeholder="Enter transaction name..." 
+                   onChangeText={(text) => onTextChange(text, "nameInput")} />
 
-            <Text style={styles.inputHeaderText}>Amount:</Text>
-            <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
-                       defaultValue={amountInput.toString()} 
-                       placeholder="Enter dollar amount..." 
-                       onChangeText={(text) => onTextChange(text, "amountInput")} />
+        <Text style={styles.inputHeaderText}>Amount:</Text>
+        <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
+                   defaultValue={amountInput.toString()} 
+                   placeholder="Enter dollar amount..." 
+                   onChangeText={(text) => onTextChange(text, "amountInput")} />
 
-            <Text style={styles.inputHeaderText}>Category:</Text>
-            <CategoriesList setSelection={setCategoryInput} 
-                            defaultSelection={categoryInput} 
-                            setHidden={setHidden} />
+        <Text style={styles.inputHeaderText}>Category:</Text>
+        <CategoriesList setSelection={setCategoryInput} 
+                        defaultSelection={categoryInput} 
+                        setHidden={setHidden} />
 
-            <Text style={styles.inputHeaderText}>Date:</Text>
-            <DatePicker ref={datePickerModal}
-                        type="date"
-				                value={dateInput}
-				                onChange={setDateInput} />  
-          </View>  
-          <Pressable style={({pressed}) => [styles.textInputCalendar, pressed && styles.pressed]} 
-                     onPress={() => datePickerModal.current?.showPicker()}>
-            <View style={styles.horizontalContainer}>  
-              <Text>{dateInput.toLocaleDateString()}</Text>
-              <Image style={[styles.icon, styles.calendarIcon]}
-                     source={require("./icons/calendarIcon.png")}
-                     alt="📅" />
-            </View>
-            </Pressable>        
-          {transactionToEdit &&
-          <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
-          }
-
-          <View style={styles.horizontalContainer}> 
-            {transactionToEdit &&
-            <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
-                       onPress={() => removeItemHandler()}>
-              <Image style={styles.icon}
-                     source={require("./icons/deleteIcon.png")}
-                     alt="Delete" />
-            </Pressable>
-            }
-            {!transactionToEdit &&
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
-                       onPress={() => createNewTransaction(true)}>
-              <View style={styles.horizontalContainer}>
-                <Image style={styles.icon}
-                       source={require("./icons/checkIcon.png")}
-                       alt="Add another" />
-                <Image style={styles.icon}
-                       source={require("./icons/plusIcon.png")}
-                       alt="Add another" />
-              </View>
-            </Pressable>
-            }
-            <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
-                       onPress={() => createNewTransaction()}>
-              <Image style={styles.icon}
-                     source={require("./icons/checkIcon.png")}
-                     alt="Confirm" />
-            </Pressable>
+        <Text style={styles.inputHeaderText}>Date:</Text>
+        <DatePicker ref={datePickerModal}
+                    type="date"
+				            value={dateInput}
+				            onChange={setDateInput} />  
+      </View>  
+      <Pressable style={({pressed}) => [styles.textInputCalendar, pressed && styles.pressed]} 
+                 onPress={() => datePickerModal.current?.showPicker()}>
+        <View style={styles.horizontalContainer}>  
+          <Text>{dateInput.toLocaleDateString()}</Text>
+          <Image style={[styles.icon, styles.calendarIcon]}
+                 source={require("./icons/calendarIcon.png")}
+                 alt="📅" />
+        </View>
+      </Pressable>        
+      {transactionToEdit &&
+      <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
+      }
+      <View style={styles.horizontalContainer}> 
+        {transactionToEdit &&
+        <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 
+                   onPress={() => removeItemHandler()}>
+          <Image style={styles.icon}
+                 source={require("./icons/deleteIcon.png")}
+                 alt="Delete" />
+        </Pressable>
+        }
+        {!transactionToEdit &&
+        <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                   onPress={() => createNewTransaction(true)}>
+          <View style={styles.horizontalContainer}>
+            <Image style={styles.icon}
+                   source={require("./icons/checkIcon.png")}
+                   alt="Add another" />
+            <Image style={styles.icon}
+                   source={require("./icons/plusIcon.png")}
+                   alt="Add another" />
           </View>
-        </View>    
-      </View>    
-    </Modal>
+        </Pressable>
+        }
+        <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 
+                   onPress={() => createNewTransaction()}>
+          <Image style={styles.icon}
+                 source={require("./icons/checkIcon.png")}
+                 alt="Confirm" />
+        </Pressable>
+      </View>
+    </View>     
   );
 }
 
