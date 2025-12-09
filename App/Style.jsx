@@ -282,27 +282,71 @@ export const styles = StyleSheet.create({
   bottomSheetPositioning: {
     marginLeft: 75,
     marginRight: 75,
-    marginTop: 610,
+
+    ...Platform.select({
+      ios: {
+        marginTop: 580,
+      },
+      default: {
+        marginTop: 610,
+      },    
+    }),
   },
   bottomSheetPositioningCategory: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 320,
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 300,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 320,
+      },    
+    }),
   },
   bottomSheetPositioningExpense: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 330,
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 310,
+      },
+      default: {
+        marginLeft: 20,
+        arginRight: 20,
+        marginTop: 330,
+      },    
+    }),
   },
   bottomSheetPositioningTransaction: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 190,
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 170,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 190,
+      },    
+    }),
   },
   bottomSheetPositioningTransactionEdit: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 160,
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 140,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 160,
+      },    
+    }),
   },
   modal: { 
     ...modal,
