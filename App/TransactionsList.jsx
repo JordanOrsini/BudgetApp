@@ -6,9 +6,11 @@ import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
 import TransactionsContext from "./TransactionsContext";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const TransactionsList = ({style, size, setContent}) => {
+const TransactionsList = ({style, size}) => {
   const transactionsContext = useContext(TransactionsContext);
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
   const [data, setData] = useState([]);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
@@ -18,7 +20,7 @@ const TransactionsList = ({style, size, setContent}) => {
   }, [transactionsContext.transactionData]);
 
   const editItemHandler = (item) => {
-    setContent(2, transactionsContext.findTransactionById(item.id));
+    bottomSheetDataContext._setContent("Transaction", transactionsContext.findTransactionById(item.id));
   }
 
   const fillData = () => {

@@ -10,12 +10,8 @@ import Navigation from "./Navigation";
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
-  const Loading = () => {
-  }
-
   return (
-    <Tab.Navigator initialRouteName={"Loading"}
-                   backBehavior={"history"} 
+    <Tab.Navigator backBehavior={"history"} 
                    tabBar={(props) => <Navigation {...props}/>} 
                    screenOptions={{headerShown: false}}>
       <Tab.Screen name="Overview" 
@@ -26,8 +22,6 @@ const BottomNavigation = () => {
                   component={Transactions} />
       <Tab.Screen name="Settings" 
                   component={Settings} />
-      <Tab.Screen name="Loading" 
-                  component={Loading} />
     </Tab.Navigator>
   );
 }

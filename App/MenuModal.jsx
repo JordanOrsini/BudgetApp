@@ -1,75 +1,27 @@
-import {Pressable, Text, View} from "react-native";
+import {useContext} from "react";
 import {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
 import BottomSheet from "@gorhom/bottom-sheet";
-import AddExpenseModal from "./AddExpenseModal";
-import AddCategoryModal from "./AddCategoryModal";
-import AddTransactionModal from "./AddTransactionModal";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const MenuModal = ({setVisibility, content, setContent, editObject, transferContent}) => {
+const MenuModal = () => {
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
+
   const handleSheetChanges = (index) => {
     if (index === -1)
-      setVisibility(false);
-  }
-
-  const getContent = () => {
-    switch (content) {
-      case 0: {
-        return (
-          <View style={styles.bottomSheetContent}>
-            <Text style={styles.modalHeaderText}>Add new...?</Text>
-            <View style={styles.horizontalContainer}>
-              <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
-                         onPress={() => setContent(1)}>
-                <Text>Expense</Text>
-              </Pressable>
-              <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
-                         onPress={() => setContent(2)}>
-                <Text>Transaction</Text>
-              </Pressable>
-            </View>
-          </View>
-        );
-      }
-      case 1: {
-        return (
-          <AddExpenseModal setVisibility={setVisibility}
-                           expenseToEdit={editObject} />
-        );
-      }
-      case 2: {
-        return (
-          <AddTransactionModal setVisibility={setVisibility}
-                               transactionToEdit={editObject}
-                               setContent={setContent}
-                               transferContent={transferContent} />
-        );
-      }
-      case 3: {
-        return (
-          <AddCategoryModal setVisibility={setVisibility}
-                            categoryToEdit={editObject}
-                            setContent={setContent}
-                            transferContent={transferContent} />
-        );
-      }
-    }
+      bottomSheetDataContext.setBottomSheetVisible(false);
   }
 
   return ( 
-    <BottomSheet style={(content === 0) ? styles.bottomSheetPositioning :
-                        (content === 1) ? styles.bottomSheetPositioningExpense : 
-                        (content === 3) ? styles.bottomSheetPositioningCategory :
-                        (editObject)    ? styles.bottomSheetPositioningTransactionEdit : 
-                                          styles.bottomSheetPositioningTransaction}
-                 backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
+    <BottomSheet style={bottomSheetDataContext.getStyle()}
+                 backgroundStyle={[styles.bottomSheet, bottomSheetDataContext.editObject ? styles.edit : {borderWidth: 0}]}
                  onChange={handleSheetChanges}
                  detached={true}
                  enablePanDownToClose={true}
                  overDragResistanceFactor={2}>     
       <BottomSheetView>
-        {getContent()}
+        {bottomSheetDataContext.getContent()}
       </BottomSheetView>
     </BottomSheet>
   );

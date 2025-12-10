@@ -6,9 +6,12 @@ import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
 import CategoriesContext from "./CategoriesContext";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const EditCategoryList = ({style, setContent}) => {
+const EditCategoryList = ({style}) => {
   const categoryContext = useContext(CategoriesContext);
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -16,7 +19,7 @@ const EditCategoryList = ({style, setContent}) => {
   }, [categoryContext.categoryData]);
 
   const editItemHandler = (item) => {
-    setContent(3, categoryContext.findCategoryByName(item.name));
+    bottomSheetDataContext._setContent("Category", categoryContext.findCategoryByName(item.name));
   }
 
   const fillData = () => {

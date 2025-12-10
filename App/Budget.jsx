@@ -7,11 +7,10 @@ import {styles} from "./Style";
 import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
 
-const Budget = ({route}) => {
+const Budget = () => {
   const userDataContext = useContext(UserDataContext);
 
   const data = [{index: 0}, {index: 1}];
-  const {setModalContent} = route.params;
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
   
   const renderItem = ({item}) => {
@@ -26,8 +25,7 @@ const Budget = ({route}) => {
       }
       case 1: {
         return (
-          <ExpensesList style={styles.lastContainer}
-                        setContent={setModalContent} />
+          <ExpensesList style={styles.lastContainer} />
         );
       }
       default: {

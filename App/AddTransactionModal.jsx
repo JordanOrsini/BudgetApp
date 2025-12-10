@@ -7,10 +7,12 @@ import Transaction from "./Transaction";
 import CategoriesList from "./CategoriesList";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, transferContent}) => {
+const AddTransactionModal = ({transactionToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
@@ -66,7 +68,7 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, tran
 
   const closeModal = () => {
     clearModal();
-    setVisibility(false);
+    bottomSheetDataContext.setBottomSheetVisible(false);
   }
 
   const createNewTransaction = (addAnother = false) => {
@@ -214,9 +216,8 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, tran
                    onChangeText={(text) => onTextChange(text, "amountInput")} />
 
         <Text style={styles.inputHeaderText}>Category:</Text>
-        <CategoriesList setSelection={setCategoryInput} 
+        <CategoriesList setCategoryInput={setCategoryInput} 
                         defaultSelection={categoryInput} 
-                        setContent={setContent}
                         transferData={myTransferData} />
 
         <Text style={styles.inputHeaderText}>Date:</Text>

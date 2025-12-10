@@ -5,9 +5,11 @@ import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import CategoriesContext from "./CategoriesContext";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const CategoriesList = ({setSelection, defaultSelection, setContent, transferData}) => {
+const CategoriesList = ({setCategoryInput, defaultSelection, transferData}) => {
   const categoriesContext = useContext(CategoriesContext);
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
   const [data, setData] = useState([]);
 
@@ -28,7 +30,7 @@ const CategoriesList = ({setSelection, defaultSelection, setContent, transferDat
   }
 
   const onSelectionChange = (item) => {
-    setSelection(item.name);
+    setCategoryInput(item.name);
 
     const newDataArray = [...data];
     newDataArray.map((element => {
@@ -42,7 +44,7 @@ const CategoriesList = ({setSelection, defaultSelection, setContent, transferDat
     if (item.addCategory) {
       return (
         <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} 
-                   onPress={() => setContent(3, null, transferData)}>
+                   onPress={() => bottomSheetDataContext._setContent("Category", null /*categoryToEdit*/, transferData)}>
           <Image style={styles.iconLarge}
                  source={require("./icons/plusIcon.png")}
                  alt="+" />

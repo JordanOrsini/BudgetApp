@@ -1,13 +1,15 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Image, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./Style";
 
 import Category from "./Category";
 import CategoriesContext from "./CategoriesContext";
 import IconSelectionList from "./IconSelectionList";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferContent}) => {
+const AddCategoryModal = ({categoryToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
@@ -35,9 +37,9 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferCo
     clearModal();
 
     if (categoryToEdit)
-      setVisibility(false);
+      bottomSheetDataContext.setBottomSheetVisible(false);
     else
-      setContent(2, transferContent.transactionToEdit, transferContent);
+      bottomSheetDataContext._setContent("Transaction", transferContent.transactionToEdit, transferContent);
   }
 
   const createNewCategory = () => {
@@ -146,10 +148,10 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferCo
         }
         {!categoryToEdit &&
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
-                   onPress={() => setContent(2, transferContent.transactionToEdit, transferContent)}>
+                   onPress={() => bottomSheetDataContext._setContent("Transaction", transferContent.transactionToEdit, transferContent)}>
           <Image style={styles.icon}
                  source={require("./icons/backIcon.png")}
-                 alt="Delete" />
+                 alt="Back" />
         </Pressable>
         }  
         <Pressable style={({pressed}) => [styles.button, styles.accept, pressed && styles.pressed]} 

@@ -5,9 +5,11 @@ import {styles} from "./Style";
 import Expense from "./Expense";
 import IntervalsList from "./IntervalsList";
 import ExpensesContext from "./ExpensesContext";
+import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const AddExpenseModal = ({setVisibility, expenseToEdit}) => {
+const AddExpenseModal = ({expenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
+  const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
@@ -43,7 +45,7 @@ const AddExpenseModal = ({setVisibility, expenseToEdit}) => {
 
   const closeModal = () => {
     clearModal();
-    setVisibility(false);
+    bottomSheetDataContext.setBottomSheetVisible(false);
   }
 
   const createNewExpense = (addAnother = false) => {

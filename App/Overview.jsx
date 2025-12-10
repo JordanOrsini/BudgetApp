@@ -8,10 +8,8 @@ import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
 import TransactionsList from "./TransactionsList";
 
-const Overview = ({route}) => {
+const Overview = () => {
   const userDataContext = useContext(UserDataContext);
-
-  const {setModalContent} = route.params;
   const data = [{index: 0}, {index: 1}, {index: 2}];
   
   const renderItem = ({item}) => {
@@ -27,15 +25,13 @@ const Overview = ({route}) => {
       case 1: {
         return (
           <ExpensesList style={styles.mainBodyContainerMedium}
-                        size={4}             
-                        setContent={setModalContent} />
+                        size={4} />
         );
       }
       case 2: {
         return (
           <TransactionsList style={[styles.mainBodyContainerMedium, styles.lastContainer]}
-                            size={4}
-                            setContent={setModalContent} />
+                            size={4} />
         );
       }
       default: {

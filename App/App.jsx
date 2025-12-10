@@ -4,9 +4,10 @@ import {NavigationContainer} from "@react-navigation/native";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 
 import UserDataProvider from "./UserDataProvider";
-import ExpensesProvider from "./ExpensesProvider";
 import CategoriesProvider from "./CategoriesProvider";
+import ExpensesProvider from "./ExpensesProvider";
 import TransactionsProvider from "./TransactionsProvider";
+import BottomSheetDataProvider from "./BottomSheetDataProvider";
 
 import BottomNavigation from "./BottomNavigation";
 
@@ -28,9 +29,11 @@ const App = () => {
           <CategoriesProvider>
             <ExpensesProvider>
               <TransactionsProvider>
-                <NavigationContainer>
-                  <BottomNavigation />
-                </NavigationContainer>
+                <BottomSheetDataProvider>
+                  <NavigationContainer>
+                    <BottomNavigation />
+                  </NavigationContainer>
+                </BottomSheetDataProvider>
               </TransactionsProvider>
             </ExpensesProvider>
           </CategoriesProvider>
