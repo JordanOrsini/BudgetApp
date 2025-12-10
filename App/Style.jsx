@@ -315,7 +315,7 @@ export const styles = StyleSheet.create({
       },
       default: {
         marginLeft: 20,
-        arginRight: 20,
+        marginRight: 20,
         marginTop: 330,
       },    
     }),

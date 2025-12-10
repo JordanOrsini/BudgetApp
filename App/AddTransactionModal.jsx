@@ -25,7 +25,8 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, tran
   const myTransferData = {name: nameInput,
                           amount: amountInput,
                           category: categoryInput,
-                          date: dateInput}
+                          date: dateInput,
+                          transactionToEdit: transactionToEdit}
 
   useEffect(() => {
     setInErrorName(false);
@@ -45,7 +46,7 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, tran
   }, [transferContent]);
 
   useEffect(() => {
-    if (transactionToEdit) {
+    if (transactionToEdit && !transferContent) {
       setNameInput(transactionToEdit.getName());
       setAmountInput(transactionToEdit.getAmount());
       setCategoryInput(transactionToEdit.getCategory().getName());
@@ -201,13 +202,13 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, tran
           
       <View>
         <Text style={styles.inputHeaderText}>Name:</Text>
-        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+        <TextInput style={[styles.textInput, inErrorName ? styles.decline : {borderWidth: 0}]}
                    defaultValue={nameInput} 
                    placeholder="Enter transaction name..." 
                    onChangeText={(text) => onTextChange(text, "nameInput")} />
 
         <Text style={styles.inputHeaderText}>Amount:</Text>
-        <TextInput style={[styles.textInput, inErrorAmount && styles.decline]} 
+        <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : {borderWidth: 0}]} 
                    defaultValue={amountInput.toString()} 
                    placeholder="Enter dollar amount..." 
                    onChangeText={(text) => onTextChange(text, "amountInput")} />

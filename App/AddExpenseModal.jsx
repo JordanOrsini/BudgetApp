@@ -168,13 +168,13 @@ const AddExpenseModal = ({setVisibility, expenseToEdit}) => {
 
       <View>
         <Text style={styles.inputHeaderText}>Name:</Text>
-        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+        <TextInput style={[styles.textInput, inErrorName ? styles.decline : {borderWidth: 0}]}
                    defaultValue={nameInput}
                    placeholder="Enter expense name..."
                    onChangeText={(text) => onTextChange(text, "nameInput")} />
 
         <Text style={styles.inputHeaderText}>Amount:</Text>      
-        <TextInput style={[styles.textInput, inErrorAmount && styles.decline]}
+        <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : {borderWidth: 0}]}
                    defaultValue={amountInput.toString()}
                    placeholder="Enter dollar amount..."
                    onChangeText={(text) => onTextChange(text, "amountInput")} />

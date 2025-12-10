@@ -37,7 +37,7 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferCo
     if (categoryToEdit)
       setVisibility(false);
     else
-      setContent(2, null, transferContent);
+      setContent(2, transferContent.transactionToEdit, transferContent);
   }
 
   const createNewCategory = () => {
@@ -65,6 +65,8 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferCo
       categoriesContext._setCategoryData([...categoriesContext.categoryData, new Category(processedNameInput, // name
                                                                                           selectedIcon // iconPath
                                                                                          )]);
+      if (transferContent)
+        transferContent.category = processedNameInput;
     }
 
     closeModal();
@@ -124,7 +126,7 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferCo
           
       <View>
         <Text style={styles.inputHeaderText}>Name:</Text>
-        <TextInput style={[styles.textInput, inErrorName && styles.decline]}
+        <TextInput style={[styles.textInput, inErrorName ? styles.decline : {borderWidth: 0}]}
                    defaultValue={nameInput} 
                    placeholder="Enter category name..."
                    onChangeText={(text) => onTextChange(text)} />
@@ -144,7 +146,7 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferCo
         }
         {!categoryToEdit &&
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
-                   onPress={() => setContent(2, null, transferContent)}>
+                   onPress={() => setContent(2, transferContent.transactionToEdit, transferContent)}>
           <Image style={styles.icon}
                  source={require("./icons/backIcon.png")}
                  alt="Delete" />
