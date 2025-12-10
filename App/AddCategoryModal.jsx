@@ -6,7 +6,7 @@ import Category from "./Category";
 import CategoriesContext from "./CategoriesContext";
 import IconSelectionList from "./IconSelectionList";
 
-const AddCategoryModal = ({setVisibility, categoryToEdit, setContent}) => {
+const AddCategoryModal = ({setVisibility, categoryToEdit, setContent, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [nameInput, setNameInput] = useState("");
@@ -37,7 +37,7 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent}) => {
     if (categoryToEdit)
       setVisibility(false);
     else
-      setContent(2);
+      setContent(2, null, transferContent);
   }
 
   const createNewCategory = () => {
@@ -144,7 +144,7 @@ const AddCategoryModal = ({setVisibility, categoryToEdit, setContent}) => {
         }
         {!categoryToEdit &&
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
-                   onPress={() => setContent(2)}>
+                   onPress={() => setContent(2, null, transferContent)}>
           <Image style={styles.icon}
                  source={require("./icons/backIcon.png")}
                  alt="Delete" />

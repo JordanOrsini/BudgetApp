@@ -7,7 +7,7 @@ import AddExpenseModal from "./AddExpenseModal";
 import AddCategoryModal from "./AddCategoryModal";
 import AddTransactionModal from "./AddTransactionModal";
 
-const MenuModal = ({setVisibility, content, setContent, editObject}) => {
+const MenuModal = ({setVisibility, content, setContent, editObject, transferContent}) => {
   const handleSheetChanges = (index) => {
     if (index === -1)
       setVisibility(false);
@@ -42,14 +42,16 @@ const MenuModal = ({setVisibility, content, setContent, editObject}) => {
         return (
           <AddTransactionModal setVisibility={setVisibility}
                                transactionToEdit={editObject}
-                               setContent={setContent} />
+                               setContent={setContent}
+                               transferContent={transferContent} />
         );
       }
       case 3: {
         return (
           <AddCategoryModal setVisibility={setVisibility}
                             categoryToEdit={editObject}
-                            setContent={setContent} />
+                            setContent={setContent}
+                            transferContent={transferContent} />
         );
       }
     }

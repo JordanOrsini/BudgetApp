@@ -8,7 +8,7 @@ import CategoriesList from "./CategoriesList";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
 
-const AddTransactionModal = ({setVisibility, transactionToEdit, setContent}) => {
+const AddTransactionModal = ({setVisibility, transactionToEdit, setContent, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
 
@@ -22,6 +22,11 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent}) => 
 
   const datePickerModal = useRef(null);
 
+  const myTransferData = {name: nameInput,
+                          amount: amountInput,
+                          category: categoryInput,
+                          date: dateInput}
+
   useEffect(() => {
     setInErrorName(false);
   }, [nameInput]);
@@ -29,6 +34,15 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent}) => 
   useEffect(() => {
     setInErrorAmount(false);
   }, [amountInput]);
+
+  useEffect(() => {
+    if (transferContent) {
+      setNameInput(transferContent.name);
+      setAmountInput(transferContent.amount);
+      setCategoryInput(transferContent.category);
+      setDateInput(transferContent.date);
+    }
+  }, [transferContent]);
 
   useEffect(() => {
     if (transactionToEdit) {
@@ -201,7 +215,8 @@ const AddTransactionModal = ({setVisibility, transactionToEdit, setContent}) => 
         <Text style={styles.inputHeaderText}>Category:</Text>
         <CategoriesList setSelection={setCategoryInput} 
                         defaultSelection={categoryInput} 
-                        setContent={setContent} />
+                        setContent={setContent}
+                        transferData={myTransferData} />
 
         <Text style={styles.inputHeaderText}>Date:</Text>
         <DatePicker ref={datePickerModal}

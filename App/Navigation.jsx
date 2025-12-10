@@ -9,8 +9,11 @@ const Navigation = ({state, navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [content, setContent] = useState(0);
   const [editObject, setEditObject] = useState(null);
+  const [transferContent, setTransferContent] = useState(null);
 
-  const _setContent = (newContent, newEditObject) => {
+  const _setContent = (newContent, newEditObject, newTransferContent) => {
+    console.log("newContent: " + newContent + " newEditObject: " + newEditObject + " newTransferContent: " + newTransferContent);
+
     setModalVisible(true);
     setContent(newContent);
 
@@ -18,6 +21,11 @@ const Navigation = ({state, navigation}) => {
       setEditObject(newEditObject);
     else
       setEditObject(null);
+
+    if (newTransferContent)
+      setTransferContent(newTransferContent);
+    else
+      setTransferContent(null);
   }
 
   const _setModalVisible = (isVisible) => {
@@ -40,7 +48,8 @@ const Navigation = ({state, navigation}) => {
       <MenuModal setVisibility={_setModalVisible}
                  content={content} 
                  setContent={_setContent}
-                 editObject={editObject} />
+                 editObject={editObject}
+                 transferContent={transferContent} />
       }
 
       <View style={styles.navigationContainer}>

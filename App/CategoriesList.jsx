@@ -6,7 +6,7 @@ import {styles} from "./Style";
 
 import CategoriesContext from "./CategoriesContext";
 
-const CategoriesList = ({setSelection, defaultSelection, setContent}) => {
+const CategoriesList = ({setSelection, defaultSelection, setContent, transferData}) => {
   const categoriesContext = useContext(CategoriesContext);
 
   const [data, setData] = useState([]);
@@ -42,7 +42,7 @@ const CategoriesList = ({setSelection, defaultSelection, setContent}) => {
     if (item.addCategory) {
       return (
         <Pressable style={({pressed}) => [styles.categoryButtons, pressed && styles.pressed]} 
-                   onPress={() => setContent(3)}>
+                   onPress={() => setContent(3, null, transferData)}>
           <Image style={styles.iconLarge}
                  source={require("./icons/plusIcon.png")}
                  alt="+" />
