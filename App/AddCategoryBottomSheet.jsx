@@ -7,7 +7,7 @@ import CategoriesContext from "./CategoriesContext";
 import IconSelectionList from "./IconSelectionList";
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const AddCategoryModal = ({categoryToEdit, transferContent}) => {
+const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
@@ -120,10 +120,10 @@ const AddCategoryModal = ({categoryToEdit, transferContent}) => {
   return (
     <View style={[styles.bottomSheetContent, categoryToEdit && styles.edit]}>
       {categoryToEdit &&
-      <Text style={styles.modalHeaderText}>Edit Category</Text>
+      <Text style={styles.bottomSheetHeaderText}>Edit Category</Text>
       }
       {!categoryToEdit &&
-      <Text style={styles.modalHeaderText}>Add Category</Text>
+      <Text style={styles.bottomSheetHeaderText}>Add Category</Text>
       }
           
       <View>
@@ -165,4 +165,4 @@ const AddCategoryModal = ({categoryToEdit, transferContent}) => {
   );
 }
 
-export default AddCategoryModal;
+export default AddCategoryBottomSheet;

@@ -9,7 +9,7 @@ import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const AddTransactionModal = ({transactionToEdit, transferContent}) => {
+const AddTransactionBottomSheet = ({transactionToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
   const bottomSheetDataContext = useContext(BottomSheetDataContext);
@@ -196,10 +196,10 @@ const AddTransactionModal = ({transactionToEdit, transferContent}) => {
   return (
     <View style={[styles.bottomSheetContent, transactionToEdit && styles.edit]}>
       {transactionToEdit &&
-      <Text style={styles.modalHeaderText}>Edit Transaction</Text>
+      <Text style={styles.bottomSheetHeaderText}>Edit Transaction</Text>
       }
       {!transactionToEdit &&
-      <Text style={styles.modalHeaderText}>Add Transaction</Text>
+      <Text style={styles.bottomSheetHeaderText}>Add Transaction</Text>
       }
           
       <View>
@@ -271,4 +271,4 @@ const AddTransactionModal = ({transactionToEdit, transferContent}) => {
   );
 }
 
-export default AddTransactionModal;
+export default AddTransactionBottomSheet;

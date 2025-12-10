@@ -7,7 +7,7 @@ import IntervalsList from "./IntervalsList";
 import ExpensesContext from "./ExpensesContext";
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const AddExpenseModal = ({expenseToEdit}) => {
+const AddExpenseBottomSheet = ({expenseToEdit}) => {
   const expensesContext = useContext(ExpensesContext);
   const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
@@ -162,10 +162,10 @@ const AddExpenseModal = ({expenseToEdit}) => {
   return (
     <View style={[styles.bottomSheetContent, expenseToEdit && styles.edit]}>          
       {expenseToEdit &&
-      <Text style={styles.modalHeaderText}>Edit Expense</Text>
+      <Text style={styles.bottomSheetHeaderText}>Edit Expense</Text>
       }
       {!expenseToEdit &&
-      <Text style={styles.modalHeaderText}>Add Expense</Text>
+      <Text style={styles.bottomSheetHeaderText}>Add Expense</Text>
       }
 
       <View>
@@ -218,4 +218,4 @@ const AddExpenseModal = ({expenseToEdit}) => {
   );
 }
 
-export default AddExpenseModal;
+export default AddExpenseBottomSheet;

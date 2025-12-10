@@ -5,7 +5,7 @@ import {styles} from "./Style";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
-const MenuModal = () => {
+const BottomSheetMain = () => {
   const bottomSheetDataContext = useContext(BottomSheetDataContext);
 
   const handleSheetChanges = (index) => {
@@ -27,4 +27,4 @@ const MenuModal = () => {
   );
 }
 
-export default MenuModal;
+export default BottomSheetMain;

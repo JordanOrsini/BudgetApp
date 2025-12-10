@@ -57,14 +57,6 @@ const mainBodyContainer = {
   borderRadius: 30,
   height: 345,
 };
-const modal = {
-  ...appShadows,
-  margin: 20,
-  backgroundColor: "#ECECEC",
-  borderRadius: 20,
-  padding: 35,
-  alignItems: "center",
-};
 const navButton = {
   ...appShadows,
   alignItems: "center",
@@ -85,6 +77,92 @@ const textInput = {
 
 // Style sheets CSS for the entire application.
 export const styles = StyleSheet.create({
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  // Bottom sheet CSS classes /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  bottomSheet: {
+    ...appShadows,
+    borderRadius: 20,
+  },
+  bottomSheetContent: {
+    ...appShadows,
+    backgroundColor: "#FFFFFF",
+    borderTopWidth: 0,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    alignItems: "center",
+    padding: 36,
+    paddingTop: 10, 
+  },
+  bottomSheetPositioning: {
+    marginLeft: 75,
+    marginRight: 75,
+
+    ...Platform.select({
+      ios: {
+        marginTop: 580,
+      },
+      default: {
+        marginTop: 610,
+      },    
+    }),
+  },
+  bottomSheetPositioningCategory: {
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 300,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 320,
+      },    
+    }),
+  },
+  bottomSheetPositioningExpense: {
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 310,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 330,
+      },    
+    }),
+  },
+  bottomSheetPositioningTransaction: {
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 170,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 190,
+      },    
+    }),
+  },
+  bottomSheetPositioningTransactionEdit: {
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 140,
+      },
+      default: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 160,
+      },    
+    }),
+  },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Button CSS classes ///////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,6 +213,10 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Container CSS classes ////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
+  bottomSheetNavContainer: {
+    position: "absolute",
+    width: "100%",
+  },
   categoryContainer: {
     height: 200,
   },
@@ -181,10 +263,6 @@ export const styles = StyleSheet.create({
   mainBodyContainerSmall: {
     ...mainBodyContainer, 
     height: 260,
-  },
-  modalNavContainer: {
-    position: "absolute",
-    width: "100%",
   },
   pageView: {
     flex: 1,
@@ -263,100 +341,6 @@ export const styles = StyleSheet.create({
     ...listElementStart,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  // Modal CSS classes ////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  bottomSheet: {
-    ...appShadows,
-    borderRadius: 20,
-  },
-  bottomSheetContent: {
-    ...appShadows,
-    backgroundColor: "#FFFFFF",
-    borderTopWidth: 0,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    alignItems: "center",
-    padding: 36,
-    paddingTop: 0, 
-  },
-  bottomSheetPositioning: {
-    marginLeft: 75,
-    marginRight: 75,
-
-    ...Platform.select({
-      ios: {
-        marginTop: 580,
-      },
-      default: {
-        marginTop: 610,
-      },    
-    }),
-  },
-  bottomSheetPositioningCategory: {
-    ...Platform.select({
-      ios: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 300,
-      },
-      default: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 320,
-      },    
-    }),
-  },
-  bottomSheetPositioningExpense: {
-    ...Platform.select({
-      ios: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 310,
-      },
-      default: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 330,
-      },    
-    }),
-  },
-  bottomSheetPositioningTransaction: {
-    ...Platform.select({
-      ios: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 170,
-      },
-      default: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 190,
-      },    
-    }),
-  },
-  bottomSheetPositioningTransactionEdit: {
-    ...Platform.select({
-      ios: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 140,
-      },
-      default: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 160,
-      },    
-    }),
-  },
-  modal: { 
-    ...modal,
-  },
-  modalPositioning: {
-    flex: 1,
-    marginBottom: 100,
-    justifyContent: "flex-end",
-  },
-  /////////////////////////////////////////////////////////////////////////////////////////////////
   // Navigation CSS classes ///////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   navButton: {
@@ -408,6 +392,11 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Text CSS classes /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
+  bottomSheetHeaderText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
   creationText: {
     fontSize: 12,
     paddingTop: 5,
@@ -419,11 +408,6 @@ export const styles = StyleSheet.create({
   },
   inputHeaderText: {
     marginLeft: 10,
-  },
-  modalHeaderText: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginBottom: 10,
   },
   smallText: {
     fontSize: 12,

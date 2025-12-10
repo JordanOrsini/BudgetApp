@@ -2,9 +2,11 @@ import {useState} from "react";
 import {Pressable, Text, View} from "react-native";
 import {styles} from "./Style";
 
-import AddExpenseModal from "./AddExpenseModal";
-import AddCategoryModal from "./AddCategoryModal";
-import AddTransactionModal from "./AddTransactionModal";
+import MenuBottomSheet from "./MenuBottomSheet";
+import AddExpenseBottomSheet from "./AddExpenseBottomSheet";
+import AddCategoryBottomSheet from "./AddCategoryBottomSheet";
+import AddTransactionBottomSheet from "./AddTransactionBottomSheet";
+
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
 const BottomSheetDataProvider = ({children}) => {
@@ -18,36 +20,24 @@ const BottomSheetDataProvider = ({children}) => {
     switch (content) {
       case "Menu": {
         return (
-          <View style={styles.bottomSheetContent}>
-            <Text style={styles.modalHeaderText}>Add new...?</Text>
-            <View style={styles.horizontalContainer}>
-              <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
-                         onPress={() => setContent("Expense")}>
-                <Text>Expense</Text>
-              </Pressable>
-              <Pressable style={({pressed}) => [styles.button, pressed && styles.pressed]} 
-                         onPress={() => setContent("Transaction")}>
-                <Text>Transaction</Text>
-              </Pressable>
-            </View>
-          </View>
+          <MenuBottomSheet />
         );
       }
       case "Expense": {
         return (
-          <AddExpenseModal expenseToEdit={editObject} />
+          <AddExpenseBottomSheet expenseToEdit={editObject} />
         );
       }
       case "Transaction": {
         return (
-          <AddTransactionModal transactionToEdit={editObject}
-                               transferContent={transferContent} />
+          <AddTransactionBottomSheet transactionToEdit={editObject}
+                                     transferContent={transferContent} />
         );
       }
       case "Category": {
         return (
-          <AddCategoryModal categoryToEdit={editObject}
-                            transferContent={transferContent} />
+          <AddCategoryBottomSheet categoryToEdit={editObject}
+                                  transferContent={transferContent} />
         );
       }
     }

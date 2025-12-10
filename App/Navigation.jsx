@@ -3,7 +3,7 @@ import {Image, Pressable, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
-import MenuModal from "./MenuModal";
+import BottomSheetMain from "./BottomSheetMain";
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
 const Navigation = ({state, navigation}) => {
@@ -11,9 +11,9 @@ const Navigation = ({state, navigation}) => {
 
   // Function that returns the navigation component.
   return (
-    <SafeAreaView style={styles.modalNavContainer}> 
+    <SafeAreaView style={styles.bottomSheetNavContainer}> 
       {bottomSheetDataContext.bottomSheetVisible &&     
-      <MenuModal />
+      <BottomSheetMain />
       }
 
       <View style={styles.navigationContainer}>
