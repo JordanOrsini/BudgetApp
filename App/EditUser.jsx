@@ -4,9 +4,11 @@ import {styles} from "./Style";
 
 import User from "./User";
 import UserDataContext from "./UserDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const EditUser = ({style}) => {
   const userDataContext = useContext(UserDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
 
   const [nameInput, setNameInput] = useState("");
   const [salaryInput, setSalaryInput] = useState("");
@@ -119,12 +121,14 @@ const EditUser = ({style}) => {
           <Text style={styles.inputHeaderText}>Username:</Text>
           <TextInput style={[styles.textInput, inErrorName && styles.decline]}
                      defaultValue={nameInput} 
+                     editable={!bottomSheetContext.bottomSheetVisible}
                      placeholder="Enter username..." 
                      onChangeText={(text) => onTextChange(text, "nameInput")} /> 
 
           <Text style={styles.inputHeaderText}>Salary:</Text>
           <TextInput style={[styles.textInput, inErrorSalary && styles.decline]}
                      defaultValue={salaryInput} 
+                     editable={!bottomSheetContext.bottomSheetVisible}
                      placeholder="Enter dollar amount..." 
                      onChangeText={(text) => onTextChange(text, "salaryInput")} />
         </View>

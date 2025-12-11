@@ -117,6 +117,7 @@ const BottomSheetProvider = ({children}) => {
     
   // Values to expose in our context.
   const contextValue = {
+    bottomSheetVisible,
     setBottomSheetVisible,
     _setContent,
     BottomSheetMain,

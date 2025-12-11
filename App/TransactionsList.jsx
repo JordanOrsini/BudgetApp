@@ -83,7 +83,7 @@ const TransactionsList = ({style, size}) => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={size === undefined}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible && size === undefined}
                 ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListContentContainer} /> 

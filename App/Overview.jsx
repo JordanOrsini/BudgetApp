@@ -7,9 +7,12 @@ import {styles} from "./Style";
 import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
 import TransactionsList from "./TransactionsList";
+import BottomSheetContext from "./BottomSheetContext";
 
 const Overview = () => {
   const userDataContext = useContext(UserDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
+
   const data = [{index: 0}, {index: 1}, {index: 2}];
   
   const renderItem = ({item}) => {
@@ -46,7 +49,8 @@ const Overview = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                showsVerticalScrollIndicator={false} />
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView>  
   );
 }

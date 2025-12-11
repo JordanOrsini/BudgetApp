@@ -76,7 +76,8 @@ const EditCategoryList = ({style}) => {
                 keyExtractor={(item) => item.id}
                 ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatListContentContainer} /> 
+                contentContainerStyle={styles.flatListContentContainer}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} /> 
     </View>     
   );
 }

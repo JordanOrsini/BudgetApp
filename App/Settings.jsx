@@ -1,3 +1,4 @@
+import {useContext} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
@@ -6,8 +7,10 @@ import {styles} from "./Style";
 import EditUser from "./EditUser";
 import DeleteAllData from "./DeleteAllData";
 import EditCategoryList from "./EditCategoryList";
+import BottomSheetContext from "./BottomSheetContext";
 
 const Settings = () => {
+  const bottomSheetContext = useContext(BottomSheetContext);
   const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
   
   const renderItem = ({item}) => {
@@ -46,7 +49,8 @@ const Settings = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                showsVerticalScrollIndicator={false} />
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView> 
   );
 }
