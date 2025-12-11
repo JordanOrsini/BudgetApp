@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {BottomSheetView} from "@gorhom/bottom-sheet";
+import {BottomSheetBackdrop, BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
 import MenuBottomSheet from "./MenuBottomSheet";
@@ -26,7 +26,11 @@ const BottomSheetProvider = ({children}) => {
                    onChange={handleSheetChanges}
                    detached={true}
                    enablePanDownToClose={true}
-                   overDragResistanceFactor={2}>     
+                   overDragResistanceFactor={2}
+                   backdropComponent={props => (<BottomSheetBackdrop {...props}
+                                                                     style={styles.bottomSheetBackdrop}                                                           
+                                                                     disappearsOnIndex={-1}
+                                                                     pressBehavior="none" />)}>     
         <BottomSheetView>
           {getContent()}
         </BottomSheetView>

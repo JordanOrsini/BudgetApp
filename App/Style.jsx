@@ -84,6 +84,9 @@ export const styles = StyleSheet.create({
     ...appShadows,
     borderRadius: 20,
   },
+  bottomSheetBackdrop: {
+    height: 900,
+  },
   bottomSheetContent: {
     ...appShadows,
     backgroundColor: "#FFFFFF",
