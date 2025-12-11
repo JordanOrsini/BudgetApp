@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Pressable, Text, View} from "react-native";
+import {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
 import MenuBottomSheet from "./MenuBottomSheet";
@@ -7,6 +7,7 @@ import AddExpenseBottomSheet from "./AddExpenseBottomSheet";
 import AddCategoryBottomSheet from "./AddCategoryBottomSheet";
 import AddTransactionBottomSheet from "./AddTransactionBottomSheet";
 
+import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetDataContext from "./BottomSheetDataContext";
 
 const BottomSheetDataProvider = ({children}) => {
@@ -73,6 +74,11 @@ const BottomSheetDataProvider = ({children}) => {
     }
   }
 
+  const handleSheetChanges = (index) => {
+    if (index === -1)
+      setBottomSheetVisible(false);
+  }
+
   const _setContent = (newContent, newEditObject, newTransferContent) => {
     setBottomSheetVisible(true);
     setContent(newContent);
@@ -87,16 +93,30 @@ const BottomSheetDataProvider = ({children}) => {
     else
       setTransferContent(null);
   }
+
+  const BottomSheetMain = () => {
+    if (!bottomSheetVisible)
+      return (null);
+
+    return (
+      <BottomSheet style={getStyle()}
+                   backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
+                   onChange={handleSheetChanges}
+                   detached={true}
+                   enablePanDownToClose={true}
+                   overDragResistanceFactor={2}>     
+        <BottomSheetView>
+          {getContent()}
+        </BottomSheetView>
+      </BottomSheet>
+    );
+  }
     
   // Values to expose in our context.
   const contextValue = {
-    bottomSheetVisible,
     setBottomSheetVisible,
     _setContent,
-    
-    getContent,
-    getStyle,
-    editObject,
+    BottomSheetMain,
   }
 
   return (

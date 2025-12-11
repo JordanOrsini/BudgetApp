@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
         marginTop: 580,
       },
       default: {
-        marginTop: 610,
+        marginTop: 600,
       },    
     }),
   },
@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 320,
+        marginTop: 310,
       },    
     }),
   },
@@ -131,7 +131,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 330,
+        marginTop: 320,
       },    
     }),
   },
@@ -145,7 +145,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 190,
+        marginTop: 180,
       },    
     }),
   },
@@ -159,7 +159,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 160,
+        marginTop: 150,
       },    
     }),
   },
