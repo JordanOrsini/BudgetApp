@@ -6,11 +6,11 @@ import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
 import CategoriesContext from "./CategoriesContext";
-import BottomSheetDataContext from "./BottomSheetDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const EditCategoryList = ({style}) => {
   const categoryContext = useContext(CategoriesContext);
-  const bottomSheetDataContext = useContext(BottomSheetDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
 
   const [data, setData] = useState([]);
 
@@ -19,7 +19,7 @@ const EditCategoryList = ({style}) => {
   }, [categoryContext.categoryData]);
 
   const editItemHandler = (item) => {
-    bottomSheetDataContext._setContent("Category", categoryContext.findCategoryByName(item.name));
+    bottomSheetContext._setContent("Category", categoryContext.findCategoryByName(item.name));
   }
 
   const fillData = () => {

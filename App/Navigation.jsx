@@ -3,15 +3,15 @@ import {Image, Pressable, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
-import BottomSheetDataContext from "./BottomSheetDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const Navigation = ({state, navigation}) => {
-  const bottomSheetDataContext = useContext(BottomSheetDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
 
   // Function that returns the navigation component.
   return (
     <SafeAreaView style={styles.bottomSheetNavContainer}>    
-      {bottomSheetDataContext.BottomSheetMain()}
+      {bottomSheetContext.BottomSheetMain()}
 
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}
@@ -27,7 +27,7 @@ const Navigation = ({state, navigation}) => {
                  alt="Budget" />
         </Pressable>
         <Pressable style={({pressed}) => [styles.navButtonMiddle, pressed && styles.pressed]}
-                   onPress={() => bottomSheetDataContext._setContent("Menu")}>
+                   onPress={() => bottomSheetContext._setContent("Menu")}>
           <Image style={styles.icon}
                  source={require("./icons/plusIcon.png")}
                  alt="+" />

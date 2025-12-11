@@ -7,7 +7,7 @@ import UserDataProvider from "./UserDataProvider";
 import CategoriesProvider from "./CategoriesProvider";
 import ExpensesProvider from "./ExpensesProvider";
 import TransactionsProvider from "./TransactionsProvider";
-import BottomSheetDataProvider from "./BottomSheetDataProvider";
+import BottomSheetProvider from "./BottomSheetProvider";
 
 import BottomNavigation from "./BottomNavigation";
 
@@ -29,11 +29,11 @@ const App = () => {
           <CategoriesProvider>
             <ExpensesProvider>
               <TransactionsProvider>
-                <BottomSheetDataProvider>
+                <BottomSheetProvider>
                   <NavigationContainer>
                     <BottomNavigation />
                   </NavigationContainer>
-                </BottomSheetDataProvider>
+                </BottomSheetProvider>
               </TransactionsProvider>
             </ExpensesProvider>
           </CategoriesProvider>

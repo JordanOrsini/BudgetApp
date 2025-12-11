@@ -8,9 +8,9 @@ import AddCategoryBottomSheet from "./AddCategoryBottomSheet";
 import AddTransactionBottomSheet from "./AddTransactionBottomSheet";
 
 import BottomSheet from "@gorhom/bottom-sheet";
-import BottomSheetDataContext from "./BottomSheetDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
-const BottomSheetDataProvider = ({children}) => {
+const BottomSheetProvider = ({children}) => {
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
   const [content, setContent] = useState("Menu");
@@ -120,10 +120,10 @@ const BottomSheetDataProvider = ({children}) => {
   }
 
   return (
-    <BottomSheetDataContext.Provider value={contextValue}>
+    <BottomSheetContext.Provider value={contextValue}>
       {children}
-    </BottomSheetDataContext.Provider>
+    </BottomSheetContext.Provider>
   );
 }
 
-export default BottomSheetDataProvider;
+export default BottomSheetProvider;

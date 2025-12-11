@@ -5,11 +5,11 @@ import {styles} from "./Style";
 import Category from "./Category";
 import CategoriesContext from "./CategoriesContext";
 import IconSelectionList from "./IconSelectionList";
-import BottomSheetDataContext from "./BottomSheetDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
-  const bottomSheetDataContext = useContext(BottomSheetDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
 
   const [nameInput, setNameInput] = useState("");
   const [inErrorName, setInErrorName] = useState(false);
@@ -37,9 +37,9 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
     clearModal();
 
     if (categoryToEdit)
-      bottomSheetDataContext.setBottomSheetVisible(false);
+      bottomSheetContext.setBottomSheetVisible(false);
     else
-      bottomSheetDataContext._setContent("Transaction", transferContent.transactionToEdit, transferContent);
+      bottomSheetContext._setContent("Transaction", transferContent.transactionToEdit, transferContent);
   }
 
   const createNewCategory = () => {
@@ -148,7 +148,7 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
         }
         {!categoryToEdit &&
         <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
-                   onPress={() => bottomSheetDataContext._setContent("Transaction", transferContent.transactionToEdit, transferContent)}>
+                   onPress={() => bottomSheetContext._setContent("Transaction", transferContent.transactionToEdit, transferContent)}>
           <Image style={styles.icon}
                  source={require("./icons/backIcon.png")}
                  alt="Back" />

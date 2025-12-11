@@ -7,12 +7,12 @@ import Transaction from "./Transaction";
 import CategoriesList from "./CategoriesList";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
-import BottomSheetDataContext from "./BottomSheetDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const AddTransactionBottomSheet = ({transactionToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const transactionsContext = useContext(TransactionsContext);
-  const bottomSheetDataContext = useContext(BottomSheetDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
 
   const [nameInput, setNameInput] = useState("");
   const [amountInput, setAmountInput] = useState("");
@@ -68,7 +68,7 @@ const AddTransactionBottomSheet = ({transactionToEdit, transferContent}) => {
 
   const closeModal = () => {
     clearModal();
-    bottomSheetDataContext.setBottomSheetVisible(false);
+    bottomSheetContext.setBottomSheetVisible(false);
   }
 
   const createNewTransaction = (addAnother = false) => {
