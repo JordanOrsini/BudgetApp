@@ -49,8 +49,6 @@ const listElementStart = {
 const mainBodyContainer = {
   borderWidth: 2,
   borderColor: "#E1E1E1",
-  outlineWidth: 2,
-  outlineColor: "#FFFFFF",
   margin: 5,
   padding: 10,
   width: 380,
@@ -247,7 +245,6 @@ export const styles = StyleSheet.create({
     ...mainBodyContainer, 
     height: "auto",
     borderWidth: 0,
-    outlineWidth: 0,
   },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
