@@ -379,6 +379,7 @@ export const styles = StyleSheet.create({
     marginRight: 10,
   },
   navigationContainer: {
+    zIndex: -1,
     flexDirection: "row",
     alignItems: "center",
     position: "absolute",
