@@ -11,11 +11,28 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetContext from "./BottomSheetContext";
 
 const BottomSheetProvider = ({children}) => {
-  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
-
   const [content, setContent] = useState("Menu");
   const [editObject, setEditObject] = useState(null);
   const [transferContent, setTransferContent] = useState(null);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
+
+  const BottomSheetMain = () => {
+    if (!bottomSheetVisible)
+      return (null);
+
+    return (
+      <BottomSheet style={getStyle()}
+                   backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
+                   onChange={handleSheetChanges}
+                   detached={true}
+                   enablePanDownToClose={true}
+                   overDragResistanceFactor={2}>     
+        <BottomSheetView>
+          {getContent()}
+        </BottomSheetView>
+      </BottomSheet>
+    );
+  }
 
   const getContent = () => {
     switch (content) {
@@ -92,24 +109,6 @@ const BottomSheetProvider = ({children}) => {
       setTransferContent(newTransferContent);
     else
       setTransferContent(null);
-  }
-
-  const BottomSheetMain = () => {
-    if (!bottomSheetVisible)
-      return (null);
-
-    return (
-      <BottomSheet style={getStyle()}
-                   backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
-                   onChange={handleSheetChanges}
-                   detached={true}
-                   enablePanDownToClose={true}
-                   overDragResistanceFactor={2}>     
-        <BottomSheetView>
-          {getContent()}
-        </BottomSheetView>
-      </BottomSheet>
-    );
   }
     
   // Values to expose in our context.
