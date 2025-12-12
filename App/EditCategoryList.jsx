@@ -35,10 +35,10 @@ const EditCategoryList = ({style}) => {
 
   const ListHeader = () => {
     return (
-      <View>
+      <View style={styles.background}>
         <Text style={styles.subHeaderText}>Edit category</Text>
         <View style={{alignItems: "center"}}>
-          <View style={styles.listContainer}>
+          <View style={styles.horizontalContainer}>
             <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
             <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
           </View>
@@ -49,34 +49,31 @@ const EditCategoryList = ({style}) => {
 
   const renderItem = ({item}) => {
     return (
-      (item.id > 0) &&
-      <View style={{alignItems: "center"}}>   
-        <View style={styles.listContainer}>
-          <Pressable onPress={() => editItemHandler(item)}>
-            {({pressed}) => (
-            <View style={styles.horizontalContainer}>
-              <Text numberOfLines={1} style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
-              <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>
-                {getIconFromPath(item.iconPath)}
-              </View>
-            </View>
-            )}
-          </Pressable>
+      (item.id > 0) &&  
+      <Pressable onPress={() => editItemHandler(item)}>
+        {({pressed}) => (
+        <View style={styles.horizontalContainer}>
+          <Text numberOfLines={1} style={[styles.categoryListElementStart, pressed && styles.pressed]}>{item.name}</Text>
+          <View style={[styles.categoryListElementEnd, pressed && styles.pressed]}>
+            {getIconFromPath(item.iconPath)}
+          </View>
         </View>
-      </View>
+        )}
+      </Pressable>
     );
   }
 
   // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={[styles.mainBodyContainer, style]}>
-      <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.id}
                 ListEmptyComponent={ListEmpty}
-                showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListContentContainer}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]}
+                showsVerticalScrollIndicator={false}
                 scrollEnabled={false} /> 
     </View>     
   );

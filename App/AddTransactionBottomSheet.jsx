@@ -224,20 +224,21 @@ const AddTransactionBottomSheet = ({transactionToEdit, transferContent}) => {
         <DatePicker ref={datePickerModal}
                     type="date"
 				            value={dateInput}
-				            onChange={setDateInput} />  
-      </View>  
-      <Pressable style={({pressed}) => [styles.textInputCalendar, pressed && styles.pressed]} 
-                 onPress={() => datePickerModal.current?.showPicker()}>
-        <View style={styles.horizontalContainer}>  
-          <Text>{dateInput.toLocaleDateString()}</Text>
-          <Image style={[styles.icon, styles.calendarIcon]}
-                 source={require("./icons/calendarIcon.png")}
-                 alt="📅" />
-        </View>
-      </Pressable>        
+				            onChange={setDateInput} />
+        <Pressable onPress={() => datePickerModal.current?.showPicker()}>
+          {({pressed}) => (
+          <View style={[styles.textInputCalendar, pressed && styles.pressed]}>  
+            <Text>{dateInput.toLocaleDateString()}</Text>
+            <Image style={[styles.icon, styles.calendarIcon]}
+                   source={require("./icons/calendarIcon.png")}
+                   alt="📅" />
+          </View>
+          )}
+        </Pressable>  
+      </View> 
       {transactionToEdit &&
       <Text style={styles.creationText}>Created on: {new Date(transactionToEdit.getCreationDate()).toDateString()}</Text>
-      }
+      }         
       <View style={styles.horizontalContainer}> 
         {transactionToEdit &&
         <Pressable style={({pressed}) => [styles.button, styles.decline, pressed && styles.pressed]} 

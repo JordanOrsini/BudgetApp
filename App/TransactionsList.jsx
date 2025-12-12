@@ -40,14 +40,14 @@ const TransactionsList = ({style, size}) => {
 
   const ListHeader = () => {
     return (
-      <View>
+      <View style={styles.background}>
         {size &&
         <Text style={styles.subHeaderText}>Recent transactions</Text>
         }
         {!size &&
         <Text style={styles.subHeaderText}>Transaction history</Text>
         }
-        <View style={styles.listContainer}>
+        <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
           <Text numberOfLines={1} style={styles.listElementIconHeader}>Cat</Text>
@@ -60,33 +60,32 @@ const TransactionsList = ({style, size}) => {
   const renderItem = ({item}, data) => {
     const isLastItem = (!size && (item.index === data.length - 1));
     return (
-      <View style={[styles.listContainer, isLastItem && styles.lastItem]}>
-        <Pressable onPress={() => editItemHandler(item)}>
-          {({pressed}) => (
-          <View style={styles.horizontalContainer}>
-            <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
-            <Text numberOfLines={1} style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
-            <View style={[styles.listElementIcon, pressed && styles.pressed]}>
-              {getIconFromPath(item.categoryIcon)}
-            </View>
-            <Text numberOfLines={1} style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
+      <Pressable onPress={() => editItemHandler(item)}>
+        {({pressed}) => (
+        <View style={[styles.horizontalContainer, isLastItem && styles.lastItem]}>
+          <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
+          <Text numberOfLines={1} style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
+          <View style={[styles.listElementIcon, pressed && styles.pressed]}>
+            {getIconFromPath(item.categoryIcon)}
           </View>
-          )}
-        </Pressable>
-      </View>
+          <Text numberOfLines={1} style={[styles.listElementEnd, pressed && styles.pressed]}>{item.date}</Text>
+        </View>
+        )}
+      </Pressable>
     );
   }
 
   return (
     <View style={[styles.mainBodyContainerLarge, style]}>
-      <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
                 ListEmptyComponent={ListEmpty}
+                contentContainerStyle={styles.flatListContentContainer}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatListContentContainer} /> 
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} /> 
     </View>      
     );
 }

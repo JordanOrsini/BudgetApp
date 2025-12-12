@@ -16,22 +16,29 @@ const appShadows = {
     },    
   }),
 };
+const background = {
+  backgroundColor: "#FFFFFF",
+};
+const border = {
+  borderWidth: 2,
+  borderColor: "#ECECEC",
+};
 const button = {
   ...appShadows,
-  backgroundColor: "#FFFFFF",
+  ...background,
   width: 90,
   height: 45,
   borderRadius: 20,
   alignItems: "center",
   justifyContent: "center",
-  margin: 5,
+  margin: 4,
 };
 const listElement = {
   ...appShadows,
+  ...background,
   paddingLeft: 6,
   paddingRight: 6,
   lineHeight: 40,
-  backgroundColor: "#FFFFFF",
   width: 105,
 };
 const listElementEnd = {
@@ -49,28 +56,30 @@ const listElementStart = {
   borderBottomLeftRadius: 20,
 };
 const mainBodyContainer = {
+  ...background,
   padding: 10,
   borderRadius: 20,
   width: "100%",
   height: "auto",
-  backgroundColor: "#FFFFFF",
 };
 const navButton = {
   ...appShadows,
+  ...background,
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#FFFFFF",
   flex: 1,
   height: 40,
 };
 const textInput = {
   ...appShadows,
+  ...background,
   borderRadius: 20,
   width: 295,
+  height: 40,
   marginTop: 5,
   marginBottom: 5,
-  backgroundColor: "#FFFFFF",
-  padding: 10,
+  paddingLeft: 12,
+  paddingRight: 12,
 };
 
 // Style sheets CSS for the entire application.
@@ -87,7 +96,7 @@ export const styles = StyleSheet.create({
   },
   bottomSheetContent: {
     ...appShadows,
-    backgroundColor: "#FFFFFF",
+    ...background,
     borderTopWidth: 0,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
@@ -186,15 +195,21 @@ export const styles = StyleSheet.create({
   // Colour CSS classes ///////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   accept: {
-    borderWidth: 2,
+    ...border,
     borderColor: "#A0FAA0",
   },
+  background: {
+    ...background,
+  },
+  border: {
+    ...border,
+  },
   decline: {
-    borderWidth: 2,
+     ...border,
     borderColor: "#F76464",
   },
   edit: {
-    borderWidth: 2,
+     ...border,
     borderColor: "#FFB343",
   },
   pressed: {
@@ -211,7 +226,8 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
   categoryContainer: {
-    height: 200,
+    height: 195,
+    alignItems: "center",
   },
   flatListContentContainer: {
     flexGrow: 1,
@@ -219,9 +235,12 @@ export const styles = StyleSheet.create({
   horizontalContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 10,
+    marginBottom: 10, 
   },
   intervalContainer: {
-    height: 125,
+    height: 110,
+    alignItems: "center",
   },
   lastContainer: {
     ...Platform.select({
@@ -249,9 +268,7 @@ export const styles = StyleSheet.create({
   },
   mainBodyContainerSmall: {
     ...mainBodyContainer, 
-    borderWidth: 2,
-    borderColor: "#ECECEC",
-    height: 280,
+    height: 285,
   },
   pageView: {
     flex: 1,
@@ -263,7 +280,7 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   calendarIcon: {
     position: "absolute",
-    marginLeft: 140,
+    marginLeft: 235,
   },
   icon: {
     height: 24,
@@ -272,6 +289,10 @@ export const styles = StyleSheet.create({
   iconLarge: {
     height: 36,
     width: 36,
+  },
+  iconGiant: {
+    height: 225,
+    width: 225,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // List element CSS classes /////////////////////////////////////////////////////////////////////
@@ -295,17 +316,12 @@ export const styles = StyleSheet.create({
   lastItem: {
     ...Platform.select({
       ios: {
-        paddingBottom: 55,
+        paddingBottom: 45,
       },
       default: {
-        paddingBottom: 70,
+        paddingBottom: 60,
       },    
     }),
-  },
-  listContainer: {
-    flexDirection: "row",
-    paddingTop: 10,
-    paddingBottom: 10,
   },
   listElement: {
     ...listElement,
@@ -385,7 +401,6 @@ export const styles = StyleSheet.create({
   bottomSheetHeaderText: {
     fontSize: 25,
     fontWeight: "bold",
-    marginBottom: 10,
   },
   creationText: {
     fontSize: 12,
@@ -398,6 +413,7 @@ export const styles = StyleSheet.create({
   },
   inputHeaderText: {
     marginLeft: 10,
+    margin: 5,
   },
   smallText: {
     fontSize: 12,
@@ -412,9 +428,6 @@ export const styles = StyleSheet.create({
   textInputCalendar: {
     ...textInput,
     alignItems: "center",
-  },
-  textInputSmall: {
-    ...textInput,
-    width: 160,
+    justifyContent: "center",
   },
 });

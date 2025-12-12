@@ -114,7 +114,7 @@ const EditUser = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, style]}>
+    <View style={[styles.mainBodyContainerSmall, styles.border, style]}>
       <Text style={styles.subHeaderText}>Edit user</Text>
       <View style={styles.pageView}>
         <View>
@@ -132,12 +132,14 @@ const EditUser = ({style}) => {
                      placeholder="Enter dollar amount..." 
                      onChangeText={(text) => onTextChange(text, "salaryInput")} />
         </View>
-        <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
-                   onPress={() => modifyUser()} >
-          <Image style={styles.icon}
-                 source={require("./icons/editIcon.png")}
-                 alt="Edit" />
-        </Pressable> 
+        <View style={styles.horizontalContainer}>
+          <Pressable style={({pressed}) => [styles.button, styles.edit, pressed && styles.pressed]} 
+                     onPress={() => modifyUser()} >
+            <Image style={styles.icon}
+                   source={require("./icons/editIcon.png")}
+                   alt="Edit" />
+          </Pressable> 
+        </View>
       </View>  
     </View>     
   );

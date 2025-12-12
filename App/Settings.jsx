@@ -50,10 +50,10 @@ const Settings = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
                 ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]} />
+                stickyHeaderIndices={[0]}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView> 
   );
 }

@@ -26,7 +26,7 @@ const Transactions = () => {
     switch (item.index) {
       case 0: {
         return (
-          <TransactionsList />   
+          <TransactionsList style={styles.lastContainer} />   
         );
       }
       default: {
@@ -41,10 +41,10 @@ const Transactions = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
                 ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]} />    
+                stickyHeaderIndices={[0]}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false} />    
     </SafeAreaView> 
     );
 }

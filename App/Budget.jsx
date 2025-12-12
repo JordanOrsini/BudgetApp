@@ -6,9 +6,11 @@ import {styles} from "./Style";
 
 import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const Budget = () => {
   const userDataContext = useContext(UserDataContext);
+  const bottomSheetContext = useContext(BottomSheetContext);
 
   const data = [{index: 0}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
@@ -26,7 +28,7 @@ const Budget = () => {
     switch (item.index) {
       case 0: {
         return (
-          <ExpensesList />
+          <ExpensesList style={styles.lastContainer} />
         );
       }
       default: {
@@ -41,10 +43,10 @@ const Budget = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
                 ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]} />
+                stickyHeaderIndices={[0]}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView>
   );
 }

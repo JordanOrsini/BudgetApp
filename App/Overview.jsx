@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Text, View} from "react-native";
+import {Image, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
@@ -13,7 +13,7 @@ const Overview = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}, {index: 1}];
+  const data = [{index: 0}, {index: 1}, {index: 2}];
 
   const ListHeader = () => {
     return (
@@ -28,14 +28,21 @@ const Overview = () => {
     switch (item.index) {
       case 0: {
         return (
-          <ExpensesList style={styles.mainBodyContainer}
-                        size={4} />
+          <Image style={styles.iconGiant}
+                 source={require("./icons/overviewGraphic.png")}
+                 alt="Overview graphic" />
         );
       }
       case 1: {
         return (
+          <ExpensesList style={styles.mainBodyContainer}
+                        size={3} />
+        );
+      }
+      case 2: {
+        return (
           <TransactionsList style={[styles.mainBodyContainer, styles.lastContainer]}
-                            size={4} />
+                            size={3} />
         );
       }
       default: {
@@ -50,10 +57,10 @@ const Overview = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
                 ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]} />
+                stickyHeaderIndices={[0]}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView>  
   );
 }
