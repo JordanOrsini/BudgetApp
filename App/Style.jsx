@@ -21,7 +21,7 @@ const button = {
   backgroundColor: "#FFFFFF",
   width: 90,
   height: 45,
-  borderRadius: 10,
+  borderRadius: 20,
   alignItems: "center",
   justifyContent: "center",
   margin: 5,
@@ -36,24 +36,24 @@ const listElement = {
 };
 const listElementEnd = {
   ...listElement,
+  marginRight: 5,
   paddingRight: 12,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
 };
 const listElementStart = {
   ...listElement,
+  marginLeft: 5,
   paddingLeft: 12,
   borderTopLeftRadius: 20,
   borderBottomLeftRadius: 20,
 };
 const mainBodyContainer = {
-  borderWidth: 2,
-  borderColor: "#E1E1E1",
-  margin: 5,
   padding: 10,
-  width: 380,
-  borderRadius: 30,
-  height: 345,
+  borderRadius: 20,
+  width: "100%",
+  height: "auto",
+  backgroundColor: "#FFFFFF",
 };
 const navButton = {
   ...appShadows,
@@ -180,15 +180,7 @@ export const styles = StyleSheet.create({
   deleteAllButton: {
     ...button,
     height: 80,
-    width: 290,
-  },
-  smallButton: {
-    ...button,
-    width: 25,
-    height: 25,
-    borderRadius: 25,
-    marginTop: 0,
-    marginBottom: 10,
+    width: 350,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Colour CSS classes ///////////////////////////////////////////////////////////////////////////
@@ -234,17 +226,15 @@ export const styles = StyleSheet.create({
   lastContainer: {
     ...Platform.select({
       ios: {
-        marginBottom: 75,
+        marginBottom: 60,
       },
       default: {
-        marginBottom: 100,
+        marginBottom: 85,
       },    
     }),
   },
-  mainBodyContainerHeader: { 
+  mainBodyContainer: { 
     ...mainBodyContainer, 
-    height: "auto",
-    borderWidth: 0,
   },
   mainBodyContainerLarge: {
     ...mainBodyContainer,
@@ -257,12 +247,11 @@ export const styles = StyleSheet.create({
       },    
     }),
   },
-  mainBodyContainerMedium: {
-    ...mainBodyContainer,
-  },
   mainBodyContainerSmall: {
     ...mainBodyContainer, 
-    height: 260,
+    borderWidth: 2,
+    borderColor: "#ECECEC",
+    height: 280,
   },
   pageView: {
     flex: 1,
@@ -306,10 +295,10 @@ export const styles = StyleSheet.create({
   lastItem: {
     ...Platform.select({
       ios: {
-        paddingBottom: 70,
+        paddingBottom: 55,
       },
       default: {
-        paddingBottom: 85,
+        paddingBottom: 70,
       },    
     }),
   },

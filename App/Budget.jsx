@@ -10,22 +10,23 @@ import UserDataContext from "./UserDataContext";
 const Budget = () => {
   const userDataContext = useContext(UserDataContext);
 
-  const data = [{index: 0}, {index: 1}];
+  const data = [{index: 0}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
+
+  const ListHeader = () => {
+    return (
+      <View style={styles.mainBodyContainer}>
+        <Text style={styles.headerText}>Budget</Text>
+        <Text style={styles.subHeaderText}>Salary: {myNumberFormatter.format(userDataContext.userData.getSalary())}</Text>
+      </View>
+    );
+  }
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerHeader}>
-            <Text style={styles.headerText}>Budget</Text>
-            <Text style={styles.subHeaderText}>Salary: {myNumberFormatter.format(userDataContext.userData.getSalary())}</Text>
-          </View>
-        );
-      }
-      case 1: {
-        return (
-          <ExpensesList style={styles.lastContainer} />
+          <ExpensesList />
         );
       }
       default: {
@@ -41,7 +42,9 @@ const Budget = () => {
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
                 scrollEnabled={false}
-                showsVerticalScrollIndicator={false} />
+                showsVerticalScrollIndicator={false}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]} />
     </SafeAreaView>
   );
 }

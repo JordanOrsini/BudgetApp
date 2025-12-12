@@ -10,22 +10,23 @@ import TransactionsContext from "./TransactionsContext";
 const Transactions = () => {
   const transactionContext = useContext(TransactionsContext);
 
-  const data = [{index: 0}, {index: 1}];
+  const data = [{index: 0}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
+
+  const ListHeader = () => {
+    return (
+      <View style={styles.mainBodyContainer}>      
+        <Text style={styles.headerText}>Transactions</Text>
+        <Text style={styles.subHeaderText}>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
+      </View>
+    );
+  }
 
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerHeader}>      
-            <Text style={styles.headerText}>Transactions</Text>
-            <Text style={styles.subHeaderText}>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
-          </View>
-        );
-      }
-      case 1: {
-        return (
-          <TransactionsList style={styles.lastContainer} />   
+          <TransactionsList />   
         );
       }
       default: {
@@ -41,7 +42,9 @@ const Transactions = () => {
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
                 scrollEnabled={false}
-                showsVerticalScrollIndicator={false} />    
+                showsVerticalScrollIndicator={false}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]} />    
     </SafeAreaView> 
     );
 }

@@ -45,7 +45,7 @@ const TransactionsList = ({style, size}) => {
         <Text style={styles.subHeaderText}>Recent transactions</Text>
         }
         {!size &&
-        <Text style={styles.subHeaderText}>Transactions</Text>
+        <Text style={styles.subHeaderText}>Transaction history</Text>
         }
         <View style={styles.listContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
@@ -83,7 +83,7 @@ const TransactionsList = ({style, size}) => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible && size === undefined}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
                 ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListContentContainer} /> 

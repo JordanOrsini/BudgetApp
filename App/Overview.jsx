@@ -13,27 +13,28 @@ const Overview = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}, {index: 1}, {index: 2}];
+  const data = [{index: 0}, {index: 1}];
+
+  const ListHeader = () => {
+    return (
+      <View style={styles.mainBodyContainer}>
+        <Text style={styles.headerText}>Overview</Text>
+        <Text style={styles.subHeaderText}>Welcome {userDataContext.userData.getName()}! 😊</Text>
+      </View>
+    );
+  }
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerHeader}>
-            <Text style={styles.headerText}>Overview</Text>
-            <Text style={styles.subHeaderText}>Welcome {userDataContext.userData.getName()}! 😊</Text>
-          </View> 
+          <ExpensesList style={styles.mainBodyContainer}
+                        size={4} />
         );
       }
       case 1: {
         return (
-          <ExpensesList style={styles.mainBodyContainerMedium}
-                        size={4} />
-        );
-      }
-      case 2: {
-        return (
-          <TransactionsList style={[styles.mainBodyContainerMedium, styles.lastContainer]}
+          <TransactionsList style={[styles.mainBodyContainer, styles.lastContainer]}
                             size={4} />
         );
       }
@@ -50,7 +51,9 @@ const Overview = () => {
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
                 showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]} />
     </SafeAreaView>  
   );
 }

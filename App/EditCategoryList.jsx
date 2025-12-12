@@ -69,7 +69,7 @@ const EditCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerMedium, style]}>
+    <View style={[styles.mainBodyContainer, style]}>
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
@@ -77,7 +77,7 @@ const EditCategoryList = ({style}) => {
                 ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListContentContainer}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible} /> 
+                scrollEnabled={false} /> 
     </View>     
   );
 }

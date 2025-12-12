@@ -43,7 +43,7 @@ const ExpensesList = ({style, size}) => {
         <Text style={styles.subHeaderText}>Recent expenses</Text>
         }
         {!size &&
-        <Text style={styles.subHeaderText}>Expenses</Text>
+        <Text style={styles.subHeaderText}>Expense history</Text>
         }
         <View style={styles.listContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
@@ -84,7 +84,7 @@ const ExpensesList = ({style, size}) => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible && size === undefined}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
                 ListEmptyComponent={ListEmpty}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListContentContainer} /> 

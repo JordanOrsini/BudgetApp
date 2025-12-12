@@ -11,28 +11,29 @@ import BottomSheetContext from "./BottomSheetContext";
 
 const Settings = () => {
   const bottomSheetContext = useContext(BottomSheetContext);
-  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
+  const data = [{index: 0}, {index: 1}, {index: 2}];
+
+  const ListHeader = () => {
+    return (
+      <View style={styles.mainBodyContainer}>
+        <Text style={styles.headerText}>Settings</Text>  
+      </View> 
+    );
+  }
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.mainBodyContainerHeader}>
-            <Text style={styles.headerText}>Settings</Text>  
-          </View> 
+          <EditUser />
         );
       }
       case 1: {
         return (
-          <EditUser />
-        );
-      }
-      case 2: {
-        return (
           <EditCategoryList />
         );
       }
-      case 3: {
+      case 2: {
         return (
           <DeleteAllData style={styles.lastContainer} />
         );
@@ -50,7 +51,9 @@ const Settings = () => {
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
                 showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]} />
     </SafeAreaView> 
   );
 }
