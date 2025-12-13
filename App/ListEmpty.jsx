@@ -3,7 +3,7 @@ import {styles} from "./Style";
 
 const ListEmpty = () => {
   return (
-    <View style={styles.pageView}>
+    <View style={[styles.pageView, styles.mainBodyContainer]}>
       <Image style={styles.iconLarge}
              source={require("./icons/emptyIcon.png")}
              alt="Empty" />

@@ -297,11 +297,6 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // List element CSS classes /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  categoryListElementEndHeader: {
-    ...listElementEnd,
-    width: 175,
-    textAlign: "center",
-  },
   categoryListElementEnd: {
     ...listElementEnd,
     width: 175,
@@ -309,9 +304,19 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  categoryListElementEndHeader: {
+    ...listElementEnd,
+    width: 175,
+    textAlign: "center",
+  },
   categoryListElementStart: {
     ...listElementStart,
     width: 175,
+  },
+  expenseListElementEnd:{
+    ...listElementEnd,
+    width: 140,
+    textAlign: "center",
   },
   lastItem: {
     ...Platform.select({
@@ -328,6 +333,7 @@ export const styles = StyleSheet.create({
   },
   listElementEnd: {
     ...listElementEnd,
+    width: 100,
     textAlign: "center",
   },
   listElementIcon: {
@@ -344,6 +350,18 @@ export const styles = StyleSheet.create({
   },
   listElementStart: {
     ...listElementStart,
+  },
+  topCategoryListElementEndIcon: {
+    ...listElementEnd,
+    width: 140,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  topCategoryListElementEndText: {
+    ...listElementEnd,
+    width: 140,
+    textAlign: "center",
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Navigation CSS classes ///////////////////////////////////////////////////////////////////////

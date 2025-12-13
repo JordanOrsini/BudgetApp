@@ -17,7 +17,7 @@ const Transactions = () => {
     return (
       <View style={styles.mainBodyContainer}>      
         <Text style={styles.headerText}>Transactions</Text>
-        <Text style={styles.subHeaderText}>Total amount spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
+        <Text style={styles.subHeaderText}>Total spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
       </View>
     );
   }

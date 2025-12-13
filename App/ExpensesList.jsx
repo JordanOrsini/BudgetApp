@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
@@ -43,13 +43,12 @@ const ExpensesList = ({style, size}) => {
         <Text style={styles.subHeaderText}>Recent expenses</Text>
         }
         {!size &&
-        <Text style={styles.subHeaderText}>Expense history</Text>
+        <Text style={styles.subHeaderText}>Expenses</Text>
         }
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
-          <Text numberOfLines={1} style={styles.listElementIconHeader}>Rec</Text>
-          <Text numberOfLines={1} style={styles.listElementEnd}>Frequency</Text>
+          <Text numberOfLines={1} style={styles.expenseListElementEnd}>Frequency</Text>
         </View>
       </View>
     );
@@ -62,12 +61,7 @@ const ExpensesList = ({style, size}) => {
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
           <Text numberOfLines={1} style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>
-          <View style={[styles.listElementIcon, pressed && styles.pressed]}>
-            <Image style={styles.icon}
-                   source={require("./icons/recurringIcon.png")}
-                   alt="Recurring" />
-          </View>
-          <Text numberOfLines={1} style={[styles.listElementEnd, pressed && styles.pressed]}>{item.interval}</Text>
+          <Text numberOfLines={1} style={[styles.expenseListElementEnd, pressed && styles.pressed]}>{item.interval}</Text>
         </View>
         )}
       </Pressable>

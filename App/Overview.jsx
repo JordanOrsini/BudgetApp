@@ -8,12 +8,13 @@ import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
 import TransactionsList from "./TransactionsList";
 import BottomSheetContext from "./BottomSheetContext";
+import TopCategories from "./TopCategories";
 
 const Overview = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}, {index: 1}, {index: 2}];
+  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
 
   const ListHeader = () => {
     return (
@@ -35,14 +36,19 @@ const Overview = () => {
       }
       case 1: {
         return (
-          <ExpensesList style={styles.mainBodyContainer}
-                        size={3} />
+          <TopCategories />
         );
       }
       case 2: {
         return (
+          <ExpensesList style={styles.mainBodyContainer}
+                        size={4} />
+        );
+      }
+      case 3: {
+        return (
           <TransactionsList style={[styles.mainBodyContainer, styles.lastContainer]}
-                            size={3} />
+                            size={4} />
         );
       }
       default: {

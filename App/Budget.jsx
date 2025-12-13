@@ -4,6 +4,8 @@ import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
+import Goals from "./Goals";
+import Accounts from "./Accounts";
 import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
 import BottomSheetContext from "./BottomSheetContext";
@@ -12,7 +14,7 @@ const Budget = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}];
+  const data = [{index: 0}, {index: 1}, {index: 2}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const ListHeader = () => {
@@ -28,7 +30,17 @@ const Budget = () => {
     switch (item.index) {
       case 0: {
         return (
-          <ExpensesList style={styles.lastContainer} />
+          <ExpensesList />
+        );
+      }
+      case 1: {
+        return (
+          <Accounts />
+        );
+      }
+      case 2: {
+        return (
+          <Goals style={styles.lastContainer} />
         );
       }
       default: {

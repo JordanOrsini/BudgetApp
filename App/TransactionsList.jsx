@@ -44,9 +44,6 @@ const TransactionsList = ({style, size}) => {
         {size &&
         <Text style={styles.subHeaderText}>Recent transactions</Text>
         }
-        {!size &&
-        <Text style={styles.subHeaderText}>Transaction history</Text>
-        }
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    

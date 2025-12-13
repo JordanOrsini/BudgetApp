@@ -87,6 +87,14 @@ const TransactionsProvider = ({children}) => {
     await readAndParseFile();
   }
 
+  const findTransactionsByCategory = (category) => {
+    const filteredData = transactionData.filter(element => 
+      element.getCategory() === category
+    );
+    
+    return (filteredData);
+  }
+
   const findTransactionById = (id) => {
     const filteredData = transactionData.filter(element => 
       element.getId() === id
@@ -171,6 +179,7 @@ const TransactionsProvider = ({children}) => {
     transactionData,
     _setTransactionData,
     totalAmount,
+    findTransactionsByCategory,
     findTransactionById,
   }
 
