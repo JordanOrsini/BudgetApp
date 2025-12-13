@@ -221,6 +221,20 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Container CSS classes ////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
+  blurPosition: {
+    position: "absolute",
+    zIndex: -1,
+    width: "100%",
+    height: 100,
+    ...Platform.select({
+      ios: {
+        marginTop: 770,
+      },
+      default: {
+        marginTop: 795,
+      },    
+    }),
+  },
   bottomSheetNavContainer: {
     position: "absolute",
     width: "100%",
@@ -259,10 +273,10 @@ export const styles = StyleSheet.create({
     ...mainBodyContainer,
     ...Platform.select({
       ios: {
-        height: 640,
+        height: 675,
       },
       default: {
-        height: 690,
+        height: 725,
       },    
     }),
   },
@@ -403,7 +417,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     position: "absolute",
-    paddingBottom: 40,
     ...Platform.select({
       ios: {
         marginTop: 750,
