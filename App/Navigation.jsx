@@ -14,6 +14,7 @@ const Navigation = ({state, navigation}) => {
     <SafeAreaView style={styles.bottomSheetNavContainer}>    
       {bottomSheetContext.BottomSheetMain()}
       <BlurView style={styles.blurPosition}
+                blurType="light"
                 blurAmount={1}
                 overlayColor="transparent" />
       <View style={styles.navigationContainer}>

@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
 
     ...Platform.select({
       ios: {
-        marginTop: 580,
+        marginTop: 570,
       },
       default: {
         marginTop: 605,
@@ -122,7 +122,7 @@ export const styles = StyleSheet.create({
       ios: {
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 300,
+        marginTop: 270,
       },
       default: {
         marginLeft: 20,
@@ -136,7 +136,7 @@ export const styles = StyleSheet.create({
       ios: {
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 310,
+        marginTop: 280,
       },
       default: {
         marginLeft: 20,
@@ -150,7 +150,7 @@ export const styles = StyleSheet.create({
       ios: {
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 170,
+        marginTop: 115,
       },
       default: {
         marginLeft: 20,
@@ -164,7 +164,7 @@ export const styles = StyleSheet.create({
       ios: {
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 140,
+        marginTop: 90,
       },
       default: {
         marginLeft: 20,
@@ -333,14 +333,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   lastItem: {
-    ...Platform.select({
-      ios: {
-        paddingBottom: 45,
-      },
-      default: {
-        paddingBottom: 80,
-      },    
-    }),
+    paddingBottom: 80,
   },
   listElement: {
     ...listElement,
