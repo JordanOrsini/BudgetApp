@@ -113,7 +113,7 @@ export const styles = StyleSheet.create({
         marginTop: 580,
       },
       default: {
-        marginTop: 600,
+        marginTop: 605,
       },    
     }),
   },
@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 310,
+        marginTop: 302,
       },    
     }),
   },
@@ -141,7 +141,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 320,
+        marginTop: 310,
       },    
     }),
   },
@@ -155,7 +155,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 180,
+        marginTop: 145,
       },    
     }),
   },
@@ -169,7 +169,7 @@ export const styles = StyleSheet.create({
       default: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 150,
+        marginTop: 115,
       },    
     }),
   },
@@ -225,13 +225,13 @@ export const styles = StyleSheet.create({
     position: "absolute",
     zIndex: -1,
     width: "100%",
-    height: 100,
+    height: 90,
     ...Platform.select({
       ios: {
         marginTop: 770,
       },
       default: {
-        marginTop: 795,
+        marginTop: 810,
       },    
     }),
   },
@@ -262,7 +262,7 @@ export const styles = StyleSheet.create({
         marginBottom: 60,
       },
       default: {
-        marginBottom: 85,
+        marginBottom: 70,
       },    
     }),
   },
@@ -338,7 +338,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 45,
       },
       default: {
-        paddingBottom: 60,
+        paddingBottom: 80,
       },    
     }),
   },
@@ -422,7 +422,7 @@ export const styles = StyleSheet.create({
         marginTop: 750,
       },
       default: {
-        marginTop: 775,
+        marginTop: 790,
       },    
     }),
   },
