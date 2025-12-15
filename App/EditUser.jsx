@@ -115,7 +115,7 @@ const EditUser = ({style}) => {
 
   return (
     <View style={[styles.mainBodyContainerSmall, styles.border, style]}>
-      <Text style={styles.subHeaderText}>Edit user</Text>
+      <Text style={styles.containerHeaderText}>Edit user</Text>
       <View style={styles.pageView}>
         <View>
           <Text style={styles.inputHeaderText}>Username:</Text>

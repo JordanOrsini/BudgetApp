@@ -40,10 +40,10 @@ const ExpensesList = ({style, size}) => {
     return (
       <View style={styles.backgroundTransparent}>
         {size &&
-        <Text style={styles.subHeaderText}>Recent expenses</Text>
+        <Text style={styles.containerHeaderText}>Recent expenses</Text>
         }
         {!size &&
-        <Text style={styles.subHeaderText}>Expenses</Text>
+        <Text style={styles.containerHeaderText}>Expenses</Text>
         }
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
@@ -70,7 +70,7 @@ const ExpensesList = ({style, size}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerSmall, !size && styles.border, style]}>    
+    <View style={[styles.mainBodyContainer, !size && styles.border, style]}>    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}

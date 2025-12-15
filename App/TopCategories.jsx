@@ -9,7 +9,7 @@ import CategoriesContext from "./CategoriesContext";
 import BottomSheetContext from "./BottomSheetContext";
 import TransactionsContext from "./TransactionsContext";
 
-const TopCategories = ({style}) => {
+const TopCategories = ({showTotal = true, style}) => {
   const categoriesContext = useContext(CategoriesContext);
   const bottomSheetContext = useContext(BottomSheetContext);
   const transactionsContext = useContext(TransactionsContext);
@@ -72,12 +72,13 @@ const TopCategories = ({style}) => {
   const ListHeader = () => {
     return (
       <View style={styles.background}>
-        <Text style={styles.subHeaderText}>Top categories</Text>
+        <Text style={styles.containerHeaderText}>Top categories</Text>
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
           <Text numberOfLines={1} style={styles.topCategoryListElementEndText}>Category</Text>
         </View>
+        {showTotal &&
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>TOTAL</Text>
           <Text numberOfLines={1} style={styles.listElement}>{myNumberFormatter.format(transactionsContext.totalAmount)}</Text>    
@@ -87,6 +88,7 @@ const TopCategories = ({style}) => {
                    alt="Dots" />
           </View>
         </View>
+        }
       </View>
     );
   }

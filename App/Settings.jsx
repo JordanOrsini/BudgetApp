@@ -47,7 +47,7 @@ const Settings = () => {
   // Function that returns the contents of the settings screen.
   return (
     <SafeAreaView style={styles.pageView}
-                  edges={["top", "left", "right"]}>    
+                  edges={["left", "right"]}>    
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}

@@ -36,19 +36,18 @@ const Overview = () => {
       }
       case 1: {
         return (
-          <TopCategories />
+          <TopCategories showTotal={false} />
         );
       }
       case 2: {
         return (
-          <ExpensesList style={styles.mainBodyContainer}
-                        size={4} />
+          <ExpensesList size={3} />
         );
       }
       case 3: {
         return (
-          <TransactionsList style={[styles.mainBodyContainer, styles.lastContainer]}
-                            size={4} />
+          <TransactionsList style={styles.lastContainer}
+                            size={3} />
         );
       }
       default: {
@@ -60,7 +59,7 @@ const Overview = () => {
   // Function that returns the contents of the overview screen.
   return (
     <SafeAreaView style={styles.pageView}
-                  edges={["top", "left", "right"]}>
+                  edges={["left", "right"]}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}

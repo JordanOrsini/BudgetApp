@@ -60,7 +60,8 @@ const listElementStart = {
 };
 const mainBodyContainer = {
   ...backgroundTransparent,
-  padding: 10,
+  paddingLeft: 10,
+  paddingRight: 10,
   borderRadius: 20,
   width: "100%",
   height: "auto",
@@ -191,6 +192,8 @@ export const styles = StyleSheet.create({
   },
   deleteAllButton: {
     ...button,
+    marginTop: 15,
+    marginBottom: 15,
     height: 80,
     width: 350,
   },
@@ -209,6 +212,8 @@ export const styles = StyleSheet.create({
   },
   border: {
     ...border,
+    marginTop: 2.5,
+    marginBottom: 2.5,
   },
   decline: {
      ...border,
@@ -264,21 +269,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   lastContainer: {
-    marginBottom: 70,
+    marginBottom: 110,
   },
   mainBodyContainer: { 
     ...mainBodyContainer, 
-  },
-  mainBodyContainerLarge: {
-    ...mainBodyContainer,
-    ...Platform.select({
-      ios: {
-        height: 800,
-      },
-      default: {
-        height: 840,
-      },    
-    }),
   },
   mainBodyContainerSmall: {
     ...mainBodyContainer, 
@@ -304,6 +298,10 @@ export const styles = StyleSheet.create({
     height: 36,
     width: 36,
   },
+  iconLogo: {
+    height: 70,
+    width: 140,
+  },
   iconGiant: {
     height: 225,
     width: 225,
@@ -311,6 +309,12 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // List element CSS classes /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
+  accountListElementStart: {
+    width: 140,
+    height: 40,
+    alignItems: "center", 
+    justifyContent: "center",
+  },
   categoryListElementEnd: {
     ...listElementEnd,
     width: 175,
@@ -333,7 +337,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   lastItem: {
-    paddingBottom: 80,
+    paddingBottom: 110,
   },
   listElement: {
     ...listElement,
@@ -426,12 +430,28 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
   },
+  containerHeaderText: {
+    fontSize: 20,
+    paddingTop: 10,
+    paddingLeft: 5,
+  },
   creationText: {
     fontSize: 12,
     paddingTop: 5,
     paddingBottom: 5,
   },
+  goalsOverlay: {
+    position: "absolute",
+    backgroundColor: "#88E788",
+    height: 40,
+  },
+  goalsText: {
+    zIndex: 1,
+    textAlign: "center",
+    lineHeight: 40,
+  },
   headerText: {
+    paddingTop: 40,
     fontSize: 50,
     fontWeight: "bold",
   },

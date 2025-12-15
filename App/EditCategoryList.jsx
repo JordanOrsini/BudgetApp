@@ -35,8 +35,8 @@ const EditCategoryList = ({style}) => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.background}>
-        <Text style={styles.subHeaderText}>Edit category</Text>
+      <View style={styles.backgroundTransparent}>
+        <Text style={styles.containerHeaderText}>Edit category</Text>
         <View style={{alignItems: "center"}}>
           <View style={styles.horizontalContainer}>
             <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
@@ -65,7 +65,7 @@ const EditCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainer, style]}>
+    <View style={[styles.mainBodyContainer, styles.border, style]}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.id}
@@ -74,7 +74,7 @@ const EditCategoryList = ({style}) => {
                 ListHeaderComponent={ListHeader}
                 stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
-                scrollEnabled={false} /> 
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} /> 
     </View>     
   );
 }

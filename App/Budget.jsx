@@ -30,7 +30,7 @@ const Budget = () => {
     switch (item.index) {
       case 0: {
         return (
-          <ExpensesList />
+          <ExpensesList style={styles.mainBodyContainerSmall} />
         );
       }
       case 1: {
@@ -52,7 +52,7 @@ const Budget = () => {
   // Function that returns the contents of the budget screen.
   return (
     <SafeAreaView style={styles.pageView}
-                  edges={["top", "left", "right"]}>
+                  edges={["left", "right"]}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
