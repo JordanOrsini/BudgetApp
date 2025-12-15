@@ -37,7 +37,7 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
     clearModal();
 
     if (categoryToEdit)
-      bottomSheetContext.setBottomSheetVisible(false);
+      bottomSheetContext.bottomSheetRef.current?.close();
     else
       bottomSheetContext._setContent("Transaction", transferContent.transactionToEdit, transferContent);
   }

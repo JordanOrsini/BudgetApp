@@ -45,7 +45,7 @@ const AddExpenseBottomSheet = ({expenseToEdit}) => {
 
   const closeModal = () => {
     clearModal();
-    bottomSheetContext.setBottomSheetVisible(false);
+    bottomSheetContext.bottomSheetRef.current?.close();
   }
 
   const createNewExpense = (addAnother = false) => {
