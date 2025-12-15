@@ -264,14 +264,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   lastContainer: {
-    ...Platform.select({
-      ios: {
-        marginBottom: 60,
-      },
-      default: {
-        marginBottom: 70,
-      },    
-    }),
+    marginBottom: 70,
   },
   mainBodyContainer: { 
     ...mainBodyContainer, 
@@ -280,7 +273,7 @@ export const styles = StyleSheet.create({
     ...mainBodyContainer,
     ...Platform.select({
       ios: {
-        height: 675,
+        height: 800,
       },
       default: {
         height: 840,
