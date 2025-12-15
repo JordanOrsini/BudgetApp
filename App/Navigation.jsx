@@ -12,7 +12,7 @@ const Navigation = ({state, navigation}) => {
   return (
     <SafeAreaView style={styles.bottomSheetNavContainer}>    
       {bottomSheetContext.BottomSheetMain()}
-      <View style={styles.blurPosition} />
+      <View style={styles.navigationBackground} />
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Overview")}>

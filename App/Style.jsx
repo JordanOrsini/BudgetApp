@@ -232,21 +232,6 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Container CSS classes ////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  blurPosition: {
-    ...backgroundTransparent,
-    position: "absolute",
-    zIndex: -1,
-    width: "100%",
-    height: 90,
-    ...Platform.select({
-      ios: {
-        marginTop: 770,
-      },
-      default: {
-        marginTop: 810,
-      },    
-    }),
-  },
   bottomSheetNavContainer: {
     position: "absolute",
     width: "100%",
@@ -409,6 +394,21 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 50,
     marginRight: 10,
   },
+  navigationBackground: {
+    ...backgroundTransparent,
+    position: "absolute",
+    zIndex: -1,
+    width: "100%",
+    height: 90,
+    ...Platform.select({
+      ios: {
+        marginTop: 770,
+      },
+      default: {
+        marginTop: 810,
+      },    
+    }),
+  },
   navigationContainer: {
     zIndex: -1,
     flexDirection: "row",
@@ -451,9 +451,16 @@ export const styles = StyleSheet.create({
     lineHeight: 40,
   },
   headerText: {
-    paddingTop: 40,
     fontSize: 50,
     fontWeight: "bold",
+    ...Platform.select({
+      ios: {
+        paddingTop: 60,
+      },
+      default: {
+        paddingTop: 40,
+      },    
+    }),
   },
   inputHeaderText: {
     marginLeft: 10,
