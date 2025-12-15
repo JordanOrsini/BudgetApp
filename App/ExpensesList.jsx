@@ -38,7 +38,7 @@ const ExpensesList = ({style, size}) => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.background}>
+      <View style={styles.backgroundTransparent}>
         {size &&
         <Text style={styles.subHeaderText}>Recent expenses</Text>
         }

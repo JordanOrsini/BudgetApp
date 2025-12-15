@@ -1,26 +1,11 @@
-import {useContext} from "react";
-import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
 import TransactionsList from "./TransactionsList";
-import TransactionsContext from "./TransactionsContext";
 
 const Transactions = () => {
-  const transactionContext = useContext(TransactionsContext);
-
   const data = [{index: 0}];
-  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
-
-  const ListHeader = () => {
-    return (
-      <View style={styles.mainBodyContainer}>      
-        <Text style={styles.headerText}>Transactions</Text>
-        <Text style={styles.subHeaderText}>Total spent: {myNumberFormatter.format(transactionContext.totalAmount)}</Text> 
-      </View>
-    );
-  }
 
   const renderItem = ({item}) => {
     switch (item.index) {
@@ -41,8 +26,6 @@ const Transactions = () => {
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}
-                ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false} />    
     </SafeAreaView> 

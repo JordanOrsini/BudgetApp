@@ -1,6 +1,5 @@
 import {useContext} from "react";
 import {Image, Pressable, View} from "react-native";
-import {BlurView} from "@react-native-community/blur";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
@@ -13,10 +12,7 @@ const Navigation = ({state, navigation}) => {
   return (
     <SafeAreaView style={styles.bottomSheetNavContainer}>    
       {bottomSheetContext.BottomSheetMain()}
-      <BlurView style={styles.blurPosition}
-                blurType="light"
-                blurAmount={1}
-                overlayColor="transparent" />
+      <View style={styles.blurPosition} />
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}
                    onPress={() => navigation.navigate("Overview")}>

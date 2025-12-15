@@ -40,7 +40,13 @@ const TransactionsList = ({style, size}) => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.background}>
+      <View style={styles.backgroundTransparent}>
+        {!size &&
+        <View>      
+          <Text style={styles.headerText}>Transactions</Text>
+          <Text style={styles.subHeaderText}>Total spent: {myNumberFormatter.format(transactionsContext.totalAmount)}</Text> 
+        </View>
+        }
         {size &&
         <Text style={styles.subHeaderText}>Recent transactions</Text>
         }

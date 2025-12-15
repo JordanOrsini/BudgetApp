@@ -19,6 +19,9 @@ const appShadows = {
 const background = {
   backgroundColor: "#FFFFFF",
 };
+const backgroundTransparent = {
+  backgroundColor: "rgba(255, 255, 255, 0.9)",
+};
 const border = {
   borderWidth: 2,
   borderColor: "#ECECEC",
@@ -56,7 +59,7 @@ const listElementStart = {
   borderBottomLeftRadius: 20,
 };
 const mainBodyContainer = {
-  ...background,
+  ...backgroundTransparent,
   padding: 10,
   borderRadius: 20,
   width: "100%",
@@ -201,6 +204,9 @@ export const styles = StyleSheet.create({
   background: {
     ...background,
   },
+   backgroundTransparent: {
+    ...backgroundTransparent,
+  },
   border: {
     ...border,
   },
@@ -222,6 +228,7 @@ export const styles = StyleSheet.create({
   // Container CSS classes ////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////
   blurPosition: {
+    ...backgroundTransparent,
     position: "absolute",
     zIndex: -1,
     width: "100%",
@@ -276,7 +283,7 @@ export const styles = StyleSheet.create({
         height: 675,
       },
       default: {
-        height: 725,
+        height: 840,
       },    
     }),
   },
