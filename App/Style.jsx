@@ -20,7 +20,7 @@ const background = {
   backgroundColor: "#FFFFFF",
 };
 const backgroundTransparent = {
-  backgroundColor: "rgba(255, 255, 255, 0.9)",
+  backgroundColor: "rgba(255, 255, 255, 0.925)",
 };
 const border = {
   borderWidth: 2,
@@ -93,10 +93,7 @@ export const styles = StyleSheet.create({
   /////////////////////////////////////////////////////////////////////////////////////////////////
   bottomSheet: {
     ...appShadows,
-    borderRadius: 20,
-  },
-  bottomSheetBackdrop: {
-    height: 900,
+    height: 40,
   },
   bottomSheetContent: {
     ...appShadows,

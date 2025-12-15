@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useWindowDimensions} from "react-native";
 import {BottomSheetBackdrop, BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
@@ -16,6 +17,8 @@ const BottomSheetProvider = ({children}) => {
   const [transferContent, setTransferContent] = useState(null);
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
+  const windowHeight = useWindowDimensions().height;
+
   const BottomSheetMain = () => {
     if (!bottomSheetVisible)
       return (null);
@@ -26,9 +29,10 @@ const BottomSheetProvider = ({children}) => {
                    onChange={handleSheetChanges}
                    detached={true}
                    enablePanDownToClose={true}
-                   overDragResistanceFactor={2}
+                   overDragResistanceFactor={8}
+                   bottomInset={getInset()}
                    backdropComponent={props => (<BottomSheetBackdrop {...props}
-                                                                     style={styles.bottomSheetBackdrop}                                                           
+                                                                     style={{height: windowHeight}}                                                           
                                                                      disappearsOnIndex={-1}
                                                                      pressBehavior="none" />)}>     
         <BottomSheetView>
@@ -65,32 +69,39 @@ const BottomSheetProvider = ({children}) => {
     }
   }
 
+  const getInset = () => {
+    switch (content) {
+      case "Menu": {
+        return 300;
+      }
+      case "Expense": {
+        return 600;
+      }
+      case "Transaction": {
+        return 800;
+      }
+      case "Category": {
+        return 600;
+      }
+    }
+  }
+
   const getStyle = () => {
     switch (content) {
       case "Menu": {
-        return (
-          styles.bottomSheetPositioning
-        );
+        return styles.bottomSheetPositioning;
       }
       case "Expense": {
-        return (
-          styles.bottomSheetPositioningExpense
-        );
+        return styles.bottomSheetPositioningExpense;
       }
       case "Transaction": {
         if (editObject)
-          return (
-            styles.bottomSheetPositioningTransactionEdit
-          );
+          return styles.bottomSheetPositioningTransactionEdit;
         
-        return (
-          styles.bottomSheetPositioningTransaction
-        );
+        return styles.bottomSheetPositioningTransaction;
       }
       case "Category": {
-        return (
-          styles.bottomSheetPositioningCategory
-        );
+        return styles.bottomSheetPositioningCategory;
       }
     }
   }

@@ -28,7 +28,7 @@ const Goals = ({style}) => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.backgroundTransparent}>
+      <View style={styles.background}>
         <Text style={styles.containerHeaderText}>Goals</Text>
       </View>
     );
@@ -47,13 +47,12 @@ const Goals = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, styles.border, style]}>    
+    <View style={[styles.mainBodyContainerSmall, styles.border, style]}> 
+      <ListHeader />   
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}
                 contentContainerStyle={styles.flatListContentContainer}
-                ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]}
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={!bottomSheetContext.bottomSheetVisible} /> 
     </View>
