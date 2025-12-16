@@ -25,9 +25,11 @@ const EditCategoryList = ({style}) => {
   const fillData = () => {
     const newCategoryArray = [];
     categoryContext.categoryData.map((element, index) => {
-      newCategoryArray.push({id: index, 
-                             name: element.getName(),
-                             iconPath: element.getIconPath()});
+      if (index !== 0) {
+        newCategoryArray.push({id: index, 
+                               name: element.getName(),
+                               iconPath: element.getIconPath()});
+      }
     });
 
     setData(newCategoryArray);
@@ -49,7 +51,6 @@ const EditCategoryList = ({style}) => {
 
   const renderItem = ({item}) => {
     return (
-      (item.id > 0) &&  
       <Pressable onPress={() => editItemHandler(item)}>
         {({pressed}) => (
         <View style={styles.horizontalContainer}>
@@ -65,7 +66,7 @@ const EditCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainer, styles.border, style]}>
+    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, styles.border, style]}>
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

@@ -70,7 +70,7 @@ const ExpensesList = ({style, size}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainer, !size && styles.border, style]}> 
+    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, !size && styles.border, style]}> 
       <ListHeader />   
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

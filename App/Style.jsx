@@ -235,14 +235,12 @@ export const styles = StyleSheet.create({
   },
   categoryContainer: {
     height: 195,
-    alignItems: "center",
   },
   flatListContentContainer: {
     flexGrow: 1,
   },
   horizontalContainer: {
     flexDirection: "row",
-    alignItems: "center",
     marginTop: 10,
     marginBottom: 10, 
   },

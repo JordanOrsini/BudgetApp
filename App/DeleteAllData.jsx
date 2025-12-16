@@ -18,7 +18,7 @@ const ModifySalary = ({style}) => {
     userDataContext._setUserData(new User());
     expensesContext._setExpenseData([]);
     transactionsContext._setTransactionData([]);
-    categoriesContext._setCategoryData([]);
+    categoriesContext._setCategoryData([categoriesContext.categoryData[0]]);
   }
 
   return (

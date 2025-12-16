@@ -15,6 +15,7 @@ const Overview = () => {
   const bottomSheetContext = useContext(BottomSheetContext);
 
   const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
+  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const ListHeader = () => {
     return (
@@ -29,9 +30,21 @@ const Overview = () => {
     switch (item.index) {
       case 0: {
         return (
-          <Image style={styles.iconGiant}
-                 source={require("./icons/overviewGraphic.png")}
-                 alt="Overview graphic" />
+          <View style={styles.horizontalContainer}>
+            <Image style={styles.iconGiant}
+                   source={require("./icons/overviewGraphic.png")}
+                   alt="Overview graphic" />
+            <View style={{justifyContent: "center"}}>
+              <View>
+                <Text style={[styles.subHeaderText, {fontWeight: "bold"}]}>Account:</Text>
+                <Text style={styles.subHeaderText}>TFSA</Text>
+              </View>
+              <View style={{marginTop: 25}}>
+                <Text style={[styles.subHeaderText, {fontWeight: "bold"}]}>Amount:</Text>
+                <Text style={styles.subHeaderText}>{myNumberFormatter.format(90000)}</Text>
+              </View>
+            </View>
+          </View>
         );
       }
       case 1: {

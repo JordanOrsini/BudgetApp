@@ -44,7 +44,7 @@ const TransactionsList = ({style, size}) => {
         {!size &&
         <View>      
           <Text style={styles.headerText}>Transactions</Text>
-          <Text style={styles.containerHeaderText}>Total spent: {myNumberFormatter.format(transactionsContext.totalAmount)}</Text> 
+          <Text style={styles.subHeaderText}>Total spent: {myNumberFormatter.format(transactionsContext.totalAmount)}</Text> 
         </View>
         }
         {size &&
@@ -79,7 +79,7 @@ const TransactionsList = ({style, size}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainer, style]}>
+    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, style]}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item, data)} 
                 keyExtractor={(item) => item.index}
