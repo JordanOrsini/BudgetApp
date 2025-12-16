@@ -63,7 +63,7 @@ const mainBodyContainer = {
   paddingLeft: 10,
   paddingRight: 10,
   borderRadius: 20,
-  width: "100%",
+  flex: 1,
   height: "auto",
 };
 const navButton = {
@@ -71,7 +71,6 @@ const navButton = {
   ...background,
   alignItems: "center",
   justifyContent: "center",
-  flex: 1,
   height: 40,
 };
 const textInput = {
@@ -362,6 +361,7 @@ export const styles = StyleSheet.create({
   },
   navButtonLeft: {
     ...navButton,
+    flex: 1,
     borderTopLeftRadius: 50,
     borderBottomLeftRadius: 50,
     marginLeft: 10,
@@ -370,21 +370,25 @@ export const styles = StyleSheet.create({
     ...navButton,
     borderRadius: 50,
     height: 80,
+    width: 80,
     marginLeft: 5,
     marginRight: 5,
   },
   navButtonMiddleLeft: {
     ...navButton,
+    flex: 1,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
   },
   navButtonMiddleRight: {
     ...navButton,
+    flex: 1,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
   },
   navButtonRight: {
     ...navButton,
+    flex: 1,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
     marginRight: 10,

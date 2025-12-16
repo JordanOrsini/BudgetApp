@@ -29,7 +29,7 @@ const BottomSheetProvider = ({children}) => {
                    onChange={handleSheetChanges}
                    detached={true}
                    enablePanDownToClose={true}
-                   overDragResistanceFactor={8}
+                   overDragResistanceFactor={9}
                    bottomInset={getInset()}
                    backdropComponent={props => (<BottomSheetBackdrop {...props}
                                                                      style={{height: windowHeight}}                                                           

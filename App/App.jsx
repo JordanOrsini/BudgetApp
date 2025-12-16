@@ -1,3 +1,4 @@
+import {StatusBar} from "react-native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
@@ -31,6 +32,7 @@ const App = () => {
               <TransactionsProvider>
                 <BottomSheetProvider>
                   <NavigationContainer theme={myTheme}>
+                    <StatusBar barStyle="dark-content" />
                     <BottomNavigation />
                   </NavigationContainer>
                 </BottomSheetProvider>
