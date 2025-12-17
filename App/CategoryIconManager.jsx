@@ -10,6 +10,13 @@ export const getIconFromPath = (iconPath, large = false) => {
                alt="CAR" />
       );
     }
+    case "dotsIcon.png": {
+      return (
+        <Image style={large ? styles.iconLarge : styles.icon}
+               source={require("./icons/categoryIcons/dotsIcon.png")}
+               alt="Miscellaneous" />
+      );
+    }
     case "entertainmentIcon.png": {
       return (
         <Image style={large ? styles.iconLarge : styles.icon}
@@ -78,6 +85,8 @@ export const getAllIconPaths = () => {
      "homeIcon.png",
      "restaurantIcon.png", 
      "schoolIcon.png",
-     "workIcon.png"]
+     "workIcon.png",
+     "dotsIcon.png",
+    ]
   );   
 }

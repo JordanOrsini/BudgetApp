@@ -49,7 +49,7 @@ const Overview = () => {
       }
       case 1: {
         return (
-          <TopCategories showTotal={false} />
+          <TopCategories />
         );
       }
       case 2: {

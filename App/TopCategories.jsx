@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Image, Pressable, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
@@ -9,7 +9,7 @@ import CategoriesContext from "./CategoriesContext";
 import BottomSheetContext from "./BottomSheetContext";
 import TransactionsContext from "./TransactionsContext";
 
-const TopCategories = ({showTotal = true, style}) => {
+const TopCategories = ({style}) => {
   const categoriesContext = useContext(CategoriesContext);
   const bottomSheetContext = useContext(BottomSheetContext);
   const transactionsContext = useContext(TransactionsContext);
@@ -78,24 +78,14 @@ const TopCategories = ({showTotal = true, style}) => {
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
           <Text numberOfLines={1} style={styles.topCategoryListElementEndText}>Category</Text>
         </View>
-        {showTotal &&
-        <View style={styles.horizontalContainer}>
-          <Text numberOfLines={1} style={styles.listElementStart}>TOTAL</Text>
-          <Text numberOfLines={1} style={styles.listElement}>{myNumberFormatter.format(transactionsContext.totalAmount)}</Text>    
-          <View style={styles.topCategoryListElementEndIcon}>
-            <Image style={styles.icon}
-                   source={require("./icons/dotsIcon.png")}
-                   alt="Dots" />
-          </View>
-        </View>
-        }
       </View>
     );
   }
 
   const renderItem = ({item}) => {
     return (
-      <Pressable onPress={() => editItemHandler(item)}>
+      <Pressable onPress={() => editItemHandler(item)}
+                 disabled={item.name === "NONE"}>
         {({pressed}) => (
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
