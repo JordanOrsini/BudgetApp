@@ -37,13 +37,10 @@ const EditCategoryList = ({style}) => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.background}>
-        <Text style={styles.containerHeaderText}>Edit category</Text>
-        <View style={{alignItems: "center"}}>
-          <View style={styles.horizontalContainer}>
-            <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
-            <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
-          </View>
+      <View>
+        <View style={styles.horizontalContainer}>
+          <Text numberOfLines={1} style={styles.categoryListElementStart}>Name</Text>   
+          <Text numberOfLines={1} style={styles.categoryListElementEndHeader}>Icon</Text>
         </View>
       </View>
     );
@@ -66,7 +63,7 @@ const EditCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, styles.border, style]}>
+    <View style={[styles.mainBodyContainerSmall, style]}>
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

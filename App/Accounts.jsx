@@ -19,14 +19,6 @@ const Accounts = ({style}) => {
                 {id: 5, name: "FHSA", amount: 14000, icon: "wealthsimpleLogo.png"},
                ]
 
-  const ListHeader = () => {
-    return (
-      <View style={styles.background}>
-        <Text style={styles.containerHeaderText}>Accounts</Text>
-      </View>
-    );
-  }
-
   const renderItem = ({item}) => {
     return (
       <View style={styles.horizontalContainer}>
@@ -38,8 +30,7 @@ const Accounts = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, styles.border, style]}>
-      <ListHeader />
+    <View style={[styles.mainBodyContainerSmall, style]}>
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}

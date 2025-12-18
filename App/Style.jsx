@@ -63,8 +63,9 @@ const mainBodyContainer = {
   paddingLeft: 10,
   paddingRight: 10,
   borderRadius: 20,
-  flex: 1,
   height: "auto",
+  width: "100%",
+  alignItems: "center",
 };
 const navButton = {
   ...appShadows,
@@ -255,7 +256,7 @@ export const styles = StyleSheet.create({
   },
   mainBodyContainerSmall: {
     ...mainBodyContainer, 
-    height: 285,
+    height: 295,
   },
   pageView: {
     flex: 1,

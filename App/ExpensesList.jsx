@@ -7,7 +7,7 @@ import ListEmpty from "./ListEmpty";
 import ExpensesContext from "./ExpensesContext";
 import BottomSheetContext from "./BottomSheetContext";
 
-const ExpensesList = ({style, size}) => {
+const ExpensesList = ({style}) => {
   const expensesContext = useContext(ExpensesContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
@@ -25,12 +25,11 @@ const ExpensesList = ({style, size}) => {
   const fillData = () => {
     const newDataArray = [];
     expensesContext.expenseData.map((element, index) => {
-      if (!size || (size && index < size))
-        newDataArray.push({index: index,
-                           id: element.getId(), 
-                           name: element.getName(), 
-                           amount: element.getAmount(),
-                           interval: element.getInterval()});
+      newDataArray.push({index: index,
+                         id: element.getId(), 
+                         name: element.getName(), 
+                         amount: element.getAmount(),
+                         interval: element.getInterval()});
     });
 
     setData(newDataArray);
@@ -38,18 +37,10 @@ const ExpensesList = ({style, size}) => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.background}>
-        {size &&
-        <Text style={styles.containerHeaderText}>Recent expenses</Text>
-        }
-        {!size &&
-        <Text style={styles.containerHeaderText}>Expenses</Text>
-        }
-        <View style={styles.horizontalContainer}>
-          <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
-          <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
-          <Text numberOfLines={1} style={styles.expenseListElementEnd}>Frequency</Text>
-        </View>
+      <View style={styles.horizontalContainer}>
+        <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
+        <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
+        <Text numberOfLines={1} style={styles.expenseListElementEnd}>Frequency</Text>
       </View>
     );
   }
@@ -70,7 +61,7 @@ const ExpensesList = ({style, size}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, !size && styles.border, style]}> 
+    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, style]}> 
       <ListHeader />   
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

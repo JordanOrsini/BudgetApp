@@ -14,7 +14,7 @@ const Overview = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
+  const data = [{index: 0}, {index: 1}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const ListHeader = () => {
@@ -49,18 +49,7 @@ const Overview = () => {
       }
       case 1: {
         return (
-          <TopCategories />
-        );
-      }
-      case 2: {
-        return (
-          <ExpensesList size={3} />
-        );
-      }
-      case 3: {
-        return (
-          <TransactionsList style={styles.lastContainer}
-                            size={3} />
+          <TopCategories style={styles.lastContainer} />
         );
       }
       default: {

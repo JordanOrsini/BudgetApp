@@ -8,7 +8,7 @@ import ListEmpty from "./ListEmpty";
 import TransactionsContext from "./TransactionsContext";
 import BottomSheetContext from "./BottomSheetContext";
 
-const TransactionsList = ({style, size}) => {
+const TransactionsList = ({style}) => {
   const transactionsContext = useContext(TransactionsContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
@@ -26,13 +26,12 @@ const TransactionsList = ({style, size}) => {
   const fillData = () => {
     const newDataArray = [];
     transactionsContext.transactionData.map((element, index) => {
-      if (!size || (size && index < size))
-        newDataArray.push({index: index, 
-                           id: element.getId(),
-                           name: element.getName(), 
-                           amount: element.getAmount(), 
-                           categoryIcon: element.getCategory().getIconPath(),
-                           date: new Date(element.getTransactionDate()).toLocaleDateString()});
+      newDataArray.push({index: index, 
+                         id: element.getId(),
+                         name: element.getName(), 
+                         amount: element.getAmount(), 
+                         categoryIcon: element.getCategory().getIconPath(),
+                         date: new Date(element.getTransactionDate()).toLocaleDateString()});
     });
 
     setData(newDataArray);
@@ -41,15 +40,10 @@ const TransactionsList = ({style, size}) => {
   const ListHeader = () => {
     return (
       <View style={styles.backgroundTransparent}>
-        {!size &&
         <View>      
           <Text style={styles.headerText}>Transactions</Text>
           <Text style={styles.subHeaderText}>Total spent: {myNumberFormatter.format(transactionsContext.totalAmount)}</Text> 
         </View>
-        }
-        {size &&
-        <Text style={styles.containerHeaderText}>Recent transactions</Text>
-        }
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
@@ -61,7 +55,7 @@ const TransactionsList = ({style, size}) => {
   }
 
   const renderItem = ({item}, data) => {
-    const isLastItem = (!size && (item.index === data.length - 1));
+    const isLastItem = item.index === data.length - 1;
     return (
       <Pressable onPress={() => editItemHandler(item)}>
         {({pressed}) => (

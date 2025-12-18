@@ -26,14 +26,6 @@ const Goals = ({style}) => {
     return ((percentage/100) * styles.categoryListElementEndHeader.width);
   }
 
-  const ListHeader = () => {
-    return (
-      <View style={styles.background}>
-        <Text style={styles.containerHeaderText}>Goals</Text>
-      </View>
-    );
-  }
-
   const renderItem = ({item}) => {
     return (
       <View style={styles.horizontalContainer}>
@@ -47,8 +39,7 @@ const Goals = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, styles.border, style]}> 
-      <ListHeader />   
+    <View style={[styles.mainBodyContainerSmall, style]}>  
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}
