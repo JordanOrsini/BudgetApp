@@ -4,17 +4,16 @@ import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
-import ExpensesList from "./ExpensesList";
-import UserDataContext from "./UserDataContext";
-import TransactionsList from "./TransactionsList";
-import BottomSheetContext from "./BottomSheetContext";
+import Goals from "./Goals";
 import TopCategories from "./TopCategories";
+import UserDataContext from "./UserDataContext";
+import BottomSheetContext from "./BottomSheetContext";
 
 const Overview = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}, {index: 1}];
+  const data = [{index: 0}, {index: 1}, {index: 2}];
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const ListHeader = () => {
@@ -49,7 +48,12 @@ const Overview = () => {
       }
       case 1: {
         return (
-          <TopCategories style={styles.lastContainer} />
+          <TopCategories />
+        );
+      }
+      case 2: {
+        return (
+          <Goals size={3} />
         );
       }
       default: {

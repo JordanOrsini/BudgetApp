@@ -7,7 +7,7 @@ import {styles} from "./Style";
 import ListEmpty from "./ListEmpty";
 import BottomSheetContext from "./BottomSheetContext";
 
-const Accounts = ({style}) => {
+const Accounts = () => {
   const bottomSheetContext = useContext(BottomSheetContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
@@ -30,7 +30,7 @@ const Accounts = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, style]}>
+    <View style={styles.mainBodyContainerSmall}>
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}

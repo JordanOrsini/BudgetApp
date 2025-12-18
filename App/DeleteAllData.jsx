@@ -8,7 +8,7 @@ import ExpensesContext from "./ExpensesContext";
 import TransactionsContext from "./TransactionsContext";
 import CategoriesContext from "./CategoriesContext";
 
-const ModifySalary = ({style}) => {
+const ModifySalary = () => {
   const userDataContext = useContext(UserDataContext);
   const expensesContext = useContext(ExpensesContext);
   const transactionsContext = useContext(TransactionsContext);
@@ -22,7 +22,7 @@ const ModifySalary = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainer, style]}>
+    <View style={styles.mainBodyContainer}>
       <View style={styles.pageView}>
         <Pressable style={({pressed}) => [styles.deleteAllButton, styles.decline, pressed && styles.pressed]} 
                    onPress={() => deletaAllData()} >

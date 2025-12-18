@@ -8,7 +8,7 @@ import ListEmpty from "./ListEmpty";
 import TransactionsContext from "./TransactionsContext";
 import BottomSheetContext from "./BottomSheetContext";
 
-const TransactionsList = ({style}) => {
+const TransactionsList = () => {
   const transactionsContext = useContext(TransactionsContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
@@ -73,17 +73,15 @@ const TransactionsList = ({style}) => {
   }
 
   return (
-    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, style]}>
-      <FlatList data={data} 
-                renderItem={(item) => renderItem(item, data)} 
-                keyExtractor={(item) => item.index}
-                ListEmptyComponent={ListEmpty}
-                contentContainerStyle={styles.flatListContentContainer}
-                ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]}
-                showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible} /> 
-    </View>      
+    <FlatList data={data} 
+              renderItem={(item) => renderItem(item, data)} 
+              keyExtractor={(item) => item.index}
+              ListEmptyComponent={ListEmpty}
+              contentContainerStyle={styles.flatListContentContainer}
+              ListHeaderComponent={ListHeader}
+              stickyHeaderIndices={[0]}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     );
 }
 

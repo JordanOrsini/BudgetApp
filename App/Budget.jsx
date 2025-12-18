@@ -1,6 +1,5 @@
 import {useContext, useState} from "react";
 import {Text, View} from "react-native";
-import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
@@ -8,21 +7,18 @@ import Goals from "./Goals";
 import Accounts from "./Accounts";
 import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
-import BottomSheetContext from "./BottomSheetContext";
 import Accordion from 'react-native-collapsible/Accordion';
 
 const Budget = () => {
   const userDataContext = useContext(UserDataContext);
-  const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}];
-  const [activeSections, setActiveSections] = useState([]);
+  const [activeSections, setActiveSections] = useState([0]);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const SECTIONS = [
     {
       title: 'Expenses',
-      content: <ExpensesList style={styles.mainBodyContainerSmall} />,
+      content: <ExpensesList />,
     },
     {
       title: 'Accounts',
@@ -43,50 +39,34 @@ const Budget = () => {
     );
   }
 
-  const renderHeader = (section) => {
+  const renderContent = (section) => {
     return (
-      <View style={{borderRadius: 20, paddingLeft: 10, margin: 10, height: 80, borderWidth: 2, justifyContent: "center"}}>
-        <Text>{section.title}</Text>
+      <View>
+        {section.content}
       </View>
     );
   }
 
-  const renderContent = (section) => {
+  const renderHeader = (section) => {
     return (
-      <View>
-        <Text>{section.content}</Text>
+      <View style={styles.accordionHeader}>
+        <Text style={styles.subHeaderText}>{section.title}</Text>
       </View>
     );
-  }
-  
-  const renderItem = ({item}) => {
-    switch (item.index) {
-      case 0: {
-        return (
-          <Accordion sections={SECTIONS}
-                     activeSections={activeSections}
-                     renderHeader={(section) => renderHeader(section)}
-                     renderContent={(section) => renderContent(section)}
-                     onChange={setActiveSections} />
-        );
-      }
-      default: {
-        break;
-      }
-    }
   }
 
   // Function that returns the contents of the budget screen.
   return (
     <SafeAreaView style={styles.pageView}
                   edges={["left", "right"]}>
-      <FlatList data={data} 
-                renderItem={(item) => renderItem(item)} 
-                keyExtractor={(item) => item.index}
-                ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]}
-                showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
+      <View style={[styles.mainBodyContainer, {alignItems: "center"}]}>
+        <ListHeader />
+        <Accordion sections={SECTIONS}
+                   activeSections={activeSections}
+                   onChange={setActiveSections}
+                   renderHeader={(section) => renderHeader(section)}
+                   renderContent={(section) => renderContent(section)} />
+      </View>
     </SafeAreaView>
   );
 }

@@ -1,17 +1,15 @@
 import {useContext, useEffect, useState} from "react";
-import {Pressable, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
 
 import ListEmpty from "./ListEmpty";
 import CategoriesContext from "./CategoriesContext";
-import BottomSheetContext from "./BottomSheetContext";
 import TransactionsContext from "./TransactionsContext";
 
-const TopCategories = ({style}) => {
+const TopCategories = () => {
   const categoriesContext = useContext(CategoriesContext);
-  const bottomSheetContext = useContext(BottomSheetContext);
   const transactionsContext = useContext(TransactionsContext);
 
   const [data, setData] = useState([]);
@@ -33,31 +31,30 @@ const TopCategories = ({style}) => {
         currentCategory.amount = currentCategory.amount + transaction.getAmount();
       }); 
       
-      if (currentCategory.amount > topCategories[0].amount) {
+      if (topCategories[0].categoryObject === null || 
+          currentCategory.amount > topCategories[0].amount) {
         topCategories[2] = topCategories[1];
         topCategories[1] = topCategories[0];
         topCategories[0] = currentCategory;
       }
-      else if (currentCategory.amount > topCategories[1].amount) {
+      else if (topCategories[1].categoryObject === null || 
+               currentCategory.amount > topCategories[1].amount) {
         topCategories[2] = topCategories[1];
         topCategories[1] = currentCategory;
       }
-      else if (currentCategory.amount > topCategories[2].amount) {
+      else if (topCategories[2].categoryObject === null || 
+               currentCategory.amount > topCategories[2].amount)
         topCategories[2] = currentCategory;
-      }
     });
 
     fillData(topCategories);
   }
 
-  const editItemHandler = (item) => {
-    bottomSheetContext._setContent("Category", categoriesContext.findCategoryByName(item.name));
-  }
-
   const fillData = (topCategories) => {
     const newDataArray = [];
     topCategories.map((element, index) => {
-      if (element.categoryObject !== null) {
+      if (element.categoryObject !== null && 
+          element.amount !== 0) {
         newDataArray.push({index: index, 
                            name: element.categoryObject.getName(), 
                            amount: element.amount, 
@@ -84,23 +81,18 @@ const TopCategories = ({style}) => {
 
   const renderItem = ({item}) => {
     return (
-      <Pressable onPress={() => editItemHandler(item)}
-                 disabled={item.name === "NONE"}>
-        {({pressed}) => (
-        <View style={styles.horizontalContainer}>
-          <Text numberOfLines={1} style={[styles.listElementStart, pressed && styles.pressed]}>{item.name}</Text>
-          <Text numberOfLines={1} style={[styles.listElement, pressed && styles.pressed]}>{myNumberFormatter.format(item.amount)}</Text>    
-          <View style={[styles.topCategoryListElementEndIcon, pressed && styles.pressed]}>
-            {getIconFromPath(item.categoryIcon)}
-          </View>
+      <View style={styles.horizontalContainer}>
+        <Text numberOfLines={1} style={styles.listElementStart}>{item.name}</Text>
+        <Text numberOfLines={1} style={styles.listElement}>{myNumberFormatter.format(item.amount)}</Text>    
+        <View style={styles.topCategoryListElementEndIcon}>
+          {getIconFromPath(item.categoryIcon)}
         </View>
-        )}
-      </Pressable>
+      </View>
     );
   }
 
   return (
-    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, style]}>
+    <View style={[data.length !== 0 ? styles.mainBodyContainer : styles.mainBodyContainerSmall]}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}

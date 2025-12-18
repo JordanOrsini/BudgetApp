@@ -8,7 +8,7 @@ import ListEmpty from "./ListEmpty";
 import CategoriesContext from "./CategoriesContext";
 import BottomSheetContext from "./BottomSheetContext";
 
-const EditCategoryList = ({style}) => {
+const EditCategoryList = () => {
   const categoryContext = useContext(CategoriesContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
@@ -63,7 +63,7 @@ const EditCategoryList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[styles.mainBodyContainerSmall, style]}>
+    <View style={styles.mainBodyContainerSmall}>
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

@@ -7,7 +7,7 @@ import ListEmpty from "./ListEmpty";
 import ExpensesContext from "./ExpensesContext";
 import BottomSheetContext from "./BottomSheetContext";
 
-const ExpensesList = ({style}) => {
+const ExpensesList = () => {
   const expensesContext = useContext(ExpensesContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
@@ -61,7 +61,7 @@ const ExpensesList = ({style}) => {
 
   // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={[(data.length === 0) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, style]}> 
+    <View style={styles.mainBodyContainerSmall}> 
       <ListHeader />   
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

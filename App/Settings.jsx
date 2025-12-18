@@ -1,20 +1,15 @@
-import {useContext, useState} from "react";
+import {useState} from "react";
 import {Text, View} from "react-native";
-import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
 import EditUser from "./EditUser";
 import DeleteAllData from "./DeleteAllData";
 import EditCategoryList from "./EditCategoryList";
-import BottomSheetContext from "./BottomSheetContext";
 import Accordion from 'react-native-collapsible/Accordion';
 
 const Settings = () => {
-  const bottomSheetContext = useContext(BottomSheetContext);
-
-  const data = [{index: 0}];
-  const [activeSections, setActiveSections] = useState([]);
+  const [activeSections, setActiveSections] = useState([0]);
 
   const SECTIONS = [
     {
@@ -31,22 +26,6 @@ const Settings = () => {
     },
   ];
 
-  const renderHeader = (section) => {
-    return (
-      <View style={{borderRadius: 20, paddingLeft: 10, margin: 10, height: 80, borderWidth: 2, justifyContent: "center"}}>
-        <Text>{section.title}</Text>
-      </View>
-    );
-  }
-
-  const renderContent = (section) => {
-    return (
-      <View>
-        <Text>{section.content}</Text>
-      </View>
-    );
-  }
-
   const ListHeader = () => {
     return (
       <View style={styles.mainBodyContainer}>
@@ -54,35 +33,35 @@ const Settings = () => {
       </View> 
     );
   }
-  
-  const renderItem = ({item}) => {
-    switch (item.index) {
-      case 0: {
-        return (
-          <Accordion sections={SECTIONS}
-                     activeSections={activeSections}
-                     renderHeader={(section) => renderHeader(section)}
-                     renderContent={(section) => renderContent(section)}
-                     onChange={setActiveSections} />
-        );
-      }
-      default: {
-        break;
-      }
-    }
+
+  const renderContent = (section) => {
+    return (
+      <View>
+        {section.content}
+      </View>
+    );
+  }
+
+  const renderHeader = (section) => {
+    return (
+      <View style={styles.accordionHeader}>
+        <Text style={styles.subHeaderText}>{section.title}</Text>
+      </View>
+    );
   }
 
   // Function that returns the contents of the settings screen.
   return (
     <SafeAreaView style={styles.pageView}
-                  edges={["left", "right"]}>    
-      <FlatList data={data} 
-                renderItem={(item) => renderItem(item)} 
-                keyExtractor={(item) => item.index}
-                ListHeaderComponent={ListHeader}
-                stickyHeaderIndices={[0]}
-                showsVerticalScrollIndicator={false}
-                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
+                  edges={["left", "right"]}>
+      <View style={[styles.mainBodyContainer, {alignItems: "center"}]}>
+      <ListHeader />
+      <Accordion sections={SECTIONS}
+                 activeSections={activeSections}
+                 onChange={setActiveSections}
+                 renderHeader={(section) => renderHeader(section)}
+                 renderContent={(section) => renderContent(section)} />
+      </View>
     </SafeAreaView> 
   );
 }

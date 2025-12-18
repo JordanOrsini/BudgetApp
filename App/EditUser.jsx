@@ -6,7 +6,7 @@ import User from "./User";
 import UserDataContext from "./UserDataContext";
 import BottomSheetContext from "./BottomSheetContext";
 
-const EditUser = ({style}) => {
+const EditUser = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
@@ -114,7 +114,7 @@ const EditUser = ({style}) => {
   }
 
   return (
-    <View style={[styles.mainBodyContainer, style]}>
+    <View style={styles.mainBodyContainer}>
       <View style={styles.pageView}>
         <View>
           <Text style={styles.inputHeaderText}>Username:</Text>
