@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
@@ -9,13 +9,30 @@ import Accounts from "./Accounts";
 import ExpensesList from "./ExpensesList";
 import UserDataContext from "./UserDataContext";
 import BottomSheetContext from "./BottomSheetContext";
+import Accordion from 'react-native-collapsible/Accordion';
 
 const Budget = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
-  const data = [{index: 0}, {index: 1}, {index: 2}];
+  const data = [{index: 0}];
+  const [activeSections, setActiveSections] = useState([]);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
+
+  const SECTIONS = [
+    {
+      title: 'Expenses',
+      content: <ExpensesList style={styles.mainBodyContainerSmall} />,
+    },
+    {
+      title: 'Accounts',
+      content: <Accounts />,
+    },
+    {
+      title: 'Goals',
+      content: <Goals />,
+    },
+  ];
 
   const ListHeader = () => {
     return (
@@ -25,22 +42,32 @@ const Budget = () => {
       </View>
     );
   }
+
+  const renderHeader = (section) => {
+    return (
+      <View style={{borderRadius: 20, paddingLeft: 10, margin: 10, height: 80, borderWidth: 2, justifyContent: "center"}}>
+        <Text>{section.title}</Text>
+      </View>
+    );
+  }
+
+  const renderContent = (section) => {
+    return (
+      <View>
+        <Text>{section.content}</Text>
+      </View>
+    );
+  }
   
   const renderItem = ({item}) => {
     switch (item.index) {
       case 0: {
         return (
-          <ExpensesList style={styles.mainBodyContainerSmall} />
-        );
-      }
-      case 1: {
-        return (
-          <Accounts />
-        );
-      }
-      case 2: {
-        return (
-          <Goals style={styles.lastContainer} />
+          <Accordion sections={SECTIONS}
+                     activeSections={activeSections}
+                     renderHeader={(section) => renderHeader(section)}
+                     renderContent={(section) => renderContent(section)}
+                     onChange={setActiveSections} />
         );
       }
       default: {
