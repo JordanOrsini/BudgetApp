@@ -30,7 +30,7 @@ const Accounts = () => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, {alignItems: "center"}]}>
+    <View style={[(data.length === 0 || data.length > 5) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, {alignItems: "center"}]}>
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}

@@ -92,7 +92,7 @@ const TopCategories = () => {
   }
 
   return (
-    <View style={[data.length !== 0 ? styles.mainBodyContainer : styles.mainBodyContainerSmall, styles.lastContainer]}>
+    <View style={[data.length === 0 ? styles.mainBodyContainerSmall : styles.mainBodyContainer, styles.lastContainer]}>
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
                 keyExtractor={(item) => item.index}

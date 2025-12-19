@@ -62,7 +62,7 @@ const EditCategoryList = () => {
   }
 
   return (
-    <View style={[styles.mainBodyContainerSmall, {alignItems: "center"}]}>
+    <View style={[(data.length === 0 || data.length > 4) ? styles.mainBodyContainerSmall : styles.mainBodyContainer, {alignItems: "center"}]}>
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 

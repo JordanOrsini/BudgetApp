@@ -70,15 +70,17 @@ const TransactionsList = () => {
   }
 
   return (
-    <FlatList data={data} 
-              renderItem={(item) => renderItem(item, data)} 
-              keyExtractor={(item) => item.index}
-              ListEmptyComponent={ListEmpty}
-              contentContainerStyle={styles.flatListContentContainer}
-              ListHeaderComponent={ListHeader}
-              stickyHeaderIndices={[0]}
-              showsVerticalScrollIndicator={false}
-              scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
+    <View style={[(data.length === 0) && styles.mainBodyContainerSmall, {alignItems: "center"}]}>
+      <FlatList data={data} 
+                renderItem={(item) => renderItem(item, data)} 
+                keyExtractor={(item) => item.index}
+                ListEmptyComponent={ListEmpty}
+                contentContainerStyle={styles.flatListContentContainer}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
+    </View>
   );
 }
 

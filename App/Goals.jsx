@@ -70,6 +70,13 @@ const Goals = ({size}) => {
     setData(newDataArray);
   }
 
+  const getStyle = () => {
+    return ([!size && {alignItems: "center"},
+             (data.length === 0 || data.length > 5) ? styles.mainBodyContainerSmall :
+                                                      styles.mainBodyContainer, 
+            ]);
+  }
+
   const ListHeader = () => {
     if (size) {
       return (
@@ -88,14 +95,6 @@ const Goals = ({size}) => {
         </View>
       </View>    
     );
-  }
-
-  const getStyle = () => {
-    if (size) {
-      return (styles.mainBodyContainer);
-    }
-
-    return ([styles.mainBodyContainerSmall, {alignItems: "center"}]);
   }
 
   return (
