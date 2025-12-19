@@ -231,7 +231,7 @@ export const styles = StyleSheet.create({
     borderColor: "#FFB343",
   },
   pressed: {
-    backgroundColor: "#FDFD96",
+    backgroundColor: "#FAFAFA",
   },
   selected: {
     backgroundColor: "#ADD8E6",

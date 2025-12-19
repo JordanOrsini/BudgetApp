@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Image, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import {FlatList} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
@@ -8,13 +8,12 @@ import Goals from "./Goals";
 import TopCategories from "./TopCategories";
 import UserDataContext from "./UserDataContext";
 import BottomSheetContext from "./BottomSheetContext";
+import AccountsInfographic from "./AccountsInfographic";
 
 const Overview = () => {
   const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
-
   const data = [{index: 0}, {index: 1}, {index: 2}];
-  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const ListHeader = () => {
     return (
@@ -29,21 +28,7 @@ const Overview = () => {
     switch (item.index) {
       case 0: {
         return (
-          <View style={styles.horizontalContainer}>
-            <Image style={styles.iconGiant}
-                   source={require("./icons/overviewGraphic.png")}
-                   alt="Overview graphic" />
-            <View style={{justifyContent: "center"}}>
-              <View>
-                <Text style={[styles.subHeaderText, {fontWeight: "bold"}]}>Account:</Text>
-                <Text style={styles.subHeaderText}>TFSA</Text>
-              </View>
-              <View style={{marginTop: 25}}>
-                <Text style={[styles.subHeaderText, {fontWeight: "bold"}]}>Amount:</Text>
-                <Text style={styles.subHeaderText}>{myNumberFormatter.format(90000)}</Text>
-              </View>
-            </View>
-          </View>
+          <AccountsInfographic />
         );
       }
       case 1: {
