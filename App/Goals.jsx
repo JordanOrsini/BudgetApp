@@ -90,8 +90,16 @@ const Goals = ({size}) => {
     );
   }
 
+  const getStyle = () => {
+    if (size) {
+      return (styles.mainBodyContainer);
+    }
+
+    return ([styles.mainBodyContainerSmall, {alignItems: "center"}]);
+  }
+
   return (
-    <View style={[size ? styles.mainBodyContainer : styles.mainBodyContainerSmall, styles.lastContainer, {alignItems: "center"}]}>
+    <View style={getStyle()}>
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}

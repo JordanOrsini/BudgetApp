@@ -75,6 +75,7 @@ const Settings = () => {
                  ListHeaderComponent={ListHeader}
                  stickyHeaderIndices={[0]}
                  showsVerticalScrollIndicator={false}
+                 containerStyle={styles.lastContainer}
                  scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView> 
   );

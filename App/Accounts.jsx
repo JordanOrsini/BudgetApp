@@ -17,7 +17,7 @@ const Accounts = () => {
                 {id: 3, name: "RRSP", amount: 20000, icon: "tdBankLogo.png"},
                 {id: 4, name: "Chequing", amount: 10000, icon: "scotiaBankLogo.png"},
                 {id: 5, name: "FHSA", amount: 14000, icon: "wealthsimpleLogo.png"},
-               ]
+               ];
 
   const renderItem = ({item}) => {
     return (

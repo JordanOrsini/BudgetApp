@@ -6,20 +6,18 @@ import {styles} from "./Style";
 
 import Goals from "./Goals";
 import TopCategories from "./TopCategories";
-import UserDataContext from "./UserDataContext";
 import BottomSheetContext from "./BottomSheetContext";
 import AccountsInfographic from "./AccountsInfographic";
+import IncomeOutflowGraphic from "./IncomeOutflowGraphic";
 
 const Overview = () => {
-  const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
-  const data = [{index: 0}, {index: 1}, {index: 2}];
+  const data = [{index: 0}, {index: 1}, {index: 2}, {index: 3}];
 
   const ListHeader = () => {
     return (
       <View style={styles.mainBodyContainer}>
         <Text style={styles.headerText}>Overview</Text>
-        <Text style={styles.subHeaderText}>Welcome {userDataContext.userData.getName()}! 😊</Text>
       </View>
     );
   }
@@ -33,12 +31,17 @@ const Overview = () => {
       }
       case 1: {
         return (
-          <TopCategories />
+          <Goals size={3} />
         );
       }
       case 2: {
         return (
-          <Goals size={3} />
+          <IncomeOutflowGraphic />
+        );
+      }
+      case 3: {
+        return (
+          <TopCategories />
         );
       }
       default: {

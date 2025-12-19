@@ -39,11 +39,8 @@ const TransactionsList = () => {
 
   const ListHeader = () => {
     return (
-      <View style={styles.backgroundTransparent}>
-        <View>      
-          <Text style={styles.headerText}>Transactions</Text>
-          <Text style={styles.subHeaderText}>Total spent: {myNumberFormatter.format(transactionsContext.totalAmount)}</Text> 
-        </View>
+      <View style={styles.backgroundTransparent}>     
+        <Text style={styles.headerText}>Transactions</Text>
         <View style={styles.horizontalContainer}>
           <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
           <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    

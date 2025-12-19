@@ -4,18 +4,15 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import {styles} from "./Style";
 
 import Goals from "./Goals";
+import Income from "./Income";
 import Accounts from "./Accounts";
 import ExpensesList from "./ExpensesList";
-import UserDataContext from "./UserDataContext";
 import BottomSheetContext from "./BottomSheetContext";
 import Accordion from 'react-native-collapsible/Accordion';
 
 const Budget = () => {
-  const userDataContext = useContext(UserDataContext);
   const bottomSheetContext = useContext(BottomSheetContext);
-
   const [activeSections, setActiveSections] = useState([]);
-  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   const SECTIONS = [
     {
@@ -25,11 +22,16 @@ const Budget = () => {
     },
     {
       index: 1,
+      title: 'Income',
+      content: <Income />,
+    },
+    {
+      index: 2,
       title: 'Accounts',
       content: <Accounts />,
     },
     {
-      index: 2,
+      index: 3,
       title: 'Goals',
       content: <Goals />,
     },
@@ -43,7 +45,6 @@ const Budget = () => {
     return (
       <View style={styles.mainBodyContainer}>
         <Text style={styles.headerText}>Budget</Text>
-        <Text style={styles.subHeaderText}>Salary: {myNumberFormatter.format(userDataContext.userData.getSalary())}</Text>
       </View>
     );
   }
@@ -80,6 +81,7 @@ const Budget = () => {
                  ListHeaderComponent={ListHeader}
                  stickyHeaderIndices={[0]}
                  showsVerticalScrollIndicator={false}
+                 containerStyle={styles.lastContainer}
                  scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView>
   );

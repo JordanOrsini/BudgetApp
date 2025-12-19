@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     paddingLeft: 10,
     margin: 10,
-    height: 80,
+    height: 75,
     justifyContent: "center",
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,6 +288,14 @@ export const styles = StyleSheet.create({
     height: 24,
     width: 24,
   },
+  iconFull: {
+    height: 225,
+    width: "100%",
+  },
+  iconGiant: {
+    height: 225,
+    width: 225,
+  },
   iconLarge: {
     height: 36,
     width: 36,
@@ -295,10 +303,6 @@ export const styles = StyleSheet.create({
   iconLogo: {
     height: 70,
     width: 140,
-  },
-  iconGiant: {
-    height: 225,
-    width: 225,
   },
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // List element CSS classes /////////////////////////////////////////////////////////////////////
@@ -338,6 +342,15 @@ export const styles = StyleSheet.create({
   goalListElementStart: {
     ...listElementStart,
     width: 175,
+  },
+  incomeListElementEnd: {
+    ...listElementEnd,
+    textAlign: "center",
+    width: 120,
+  },
+  incomeListElementStart: {
+    ...listElementStart,
+    width: 120,
   },
   lastItem: {
     paddingBottom: 110,
