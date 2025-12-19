@@ -68,21 +68,19 @@ const Budget = () => {
   return (
     <SafeAreaView style={styles.pageView}
                   edges={["left", "right"]}>
-      <View style={[styles.mainBodyContainer, {alignItems: "center"}]}>
-        <Accordion sections={SECTIONS}
-                   activeSections={activeSections}
-                   onChange={setActiveSections}
-                   renderHeader={renderHeader}
-                   renderContent={renderContent}
-                   keyExtractor={(item) => item.index}
-                   touchableComponent={Pressable}
-                   touchableProps={{style: ({pressed}) => [styles.accordionHeader, pressed && styles.pressed]}}
-                   renderAsFlatList={true}
-                   ListHeaderComponent={ListHeader}
-                   stickyHeaderIndices={[0]}
-                   showsVerticalScrollIndicator={false}
-                   scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
-      </View>
+      <Accordion sections={SECTIONS}
+                 activeSections={activeSections}
+                 onChange={setActiveSections}
+                 renderHeader={renderHeader}
+                 renderContent={renderContent}
+                 keyExtractor={(item) => item.index}
+                 touchableComponent={Pressable}
+                 touchableProps={{style: ({pressed}) => [styles.accordionHeader, pressed && styles.pressed]}}
+                 renderAsFlatList={true}
+                 ListHeaderComponent={ListHeader}
+                 stickyHeaderIndices={[0]}
+                 showsVerticalScrollIndicator={false}
+                 scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
     </SafeAreaView>
   );
 }

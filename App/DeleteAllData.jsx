@@ -22,7 +22,7 @@ const ModifySalary = () => {
   }
 
   return (
-    <View style={styles.mainBodyContainer}>
+    <View style={[styles.mainBodyContainer, {alignItems: "center"}]}>
       <View style={styles.pageView}>
         <Pressable style={({pressed}) => [styles.deleteAllButton, styles.decline, pressed && styles.pressed]} 
                    onPress={() => deletaAllData()} >

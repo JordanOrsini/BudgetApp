@@ -325,10 +325,19 @@ export const styles = StyleSheet.create({
     ...listElementStart,
     width: 175,
   },
-  expenseListElementEnd:{
+  expenseListElementEnd: {
     ...listElementEnd,
     width: 140,
     textAlign: "center",
+  },
+  goalListElementEnd: {
+    ...listElementEnd,
+    width: 175,
+    textAlign: "center",
+  },
+  goalListElementStart: {
+    ...listElementStart,
+    width: 175,
   },
   lastItem: {
     paddingBottom: 110,

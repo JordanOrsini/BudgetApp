@@ -114,7 +114,7 @@ const EditUser = () => {
   }
 
   return (
-    <View style={styles.mainBodyContainer}>
+    <View style={[styles.mainBodyContainer, {alignItems: "center"}]}>
       <View style={styles.pageView}>
         <View>
           <Text style={styles.inputHeaderText}>Username:</Text>

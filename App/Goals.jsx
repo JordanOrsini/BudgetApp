@@ -71,34 +71,36 @@ const Goals = ({size}) => {
   }
 
   const ListHeader = () => {
-    return (
-      <Text style={styles.containerHeaderText}>Top goals</Text>
-    );
+    if (size) {
+      return (
+        <Text style={styles.containerHeaderText}>Top goals</Text>
+      );
+    }
   }
 
   const renderItem = ({item}) => {
     return (
       <View style={styles.horizontalContainer}>
-        <Text style={styles.categoryListElementStart}>{item.name}</Text>
-        <View style={styles.categoryListElementEndHeader}>
+        <Text style={styles.goalListElementStart}>{item.name}</Text>
+        <View style={styles.goalListElementEnd}>
           <Text style={styles.goalsText}>{item.percentage}%</Text>
-          <View style={[styles.categoryListElementEndHeader, styles.goalsOverlay, {width: calcGoalOverlayWidth(item.percentage)}]}/>
+          <View style={[styles.goalListElementEnd, styles.goalsOverlay, {width: calcGoalOverlayWidth(item.percentage)}]}/>
         </View>
       </View>    
     );
   }
 
   return (
-    <View style={[size ? styles.mainBodyContainer : styles.mainBodyContainerSmall, styles.lastContainer]}>
-      {size &&
-      <ListHeader />
-      }
+    <View style={[size ? styles.mainBodyContainer : styles.mainBodyContainerSmall, styles.lastContainer, {alignItems: "center"}]}>
       <FlatList data={data}
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmpty}
+                ListHeaderComponent={ListHeader}
+                stickyHeaderIndices={[0]}
                 contentContainerStyle={styles.flatListContentContainer}
                 showsVerticalScrollIndicator={false}
-                scrollEnabled={!size && !bottomSheetContext.bottomSheetVisible} /> 
+                scrollEnabled={!size && 
+                               !bottomSheetContext.bottomSheetVisible} /> 
     </View>
   );
 }

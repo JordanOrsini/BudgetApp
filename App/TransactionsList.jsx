@@ -82,7 +82,7 @@ const TransactionsList = () => {
               stickyHeaderIndices={[0]}
               showsVerticalScrollIndicator={false}
               scrollEnabled={!bottomSheetContext.bottomSheetVisible} />
-    );
+  );
 }
 
 export default TransactionsList;

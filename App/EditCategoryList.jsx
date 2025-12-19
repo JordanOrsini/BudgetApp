@@ -61,9 +61,8 @@ const EditCategoryList = () => {
     );
   }
 
-  // Function that returns the contents of the AddTransaction modal.
   return (
-    <View style={styles.mainBodyContainerSmall}>
+    <View style={[styles.mainBodyContainerSmall, {alignItems: "center"}]}>
       <ListHeader />
       <FlatList data={data} 
                 renderItem={(item) => renderItem(item)} 
