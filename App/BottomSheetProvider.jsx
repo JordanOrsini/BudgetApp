@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
-import {useWindowDimensions} from "react-native";
-import {BottomSheetBackdrop, BottomSheetView} from "@gorhom/bottom-sheet";
+import {View, useWindowDimensions} from "react-native";
+import {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
 import MenuBottomSheet from "./MenuBottomSheet";
@@ -17,24 +17,27 @@ const BottomSheetProvider = ({children}) => {
   const [transferContent, setTransferContent] = useState(null);
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
-  const windowHeight = useWindowDimensions().height;
   const bottomSheetRef = useRef(null);
+  const windowHeight = useWindowDimensions().height;
+
+  const BottomSheetBackdrop = () => {
+    return (
+      bottomSheetVisible &&
+      <View style={[styles.bottomSheetBackdrop, {height: windowHeight}]} />
+    );
+  }
 
   const BottomSheetMain = () => {
     return (
-      bottomSheetVisible &&
       <BottomSheet style={getStyle()}
                    backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
                    ref={bottomSheetRef}
                    onChange={handleSheetChanges}
                    detached={true}
+                   index={-1}
                    enablePanDownToClose={true}
                    overDragResistanceFactor={9}
-                   bottomInset={getInset()}
-                   backdropComponent={props => (<BottomSheetBackdrop {...props}
-                                                                     style={{height: windowHeight}}                                                           
-                                                                     disappearsOnIndex={-1}
-                                                                     pressBehavior="none" />)}>     
+                   bottomInset={getInset()}>     
         <BottomSheetView>
           {getContent()}
         </BottomSheetView>
@@ -111,6 +114,8 @@ const BottomSheetProvider = ({children}) => {
 
     if (index === -1)
       setBottomSheetVisible(false);
+    else
+      setBottomSheetVisible(true);
   }
 
   const _setContent = (newContent, newEditObject, newTransferContent) => {
@@ -126,15 +131,17 @@ const BottomSheetProvider = ({children}) => {
     else
       setTransferContent(null);
 
-    setBottomSheetVisible(true);
+    bottomSheetRef.current?.expand();
   }
     
   // Values to expose in our context.
   const contextValue = {
+    bottomSheetRef,
     bottomSheetVisible,
     _setContent,
+
+    BottomSheetBackdrop,
     BottomSheetMain,
-    bottomSheetRef,
   }
 
   return (

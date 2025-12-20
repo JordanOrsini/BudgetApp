@@ -10,7 +10,8 @@ const Navigation = ({state, navigation}) => {
 
   // Function that returns the navigation component.
   return (
-    <SafeAreaView style={styles.bottomSheetNavContainer}>    
+    <SafeAreaView style={styles.bottomSheetNavContainer}>
+      {bottomSheetContext.BottomSheetBackdrop()}  
       {bottomSheetContext.BottomSheetMain()}
       <View style={styles.navigationBackground} />
       <View style={styles.navigationContainer}>

@@ -105,6 +105,12 @@ export const styles = StyleSheet.create({
     ...appShadows,
     height: 40,
   },
+  bottomSheetBackdrop: {
+    width: "100%",
+    backgroundColor: "black",
+    opacity: 0.25,
+    position: "absolute",
+  },
   bottomSheetContent: {
     ...appShadows,
     ...background,
