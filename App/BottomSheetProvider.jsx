@@ -37,7 +37,8 @@ const BottomSheetProvider = ({children}) => {
                    index={-1}
                    enablePanDownToClose={true}
                    overDragResistanceFactor={9}
-                   bottomInset={getInset()}>     
+                   bottomInset={getInset()}
+                   backdropComponent={BottomSheetBackdrop}>     
         <BottomSheetView>
           {getContent()}
         </BottomSheetView>

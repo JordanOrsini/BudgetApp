@@ -10,9 +10,9 @@ const Navigation = ({state, navigation}) => {
 
   // Function that returns the navigation component.
   return (
-    <SafeAreaView style={styles.bottomSheetNavContainer}>
-      {bottomSheetContext.BottomSheetBackdrop()}  
+    <SafeAreaView style={styles.bottomSheetNavContainer}> 
       {bottomSheetContext.BottomSheetMain()}
+      
       <View style={styles.navigationBackground} />
       <View style={styles.navigationContainer}>
         <Pressable style={({pressed}) => [styles.navButtonLeft, (state.index === 0) && styles.selected, pressed && styles.pressed]}
