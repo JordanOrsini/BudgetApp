@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import {Keyboard, View, useWindowDimensions} from "react-native";
+import {Keyboard, Platform, View, useWindowDimensions} from "react-native";
 import {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
@@ -51,7 +51,7 @@ const BottomSheetProvider = ({children}) => {
 
   const BottomSheetMain = () => {
     return (
-      <BottomSheet style={[getStyle(), isKeyboardVisible && {marginTop: 50}]}
+      <BottomSheet style={[getStyle(), isKeyboardVisible && {marginTop: Platform.OS === "ios" ? 60 : 50}]}
                    backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
                    ref={bottomSheetRef}
                    onChange={handleSheetChanges}
