@@ -212,7 +212,8 @@ const AddTransactionBottomSheet = ({transactionToEdit, transferContent}) => {
         <Text style={styles.inputHeaderText}>Amount:</Text>
         <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : {borderWidth: 0}]} 
                    defaultValue={amountInput.toString()} 
-                   placeholder="Enter dollar amount..." 
+                   placeholder="Enter dollar amount..."
+                   inputMode="numeric"
                    onChangeText={(text) => onTextChange(text, "amountInput")} />
 
         <Text style={styles.inputHeaderText}>Category:</Text>

@@ -179,6 +179,7 @@ const AddExpenseBottomSheet = ({expenseToEdit}) => {
         <TextInput style={[styles.textInput, inErrorAmount ? styles.decline : {borderWidth: 0}]}
                    defaultValue={amountInput.toString()}
                    placeholder="Enter dollar amount..."
+                   inputMode="numeric"
                    onChangeText={(text) => onTextChange(text, "amountInput")} />
 
         <Text style={styles.inputHeaderText}>Interval:</Text>

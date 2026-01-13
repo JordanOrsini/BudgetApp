@@ -128,7 +128,8 @@ const EditUser = () => {
           <TextInput style={[styles.textInput, inErrorSalary && styles.decline]}
                      defaultValue={salaryInput} 
                      editable={!bottomSheetContext.bottomSheetVisible}
-                     placeholder="Enter dollar amount..." 
+                     placeholder="Enter dollar amount..."
+                     inputMode="numeric"
                      onChangeText={(text) => onTextChange(text, "salaryInput")} />
         </View>
         <View style={styles.horizontalContainer}>
