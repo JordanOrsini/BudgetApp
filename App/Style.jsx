@@ -508,6 +508,11 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     margin: 5,
   },
+  searchInput: {
+    ...textInput,
+    width: 355,
+    position: "absolute",
+  },
   smallText: {
     fontSize: 12,
   },
