@@ -1,5 +1,5 @@
-import {useEffect, useRef, useState} from "react";
-import {Keyboard, Platform, View, useWindowDimensions} from "react-native";
+import {useContext, useRef, useState} from "react";
+import {Platform, View, useWindowDimensions} from "react-native";
 import {BottomSheetView} from "@gorhom/bottom-sheet";
 import {styles} from "./Style";
 
@@ -7,60 +7,40 @@ import MenuBottomSheet from "./MenuBottomSheet";
 import AddExpenseBottomSheet from "./AddExpenseBottomSheet";
 import AddCategoryBottomSheet from "./AddCategoryBottomSheet";
 import AddTransactionBottomSheet from "./AddTransactionBottomSheet";
+import KeyboardListenerContext from "./KeyboardListenerContext";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetContext from "./BottomSheetContext";
 
 const BottomSheetProvider = ({children}) => {
+  const keyboardListenerContext = useContext(KeyboardListenerContext);
+
   const [content, setContent] = useState("Menu");
   const [editObject, setEditObject] = useState(null);
   const [transferContent, setTransferContent] = useState(null);
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   const bottomSheetRef = useRef(null);
   const windowHeight = useWindowDimensions().height;
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
   const BottomSheetBackdrop = () => {
     return (
-      bottomSheetVisible &&
       <View style={[styles.bottomSheetBackdrop, {height: windowHeight}]} />
     );
   }
 
   const BottomSheetMain = () => {
     return (
-      <BottomSheet style={[getStyle(), isKeyboardVisible && {marginTop: Platform.OS === "ios" ? 60 : 50}]}
+      <BottomSheet style={[getStyle(), bottomSheetVisible && keyboardListenerContext.isKeyboardVisible && {marginTop: Platform.OS === "ios" ? 60 : 50}]}
                    backgroundStyle={[styles.bottomSheet, editObject ? styles.edit : {borderWidth: 0}]}
                    ref={bottomSheetRef}
                    onChange={handleSheetChanges}
                    detached={true}
                    index={-1}
                    enablePanDownToClose={true}
-                   overDragResistanceFactor={isKeyboardVisible ? 0 : 9}
+                   overDragResistanceFactor={keyboardListenerContext.isKeyboardVisible ? 0 : 9}
                    bottomInset={getInset()}
-                   backdropComponent={BottomSheetBackdrop}>     
+                   backdropComponent={bottomSheetVisible && BottomSheetBackdrop}>     
         <BottomSheetView>
           {getContent()}
         </BottomSheetView>

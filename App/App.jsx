@@ -8,12 +8,11 @@ import CategoriesProvider from "./CategoriesProvider";
 import ExpensesProvider from "./ExpensesProvider";
 import TransactionsProvider from "./TransactionsProvider";
 import BottomSheetProvider from "./BottomSheetProvider";
+import KeyboardListenerProvider from "./KeyboardListenerProvider";
 
 import BottomNavigation from "./BottomNavigation";
 
-/* 
-   Main function of the application. 
-*/
+// Main function of the application. 
 const App = () => {
   const myTheme = {
     ...DefaultTheme,
@@ -25,22 +24,24 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <SafeAreaProvider>
-        <UserDataProvider>
-          <CategoriesProvider>
-            <ExpensesProvider>
-              <TransactionsProvider>
-                <BottomSheetProvider>
-                  <NavigationContainer theme={myTheme}>
-                    <StatusBar barStyle="dark-content" />
-                    <BottomNavigation />
-                  </NavigationContainer>
-                </BottomSheetProvider>
-              </TransactionsProvider>
-            </ExpensesProvider>
-          </CategoriesProvider>
-        </UserDataProvider>
-      </SafeAreaProvider>
+      <KeyboardListenerProvider>
+        <SafeAreaProvider>
+          <UserDataProvider>
+            <CategoriesProvider>
+              <ExpensesProvider>
+                <TransactionsProvider>
+                  <BottomSheetProvider>
+                    <NavigationContainer theme={myTheme}>
+                      <StatusBar barStyle="dark-content" />
+                      <BottomNavigation />
+                    </NavigationContainer>
+                  </BottomSheetProvider>
+                </TransactionsProvider>
+              </ExpensesProvider>
+            </CategoriesProvider>
+          </UserDataProvider>
+        </SafeAreaProvider>
+      </KeyboardListenerProvider>
     </GestureHandlerRootView>
   );
 }
