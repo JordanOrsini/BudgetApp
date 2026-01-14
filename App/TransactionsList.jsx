@@ -16,18 +16,21 @@ const TransactionsList = () => {
 
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [sortType, setSortType] = useState("None");
+  const [sortType, setSortType] = useState("Date");
+  const [isAscending, setIsAscending] = useState(false);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   useEffect(() => {
     fillData();
-  }, [transactionsContext.transactionData, searchInput, sortType]);
+  }, [transactionsContext.transactionData, searchInput, sortType, isAscending]);
 
   const _setSortType = (newSortType) => {
     if (newSortType === sortType)
-      setSortType("None");
-    else
+      setIsAscending(!isAscending);
+    else {
+      setIsAscending(true);
       setSortType(newSortType);
+    }
   }
 
   const editItemHandler = (item) => {
@@ -45,14 +48,26 @@ const TransactionsList = () => {
       transactionData = [...transactionsContext.findTransactionsByName(searchInput)];
     }
 
-    if (sortType === "Name")
-      transactionData.sort((a, b) => {return a.getName().localeCompare(b.getName(), undefined, {numeric: true, sensitivity: "base"});});
-    else if (sortType === "Amount")
-      transactionData.sort((a, b) => {return a.getAmount().toString().localeCompare(b.getAmount().toString(), undefined, {numeric: true, sensitivity: "base"});});
-    else if (sortType === "Category")
-      transactionData.sort((a, b) => {return a.getCategory().getName().localeCompare(b.getCategory().getName(), undefined, {numeric: true, sensitivity: "base"});});
-    else if (sortType === "Date")
-      transactionData.sort((a, b) => {return a.getTransactionDate().toString().localeCompare(b.getTransactionDate().toString(), undefined, {numeric: true, sensitivity: "base"});});
+    if (sortType === "Name") {
+      isAscending ?
+        transactionData.sort((a, b) => {return a.getName().localeCompare(b.getName(), undefined, {numeric: true, sensitivity: "base"});}) :
+        transactionData.sort((b, a) => {return a.getName().localeCompare(b.getName(), undefined, {numeric: true, sensitivity: "base"});});
+    }
+    else if (sortType === "Amount") {
+      isAscending ?
+        transactionData.sort((a, b) => {return a.getAmount().toString().localeCompare(b.getAmount().toString(), undefined, {numeric: true, sensitivity: "base"});}) :
+        transactionData.sort((b, a) => {return a.getAmount().toString().localeCompare(b.getAmount().toString(), undefined, {numeric: true, sensitivity: "base"});});
+    }
+    else if (sortType === "Category") {
+      isAscending ?
+        transactionData.sort((a, b) => {return a.getCategory().getName().localeCompare(b.getCategory().getName(), undefined, {numeric: true, sensitivity: "base"});}) :
+        transactionData.sort((b, a) => {return a.getCategory().getName().localeCompare(b.getCategory().getName(), undefined, {numeric: true, sensitivity: "base"});});
+    }
+    else if (sortType === "Date") {
+      isAscending ?
+        transactionData.sort((a, b) => {return a.getTransactionDate().toString().localeCompare(b.getTransactionDate().toString(), undefined, {numeric: true, sensitivity: "base"});}) :
+        transactionData.sort((b, a) => {return a.getTransactionDate().toString().localeCompare(b.getTransactionDate().toString(), undefined, {numeric: true, sensitivity: "base"});});
+    }
 
     transactionData.map((element, index) => {
       newDataArray.push({index: index, 
@@ -64,6 +79,16 @@ const TransactionsList = () => {
     });
 
     setData(newDataArray);
+  }
+
+  const getUnicode = (field) => {
+    if (field !== sortType)
+      return ("\u21C5");
+    
+    if (isAscending)
+      return ("\u2191");
+
+    return ("\u2193");
   }
 
   const ListFooter = () => {
@@ -82,22 +107,22 @@ const TransactionsList = () => {
         <View style={styles.horizontalContainer}>
           <Pressable onPress={() => _setSortType("Name")}>
             {({pressed}) => (
-            <Text numberOfLines={1} style={[styles.listElementStart, (sortType === "Name") && styles.selected, pressed && styles.pressed]}>Name</Text>
+            <Text numberOfLines={1} style={[styles.listElementStart, (sortType === "Name") && styles.selected, pressed && styles.pressed]}>Name {getUnicode("Name")}</Text>
             )}
           </Pressable>
           <Pressable onPress={() => _setSortType("Amount")}>
             {({pressed}) => (
-            <Text numberOfLines={1} style={[styles.listElement, (sortType === "Amount") && styles.selected, pressed && styles.pressed]}>Amount</Text>
+            <Text numberOfLines={1} style={[styles.listElement, (sortType === "Amount") && styles.selected, pressed && styles.pressed]}>Amount {getUnicode("Amount")}</Text>
             )}
           </Pressable>
           <Pressable onPress={() => _setSortType("Category")}>
             {({pressed}) => (
-            <Text numberOfLines={1} style={[styles.listElementIconHeader, (sortType === "Category") && styles.selected, pressed && styles.pressed]}>Cat</Text>
+            <Text numberOfLines={1} style={[styles.listElementIconHeader, (sortType === "Category") && styles.selected, pressed && styles.pressed]}>C {getUnicode("Category")}</Text>
             )}
           </Pressable>
           <Pressable onPress={() => _setSortType("Date")}>
             {({pressed}) => (
-            <Text numberOfLines={1} style={[styles.listElementEnd, (sortType === "Date") && styles.selected, pressed && styles.pressed]}>Date</Text>
+            <Text numberOfLines={1} style={[styles.listElementEnd, (sortType === "Date") && styles.selected, pressed && styles.pressed]}>Date {getUnicode("Date")}</Text>
             )}
           </Pressable>
         </View>
