@@ -11,6 +11,7 @@ const TransactionsProvider = ({children}) => {
   const [loading, setLoading] = useState(true);
   const [totalAmount, setTotalAmount] = useState(0);
   const [transactionData, setTransactionData] = useState([]);
+  const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   // Check if user saved data exists on component mount.
   useEffect(() => {
@@ -107,8 +108,15 @@ const TransactionsProvider = ({children}) => {
   }
 
   const findTransactionsByName = (name) => {
-    const filteredData = transactionData.filter(element => 
-      element.getName().toLowerCase().includes(name.toLowerCase())
+    let filteredData = [];
+
+    if (name.length === 0)
+      return filteredData;
+
+    filteredData = transactionData.filter(element => 
+      element.getName().toLowerCase().includes(name.toLowerCase()) || 
+      element.getCategory().getName().toLowerCase().includes(name.toLowerCase()) ||
+      name[0] === "$" && myNumberFormatter.format(element.getAmount()).includes(name)
     );
     
     return (filteredData);
