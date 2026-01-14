@@ -108,7 +108,7 @@ const TransactionsProvider = ({children}) => {
 
   const findTransactionsByName = (name) => {
     const filteredData = transactionData.filter(element => 
-      element.getName().includes(name)
+      element.getName().toLowerCase().includes(name.toLowerCase())
     );
     
     return (filteredData);

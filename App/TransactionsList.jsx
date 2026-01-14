@@ -16,11 +16,19 @@ const TransactionsList = () => {
 
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [sortType, setSortType] = useState("None");
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
   useEffect(() => {
     fillData();
-  }, [transactionsContext.transactionData, searchInput]);
+  }, [transactionsContext.transactionData, searchInput, sortType]);
+
+  const _setSortType = (newSortType) => {
+    if (newSortType === sortType)
+      setSortType("None");
+    else
+      setSortType(newSortType);
+  }
 
   const editItemHandler = (item) => {
     bottomSheetContext._setContent("Transaction", transactionsContext.findTransactionById(item.id));
@@ -31,11 +39,20 @@ const TransactionsList = () => {
     let transactionData = [];
 
     if (searchInput === "") {
-      transactionData = transactionsContext.transactionData;
+      transactionData = [...transactionsContext.transactionData];
     }
     else {
-      transactionData = transactionsContext.findTransactionsByName(searchInput);
+      transactionData = [...transactionsContext.findTransactionsByName(searchInput)];
     }
+
+    if (sortType === "Name")
+      transactionData.sort((a, b) => {return a.getName().localeCompare(b.getName(), undefined, {numeric: true, sensitivity: "base"});});
+    else if (sortType === "Amount")
+      transactionData.sort((a, b) => {return a.getAmount().toString().localeCompare(b.getAmount().toString(), undefined, {numeric: true, sensitivity: "base"});});
+    else if (sortType === "Category")
+      transactionData.sort((a, b) => {return a.getCategory().getName().localeCompare(b.getCategory().getName(), undefined, {numeric: true, sensitivity: "base"});});
+    else if (sortType === "Date")
+      transactionData.sort((a, b) => {return a.getTransactionDate().toString().localeCompare(b.getTransactionDate().toString(), undefined, {numeric: true, sensitivity: "base"});});
 
     transactionData.map((element, index) => {
       newDataArray.push({index: index, 
@@ -63,10 +80,26 @@ const TransactionsList = () => {
       <View style={styles.backgroundTransparent}>     
         <Text style={styles.headerText}>Transactions</Text>
         <View style={styles.horizontalContainer}>
-          <Text numberOfLines={1} style={styles.listElementStart}>Name</Text>
-          <Text numberOfLines={1} style={styles.listElement}>Amount</Text>    
-          <Text numberOfLines={1} style={styles.listElementIconHeader}>Cat</Text>
-          <Text numberOfLines={1} style={styles.listElementEnd}>Date</Text>
+          <Pressable onPress={() => _setSortType("Name")}>
+            {({pressed}) => (
+            <Text numberOfLines={1} style={[styles.listElementStart, (sortType === "Name") && styles.selected, pressed && styles.pressed]}>Name</Text>
+            )}
+          </Pressable>
+          <Pressable onPress={() => _setSortType("Amount")}>
+            {({pressed}) => (
+            <Text numberOfLines={1} style={[styles.listElement, (sortType === "Amount") && styles.selected, pressed && styles.pressed]}>Amount</Text>
+            )}
+          </Pressable>
+          <Pressable onPress={() => _setSortType("Category")}>
+            {({pressed}) => (
+            <Text numberOfLines={1} style={[styles.listElementIconHeader, (sortType === "Category") && styles.selected, pressed && styles.pressed]}>Cat</Text>
+            )}
+          </Pressable>
+          <Pressable onPress={() => _setSortType("Date")}>
+            {({pressed}) => (
+            <Text numberOfLines={1} style={[styles.listElementEnd, (sortType === "Date") && styles.selected, pressed && styles.pressed]}>Date</Text>
+            )}
+          </Pressable>
         </View>
       </View>
     );
