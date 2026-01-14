@@ -512,6 +512,16 @@ export const styles = StyleSheet.create({
     ...textInput,
     width: 355,
     position: "absolute",
+    opacity: 0.925,
+
+    ...Platform.select({
+      ios: {
+        marginTop: 693,
+      },
+      default: {
+        marginTop: 735,
+      },    
+    }),
   },
   smallText: {
     fontSize: 12,

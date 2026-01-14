@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Pressable, Text, TextInput, View} from "react-native";
+import {Platform, Pressable, Text, TextInput, View} from "react-native";
 import {getIconFromPath} from "./CategoryIconManager";
 import {FlatList} from "react-native-gesture-handler";
 import {styles} from "./Style";
@@ -93,8 +93,7 @@ const TransactionsList = () => {
 
   const ListFooter = () => {
     return (   
-      <TextInput style={[styles.searchInput, {marginTop: keyboardListenerContext.isKeyboardVisible ? 117 : 735,
-                                              opacity: keyboardListenerContext.isKeyboardVisible ? 1 : 0.925}]} 
+      <TextInput style={[styles.searchInput, keyboardListenerContext.isKeyboardVisible && {marginTop: Platform.OS === "ios" ? 130 : 117, opacity: 1}]} 
                  placeholder="Search..."
                  onChangeText={(text) => setSearchInput(text)} />
     );
@@ -117,7 +116,7 @@ const TransactionsList = () => {
           </Pressable>
           <Pressable onPress={() => _setSortType("Category")}>
             {({pressed}) => (
-            <Text numberOfLines={1} style={[styles.listElementIconHeader, (sortType === "Category") && styles.selected, pressed && styles.pressed]}>C {getUnicode("Category")}</Text>
+            <Text numberOfLines={1} style={[styles.listElementIconHeader, (sortType === "Category") && styles.selected, pressed && styles.pressed]}>{getUnicode("Category")}</Text>
             )}
           </Pressable>
           <Pressable onPress={() => _setSortType("Date")}>
