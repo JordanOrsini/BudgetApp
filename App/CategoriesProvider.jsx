@@ -50,7 +50,7 @@ const CategoriesProvider = ({children}) => {
         console.log("File does not exist, creating it: ", filePath);
 
         // Create a blank file.
-        await RNFS.writeFile(filePath, "", "utf8");
+        await RNFS.writeFile(filePath, "NONE;noneIcon.png", "utf8");
         console.log("File created successfully.");
       }
     } 

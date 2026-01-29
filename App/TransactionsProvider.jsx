@@ -39,6 +39,8 @@ const TransactionsProvider = ({children}) => {
     transactionData.map((element) => {
       if (categoriesContext.findCategoryByName(element.getCategory().getName()) === undefined)
         element.setCategory(categoriesContext.findCategoryByName("NONE"));
+      else
+        element.setCategory(categoriesContext.findCategoryByName(element.getCategory().getName()));
     })
 
     setTransactionData([...transactionData]);
