@@ -27,16 +27,15 @@ const CategoriesProvider = ({children}) => {
 
   // File path of our saved category data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/CategoryData.txt";
-
-  // [TODO]: Temporary data for testing.
-  const defaultFileContents = "NONE;noneIcon.png\n" +
-                              "HOME;homeIcon.png\n" +
-                              "WORK;workIcon.png\n" +
-                              "SCHOOL;schoolIcon.png\n" +
-                              "GROCERIES;groceriesIcon.png\n" +
-                              "CAR;carIcon.png\n" +
-                              "ENTERTAINMENT;entertainmentIcon.png\n" +
-                              "RESTAURANT;restaurantIcon.png";
+  const defaultData = [new Category("NONE", "noneIcon.png"),
+                       new Category("HOME", "homeIcon.png"),
+                       new Category("WORK", "workIcon.png"),
+                       new Category("SCHOOL", "schoolIcon.png"),
+                       new Category("GROCERIES", "groceriesIcon.png"),
+                       new Category("CAR", "carIcon.png"),
+                       new Category("ENTERTAINMENT", "entertainmentIcon.png"),
+                       new Category("RESTAURANT", "restaurantIcon.png"),
+                      ];
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -76,9 +75,6 @@ const CategoriesProvider = ({children}) => {
 
   async function readAndParseFile() {
     try {
-      // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, "utf8");
-
       const content = await RNFS.readFile(filePath, "utf8");
       console.log("File content:\n", content);
           
@@ -130,6 +126,7 @@ const CategoriesProvider = ({children}) => {
     categoryData,
     _setCategoryData,
     findCategoryByName,
+    defaultData,
   }
 
   if (loading) {

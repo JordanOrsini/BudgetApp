@@ -45,23 +45,22 @@ const TransactionsProvider = ({children}) => {
 
   // File path of our saved transaction data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/TransactionData.txt";
-
-  // [TODO]: Temporary data for testing.
-  const defaultFileContents = "1;1;HOME;1598051730000;1598051730000\n" + 
-                              "2;2;HOME;1598051730000;1598051730000\n" + 
-                              "3;3;HOME;1598051730000;1598051730000\n" +
-                              "4;4;HOME;1598051730000;1598051730000\n" +
-                              "5;5;WORK;1598051730000;1598051730000\n" +
-                              "6;6;WORK;1598051730000;1598051730000\n" +
-                              "7;7;WORK;1598051730000;1598051730000\n" +
-                              "8;8;WORK;1598051730000;1598051730000\n" +
-                              "9;9;WORK;1598051730000;1598051730000\n" +
-                              "10;10;SCHOOL;1598051730000;1598051730000\n" +
-                              "11;11;SCHOOL;1598051730000;1598051730000\n" +
-                              "12;12;SCHOOL;1598051730000;1598051730000\n" +
-                              "13;13;CAR;1598051730000;1598051730000\n" +
-                              "14;14;CAR;1598051730000;1598051730000\n" +
-                              "15;15;CAR;1598051730000;1598051730000";
+  const defaultData = [new Transaction("1", 1, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
+                       new Transaction("2", 2, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
+                       new Transaction("3", 3, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
+                       new Transaction("4", 4, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
+                       new Transaction("5", 5, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
+                       new Transaction("6", 6, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
+                       new Transaction("7", 7, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
+                       new Transaction("8", 8, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
+                       new Transaction("9", 9, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
+                       new Transaction("10", 10, categoriesContext.findCategoryByName("SCHOOL"), 1598051730000, 1598051730000),
+                       new Transaction("11", 11, categoriesContext.findCategoryByName("SCHOOL"), 1598051730000, 1598051730000),
+                       new Transaction("12", 12, categoriesContext.findCategoryByName("SCHOOL"), 1598051730000, 1598051730000),
+                       new Transaction("13", 13, categoriesContext.findCategoryByName("CAR"), 1598051730000, 1598051730000),
+                       new Transaction("14", 14, categoriesContext.findCategoryByName("CAR"), 1598051730000, 1598051730000),
+                       new Transaction("15", 15, categoriesContext.findCategoryByName("CAR"), 1598051730000, 1598051730000),
+                      ]; 
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -124,9 +123,6 @@ const TransactionsProvider = ({children}) => {
 
   async function readAndParseFile() {
     try {
-      // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, "utf8");
-
       const content = await RNFS.readFile(filePath, "utf8");
       console.log("File content:\n", content);
           
@@ -198,6 +194,7 @@ const TransactionsProvider = ({children}) => {
     findTransactionsByCategory,
     findTransactionById,
     findTransactionsByName,
+    defaultData,
   }
 
   if (loading) {

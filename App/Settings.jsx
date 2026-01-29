@@ -5,6 +5,7 @@ import {styles} from "./Style";
 
 import EditUser from "./EditUser";
 import DeleteAllData from "./DeleteAllData";
+import RestoreDefaults from "./RestoreDefaults";
 import EditCategoryList from "./EditCategoryList";
 import BottomSheetContext from "./BottomSheetContext";
 import Accordion from 'react-native-collapsible/Accordion';
@@ -26,8 +27,11 @@ const Settings = () => {
     },
     {
       index: 2,
-      title: 'Delete all data',
-      content: <DeleteAllData />,
+      title: 'Manage data',
+      content: <View>
+                 <RestoreDefaults />
+                 <DeleteAllData />
+               </View>,
     },
   ];
 

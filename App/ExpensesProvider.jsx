@@ -27,23 +27,22 @@ const ExpensesProvider = ({children}) => {
 
   // File path of our saved expense data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/ExpenseData.txt";
-
-  // [TODO]: Temporary data for testing.
-  const defaultFileContents = "1;1;WEEKLY\n" +
-                              "2;2;WEEKLY\n" +
-                              "3;3;WEEKLY\n" +
-                              "4;4;WEEKLY\n" +
-                              "5;5;BI-MONTHLY\n" +
-                              "6;6;BI-MONTHLY\n" +
-                              "7;7;MONTHLY\n" +
-                              "8;8;MONTHLY\n" +
-                              "9;9;MONTHLY\n" +
-                              "10;10;QUARTERLY\n" +
-                              "11;11;QUARTERLY\n" +
-                              "12;12;QUARTERLY\n" +
-                              "13;13;ANNUALLY\n" +
-                              "14;14;ANNUALLY\n" +
-                              "15;15;ANNUALLY";
+  const defaultData = [new Expense("1", 1, "WEEKLY"),
+                       new Expense("2", 2, "WEEKLY"),
+                       new Expense("3", 3, "WEEKLY"),
+                       new Expense("4", 4, "WEEKLY"),
+                       new Expense("5", 5, "BI-MONTHLY"),
+                       new Expense("6", 6, "BI-MONTHLY"),
+                       new Expense("7", 7, "MONTHLY"),
+                       new Expense("8", 8, "MONTHLY"),
+                       new Expense("9", 9, "MONTHLY"),
+                       new Expense("10", 10, "QUARTERLY"),
+                       new Expense("11", 11, "QUARTERLY"),
+                       new Expense("12", 12, "QUARTERLY"),
+                       new Expense("13", 13, "ANNUALLY"),
+                       new Expense("14", 14, "ANNUALLY"),
+                       new Expense("15", 15, "ANNUALLY"),
+                      ];
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -83,9 +82,6 @@ const ExpensesProvider = ({children}) => {
 
   async function readAndParseFile() {
     try {
-      // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, "utf8");
-
       const content = await RNFS.readFile(filePath, "utf8");
       console.log("File content:\n", content);
           
@@ -139,6 +135,7 @@ const ExpensesProvider = ({children}) => {
     expenseData,
     _setExpenseData,
     findExpenseById,
+    defaultData,
   }
 
   if (loading) {

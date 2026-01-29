@@ -27,9 +27,7 @@ const UserDataProvider = ({children}) => {
 
   // File path of our saved user data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/UserData.txt";
-
-  // [TODO]: Temporary data for testing.
-  const defaultFileContents = "Jordan;100000";
+  const defaultData = new User("Jordan", 100000);
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
   async function checkAndCreateFile() {
@@ -58,9 +56,6 @@ const UserDataProvider = ({children}) => {
 
   async function readAndParseFile() {
     try {
-      // [TODO]: Temporarily write to file for testing.
-      await RNFS.writeFile(filePath, defaultFileContents, "utf8");
-
       const content = await RNFS.readFile(filePath, "utf8");
       console.log("File content:\n", content);
           
@@ -101,6 +96,7 @@ const UserDataProvider = ({children}) => {
   const contextValue = {
     userData,
     _setUserData,
+    defaultData,
   }
 
   if (loading) {
