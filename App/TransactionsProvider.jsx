@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 
 import RNFS from "react-native-fs";
+import Category from "./Category";
 import Transaction from "./Transaction";
 import CategoriesContext from "./CategoriesContext";
 import TransactionsContext from "./TransactionsContext";
@@ -45,21 +46,21 @@ const TransactionsProvider = ({children}) => {
 
   // File path of our saved transaction data. Not user accessible. Cross-platform.
   const filePath = RNFS.DocumentDirectoryPath + "/TransactionData.txt";
-  const defaultData = [new Transaction("1", 1, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
-                       new Transaction("2", 2, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
-                       new Transaction("3", 3, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
-                       new Transaction("4", 4, categoriesContext.findCategoryByName("HOME"), 1598051730000, 1598051730000),
-                       new Transaction("5", 5, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
-                       new Transaction("6", 6, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
-                       new Transaction("7", 7, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
-                       new Transaction("8", 8, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
-                       new Transaction("9", 9, categoriesContext.findCategoryByName("WORK"), 1598051730000, 1598051730000),
-                       new Transaction("10", 10, categoriesContext.findCategoryByName("SCHOOL"), 1598051730000, 1598051730000),
-                       new Transaction("11", 11, categoriesContext.findCategoryByName("SCHOOL"), 1598051730000, 1598051730000),
-                       new Transaction("12", 12, categoriesContext.findCategoryByName("SCHOOL"), 1598051730000, 1598051730000),
-                       new Transaction("13", 13, categoriesContext.findCategoryByName("CAR"), 1598051730000, 1598051730000),
-                       new Transaction("14", 14, categoriesContext.findCategoryByName("CAR"), 1598051730000, 1598051730000),
-                       new Transaction("15", 15, categoriesContext.findCategoryByName("CAR"), 1598051730000, 1598051730000),
+  const defaultData = [new Transaction("1", 1, new Category("HOME", "homeIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("2", 2, new Category("HOME", "homeIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("3", 3, new Category("HOME", "homeIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("4", 4, new Category("HOME", "homeIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("5", 5, new Category("WORK", "workIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("6", 6, new Category("WORK", "workIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("7", 7, new Category("WORK", "workIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("8", 8, new Category("WORK", "workIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("9", 9, new Category("WORK", "workIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("10", 10, new Category("SCHOOL", "schoolIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("11", 11, new Category("SCHOOL", "schoolIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("12", 12, new Category("SCHOOL", "schoolIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("13", 13, new Category("CAR", "carIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("14", 14, new Category("CAR", "carIcon.png"), 1598051730000, 1598051730000),
+                       new Transaction("15", 15, new Category("CAR", "carIcon.png"), 1598051730000, 1598051730000),
                       ]; 
 
   // Function that verifies if user saved data exists. If not, it will create a blank file.
