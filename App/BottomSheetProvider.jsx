@@ -117,8 +117,6 @@ const BottomSheetProvider = ({children}) => {
 
     if (index === -1)
       setBottomSheetVisible(false);
-    else
-      setBottomSheetVisible(true);
   }
 
   const _setContent = (newContent, newEditObject, newTransferContent) => {
@@ -134,6 +132,7 @@ const BottomSheetProvider = ({children}) => {
     else
       setTransferContent(null);
 
+    setBottomSheetVisible(true);
     bottomSheetRef.current?.expand();
   }
     
