@@ -7,10 +7,17 @@ import {styles} from "./Style";
 import ListEmpty from "./ListEmpty";
 import BottomSheetContext from "./BottomSheetContext";
 
+/**
+ * Accounts component. 
+ * Represents a list of the various accounts the user owns along with their values.
+ * 
+ * @returns {JSX.Element} The list of the user's accounts.
+ */
 const Accounts = () => {
   const bottomSheetContext = useContext(BottomSheetContext);
   const myNumberFormatter = new Intl.NumberFormat("en-CA", {style: "currency", currency: "CAD"});
 
+  // [TODO]: Placeholder data for now.
   const data = [{id: 0, name: "Savings", amount: 5000, icon: "nationalBankLogo.png"},
                 {id: 1, name: "TFSA", amount: 90000, icon: "questradeLogo.png"} ,   
                 {id: 2, name: "Investments", amount: 2000, icon: "bmoLogo.png"},
@@ -19,6 +26,14 @@ const Accounts = () => {
                 {id: 5, name: "FHSA", amount: 14000, icon: "wealthsimpleLogo.png"},
                ];
 
+  /**
+   * Function that determines how each item in the accounts list is rendered.
+   * 
+   * @param {Object} props
+   * @param {Object} props.item The item from data being rendered.
+   * 
+   * @returns {JSX.Element} Current row in the accounts list.
+   */
   const renderItem = ({item}) => {
     return (
       <View style={styles.horizontalContainer}>

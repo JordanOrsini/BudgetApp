@@ -7,18 +7,38 @@ import CategoriesContext from "./CategoriesContext";
 import IconSelectionList from "./IconSelectionList";
 import BottomSheetContext from "./BottomSheetContext";
 
+/**
+ * Add category bottom sheet component.
+ * Represents the page for the BottomSheet component allowing the user to create or edit a category
+ * for their transaction.
+ * 
+ * @param {Object} props
+ * @param {Category} props.categoryToEdit Represents a category object. If this parameter is 
+ *                                        present, the component is put into "edit" mode.
+ * @param {Transaction} props.transferContent Represents a temporary transaction object whose data 
+ *                                            should be transfered back to the 
+ *                                            AddTransactionBottomSheet component upon submission
+ *                                            or backing out of this component.
+ * 
+ * @returns {JSX.Element} The BottomSheet category page.
+ */
 const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
   const categoriesContext = useContext(CategoriesContext);
   const bottomSheetContext = useContext(BottomSheetContext);
 
+  // @type {string} Name of the category to create or edit.
   const [nameInput, setNameInput] = useState("");
+  // @type {boolean} Indicates if the name of the category to create or edit is in error.
   const [inErrorName, setInErrorName] = useState(false);
+  // @type {string} The icon path of the selected category icon.
   const [selectedIcon, setSelectedIcon] = useState("noneIcon.png");
 
+  // When the category name input is modified, set its error state to false.
   useEffect(() => {
     setInErrorName(false);
   }, [nameInput]);
 
+  // When the category to edit is modified, copy its data into our local variables.
   useEffect(() => {
     if (categoryToEdit) {
       setNameInput(categoryToEdit.getName());
@@ -26,6 +46,7 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
     }
   }, [categoryToEdit]);
 
+  // Function that clears our local variables.
   const clearModal = () => {
     setNameInput("");
     setSelectedIcon("noneIcon.png");
@@ -33,6 +54,9 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
     setInErrorName(false);
   }
 
+  // Function called when we want to close the modal. If we were in "edit" mode, we close the 
+  // BottomSheet. Otherwise, we reopen the AddTransactionBottomSheet and transfer back its 
+  // corresponding data.
   const closeModal = () => {
     clearModal();
 
@@ -42,9 +66,10 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
       bottomSheetContext._setContent("Transaction", transferContent.transactionToEdit, transferContent);
   }
 
+  // Function called that creates or saves changes to a category object.
   const createNewCategory = () => {
+    // Convert local variables to upper case before calling validations.
     const processedNameInput = nameInput.trim().toUpperCase();
-
     if (!validateNameInput(processedNameInput)) {
       console.log("Name invalid!\n");
       setInErrorName(true);
@@ -74,6 +99,7 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
     closeModal();
   }
 
+  
   const onTextChange = (text) => {
     setNameInput(text);
   }
@@ -116,7 +142,6 @@ const AddCategoryBottomSheet = ({categoryToEdit, transferContent}) => {
     return Success;
   }
 
-  // Function that returns the contents of the AddTransaction modal.
   return (
     <View style={[styles.bottomSheetContent, categoryToEdit && styles.edit]}>
       {categoryToEdit &&
